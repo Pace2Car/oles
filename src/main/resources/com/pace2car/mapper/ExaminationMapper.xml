@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pace2car.mapper.ExaminationMapper" >
+  <resultMap id="BaseResultMap" type="com.pace2car.entity.Examination" >
+    <id column="EXAM_NO" property="examNo" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="NUMERIC" />
+    <result column="EXAM_DATE" property="examDate" jdbcType="TIMESTAMP" />
+    <result column="SINGLE_ID" property="singleId" jdbcType="VARCHAR" />
+    <result column="MULTIPLE_ID" property="multipleId" jdbcType="VARCHAR" />
+    <result column="TRUE_FALSE_ID" property="trueFalseId" jdbcType="VARCHAR" />
+    <result column="FILL_IN_GAPS_ID" property="fillInGapsId" jdbcType="VARCHAR" />
+    <result column="SIMPLE_ANWSER_ID" property="simpleAnwserId" jdbcType="VARCHAR" />
+    <result column="PROGRAM_ID" property="programId" jdbcType="VARCHAR" />
+    <result column="DESCRPT" property="descrpt" jdbcType="VARCHAR" />
+    <result column="VALID_FLAG" property="validFlag" jdbcType="NUMERIC" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    EXAM_NO, USER_ID, EXAM_DATE, SINGLE_ID, MULTIPLE_ID, TRUE_FALSE_ID, FILL_IN_GAPS_ID, 
+    SIMPLE_ANWSER_ID, PROGRAM_ID, DESCRPT, VALID_FLAG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from EXAMINATION
+    where EXAM_NO = #{examNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from EXAMINATION
+    where EXAM_NO = #{examNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pace2car.entity.Examination" >
+    insert into EXAMINATION (EXAM_NO, USER_ID, EXAM_DATE, 
+      SINGLE_ID, MULTIPLE_ID, TRUE_FALSE_ID, 
+      FILL_IN_GAPS_ID, SIMPLE_ANWSER_ID, PROGRAM_ID, 
+      DESCRPT, VALID_FLAG)
+    values (#{examNo,jdbcType=VARCHAR}, #{userId,jdbcType=NUMERIC}, #{examDate,jdbcType=TIMESTAMP}, 
+      #{singleId,jdbcType=VARCHAR}, #{multipleId,jdbcType=VARCHAR}, #{trueFalseId,jdbcType=VARCHAR}, 
+      #{fillInGapsId,jdbcType=VARCHAR}, #{simpleAnwserId,jdbcType=VARCHAR}, #{programId,jdbcType=VARCHAR}, 
+      #{descrpt,jdbcType=VARCHAR}, #{validFlag,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pace2car.entity.Examination" >
+    insert into EXAMINATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="examNo != null" >
+        EXAM_NO,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="examDate != null" >
+        EXAM_DATE,
+      </if>
+      <if test="singleId != null" >
+        SINGLE_ID,
+      </if>
+      <if test="multipleId != null" >
+        MULTIPLE_ID,
+      </if>
+      <if test="trueFalseId != null" >
+        TRUE_FALSE_ID,
+      </if>
+      <if test="fillInGapsId != null" >
+        FILL_IN_GAPS_ID,
+      </if>
+      <if test="simpleAnwserId != null" >
+        SIMPLE_ANWSER_ID,
+      </if>
+      <if test="programId != null" >
+        PROGRAM_ID,
+      </if>
+      <if test="descrpt != null" >
+        DESCRPT,
+      </if>
+      <if test="validFlag != null" >
+        VALID_FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="examNo != null" >
+        #{examNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=NUMERIC},
+      </if>
+      <if test="examDate != null" >
+        #{examDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="singleId != null" >
+        #{singleId,jdbcType=VARCHAR},
+      </if>
+      <if test="multipleId != null" >
+        #{multipleId,jdbcType=VARCHAR},
+      </if>
+      <if test="trueFalseId != null" >
+        #{trueFalseId,jdbcType=VARCHAR},
+      </if>
+      <if test="fillInGapsId != null" >
+        #{fillInGapsId,jdbcType=VARCHAR},
+      </if>
+      <if test="simpleAnwserId != null" >
+        #{simpleAnwserId,jdbcType=VARCHAR},
+      </if>
+      <if test="programId != null" >
+        #{programId,jdbcType=VARCHAR},
+      </if>
+      <if test="descrpt != null" >
+        #{descrpt,jdbcType=VARCHAR},
+      </if>
+      <if test="validFlag != null" >
+        #{validFlag,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pace2car.entity.Examination" >
+    update EXAMINATION
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=NUMERIC},
+      </if>
+      <if test="examDate != null" >
+        EXAM_DATE = #{examDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="singleId != null" >
+        SINGLE_ID = #{singleId,jdbcType=VARCHAR},
+      </if>
+      <if test="multipleId != null" >
+        MULTIPLE_ID = #{multipleId,jdbcType=VARCHAR},
+      </if>
+      <if test="trueFalseId != null" >
+        TRUE_FALSE_ID = #{trueFalseId,jdbcType=VARCHAR},
+      </if>
+      <if test="fillInGapsId != null" >
+        FILL_IN_GAPS_ID = #{fillInGapsId,jdbcType=VARCHAR},
+      </if>
+      <if test="simpleAnwserId != null" >
+        SIMPLE_ANWSER_ID = #{simpleAnwserId,jdbcType=VARCHAR},
+      </if>
+      <if test="programId != null" >
+        PROGRAM_ID = #{programId,jdbcType=VARCHAR},
+      </if>
+      <if test="descrpt != null" >
+        DESCRPT = #{descrpt,jdbcType=VARCHAR},
+      </if>
+      <if test="validFlag != null" >
+        VALID_FLAG = #{validFlag,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where EXAM_NO = #{examNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pace2car.entity.Examination" >
+    update EXAMINATION
+    set USER_ID = #{userId,jdbcType=NUMERIC},
+      EXAM_DATE = #{examDate,jdbcType=TIMESTAMP},
+      SINGLE_ID = #{singleId,jdbcType=VARCHAR},
+      MULTIPLE_ID = #{multipleId,jdbcType=VARCHAR},
+      TRUE_FALSE_ID = #{trueFalseId,jdbcType=VARCHAR},
+      FILL_IN_GAPS_ID = #{fillInGapsId,jdbcType=VARCHAR},
+      SIMPLE_ANWSER_ID = #{simpleAnwserId,jdbcType=VARCHAR},
+      PROGRAM_ID = #{programId,jdbcType=VARCHAR},
+      DESCRPT = #{descrpt,jdbcType=VARCHAR},
+      VALID_FLAG = #{validFlag,jdbcType=NUMERIC}
+    where EXAM_NO = #{examNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

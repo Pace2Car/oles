@@ -19,8 +19,8 @@
         <!-- 配置数据库连接 -->
         <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
                         connectionURL="jdbc:oracle:thin:@localhost:1521:ORCL"
-                        userId="zf"
-                        password="zf" />
+                        userId="olts"
+                        password="olts" />
 
         <!-- 指定javaBean生成的位置 -->
         <javaModelGenerator targetPackage="com.pace2car.entity" targetProject="src/main/java" >
@@ -44,7 +44,17 @@
         <!--<table tableName="TYPES" domainObjectName="Types" />-->
 
         <!-- table可以有多个,每个数据库中的表都可以写一个table，tableName表示要匹配的数据库表,也可以在tableName属性中通过使用%通配符来匹配所有数据库表,只有匹配的表才会自动生成文件 -->
-        <table tableName="PROJECTS" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table tableName="COURSES" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="constructorBased" value="false" />
+            <!-- 数据库表主键 -->
+            <generatedKey column="ID" sqlStatement="JDBC" identity="true" />
+        </table>
+        <table tableName="OLTS_USERS" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="constructorBased" value="false" />
+            <!-- 数据库表主键 -->
+            <generatedKey column="ID" sqlStatement="JDBC" identity="true" />
+        </table>
+        <table tableName="EXAMINATION" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <property name="constructorBased" value="false" />
             <!-- 数据库表主键 -->
             <generatedKey column="ID" sqlStatement="JDBC" identity="true" />
