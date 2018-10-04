@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户管理-贵美商城后台管理系统</title>
+    <title>模板-在线考试后台管理系统</title>
 
     <link href="js/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
     <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
