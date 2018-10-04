@@ -22,6 +22,7 @@
         </fileset>
         <fileset id="fileset2" name="ApplicationContext" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/pace2car/mapper/UserMapper.xml</file>
         </fileset>
       </configuration>
     </facet>

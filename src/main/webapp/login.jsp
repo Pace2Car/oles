@@ -9,6 +9,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <base href="${pageContext.request.contextPath}/">
     <title>用户登录</title>
     <!-- 对IE浏览器自适应的处理 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -312,7 +313,7 @@
 </div>
 <div style="margin-left: 600px" class="sky-container">
     <div>
-        <form action="admin/login.do" method="post" class="form-horizontal" role="form">
+        <form action="user/login" method="post" class="form-horizontal" role="form">
             <div class="form-group">
                 <div style="margin-left: 60px" class="input-group input-group-lg">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-user"

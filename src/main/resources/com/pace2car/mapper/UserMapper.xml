@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pace2car.mapper.UserMapper">
+
+    <resultMap id="baseResultMap" type="OltsUsers">
+        <id property="id" column="ID"/>
+        <result property="stuNo" column="STU_NO"/>
+        <result property="idCardNo" column="ID_CARD_NO"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="passWord" column="PASS_WORD"/>
+        <!--<result property="mobile" column="ID_CARD_NO"/>-->
+        <!--<result property="homeTel" column="ID_CARD_NO"/>-->
+        <!--<result property="homeAddr" column="ID_CARD_NO"/>-->
+        <!--<result property="schAddr" column="ID_CARD_NO"/>-->
+        <!--<result property="qq" column="ID_CARD_NO"/>-->
+        <!--<result property="email" column="ID_CARD_NO"/>-->
+        <!--<result property="gender" column="ID_CARD_NO"/>-->
+        <!--<result property="birthday" column="ID_CARD_NO"/>-->
+        <!--<result property="nationPlace" column="ID_CARD_NO"/>-->
+        <!--<result property="marjor" column="ID_CARD_NO"/>-->
+        <!--<result property="eduBackground" column="ID_CARD_NO"/>-->
+        <!--<result property="graduateSchool" column="ID_CARD_NO"/>-->
+    </resultMap>
+
+    <select id="selectByLogin" parameterType="OltsUsers" resultMap="baseResultMap">
+        SELECT * FROM OLTS_USERS WHERE USER_NAME=#{userName} AND PASS_WORD=#{password}
+    </select>
+
+</mapper>
