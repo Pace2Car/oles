@@ -68,7 +68,7 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li><a href="goodsTypes/view.do">题型管理</a></li>
-                    <li><a href="goodsTypes/show.do">课程管理</a></li>
+                    <li><a href="category/search">课程管理</a></li>
                     <li><a href="goodsTypes/show.do">知识点管理</a></li>
                 </ul>
 

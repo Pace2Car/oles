@@ -34,7 +34,7 @@
                  <div class="col-md-8 col-md-offset-2">
                      
                      <h3> <i  class="fa fa-lightbulb-o fa-5x"></i> </h3>
-               <a href="index.jsp" class="btn btn-primary">GO TO HOME PAGE</a>
+               <a href="views/index.jsp" class="btn btn-primary">GO TO HOME PAGE</a>
 </div>
         </div>
 
