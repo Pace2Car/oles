@@ -53,32 +53,37 @@
             <li>
                 <a href="javascript:void(0)">
                     <i class="fa fa-file-text"></i>
-                    <span class="nav-label">订单管理</span> <span class="fa arrow"></span>
+                    <span class="nav-label">试卷管理</span> <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="trade/tradeList.do">订单信息</a></li>
-                    <li><a href="trade/showChart.do">交易量统计</a></li>
+                    <li><a href="trade/tradeList.do">新增试卷</a></li>
+                    <li><a href="trade/showChart.do">试题查询</a></li>
+                    <li><a href="trade/showChart.do">生成试卷</a></li>
                 </ul>
             </li>
             <li>
-                <a href="#"><i class="fa fa-bars"></i> <span class="nav-label">商品分类</span><span
-                        class="fa arrow"></span></a>
+                <a href="#">
+                    <i class="fa fa-bars"></i>
+                    <span class="nav-label">分类管理</span> <span class="fa arrow"></span>
+                </a>
                 <ul class="nav nav-second-level">
-                    <li><a href="goodsTypes/view.do"><i class="fa fa-cubes"></i>查看分类</a></li>
-                    <li><a href="goodsTypes/show.do"><i class="fa fa-plus-square-o"></i>新增分类</a></li>
+                    <li><a href="goodsTypes/view.do">题型管理</a></li>
+                    <li><a href="goodsTypes/show.do">课程管理</a></li>
+                    <li><a href="goodsTypes/show.do">知识点管理</a></li>
                 </ul>
 
             </li>
             <li >
-                <a href="index.jsp"><i class="fa fa-th-large"></i> <span class="nav-label">商品管理</span> <span class="fa arrow"></span></a>
+                <a href="index.jsp">
+                    <i class="fa fa-th-large"></i>
+                    <span class="nav-label">考试管理</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="product/home.do">添加商品</a></li>
-                    <li><a href="product/list.do">商品列表</a></li>
-                    <li><a href="product/sale.do">在售商品管理</a></li>
+                    <li><a href="product/home.do">安排试卷</a></li>
+                    <li><a href="product/list.do">主观题改卷</a></li>
+                    <li><a href="product/sale.do">成绩统计</a></li>
                 </ul>
             </li>
         </ul>
-
     </div>
 </nav>
 </body>
