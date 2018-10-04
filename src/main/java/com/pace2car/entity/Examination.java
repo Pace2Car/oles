@@ -1,12 +1,11 @@
 package com.pace2car.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Examination {
     private String examNo;
 
-    private BigDecimal userId;
+    private Integer userId;
 
     private Date examDate;
 
@@ -24,7 +23,24 @@ public class Examination {
 
     private String descrpt;
 
-    private BigDecimal validFlag;
+    private Integer validFlag;
+
+    public Examination() {
+    }
+
+    public Examination(String examNo, Integer userId, Date examDate, String singleId, String multipleId, String trueFalseId, String fillInGapsId, String simpleAnwserId, String programId, String descrpt, Integer validFlag) {
+        this.examNo = examNo;
+        this.userId = userId;
+        this.examDate = examDate;
+        this.singleId = singleId;
+        this.multipleId = multipleId;
+        this.trueFalseId = trueFalseId;
+        this.fillInGapsId = fillInGapsId;
+        this.simpleAnwserId = simpleAnwserId;
+        this.programId = programId;
+        this.descrpt = descrpt;
+        this.validFlag = validFlag;
+    }
 
     public String getExamNo() {
         return examNo;
@@ -34,11 +50,11 @@ public class Examination {
         this.examNo = examNo == null ? null : examNo.trim();
     }
 
-    public BigDecimal getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(BigDecimal userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -106,11 +122,28 @@ public class Examination {
         this.descrpt = descrpt == null ? null : descrpt.trim();
     }
 
-    public BigDecimal getValidFlag() {
+    public Integer getValidFlag() {
         return validFlag;
     }
 
-    public void setValidFlag(BigDecimal validFlag) {
+    public void setValidFlag(Integer validFlag) {
         this.validFlag = validFlag;
+    }
+
+    @Override
+    public String toString() {
+        return "Examination{" +
+                "examNo='" + examNo + '\'' +
+                ", userId=" + userId +
+                ", examDate=" + examDate +
+                ", singleId='" + singleId + '\'' +
+                ", multipleId='" + multipleId + '\'' +
+                ", trueFalseId='" + trueFalseId + '\'' +
+                ", fillInGapsId='" + fillInGapsId + '\'' +
+                ", simpleAnwserId='" + simpleAnwserId + '\'' +
+                ", programId='" + programId + '\'' +
+                ", descrpt='" + descrpt + '\'' +
+                ", validFlag=" + validFlag +
+                '}';
     }
 }

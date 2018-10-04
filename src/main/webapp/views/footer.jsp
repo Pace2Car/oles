@@ -13,10 +13,10 @@
 <body>
 <div class="footer">
     <div class="pull-right">
-        10GB of <strong>250GB</strong> Free.
+        蓝桥毕业项目<strong>在线考试</strong>系统.
     </div>
     <div>
-        <strong>Copyright</strong> Example Company &copy; 2014-2015
+        <strong>Copyright</strong> Lanqiao Group &copy; 2018
     </div>
 </div>
 </body>
