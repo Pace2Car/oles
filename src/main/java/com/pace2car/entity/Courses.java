@@ -1,17 +1,24 @@
 package com.pace2car.entity;
 
-import java.math.BigDecimal;
 
 public class Courses {
-    private BigDecimal id;
+    private Integer id;
 
     private String courseName;
 
-    public BigDecimal getId() {
+    public Courses() {
+    }
+
+    public Courses(Integer id, String courseName) {
+        this.id = id;
+        this.courseName = courseName;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -21,5 +28,13 @@ public class Courses {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName == null ? null : courseName.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Courses{" +
+                "id=" + id +
+                ", courseName='" + courseName + '\'' +
+                '}';
     }
 }

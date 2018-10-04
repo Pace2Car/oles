@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class OltsUsers {
-    private BigDecimal id;
+    private Integer id;
 
     private String stuNo;
 
@@ -40,11 +40,35 @@ public class OltsUsers {
 
     private String graduateSchool;
 
-    public BigDecimal getId() {
+    public OltsUsers() {
+    }
+
+    public OltsUsers(Integer id, String stuNo, String idCardNo, String userName, String passWord, String mobile, String homeTel, String homeAddr, String schAddr, String qq, String email, Short userType, String gender, Date birthday, String nationPlace, String marjor, String eduBackground, String graduateSchool) {
+        this.id = id;
+        this.stuNo = stuNo;
+        this.idCardNo = idCardNo;
+        this.userName = userName;
+        this.passWord = passWord;
+        this.mobile = mobile;
+        this.homeTel = homeTel;
+        this.homeAddr = homeAddr;
+        this.schAddr = schAddr;
+        this.qq = qq;
+        this.email = email;
+        this.userType = userType;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.nationPlace = nationPlace;
+        this.marjor = marjor;
+        this.eduBackground = eduBackground;
+        this.graduateSchool = graduateSchool;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -182,5 +206,29 @@ public class OltsUsers {
 
     public void setGraduateSchool(String graduateSchool) {
         this.graduateSchool = graduateSchool == null ? null : graduateSchool.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "OltsUsers{" +
+                "id=" + id +
+                ", stuNo='" + stuNo + '\'' +
+                ", idCardNo='" + idCardNo + '\'' +
+                ", userName='" + userName + '\'' +
+                ", passWord='" + passWord + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", homeTel='" + homeTel + '\'' +
+                ", homeAddr='" + homeAddr + '\'' +
+                ", schAddr='" + schAddr + '\'' +
+                ", qq='" + qq + '\'' +
+                ", email='" + email + '\'' +
+                ", userType=" + userType +
+                ", gender='" + gender + '\'' +
+                ", birthday=" + birthday +
+                ", nationPlace='" + nationPlace + '\'' +
+                ", marjor='" + marjor + '\'' +
+                ", eduBackground='" + eduBackground + '\'' +
+                ", graduateSchool='" + graduateSchool + '\'' +
+                '}';
     }
 }
