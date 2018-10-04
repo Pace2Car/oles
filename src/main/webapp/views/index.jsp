@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -7,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>模板-在线考试后台管理系统</title>
+    <title>首页-在线考试后台管理系统</title>
 
     <link href="js/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
     <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -29,12 +28,12 @@
         <!-- 顶部导航 -->
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>主页</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="index.jsp">Home</a>
-                    </li>
-                </ol>
+                <h2><i class="fa fa-home"></i> 主页</h2>
+                <%--<ol class="breadcrumb">--%>
+                    <%--<li>--%>
+                        <%--<a href="index.jsp">Home</a>--%>
+                    <%--</li>--%>
+                <%--</ol>--%>
             </div>
             <div class="col-lg-2">
 
@@ -43,15 +42,14 @@
         <!-- main 主体区域 -->
         <div class="wrapper wrapper-content animated fadeIn">
             <div class="row">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8">
-                    <!-- main 在此显示内容 -->
+                <div class="col-lg-12">
+                    <img style="width: 1632px;height: 760px" src="images/首页2.gif" alt="">
                 </div>
-                <div class="col-lg-2"></div>
             </div>
         </div>
         <!-- footer 底部包装区域 -->
         <%@include file="footer.jsp"%>
+
     </div>
 
 </div>
