@@ -16,6 +16,12 @@ public interface ICoursesService {
      * @param pageSize    条数
      * @return
      */
-    List<Courses> selectByName(Courses courses, int pageNum, int pageSize);
+    List<Courses> selectCourses(Courses courses, int pageNum, int pageSize);
+
+    int insertCourse(Courses courses);
+
+    int updateCourse(Courses courses);
+
+    int deleteCourse(Courses courses);
 
 }

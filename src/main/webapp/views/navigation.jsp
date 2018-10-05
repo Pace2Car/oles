@@ -36,7 +36,7 @@
                 </div>
             </li>
             <li>
-                <a href="index.jsp">
+                <a href="views/index.jsp">
                     <i class="fa fa-home"></i>
                     <span class="nav-label">首页</span> <span class="fa arrow"></span>
                 </a>
