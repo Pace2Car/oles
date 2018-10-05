@@ -1,7 +1,9 @@
 package com.pace2car.entity;
 
 
-public class SmdOptions {
+import java.io.Serializable;
+
+public class SmdOptions implements Serializable {
 
     private String id;
     private String optionA;

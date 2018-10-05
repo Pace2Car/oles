@@ -1,7 +1,9 @@
 package com.pace2car.entity;
 
 
-public class Courses {
+import java.io.Serializable;
+
+public class Courses implements Serializable {
     private Integer id;
 
     private String courseName;

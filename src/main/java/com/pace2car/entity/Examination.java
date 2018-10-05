@@ -1,8 +1,9 @@
 package com.pace2car.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Examination {
+public class Examination implements Serializable {
     private String examNo;
 
     private Integer userId;

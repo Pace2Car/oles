@@ -1,7 +1,9 @@
 package com.pace2car.entity;
 
 
-public class FspAnswer {
+import java.io.Serializable;
+
+public class FspAnswer implements Serializable {
 
     private Integer id;
     private String answer;

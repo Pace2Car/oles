@@ -19,7 +19,7 @@ public interface TechCategoryMapper {
      * @param pageSize
      * @return
      */
-    List<TechCategory> selectTechCategorys(@Param("courses") TechCategory techCategory,
+    List<TechCategory> selectTechCategorys(@Param("techCategory") TechCategory techCategory,
                                            @Param("pageNum") int pageNum,
                                            @Param("pageSize") int pageSize);
 

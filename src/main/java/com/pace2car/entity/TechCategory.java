@@ -1,7 +1,9 @@
 package com.pace2car.entity;
 
 
-public class TechCategory {
+import java.io.Serializable;
+
+public class TechCategory implements Serializable {
 
     private Integer id;
     private String techCtgr;
