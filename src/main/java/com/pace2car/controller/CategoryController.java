@@ -2,7 +2,9 @@ package com.pace2car.controller;
 
 import com.github.pagehelper.Page;
 import com.pace2car.entity.Courses;
+import com.pace2car.entity.TechCategory;
 import com.pace2car.service.ICoursesService;
+import com.pace2car.service.ITechCategoryService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +28,11 @@ public class CategoryController {
     @Autowired
     private ICoursesService coursesService;
 
-    @RequestMapping("/search")
-    public String search(Courses courses, Integer pageNum, ModelMap modelMap, HttpSession session) {
+    @Autowired
+    private ITechCategoryService techCategoryService;
+
+    @RequestMapping("/searchCourse")
+    public String searchCourse(Courses courses, Integer pageNum, ModelMap modelMap, HttpSession session) {
         Page<Courses> page = null;
         if (pageNum == null) {
             pageNum = 1;
@@ -39,7 +44,7 @@ public class CategoryController {
             return "updateCourse";
         }
         if (courses == null || courses.getCourseName() == null) {
-            courses = (Courses) session.getAttribute("courses");
+            courses = (Courses) session.getAttribute("techCategory");
         }
         page = (Page<Courses>) coursesService.selectCourses(courses, pageNum, 5);
         modelMap.addAttribute("page", page);
@@ -78,6 +83,67 @@ public class CategoryController {
     public void deleteCourse(Courses courses, HttpServletResponse response) {
         try {
             if (coursesService.deleteCourse(courses) > 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/searchTechCategory")
+    public String searchTechCategory(TechCategory techCategory, Integer pageNum, ModelMap modelMap, HttpSession session) {
+        Page<TechCategory> page = null;
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        if (techCategory != null && techCategory.getId() != null) {
+            page = (Page<TechCategory>) techCategoryService.selectTechCategorys(techCategory, 0, 0);
+            TechCategory oldTechCategory = page.get(0);
+            modelMap.addAttribute("oldTechCategory", oldTechCategory);
+            return "updateCourse";
+        }
+        if (techCategory == null || techCategory.getTechCtgr() == null) {
+            techCategory = (TechCategory) session.getAttribute("techCategory");
+        }
+        page = (Page<TechCategory>) techCategoryService.selectTechCategorys(techCategory, pageNum, 5);
+        modelMap.addAttribute("page", page);
+        session.setAttribute("techCategory", techCategory);
+
+        return "coursesList";
+    }
+
+    @RequestMapping("/updateTechCategory")
+    public void updateTechCategory(TechCategory techCategory, HttpServletResponse response) {
+        try {
+            if (techCategoryService.updateTechCategory(techCategory) > 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/insertTechCategory")
+    public void insertTechCategory(TechCategory techCategory, HttpServletResponse response) {
+        try {
+            if (techCategoryService.insertTechCategory(techCategory) > 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/deleteTechCategory")
+    public void deleteTechCategory(TechCategory techCategory, HttpServletResponse response) {
+        try {
+            if (techCategoryService.deleteTechCategory(techCategory) > 0) {
                 response.getWriter().write("{\"actionFlag\": true}");
             } else {
                 response.getWriter().write("{\"actionFlag\": false}");

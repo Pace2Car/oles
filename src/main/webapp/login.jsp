@@ -301,7 +301,7 @@
 </div>
 <div class="intro-container">
 
-    <h1>欢迎您！使用<br> 在线考试系统后台管理系统</h1>
+    <h1>欢迎您！使用<br> 蓝桥在线考试系统</h1>
 
     <div class="button shift-camera-button">
         <div class="border">

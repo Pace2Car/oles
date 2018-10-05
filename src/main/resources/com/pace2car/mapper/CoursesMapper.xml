@@ -11,12 +11,14 @@
     </resultMap>
 
     <select id="selectCourses" parameterType="Courses" resultMap="baseResultMap">
-        SELECT ID,COURSE_NAME FROM COURSES c
+        SELECT ID,
+               COURSE_NAME
+        FROM COURSES
         <where>
-            <if test="courses != null and courses.id != null">AND c.ID = #{courses.id,jdbcType=NUMERIC}</if>
+            <if test="courses != null and courses.id != null">AND ID = #{courses.id,jdbcType=NUMERIC}</if>
             <if test="courses != null and courses.courseName != null">
                 <bind name="likeName" value="'%' + courses.courseName + '%'"/>
-                AND c.COURSE_NAME LIKE #{likeName}
+                AND COURSE_NAME LIKE #{likeName}
             </if>
         </where>
         ORDER BY ID

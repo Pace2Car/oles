@@ -41,5 +41,4 @@ public class CoursesServiceImpl implements ICoursesService {
         return coursesMapper.deleteCourse(courses);
     }
 
-
 }

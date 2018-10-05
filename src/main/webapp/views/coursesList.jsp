@@ -86,7 +86,7 @@
                                     </div>
                                     <%--查询表单--%>
                                     <div class="col-sm-10">
-                                        <form action="category/search" method="post" class="text-center">
+                                        <form action="category/searchCourse" method="post" class="text-center">
                                             <span class="dataTables_filter"><label class="text-right" style="width: 75px">课程名称:</label>
                                                 <input name="courseName" id="cname" value="${sessionScope.courses.courseName}" style="margin-bottom: 5px"
                                                        type="text" class="form-control input-sm" placeholder="请输入课程名"
@@ -171,26 +171,26 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
-                                            <form action="category/search">
+                                            <form action="category/searchCourse">
                                                 <ul class="pagination pull-right">
                                                     <c:if test="${page.getPageNum() gt 1}">
                                                         <li class="footable-page-arrow">
-                                                            <a href="category/search?pageNum=1">首页</a></li>
+                                                            <a href="category/searchCourse?pageNum=1">首页</a></li>
                                                     </c:if>
                                                     <c:if test="${page.getPageNum() gt 1}">
                                                         <li class="footable-page-arrow">
-                                                            <a href="category/search?pageNum=${page.getPageNum()-1}">上一页</a>
+                                                            <a href="category/searchCourse?pageNum=${page.getPageNum()-1}">上一页</a>
                                                         </li>
                                                     </c:if>
 
                                                     <c:if test="${page.getPageNum() lt page.getPages()}">
                                                         <li class="footable-page-arrow">
-                                                            <a href="category/search?pageNum=${page.getPageNum()+1}">下一页</a>
+                                                            <a href="category/searchCourse?pageNum=${page.getPageNum()+1}">下一页</a>
                                                         </li>
                                                     </c:if>
                                                     <c:if test="${page.getPageNum() lt page.getPages()}">
                                                         <li class="footable-page-arrow">
-                                                            <a href="category/search?pageNum=${page.getPages()}">尾页</a>
+                                                            <a href="category/searchCourse?pageNum=${page.getPages()}">尾页</a>
                                                         </li>
                                                     </c:if>
                                                     <c:if test="${page.getPages() > 1}">
@@ -351,7 +351,7 @@
         $("#updateModal-content").empty();
         var id = $(e).attr('courseId');
         console.dirxml(id);
-        $.get("category/search?id=" + id, function (html) {
+        $.get("category/searchCourse?id=" + id, function (html) {
             $("#updateModal-content").append(html);
         }, "html");
     }

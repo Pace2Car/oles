@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pace2car.mapper.TechCategoryMapper">
+
+    <resultMap id="baseResultMap" type="TechCategory">
+        <id property="id" column="ID"/>
+        <result property="techCtgr" column="TECH_CTGR"/>
+        <result property="courseId" column="COURSE_ID"/>
+    </resultMap>
+
+    <select id="selectTechCategorys" parameterType="TechCategory" resultMap="baseResultMap">
+        SELECT ID,
+               TECH_CTGR,
+               COURSE_ID,
+        FROM TECH_CATEGORY
+        <where>
+            <if test="techCategory != null and techCategory.id != null">
+                AND ID = #{techCategory.id,jdbcType=NUMERIC}
+            </if>
+            <if test="techCategory != null and techCategory.techCtgr != null">
+                <bind name="likeName" value="'%' + techCategory.techCtgr + '%'"/>
+                AND TECH_CTGR LIKE #{likeName}
+            </if>
+            <if test="techCategory != null and techCategory.courseId != null">
+                AND COURSE_ID = #{techCategory.courseId,jdbcType=NUMERIC}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertTechCategory" parameterType="TechCategory">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT TECH_CATEGORY_SEQ.nextval FROM dual
+        </selectKey>
+        INSERT INTO TECH_CATEGORY VALUES (#{id}, #{techCtgr,jdbcType=VARCHAR},#{courseId,NUMERIC})
+    </insert>
+
+    <update id="updateTechCategory" parameterType="TechCategory">
+        UPDATE TECH_CATEGORY
+        <set>
+            COURSE_NAME=#{courseName,jdbcType=VARCHAR}
+        </set>
+        WHERE ID=#{id,jdbcType=NUMERIC}
+    </update>
+
+    <delete id="deleteTechCategory" parameterType="TechCategory">
+        DELETE FROM TECH_CATEGORY
+        WHERE ID=#{id,jdbcType=NUMERIC}
+    </delete>
+
+</mapper>
