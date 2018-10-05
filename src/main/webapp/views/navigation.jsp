@@ -47,7 +47,7 @@
                     <span class="nav-label">用户管理</span> <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="admin/userList.do">用户信息</a></li>
+                    <li><a href="user/list">用户信息</a></li>
                 </ul>
             </li>
             <li>

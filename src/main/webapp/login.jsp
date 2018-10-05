@@ -318,7 +318,7 @@
                 <div style="margin-left: 60px" class="input-group input-group-lg">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-user"
                                                          style="color: #1e5cff"></span></div>
-                    <input style="width: 550px;" type="text" class="form-control" id="loginName" name="loginName" value="admin" placeholder="请输入用户名">
+                    <input style="width: 550px;" type="text" class="form-control" id="loginName" name="userName" value="student" placeholder="请输入用户名">
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -327,7 +327,7 @@
                 <div style="margin-left: 60px" class="input-group input-group-lg">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-lock"
                                                          style="color: firebrick;"></span></div>
-                    <input style="width: 550px;" type="password" class="form-control" id="password" name="password" value="admin" placeholder="请输入密码">
+                    <input style="width: 550px;" type="password" class="form-control" id="password" name="password" value="student" placeholder="请输入密码">
                 </div>
             </div>
             <div class="clearfix"></div>

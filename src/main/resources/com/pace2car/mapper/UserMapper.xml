@@ -8,23 +8,27 @@
         <result property="stuNo" column="STU_NO"/>
         <result property="idCardNo" column="ID_CARD_NO"/>
         <result property="userName" column="USER_NAME"/>
-        <result property="passWord" column="PASS_WORD"/>
-        <!--<result property="mobile" column="ID_CARD_NO"/>-->
-        <!--<result property="homeTel" column="ID_CARD_NO"/>-->
-        <!--<result property="homeAddr" column="ID_CARD_NO"/>-->
-        <!--<result property="schAddr" column="ID_CARD_NO"/>-->
-        <!--<result property="qq" column="ID_CARD_NO"/>-->
-        <!--<result property="email" column="ID_CARD_NO"/>-->
-        <!--<result property="gender" column="ID_CARD_NO"/>-->
-        <!--<result property="birthday" column="ID_CARD_NO"/>-->
-        <!--<result property="nationPlace" column="ID_CARD_NO"/>-->
-        <!--<result property="marjor" column="ID_CARD_NO"/>-->
-        <!--<result property="eduBackground" column="ID_CARD_NO"/>-->
-        <!--<result property="graduateSchool" column="ID_CARD_NO"/>-->
+        <result property="password" column="PASS_WORD"/>
+        <result property="mobile" column="MOBILE"/>
+        <result property="homeTel" column="HOME_TEL"/>
+        <result property="homeAddr" column="HOME_ADDR"/>
+        <result property="schAddr" column="SCH_ADDR"/>
+        <result property="qq" column="QQ"/>
+        <result property="email" column="EMAIL"/>
+        <result property="gender" column="GENDER"/>
+        <result property="birthday" column="BIRTHDAY"/>
+        <result property="nationPlace" column="NATION_PLACE"/>
+        <result property="marjor" column="MARJOR"/>
+        <result property="eduBackground" column="EDU_BACKGROUND"/>
+        <result property="graduateSchool" column="GRADUATE_SCHOOL"/>
     </resultMap>
 
     <select id="selectByLogin" parameterType="OltsUsers" resultMap="baseResultMap">
         SELECT * FROM OLTS_USERS WHERE USER_NAME=#{userName} AND PASS_WORD=#{password}
     </select>
 
+    <select id="selectByPage" parameterType="OltsUsers" resultMap="baseResultMap">
+        SELECT * FROM OLTS_USERS
+        ORDER BY ID DESC
+    </select>
 </mapper>

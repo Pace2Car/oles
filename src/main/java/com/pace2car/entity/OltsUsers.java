@@ -1,6 +1,5 @@
 package com.pace2car.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class OltsUsers {
@@ -12,7 +11,7 @@ public class OltsUsers {
 
     private String userName;
 
-    private String passWord;
+    private String password;
 
     private String mobile;
 
@@ -43,12 +42,12 @@ public class OltsUsers {
     public OltsUsers() {
     }
 
-    public OltsUsers(Integer id, String stuNo, String idCardNo, String userName, String passWord, String mobile, String homeTel, String homeAddr, String schAddr, String qq, String email, Short userType, String gender, Date birthday, String nationPlace, String marjor, String eduBackground, String graduateSchool) {
+    public OltsUsers(Integer id, String stuNo, String idCardNo, String userName, String password, String mobile, String homeTel, String homeAddr, String schAddr, String qq, String email, Short userType, String gender, Date birthday, String nationPlace, String marjor, String eduBackground, String graduateSchool) {
         this.id = id;
         this.stuNo = stuNo;
         this.idCardNo = idCardNo;
         this.userName = userName;
-        this.passWord = passWord;
+        this.password = password;
         this.mobile = mobile;
         this.homeTel = homeTel;
         this.homeAddr = homeAddr;
@@ -96,12 +95,12 @@ public class OltsUsers {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord == null ? null : passWord.trim();
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
     public String getMobile() {
@@ -215,7 +214,7 @@ public class OltsUsers {
                 ", stuNo='" + stuNo + '\'' +
                 ", idCardNo='" + idCardNo + '\'' +
                 ", userName='" + userName + '\'' +
-                ", passWord='" + passWord + '\'' +
+                ", password='" + password + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", homeTel='" + homeTel + '\'' +
                 ", homeAddr='" + homeAddr + '\'' +
