@@ -19,7 +19,14 @@ public interface CoursesMapper {
      * @param pageSize
      * @return
      */
-    List<Courses> selectByName(@Param("courses") Courses courses,
+    List<Courses> selectCourses(@Param("courses") Courses courses,
                                @Param("pageNum") int pageNum,
                                @Param("pageSize") int pageSize);
+
+    int insertCourse(Courses courses);
+
+    int updateCourse(Courses courses);
+
+    int deleteCourse(Courses courses);
+
 }

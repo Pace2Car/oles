@@ -20,9 +20,26 @@ public class CoursesServiceImpl implements ICoursesService {
     private CoursesMapper coursesMapper;
 
     @Override
-    public List<Courses> selectByName(Courses courses, int pageNum, int pageSize) {
+    public List<Courses> selectCourses(Courses courses, int pageNum, int pageSize) {
         // pagehelp插件会自动加上分页SQL的外面两层的嵌套
         PageHelper.startPage(pageNum, pageSize);
-        return coursesMapper.selectByName(courses, pageNum, pageSize);
+        return coursesMapper.selectCourses(courses, pageNum, pageSize);
     }
+
+    @Override
+    public int insertCourse(Courses courses) {
+        return coursesMapper.insertCourse(courses);
+    }
+
+    @Override
+    public int updateCourse(Courses courses) {
+        return coursesMapper.updateCourse(courses);
+    }
+
+    @Override
+    public int deleteCourse(Courses courses) {
+        return coursesMapper.deleteCourse(courses);
+    }
+
+
 }

@@ -10,15 +10,35 @@
         <result property="courseName" column="COURSE_NAME"/>
     </resultMap>
 
-    <select id="selectByName" parameterType="Courses" resultMap="baseResultMap">
-        SELECT ID,COURSE_NAME FROM COURSES
+    <select id="selectCourses" parameterType="Courses" resultMap="baseResultMap">
+        SELECT ID,COURSE_NAME FROM COURSES c
         <where>
+            <if test="courses != null and courses.id != null">AND c.ID = #{courses.id,jdbcType=NUMERIC}</if>
             <if test="courses != null and courses.courseName != null">
                 <bind name="likeName" value="'%' + courses.courseName + '%'"/>
-                AND COURSE_NAME LIKE #{likeName}
+                AND c.COURSE_NAME LIKE #{likeName}
             </if>
         </where>
-        ORDER BY ID DESC
+        ORDER BY ID
     </select>
+
+    <insert id="insertCourse" parameterType="Courses">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT COURSE_SEQ.nextval FROM dual
+        </selectKey>
+        INSERT INTO COURSES VALUES (#{id}, #{courseName,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="updateCourse" parameterType="Courses">
+        UPDATE COURSES
+        <set>
+            COURSE_NAME=#{courseName,jdbcType=VARCHAR}
+        </set>
+        WHERE ID=#{id,jdbcType=NUMERIC}
+    </update>
+
+    <delete id="deleteCourse" parameterType="Courses">
+        DELETE FROM COURSES WHERE ID=#{id,jdbcType=NUMERIC}
+    </delete>
 
 </mapper>

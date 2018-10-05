@@ -9,8 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * @author Pace2Car
@@ -22,7 +23,7 @@ public class CategoryController {
 
     private static Logger logger = Logger.getLogger(CategoryController.class);
 
-    @Resource
+    @Autowired
     private ICoursesService coursesService;
 
     @RequestMapping("/search")
@@ -31,11 +32,59 @@ public class CategoryController {
         if (pageNum == null) {
             pageNum = 1;
         }
-        page = (Page<Courses>) coursesService.selectByName(courses, pageNum, 5);
+        if (courses != null && courses.getId() != null) {
+            page = (Page<Courses>) coursesService.selectCourses(courses, 0, 0);
+            Courses oldCourse = page.get(0);
+            modelMap.addAttribute("oldCourse", oldCourse);
+            return "updateCourse";
+        }
+        if (courses == null || courses.getCourseName() == null) {
+            courses = (Courses) session.getAttribute("courses");
+        }
+        page = (Page<Courses>) coursesService.selectCourses(courses, pageNum, 5);
         modelMap.addAttribute("page", page);
         session.setAttribute("courses", courses);
 
         return "coursesList";
+    }
+
+    @RequestMapping("/updateCourse")
+    public void updateCourse(Courses courses, HttpServletResponse response) {
+        try {
+            if (coursesService.updateCourse(courses) > 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/insertCourse")
+    public void insertCourse(Courses courses, HttpServletResponse response) {
+        try {
+            if (coursesService.insertCourse(courses) > 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/deleteCourse")
+    public void deleteCourse(Courses courses, HttpServletResponse response) {
+        try {
+            if (coursesService.deleteCourse(courses) > 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
