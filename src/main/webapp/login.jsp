@@ -9,6 +9,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <base href="${pageContext.request.contextPath}/">
     <title>用户登录</title>
     <!-- 对IE浏览器自适应的处理 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -312,12 +313,12 @@
 </div>
 <div style="margin-left: 600px" class="sky-container">
     <div>
-        <form action="admin/login.do" method="post" class="form-horizontal" role="form">
+        <form action="user/login" method="post" class="form-horizontal" role="form">
             <div class="form-group">
                 <div style="margin-left: 60px" class="input-group input-group-lg">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-user"
                                                          style="color: #1e5cff"></span></div>
-                    <input style="width: 550px;" type="text" class="form-control" id="loginName" name="loginName" value="admin" placeholder="请输入用户名">
+                    <input style="width: 550px;" type="text" class="form-control" id="loginName" name="userName" value="student" placeholder="请输入用户名">
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -326,7 +327,7 @@
                 <div style="margin-left: 60px" class="input-group input-group-lg">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-lock"
                                                          style="color: firebrick;"></span></div>
-                    <input style="width: 550px;" type="password" class="form-control" id="password" name="password" value="admin" placeholder="请输入密码">
+                    <input style="width: 550px;" type="password" class="form-control" id="password" name="password" value="student" placeholder="请输入密码">
                 </div>
             </div>
             <div class="clearfix"></div>

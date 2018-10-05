@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pace2car.mapper.UserMapper">
+
+    <resultMap id="baseResultMap" type="OltsUsers">
+        <id property="id" column="ID"/>
+        <result property="stuNo" column="STU_NO"/>
+        <result property="idCardNo" column="ID_CARD_NO"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="password" column="PASS_WORD"/>
+        <result property="mobile" column="MOBILE"/>
+        <result property="homeTel" column="HOME_TEL"/>
+        <result property="homeAddr" column="HOME_ADDR"/>
+        <result property="schAddr" column="SCH_ADDR"/>
+        <result property="qq" column="QQ"/>
+        <result property="email" column="EMAIL"/>
+        <result property="gender" column="GENDER"/>
+        <result property="birthday" column="BIRTHDAY"/>
+        <result property="nationPlace" column="NATION_PLACE"/>
+        <result property="marjor" column="MARJOR"/>
+        <result property="eduBackground" column="EDU_BACKGROUND"/>
+        <result property="graduateSchool" column="GRADUATE_SCHOOL"/>
+    </resultMap>
+
+    <select id="selectByLogin" parameterType="OltsUsers" resultMap="baseResultMap">
+        SELECT * FROM OLTS_USERS WHERE USER_NAME=#{userName} AND PASS_WORD=#{password}
+    </select>
+
+    <select id="selectByPage" parameterType="OltsUsers" resultMap="baseResultMap">
+        SELECT * FROM OLTS_USERS
+        ORDER BY ID DESC
+    </select>
+</mapper>
