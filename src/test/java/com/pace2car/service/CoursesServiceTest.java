@@ -22,7 +22,8 @@ public class CoursesServiceTest {
 
     @Test
     public void testSelectCourses() {
-        List<Courses> coursesList = coursesService.selectCourses(new Courses(2, null), 1, 5);
+//        List<Courses> coursesList = coursesService.selectCourses(new Courses(2, null), 1, 5);
+        List<Courses> coursesList = coursesService.selectCourses(new Courses(null, "J"));
         for (Courses courses : coursesList) {
             System.out.println(courses);
         }

@@ -9,23 +9,30 @@
         <id property="id" column="ID"/>
         <result property="techCtgr" column="TECH_CTGR"/>
         <result property="courseId" column="COURSE_ID"/>
+        <association property="course" javaType="Courses" columnPrefix="c_">
+            <id property="id" column="ID"/>
+            <result property="courseName" column="COURSE_NAME"/>
+        </association>
     </resultMap>
 
     <select id="selectTechCategorys" parameterType="TechCategory" resultMap="baseResultMap">
-        SELECT ID,
-               TECH_CTGR,
-               COURSE_ID
-        FROM TECH_CATEGORY
+        SELECT t.ID,
+               t.TECH_CTGR,
+               t.COURSE_ID,
+               c.ID          c_ID,
+               c.COURSE_NAME c_COURSE_NAME
+        FROM TECH_CATEGORY t
+        INNER JOIN COURSES c ON t.COURSE_ID = c.ID
         <where>
             <if test="techCategory != null and techCategory.id != null">
-                AND ID = #{techCategory.id,jdbcType=NUMERIC}
+                AND t.ID = #{techCategory.id,jdbcType=NUMERIC}
             </if>
             <if test="techCategory != null and techCategory.techCtgr != null">
                 <bind name="likeName" value="'%' + techCategory.techCtgr + '%'"/>
-                AND TECH_CTGR LIKE #{likeName}
+                AND t.TECH_CTGR LIKE #{likeName}
             </if>
             <if test="techCategory != null and techCategory.courseId != null">
-                AND COURSE_ID = #{techCategory.courseId,jdbcType=NUMERIC}
+                AND t.COURSE_ID = #{techCategory.courseId,jdbcType=NUMERIC}
             </if>
         </where>
         ORDER BY ID

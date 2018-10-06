@@ -9,6 +9,8 @@ public class TechCategory implements Serializable {
     private String techCtgr;
     private Integer courseId;
 
+    private Courses course;
+
     public TechCategory() {
     }
 
@@ -16,6 +18,14 @@ public class TechCategory implements Serializable {
         this.id = id;
         this.techCtgr = techCtgr;
         this.courseId = courseId;
+    }
+
+    public Courses getCourse() {
+        return course;
+    }
+
+    public void setCourse(Courses course) {
+        this.course = course;
     }
 
     public Integer getId() {
@@ -50,6 +60,7 @@ public class TechCategory implements Serializable {
                 "id=" + id +
                 ", techCtgr='" + techCtgr + '\'' +
                 ", courseId=" + courseId +
+                ", course=" + course +
                 '}';
     }
 }

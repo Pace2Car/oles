@@ -10,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Pace2Car
@@ -44,7 +47,7 @@ public class CategoryController {
             return "updateCourse";
         }
         if (courses == null || courses.getCourseName() == null) {
-            courses = (Courses) session.getAttribute("techCategory");
+            courses = (Courses) session.getAttribute("courses");
         }
         page = (Page<Courses>) coursesService.selectCourses(courses, pageNum, 5);
         modelMap.addAttribute("page", page);
@@ -102,7 +105,7 @@ public class CategoryController {
             page = (Page<TechCategory>) techCategoryService.selectTechCategorys(techCategory, 0, 0);
             TechCategory oldTechCategory = page.get(0);
             modelMap.addAttribute("oldTechCategory", oldTechCategory);
-            return "updateCourse";
+            return "updateTechCategory";
         }
         if (techCategory == null || techCategory.getTechCtgr() == null) {
             techCategory = (TechCategory) session.getAttribute("techCategory");
@@ -111,7 +114,7 @@ public class CategoryController {
         modelMap.addAttribute("page", page);
         session.setAttribute("techCategory", techCategory);
 
-        return "coursesList";
+        return "techCategoryList";
     }
 
     @RequestMapping("/updateTechCategory")
@@ -151,6 +154,12 @@ public class CategoryController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @RequestMapping(value = {"/load_courses"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public List<Courses> loadCouses() {
+        return coursesService.selectCourses(null,1,50);
     }
 
 }

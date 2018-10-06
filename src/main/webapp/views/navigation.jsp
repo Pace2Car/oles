@@ -67,9 +67,8 @@
                     <span class="nav-label">分类管理</span> <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    <li><a href="goodsTypes/view.do">题型管理</a></li>
                     <li><a href="category/searchCourse">课程管理</a></li>
-                    <li><a href="goodsTypes/show.do">知识点管理</a></li>
+                    <li><a href="category/searchTechCategory">知识点管理</a></li>
                 </ul>
 
             </li>

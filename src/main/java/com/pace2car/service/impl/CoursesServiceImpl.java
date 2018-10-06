@@ -27,6 +27,11 @@ public class CoursesServiceImpl implements ICoursesService {
     }
 
     @Override
+    public List<Courses> selectCourses(Courses courses) {
+        return coursesMapper.selectCourses(courses);
+    }
+
+    @Override
     public int insertCourse(Courses courses) {
         return coursesMapper.insertCourse(courses);
     }

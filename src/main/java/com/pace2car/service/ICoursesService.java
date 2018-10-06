@@ -18,6 +18,8 @@ public interface ICoursesService {
      */
     List<Courses> selectCourses(Courses courses, int pageNum, int pageSize);
 
+    List<Courses> selectCourses(Courses courses);
+
     int insertCourse(Courses courses);
 
     int updateCourse(Courses courses);
