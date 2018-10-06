@@ -87,6 +87,7 @@
                                     <%--查询表单--%>
                                     <div class="col-sm-10">
                                         <form action="category/searchTechCategory" method="post" class="text-center">
+                                            <input type="hidden" id="courseName" value="${sessionScope.techCategory.courseId}">
                                             <span class="dataTables_filter">
                                                 <label class="text-right" style="width: 75px">课程名称:</label>
                                                 <select name="courseId" id="courseId"
@@ -295,7 +296,7 @@
                     <div class="form-inline">
                         <div class="form-group">
                             <div class="input-group input-group-md">
-                                <div class="input-group-addon" style="width: 96px">课程名称：</div>
+                                <div class="input-group-addon" style="width: 110px">课程名称：</div>
                                 <select name="courseId" id="newCourseId"
                                         style="width: 300px"
                                         class="form-control" placeholder="请选择课程名"
@@ -304,7 +305,7 @@
                             </div>
                             <br/><br/>
                             <div class="input-group input-group-md">
-                                <div class="input-group-addon" style="width: 96px;">知识点名称：</div>
+                                <div class="input-group-addon" style="width: 110px;">知识点名称：</div>
                                 <input style="width: 300px" type="text" class="form-control" id="techCategoryName"
                                        name="techCtgr" placeholder="请输入知识点">
                             </div>
@@ -365,7 +366,8 @@
 
 <script>
     $(function () {
-        // 加载课程名下拉列表
+
+        // 加载搜索框课程名下拉列表
         $.get("category/load_courses",function (resp) {
             // console.log(resp);
             $("#courseId").empty();
@@ -374,7 +376,11 @@
                 var option = new Option(v.courseName, v.id);
                 $("#courseId").append(option);
             });
+            //重新选中课程名
+            var courseName = $('#courseName').val();
+            $('#courseId option[value="' + courseName + '"]').prop("selected", true);
         },"json");
+
     })
 </script>
 <script>
