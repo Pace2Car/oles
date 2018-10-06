@@ -1,8 +1,11 @@
 package com.pace2car.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class OltsUsers {
+public class OltsUsers implements Serializable{
     private Integer id;
 
     private String stuNo;
@@ -29,6 +32,7 @@ public class OltsUsers {
 
     private String gender;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     private String nationPlace;
@@ -61,6 +65,15 @@ public class OltsUsers {
         this.marjor = marjor;
         this.eduBackground = eduBackground;
         this.graduateSchool = graduateSchool;
+    }
+
+    public OltsUsers(Integer id, String idCardNo, String userName, String password, String mobile,Date birthday) {
+        this.id = id;
+        this.idCardNo = idCardNo;
+        this.userName = userName;
+        this.password = password;
+        this.mobile = mobile;
+        this.birthday = birthday;
     }
 
     public Integer getId() {

@@ -23,11 +23,11 @@
 <body>
 
 <div id="wrapper">
-    <%@include file="navigation.jsp"%>
+    <%@include file="navigation.jsp" %>
 
     <div id="page-wrapper" class="gray-bg">
         <!-- header 顶部包装区域 -->
-        <%@include file="header.jsp"%>
+        <%@include file="header.jsp" %>
         <!-- 顶部导航 -->
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
@@ -45,13 +45,13 @@
         <!-- main 主体区域 -->
         <div class="wrapper wrapper-content animated fadeIn">
             <div class="row">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                    <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">简单的FooTable，具有分页，排序和过滤功能</font></font></h5>
+                                    <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用户信息</font></font>
+                                    </h5>
 
                                     <div class="ibox-tools">
                                         <a class="collapse-link">
@@ -61,9 +61,11 @@
                                             <i class="fa fa-wrench"></i>
                                         </a>
                                         <ul class="dropdown-menu dropdown-user">
-                                            <li><a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">配置选项1</font></font></a>
+                                            <li><a href="#"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">配置选项1</font></font></a>
                                             </li>
-                                            <li><a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">配置选项2</font></font></a>
+                                            <li><a href="#"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">配置选项2</font></font></a>
                                             </li>
                                         </ul>
                                         <a class="close-link">
@@ -72,231 +74,156 @@
                                     </div>
                                 </div>
                                 <div class="ibox-content">
-                                    <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Search in table">
+                                    <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                                           placeholder="Search in table">
 
-                                    <table class="footable table table-stripped default footable-loaded" data-page-size="8" data-filter="#filter">
+                                    <table class="footable table table-stripped default footable-loaded"
+                                           data-page-size="8" data-filter="#filter">
                                         <thead>
                                         <tr>
-                                            <th class="footable-visible footable-first-column footable-sortable"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">渲染引擎</font></font><span class="footable-sort-indicator"></span></th>
-                                            <th class="footable-visible footable-sortable"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">浏览器</font></font><span class="footable-sort-indicator"></span></th>
-                                            <th data-hide="phone,tablet" class="footable-visible footable-sortable"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">平台（S）</font></font><span class="footable-sort-indicator"></span></th>
-                                            <th data-hide="phone,tablet" class="footable-visible footable-sortable footable-sorted-desc"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">引擎版本</font></font><span class="footable-sort-indicator"></span></th>
-                                            <th data-hide="phone,tablet" class="footable-visible footable-last-column footable-sortable"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CSS等级</font></font><span class="footable-sort-indicator"></span></th>
+                                            <th class="footable-visible footable-first-column footable-sortable"><font
+                                                    style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">序号</font></font><span
+                                                    class="footable-sort-indicator"></span></th>
+                                            <th class="footable-visible footable-sortable"><font
+                                                    style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">姓名</font></font><span
+                                                    class="footable-sort-indicator"></span></th>
+                                            <th data-hide="phone,tablet" class="footable-visible footable-sortable">
+                                                <font style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">身份证号码</font></font><span
+                                                    class="footable-sort-indicator"></span></th>
+                                            <th data-hide="phone,tablet"
+                                                class="footable-visible footable-sortable footable-sortable"><font
+                                                    style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">专业</font></font><span
+                                                    class="footable-sort-indicator"></span></th>
+                                            <th data-hide="phone,tablet"
+                                                class="footable-visible footable-last-column footable-sortable"><font
+                                                    style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">最高学历</font></font><span
+                                                    class="footable-sort-indicator"></span></th>
+                                            <th data-hide="phone,tablet"
+                                                class="footable-visible footable-last-column footable-sortable"><font
+                                                    style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">手机号码</font></font><span
+                                                    class="footable-sort-indicator"></span></th>
+                                            <th data-hide="phone,tablet"
+                                                class="footable-visible footable-last-column footable-sortable"><font
+                                                    style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">QQ号码</font></font><span
+                                                    class="footable-sort-indicator"></span></th>
+                                            <th data-hide="phone,tablet"
+                                                class="footable-visible footable-last-column footable-sortable"><font
+                                                    style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">授课院校</font></font><span
+                                                    class="footable-sort-indicator"></span></th>
+                                            <th data-hide="phone,tablet"
+                                                class="footable-visible footable-last-column footable-sortable"><font
+                                                    style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">操作</font></font><span
+                                                    class="footable-sort-indicator"></span></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="gradeC footable-even" style="display: table-row;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">三叉戟</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Internet Explorer 5.0
-                                            </font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">赢得95+</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">五</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C</font></font></td>
-                                        </tr><tr class="gradeA footable-odd" style="display: table-row;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">急板</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">任天堂DS浏览器</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">任天堂DS</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.5</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C / A </font></font><sup><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></sup></td>
-                                        </tr><tr class="gradeA footable-even" style="display: table-row;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">WebKit的</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Safari 3.0</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OSX.4 +</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">522.1</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeA footable-odd" style="display: table-row;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">三叉戟</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Internet Explorer 5.5
-                                            </font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">赢得95+</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.5</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeA footable-even" style="display: table-row;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">WebKit的</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">iPod Touch / iPhone</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">iPod的</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">420.1</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeA footable-odd" style="display: table-row;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">WebKit的</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OmniWeb 5.5</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OSX.4 +</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">420</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeA footable-even" style="display: table-row;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">WebKit的</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Safari 2.0</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OSX.4 +</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">419.3</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeA footable-odd" style="display: table-row;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">WebKit的</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">S60</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">S60</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">413</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeX footable-even" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">三叉戟</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Internet Explorer 4.0
-                                            </font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">赢得95+</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">X</font></font></td>
-                                        </tr><tr class="gradeA footable-odd" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">WebKit的</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Safari 1.3</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OSX.3</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">312.8</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeA footable-even" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">KHTML</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Konqureror 3.5</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">KDE 3.5</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.5</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeA footable-odd" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">KHTML</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Konqureror 3.3</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">KDE 3.3</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.3</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeC footable-even" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">KHTML</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Konqureror 3.1</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">KDE 3.1</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.1</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C</font></font></td>
-                                        </tr><tr class="gradeA footable-odd" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">壁虎</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Netscape Navigator 9</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">赢得98+ / OSX.2 +</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.8</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeC footable-even" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">塔斯曼</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Internet Explorer 5.2</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mac OS 8-X</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C</font></font></td>
-                                        </tr><tr class="gradeC footable-odd" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">塔斯曼</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Internet Explorer 5.1</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mac OS 7.6-9</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C</font></font></td>
-                                        </tr><tr class="gradeA footable-even" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">急板</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opera 9.5</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">赢得88+ / OSX.3 +</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeA footable-odd" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">急板</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">诺基亚N800</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">N800</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeU footable-even" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">其它浏览器</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">所有其他人</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ü</font></font></td>
-                                        </tr><tr class="gradeA footable-odd" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">急板</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opera 9.2</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">赢得88+ / OSX.3 +</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeA footable-even" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">急板</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opera 9.0</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">赢得95+ / OSX.3 +</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeA footable-odd" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">急板</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opera 8.5</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">赢得95+ / OSX.2 +</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeA footable-even" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">急板</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opera 8.0</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">赢得95+ / OSX.2 +</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeA footable-odd" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">急板</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opera 7.5</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">赢得95+ / OSX.2 +</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeA footable-even" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">急板</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opera 7.0</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">赢得95+ / OSX.1 +</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeX footable-odd" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">塔斯曼</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Internet Explorer 4.5</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mac OS 8-9</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">X</font></font></td>
-                                        </tr><tr class="gradeA footable-even" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">杂项</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">NetFront 3.1</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">嵌入式设备</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C</font></font></td>
-                                        </tr><tr class="gradeA footable-odd" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">杂项</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">NetFront 3.4</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">嵌入式设备</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr><tr class="gradeX footable-even" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">杂项</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dillo 0.8</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">嵌入式设备</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">X</font></font></td>
-                                        </tr><tr class="gradeX footable-odd" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">杂项</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">链接</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">纯文本</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">X</font></font></td>
-                                        </tr><tr class="gradeX footable-even" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">杂项</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">山猫</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">纯文本</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">X</font></font></td>
-                                        </tr><tr class="gradeC footable-odd" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">杂项</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">IE Mobile</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Windows Mobile 6</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C</font></font></td>
-                                        </tr><tr class="gradeC footable-even" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">杂项</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PSP浏览器</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PSP</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C</font></font></td>
-                                        </tr><tr class="gradeA footable-odd" style="display: none;">
-                                            <td class="footable-visible footable-first-column"><span class="footable-toggle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">急板</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Wii的Opera</font></font></td>
-                                            <td class="footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Wii游戏机</font></font></td>
-                                            <td class="center footable-visible"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- </font></font></td>
-                                            <td class="center footable-visible footable-last-column"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个</font></font></td>
-                                        </tr></tbody>
+                                        <c:forEach var="users" items="${page.getResult()}" varStatus="status">
+                                            <tr id="tr_${users.id}" class="gradeC footable-odd" style="display: table-row;">
+                                                <td class="footable-visible footable-first-column"><span
+                                                        class="footable-toggle"></span><font
+                                                        style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">${status.index+1}</font></font>
+                                                </td>
+                                                <td class="footable-visible"><font
+                                                        style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">${users.userName}</font></font>
+                                                </td>
+                                                <td class="footable-visible"><font
+                                                        style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">${users.idCardNo}</font></font>
+                                                </td>
+                                                <td class="center footable-visible"><font
+                                                        style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">${users.marjor}</font></font>
+                                                </td>
+                                                <td class="center footable-visible"><font
+                                                        style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">${users.eduBackground}</font></font>
+                                                </td>
+                                                <td class="center footable-visible"><font
+                                                        style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">${users.mobile}</font></font>
+                                                </td>
+                                                <td class="center footable-visible"><font
+                                                        style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">${users.qq}</font></font></td>
+                                                <td class="center footable-visible"><font
+                                                        style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">${users.graduateSchool}
+                                                </font></font>
+                                                </td>
+                                                <td class="center footable-visible footable-last-column"><font
+                                                        style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;"><a id="toUpdateBtn" onclick="toUpdate(this)" href="#" no="${users.id}"
+                                                                                            class="btn btn-info btn-sm"
+                                                                                            data-toggle="modal"
+                                                                                            data-target="#myModal"
+                                                                                            data-backdrop="static">
+                                                    <span class="glyphicon glyphicon-refresh"></span> 更新
+                                                </a></font></font></td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
                                         <tfoot>
-                                        <tr>
-                                            <td colspan="5" class="footable-visible">
-                                                <ul class="pagination pull-right"><li class="footable-page-arrow disabled"><a data-page="first" href="#first"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">«</font></font></a></li><li class="footable-page-arrow disabled"><a data-page="prev" href="#prev"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&lt;</font></font></a></li><li class="footable-page active"><a data-page="0" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></a></li><li class="footable-page"><a data-page="1" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></a></li><li class="footable-page"><a data-page="2" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></a></li><li class="footable-page"><a data-page="3" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></a></li><li class="footable-page"><a data-page="4" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">五</font></font></a></li><li class="footable-page-arrow"><a data-page="next" href="#next"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&gt;</font></font></a></li><li class="footable-page-arrow"><a data-page="last" href="#last"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">»</font></font></a></li></ul>
+                                        <%--<tr>--%>
+                                        <%--<td colspan="5" class="footable-visible">--%>
+                                        <%--<ul class="pagination pull-right">--%>
+                                        <%--<li class="footable-page-arrow disabled">--%>
+                                        <%--<a data-page="first" href="#first"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">«</font></font></a>--%>
+                                        <%--</li>--%>
+                                        <%--<li class="footable-page-arrow disabled">--%>
+                                        <%--<a data-page="prev" href="#prev"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&lt;</font></font></a>--%>
+                                        <%--</li>--%>
+                                        <%--<li class="footable-page active">--%>
+                                        <%--<a data-page="0" href="user/list?pageNum=1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></a>--%>
+                                        <%--</li>--%>
+                                        <%--<li class="footable-page">--%>
+                                        <%--<a data-page="1" href="user/list?pageNum=2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></a>--%>
+                                        <%--</li>--%>
+                                        <%--<li class="footable-page">--%>
+                                        <%--<a data-page="2" href="user/list?pageNum=3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></a>--%>
+                                        <%--</li>--%>
+                                        <%--<li class="footable-page">--%>
+                                        <%--<a data-page="3" href="user/list?pageNum=4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></a>--%>
+                                        <%--</li>--%>
+                                        <%--<li class="footable-page">--%>
+                                        <%--<a data-page="4" href="user/list?pageNum=5"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></a>--%>
+                                        <%--</li>--%>
+                                        <%--<li class="footable-page-arrow">--%>
+                                        <%--<a data-page="next" href="#next"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&gt;</font></font></a>--%>
+                                        <%--</li>--%>
+                                        <%--<li class="footable-page-arrow">--%>
+                                        <%--<a data-page="last" href="#last"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">»</font></font></a>--%>
+                                        <%--</li>--%>
+                                        <%--</ul>--%>
+                                        <%--</td>--%>
+                                        <%--</tr>--%>
+                                        <tr class="page-nav" style="text-align: right">
+                                            <td colspan='5'>
+                                                总记录：${page.getTotal()} &nbsp;&nbsp;
+                                                第${page.getPageNum()}页/共${page.getPages()}页
+                                                &nbsp;&nbsp; &nbsp;&nbsp;
+                                                <c:if test="${page.getPageNum() gt 1}">
+                                                    <a href="user/list?pageNum=1">第一页</a> &nbsp;
+                                                </c:if>
+                                                <c:if test="${page.getPageNum() gt 1}">
+                                                    <a href="user/list?pageNum=${page.getPageNum()-1}">上一页</a>&nbsp;
+                                                </c:if>
+                                                <c:if test="${page.getPageNum() lt page.getPages()}">
+                                                    <a href="user/list?pageNum=${page.getPageNum()+1}">下一页</a>&nbsp;
+                                                </c:if>
+                                                <c:if test="${page.getPageNum() lt page.getPages()}">
+                                                    <a href="user/list?pageNum=${page.getPages()}">末页</a>&nbsp;
+                                                </c:if>
                                             </td>
                                         </tr>
                                         </tfoot>
@@ -306,15 +233,19 @@
                         </div>
                     </div><!-- main 在此显示内容 -->
                 </div>
-                <div class="col-lg-2"></div>
             </div>
         </div>
         <!-- footer 底部包装区域 -->
-        <%@include file="footer.jsp"%>
+        <%@include file="footer.jsp" %>
     </div>
 
 </div>
-
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="myModal-content">
+        </div>
+    </div>
+</div>
 
 <!-- Mainly scripts -->
 <script src="js/jquery-2.2.4.js"></script>
@@ -363,6 +294,19 @@
         }
 
     });
+
+    function toUpdate(e) {
+        $('#myModal-content').empty();
+        //console.log($(e).attr('empno'));
+
+        var no = $(e).attr('no');
+        //加载更新员工的信息表单，并加入到模态框的content部分
+        $.get('user/toUpdate/' + no, function (html) {
+            //console.dirxml(html)
+            $('#myModal-content').append(html);
+        }, 'html');
+    }
+
 </script>
 
 </body>

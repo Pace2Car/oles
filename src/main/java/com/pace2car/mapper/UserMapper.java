@@ -11,7 +11,14 @@ public interface UserMapper {
 
     public OltsUsers selectByLogin(OltsUsers user);
 
-    List<OltsUsers> selectByPage(@Param("oltsUsers") OltsUsers users,
+    List<OltsUsers> selectByPage(@Param("users") OltsUsers users,
                                  @Param("pageNum") int pageNum,
                                  @Param("pageSize") int pageSize);
+
+    OltsUsers selectById(Integer id);
+
+    int update(OltsUsers user);
+
+    void insertInfoBatch(List<OltsUsers> salaryList);
+
 }
