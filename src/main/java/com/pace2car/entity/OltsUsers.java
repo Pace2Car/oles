@@ -43,6 +43,14 @@ public class OltsUsers implements Serializable {
     public OltsUsers() {
     }
 
+    public OltsUsers(Integer id, String userName, String gender, String marjor, String graduateSchool) {
+        this.id = id;
+        this.userName = userName;
+        this.gender = gender;
+        this.marjor = marjor;
+        this.graduateSchool = graduateSchool;
+    }
+
     public OltsUsers(Integer id, String stuNo, String idCardNo, String userName, String password, String mobile, String homeTel, String homeAddr, String schAddr, String qq, String email, Short userType, String gender, Date birthday, String nationPlace, String marjor, String eduBackground, String graduateSchool) {
         this.id = id;
         this.stuNo = stuNo;
