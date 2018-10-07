@@ -22,7 +22,7 @@ public class TechCategoryServiceTest {
 
     @Test
     public void testSelectTechCategorys() {
-        List<TechCategory> techCategoryList = techCategoryService.selectTechCategorys(new TechCategory(null, null, 1), 1, 50);
+        List<TechCategory> techCategoryList = techCategoryService.selectTechCategorys(new TechCategory(null, null, 2), 1, 50);
         for (TechCategory techCategory : techCategoryList) {
             System.out.println(techCategory);
         }
