@@ -36,7 +36,7 @@
                 </div>
             </li>
             <li>
-                <a href="index.jsp">
+                <a href="views/index.jsp">
                     <i class="fa fa-home"></i>
                     <span class="nav-label">首页</span> <span class="fa arrow"></span>
                 </a>
@@ -67,9 +67,8 @@
                     <span class="nav-label">分类管理</span> <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    <li><a href="goodsTypes/view.do">题型管理</a></li>
-                    <li><a href="category/search">课程管理</a></li>
-                    <li><a href="goodsTypes/show.do">知识点管理</a></li>
+                    <li><a href="category/searchCourse">课程管理</a></li>
+                    <li><a href="category/searchTechCategory">知识点管理</a></li>
                 </ul>
 
             </li>

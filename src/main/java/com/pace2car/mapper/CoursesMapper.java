@@ -19,7 +19,21 @@ public interface CoursesMapper {
      * @param pageSize
      * @return
      */
-    List<Courses> selectByName(@Param("courses") Courses courses,
+    List<Courses> selectCourses(@Param("courses") Courses courses,
                                @Param("pageNum") int pageNum,
                                @Param("pageSize") int pageSize);
+
+    /**
+     * 加载课程下拉列表
+     * @param courses
+     * @return
+     */
+    List<Courses> selectCourses(Courses courses);
+
+    int insertCourse(Courses courses);
+
+    int updateCourse(Courses courses);
+
+    int deleteCourse(Courses courses);
+
 }

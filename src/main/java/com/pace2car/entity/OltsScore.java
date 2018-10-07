@@ -1,9 +1,10 @@
 package com.pace2car.entity;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class OltsScore {
+public class OltsScore implements Serializable {
 
   private Integer id;
   private Integer score;

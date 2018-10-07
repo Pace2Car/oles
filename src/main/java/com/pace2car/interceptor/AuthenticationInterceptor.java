@@ -21,11 +21,11 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
         OltsUsers logUser = (OltsUsers) request.getSession().getAttribute("logUser");
         logger.debug("登录的用户信息: " + logUser);
         // 未登录
-        if (logUser == null) {
-            logger.warn("未授权访问请重新登录！" );
-            response.sendRedirect(request.getContextPath() + "/login_form.jsp");
-            return false;
-        }
+//        if (logUser == null) {
+//            logger.warn("未授权访问请重新登录！" );
+//            response.sendRedirect(request.getContextPath() + "/login_form.jsp");
+//            return false;
+//        }
         return super.preHandle(request, response, handler);
     }
 }

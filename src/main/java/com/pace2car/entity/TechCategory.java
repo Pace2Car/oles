@@ -1,11 +1,15 @@
 package com.pace2car.entity;
 
 
-public class TechCategory {
+import java.io.Serializable;
+
+public class TechCategory implements Serializable {
 
     private Integer id;
     private String techCtgr;
     private Integer courseId;
+
+    private Courses course;
 
     public TechCategory() {
     }
@@ -14,6 +18,14 @@ public class TechCategory {
         this.id = id;
         this.techCtgr = techCtgr;
         this.courseId = courseId;
+    }
+
+    public Courses getCourse() {
+        return course;
+    }
+
+    public void setCourse(Courses course) {
+        this.course = course;
     }
 
     public Integer getId() {
@@ -48,6 +60,7 @@ public class TechCategory {
                 "id=" + id +
                 ", techCtgr='" + techCtgr + '\'' +
                 ", courseId=" + courseId +
+                ", course=" + course +
                 '}';
     }
 }

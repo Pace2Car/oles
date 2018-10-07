@@ -11,11 +11,19 @@ import java.util.List;
 public interface ICoursesService {
 
     /**
-     * @param courses     查询条件
-     * @param pageNum     页码
-     * @param pageSize    条数
+     * @param courses  查询条件
+     * @param pageNum  页码
+     * @param pageSize 条数
      * @return
      */
-    List<Courses> selectByName(Courses courses, int pageNum, int pageSize);
+    List<Courses> selectCourses(Courses courses, int pageNum, int pageSize);
+
+    List<Courses> selectCourses(Courses courses);
+
+    int insertCourse(Courses courses);
+
+    int updateCourse(Courses courses);
+
+    int deleteCourse(Courses courses);
 
 }

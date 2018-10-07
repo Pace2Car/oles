@@ -38,7 +38,7 @@
                         <a href="javascript:void(0)">分类管理</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)">课程管理</a>
+                        <a href="javascript:void(0)">知识点管理</a>
                     </li>
                 </ol>
             </div>
@@ -54,7 +54,7 @@
                     <!-- main 在此显示内容 -->
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>课程信息表</h5>
+                            <h5>知识点信息表</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -62,7 +62,7 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                     <i class="fa fa-wrench"></i>
                                 </a>
-                                <ul class="dropdown-menu dropdown-course">
+                                <ul class="dropdown-menu dropdown-TechCategory">
                                     <li><a href="#">Config option 1</a>
                                     </li>
                                     <li><a href="#">Config option 2</a>
@@ -82,14 +82,23 @@
                                         <a href="#" onclick="toInsert()"
                                            class="btn btn-info btn-sm" data-toggle="modal"
                                            data-target="#insertModal" data-backdrop="static">
-                                            <span class="fa fa-plus"></span> 新增课程</a>
+                                            <span class="fa fa-plus"></span> 新增知识点</a>
                                     </div>
                                     <%--查询表单--%>
                                     <div class="col-sm-10">
-                                        <form action="category/searchCourse" method="post" class="text-center">
-                                            <span class="dataTables_filter"><label class="text-right" style="width: 75px">课程名称:</label>
-                                                <input name="courseName" id="cname" value="${sessionScope.courses.courseName}" style="margin-bottom: 5px"
-                                                       type="text" class="form-control input-sm" placeholder="请输入课程名"
+                                        <form action="category/searchTechCategory" method="post" class="text-center">
+                                            <span class="dataTables_filter">
+                                                <label class="text-right" style="width: 75px">课程名称:</label>
+                                                <select name="courseId" id="courseId"
+                                                        style="margin-bottom: 5px"
+                                                        class="form-select-button input-md" placeholder="请选择课程名"
+                                                        aria-controls="editable">
+                                                </select>
+                                            </span>
+                                            <span class="dataTables_filter">
+                                                <label class="text-right" style="width: 95px">知识点名称:</label>
+                                                <input name="techCtgr" id="techCtgr" value="${sessionScope.techCategory.techCtgr}" style="margin-bottom: 5px"
+                                                       type="text" class="form-control input-sm" placeholder="请输入知识点"
                                                        aria-controls="editable">
                                             </span>
                                             <span>
@@ -108,10 +117,13 @@
                                             <tr role="row">
                                                 <th class="sorting" tabindex="0" aria-controls="editable"
                                                     rowspan="1" colspan="1" aria-sort="ascending"
-                                                    style="width: 172px;">课程ID
+                                                    style="width: 172px;">知识点ID
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"
                                                     style="width: auto;">课程名称
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"
+                                                    style="width: auto;">知识点名称
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"
                                                     colspan="1"
@@ -122,16 +134,17 @@
                                             </thead>
                                             <%--表单内容--%>
                                             <tbody>
-                                            <c:forEach var="course" items="${page}">
-                                                <tr id="tr_${course.id}" class="gradeA odd" role="row">
-                                                    <td class="sorting_1">${course.id}</td>
-                                                    <td>${course.courseName}</td>
+                                            <c:forEach var="TechCategory" items="${page}">
+                                                <tr id="tr_${TechCategory.id}" class="gradeA odd" role="row">
+                                                    <td class="sorting_1">${TechCategory.id}</td>
+                                                    <td>${TechCategory.course.courseName}</td>
+                                                    <td>${TechCategory.techCtgr}</td>
                                                     <td class="center">
-                                                        <a href="#" courseId="${course.id}" onclick="toUpdate(this)"
+                                                        <a href="#" TechCategoryId="${TechCategory.id}" onclick="toUpdate(this)"
                                                            class="btn btn-info btn-sm" data-toggle="modal"
                                                            data-target="#updateModal" data-backdrop="static">
                                                             <span class="glyphicon glyphicon-refresh"></span> 更新</a>
-                                                        <a href="#" courseId="${course.id}" onclick="toDelete(this)"
+                                                        <a href="#" TechCategoryId="${TechCategory.id}" onclick="toDelete(this)"
                                                            class="btn btn-danger btn-sm" data-toggle="modal"
                                                            data-target="#deleteModal" data-backdrop="static">
                                                             <span class="glyphicon glyphicon-trash"></span> 删除</a>
@@ -171,26 +184,26 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
-                                            <form action="category/searchCourse">
+                                            <form action="category/searchTechCategory">
                                                 <ul class="pagination pull-right">
                                                     <c:if test="${page.getPageNum() gt 1}">
                                                         <li class="footable-page-arrow">
-                                                            <a href="category/searchCourse?pageNum=1">首页</a></li>
+                                                            <a href="category/searchTechCategory?pageNum=1">首页</a></li>
                                                     </c:if>
                                                     <c:if test="${page.getPageNum() gt 1}">
                                                         <li class="footable-page-arrow">
-                                                            <a href="category/searchCourse?pageNum=${page.getPageNum()-1}">上一页</a>
+                                                            <a href="category/searchTechCategory?pageNum=${page.getPageNum()-1}">上一页</a>
                                                         </li>
                                                     </c:if>
 
                                                     <c:if test="${page.getPageNum() lt page.getPages()}">
                                                         <li class="footable-page-arrow">
-                                                            <a href="category/searchCourse?pageNum=${page.getPageNum()+1}">下一页</a>
+                                                            <a href="category/searchTechCategory?pageNum=${page.getPageNum()+1}">下一页</a>
                                                         </li>
                                                     </c:if>
                                                     <c:if test="${page.getPageNum() lt page.getPages()}">
                                                         <li class="footable-page-arrow">
-                                                            <a href="category/searchCourse?pageNum=${page.getPages()}">尾页</a>
+                                                            <a href="category/searchTechCategory?pageNum=${page.getPages()}">尾页</a>
                                                         </li>
                                                     </c:if>
                                                     <c:if test="${page.getPages() > 1}">
@@ -282,9 +295,18 @@
                     <div class="form-inline">
                         <div class="form-group">
                             <div class="input-group input-group-md">
-                                <div class="input-group-addon" style="width: 96px;">课程名称：</div>
-                                <input style="width: 300px" type="text" class="form-control" id="courseName"
-                                       name="courseName" placeholder="请输入课程名">
+                                <div class="input-group-addon" style="width: 96px">课程名称：</div>
+                                <select name="courseId" id="newCourseId"
+                                        style="width: 300px"
+                                        class="form-control" placeholder="请选择课程名"
+                                        aria-controls="editable">
+                                </select>
+                            </div>
+                            <br/><br/>
+                            <div class="input-group input-group-md">
+                                <div class="input-group-addon" style="width: 96px;">知识点名称：</div>
+                                <input style="width: 300px" type="text" class="form-control" id="techCategoryName"
+                                       name="techCtgr" placeholder="请输入知识点">
                             </div>
                         </div>
                     </div>
@@ -319,7 +341,7 @@
             </div>
             <div class="modal-body">
                 <span class="fa fa-exclamation fa-2x" style="color:#f15b6c;"></span>
-                您确定要删除编号为：<span id="courseMsg"></span> 的课程吗？
+                您确定要删除编号为：<span id="TechCategoryMsg"></span> 的知识点吗？
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -343,25 +365,39 @@
 
 <script>
     $(function () {
+        // 加载课程名下拉列表
+        $.get("category/load_courses",function (resp) {
+            // console.log(resp);
+            $("#courseId").empty();
+            $("#courseId").append("<option value=''>不限--</option>");
+            $.each(resp, function (i,v) {
+                var option = new Option(v.courseName, v.id);
+                $("#courseId").append(option);
+            });
+        },"json");
+    })
+</script>
+<script>
+    $(function () {
         $('#successAlert').hide();
         $('#failAlert').hide();
     });
 
     function toUpdate(e) {
         $("#updateModal-content").empty();
-        var id = $(e).attr('courseId');
+        var id = $(e).attr('TechCategoryId');
         console.dirxml(id);
-        $.get("category/searchCourse?id=" + id, function (html) {
+        $.get("category/searchTechCategory?id=" + id, function (html) {
             $("#updateModal-content").append(html);
         }, "html");
     }
 
     function toDelete(e) {
-        var id = $(e).attr('courseId');
-        $("#courseMsg").text(id);
+        var id = $(e).attr('TechCategoryId');
+        $("#TechCategoryMsg").text(id);
         $("#deleteConfirmBtn").click(function () {
             $("#tr_" + id).remove();
-            $.get("category/deleteCourse?id=" + id, function (json) {
+            $.get("category/deleteTechCategory?id=" + id, function (json) {
                 if (json.actionFlag) {
                     $('#successAlert').show();
                     setTimeout("$('#successAlert').hide()", 3000);
@@ -375,10 +411,20 @@
     }
 
     function toInsert() {
+        // 加载课程名下拉列表
+        $.get("category/load_courses",function (resp) {
+            // console.log(resp);
+            $("#newCourseId").empty();
+            $("#newCourseId").append("<option value=''>不限--</option>");
+            $.each(resp, function (i,v) {
+                var option = new Option(v.courseName, v.id);
+                $("#newCourseId").append(option);
+            });
+        },"json");
         $("#insertBtn").click(function () {
-            console.dirxml($("#courseName").val());
-            var course = $("#insertForm").serialize();
-            $.get("category/insertCourse", course, function (json) {
+            console.dirxml($("#TechCategoryName").val());
+            var TechCategory = $("#insertForm").serialize();
+            $.get("category/insertTechCategory", TechCategory, function (json) {
                 if (json.actionFlag) {
                     $('#successAlert').show();
                     setTimeout("$('#successAlert').hide()", 3000);
@@ -392,8 +438,8 @@
     }
 
     function resetSelect() {
-        $("#cid").val("");
-        $("#cname").val("");
+        $("#courseId").val("");
+        $("#techCtgr").val("");
     }
 </script>
 

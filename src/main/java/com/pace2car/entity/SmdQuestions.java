@@ -1,9 +1,10 @@
 package com.pace2car.entity;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SmdQuestions {
+public class SmdQuestions implements Serializable {
 
     private Integer id;
     private String question;

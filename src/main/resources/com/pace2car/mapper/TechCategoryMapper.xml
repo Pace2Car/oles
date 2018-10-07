@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pace2car.mapper.TechCategoryMapper">
+
+    <resultMap id="baseResultMap" type="TechCategory">
+        <id property="id" column="ID"/>
+        <result property="techCtgr" column="TECH_CTGR"/>
+        <result property="courseId" column="COURSE_ID"/>
+        <association property="course" javaType="Courses" columnPrefix="c_">
+            <id property="id" column="ID"/>
+            <result property="courseName" column="COURSE_NAME"/>
+        </association>
+    </resultMap>
+
+    <select id="selectTechCategorys" parameterType="TechCategory" resultMap="baseResultMap">
+        SELECT t.ID,
+               t.TECH_CTGR,
+               t.COURSE_ID,
+               c.ID          c_ID,
+               c.COURSE_NAME c_COURSE_NAME
+        FROM TECH_CATEGORY t
+        INNER JOIN COURSES c ON t.COURSE_ID = c.ID
+        <where>
+            <if test="techCategory != null and techCategory.id != null">
+                AND t.ID = #{techCategory.id,jdbcType=NUMERIC}
+            </if>
+            <if test="techCategory != null and techCategory.techCtgr != null">
+                <bind name="likeName" value="'%' + techCategory.techCtgr + '%'"/>
+                AND t.TECH_CTGR LIKE #{likeName}
+            </if>
+            <if test="techCategory != null and techCategory.courseId != null">
+                AND t.COURSE_ID = #{techCategory.courseId,jdbcType=NUMERIC}
+            </if>
+        </where>
+        ORDER BY ID
+    </select>
+
+    <insert id="insertTechCategory" parameterType="TechCategory">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT TECH_CATEGORY_SEQ.nextval FROM dual
+        </selectKey>
+        INSERT INTO TECH_CATEGORY VALUES (#{id}, #{techCtgr,jdbcType=VARCHAR}, #{courseId,jdbcType=NUMERIC})
+    </insert>
+
+    <update id="updateTechCategory" parameterType="TechCategory">
+        UPDATE TECH_CATEGORY
+        <set>
+            TECH_CTGR=#{techCtgr,jdbcType=VARCHAR}
+        </set>
+        WHERE ID=#{id,jdbcType=NUMERIC}
+    </update>
+
+    <delete id="deleteTechCategory" parameterType="TechCategory">
+        DELETE FROM TECH_CATEGORY
+        WHERE ID=#{id,jdbcType=NUMERIC}
+    </delete>
+
+</mapper>

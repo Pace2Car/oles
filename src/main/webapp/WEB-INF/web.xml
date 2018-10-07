@@ -59,7 +59,7 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
         <!-- 异步请求处理支持 -->
-        <!--<async-supported>true</async-supported>-->
+        <async-supported>true</async-supported>
     </servlet>
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
