@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class SmdOptions implements Serializable {
 
-    private String id;
+    private Integer id;
     private String optionA;
     private String optionB;
     private String optionC;
@@ -16,7 +16,7 @@ public class SmdOptions implements Serializable {
     public SmdOptions() {
     }
 
-    public SmdOptions(String id, String optionA, String optionB, String optionC, String optionD, String optionE, Integer questionId) {
+    public SmdOptions(Integer id, String optionA, String optionB, String optionC, String optionD, String optionE, Integer questionId) {
         this.id = id;
         this.optionA = optionA;
         this.optionB = optionB;
@@ -26,14 +26,13 @@ public class SmdOptions implements Serializable {
         this.questionId = questionId;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-
 
     public String getOptionA() {
         return optionA;
