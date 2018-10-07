@@ -43,27 +43,21 @@
         <!-- main 主体区域 -->
         <div class="wrapper wrapper-content animated fadeIn">
             <div class="row">
-                <form role="form">
+                <form role="form" action="ques/addRadio" method="post">
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label class="col-sm-4 control-label">课程</label>
                         </div>
-                        <div class="col-lg-12 m-l-n"><select class="form-control" multiple="">
-                            <option>选项 1</option>
-                            <option>选项 2</option>
-                            <option>选项 3</option>
-                            <option>选项 4</option>
-                        </select>
+                        <div class="col-lg-12 m-l-n">
+                            <select class="form-control" multiple="" id="courseId" name="courseId">
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label">知识点</label>
                         </div>
-                        <div class="col-lg-12 m-l-n"><select class="form-control" multiple="">
-                            <option>选项 1</option>
-                            <option>选项 2</option>
-                            <option>选项 3</option>
-                            <option>选项 4</option>
+                        <div class="col-lg-12 m-l-n">
+                            <select class="form-control" multiple="" id="techCateId" name="techCateId">
                         </select>
                         </div>
                         <div class="col-sm-4 col-sm-offset-2">
@@ -77,30 +71,30 @@
                     <div class="col-lg-8">
                         <div class="form-group">
                             <label>单选题题干</label>
-                            <textarea class="form-control" rows="8"></textarea>
+                            <textarea class="form-control" rows="8" name="question" id="question"></textarea>
                         </div>
                         <div>
                             <textarea class="form-control" rows="5"
-                                      placeholder="此处为格式代码">&lt;pre&gt;&emsp;&lt;/pre&gt;</textarea>
+                                      placeholder="此处为格式代码"name="descrpt" >&lt;pre&gt;&emsp;&lt;/pre&gt;</textarea>
                         </div>
                         <label class="control-label">选项</label>
                         <br>
                         <label class="col-sm-1 control-label">A</label>
-                        <div class="input-group"><span class="input-group-addon"> <input type="radio"
-                                                                                         name="opt"> </span> <input
-                                type="text" class="form-control"></div>
+                        <div class="input-group"><span class="input-group-addon">
+                            <input type="radio" name="correct" value="A"> </span>
+                            <input type="text" class="form-control" name="optionA"></div>
                         <label class="col-sm-1 control-label">B</label>
-                        <div class="input-group"><span class="input-group-addon"> <input type="radio"
-                                                                                         name="opt"> </span> <input
-                                type="text" class="form-control"></div>
+                        <div class="input-group"><span class="input-group-addon">
+                            <input type="radio" name="correct" value="B"> </span>
+                            <input type="text" class="form-control" name="optionB"></div>
                         <label class="col-sm-1 control-label">C</label>
-                        <div class="input-group"><span class="input-group-addon"> <input type="radio"
-                                                                                         name="opt"> </span> <input
-                                type="text" class="form-control"></div>
+                        <div class="input-group"><span class="input-group-addon">
+                            <input type="radio" name="correct" value="C"> </span>
+                            <input type="text" class="form-control" name="optionC"></div>
                         <label class="col-sm-1 control-label">D</label>
-                        <div class="input-group"><span class="input-group-addon"> <input type="radio"
-                                                                                         name="opt"> </span> <input
-                                type="text" class="form-control"></div>
+                        <div class="input-group"><span class="input-group-addon">
+                            <input type="radio" name="correct" value="D"> </span>
+                            <input type="text" class="form-control" name="optionD"></div>
                     </div>
 
                 </form>
@@ -160,7 +154,35 @@
 
     });
 </script>
+<script>
+    $(function () {
+        // 加载课程名下拉列表
+        $.get("ques/load_courses",function (resp) {
+            // console.log(resp);
+            $("#courseId").empty();
+            $.each(resp, function (i,v) {
+                var option = new Option(v.courseName, v.id);
+                $("#courseId").append(option);
+            });
+        },"json");
 
+        $("#courseId").change(function () {
+            var courseId = this.options[this.selectedIndex].value;
+            console.log(courseId);
+
+            $.get("ques/load_tech_by_id",{"courseId": courseId},function (resp) {
+                console.log(resp);
+
+                $("#techCateId").empty();
+
+                $.each(resp, function (i,v) {
+                    var option = new Option(v.techCtgr, v.id);
+                    $("#techCateId").append(option);
+                });
+            },"json");
+        });
+    })
+</script>
 </body>
 
 </html>

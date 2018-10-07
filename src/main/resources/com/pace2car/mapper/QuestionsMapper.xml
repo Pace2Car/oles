@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pace2car.mapper.QuestionsMapper">
+
+    <resultMap id="baseResultMap" type="TechCategory">
+        <id property="id" column="ID"/>
+        <result property="techCtgr" column="TECH_CTGR"/>
+        <result property="courseId" column="COURSE_ID"/>
+        <association property="course" javaType="Courses" columnPrefix="c_">
+            <id property="id" column="ID"/>
+            <result property="courseName" column="COURSE_NAME"/>
+        </association>
+    </resultMap>
+    <resultMap id="baseResultMap1" type="FspQuestions">
+
+    </resultMap>
+
+
+    <insert id="insertShort" parameterType="FspQuestions">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT FSP_QUESTIONS_SEQ.nextval FROM dual
+        </selectKey>
+        INSERT INTO FSP_QUESTIONS(ID,QUESTION,STD_ANSWER,QUESTION_TYPE,TECH_CATE_ID,DESCRPT)
+        VALUES (#{id}, #{question,jdbcType=VARCHAR}, #{stdAnswer,jdbcType=VARCHAR}
+        , 5, #{techCateId,jdbcType=INTEGER}, #{descrpt,jdbcType=VARCHAR})
+    </insert>
+
+
+    <insert id="insertRadio" parameterType="SmdQuestions" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO SMD_QUESTIONS(ID,QUESTION,CORRECT,QUESTION_TYPE,TECH_CATE_ID,DESCRPT)
+        VALUES (#{id}, #{question,jdbcType=VARCHAR}, #{correct,jdbcType=VARCHAR}
+        , 1, #{techCateId,jdbcType=INTEGER}, #{descrpt,jdbcType=VARCHAR})
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT SMD_QUESTIONS_SEQ.nextval FROM dual
+        </selectKey>
+    </insert>
+
+
+    <insert id="insertRadioOpt" parameterType="SmdOptions">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT SMD_OPTIONS_SEQ.nextval FROM dual
+        </selectKey>
+        INSERT INTO SMD_OPTIONS(ID,OPTION_A,OPTION_B,OPTION_C,OPTION_D,OPTION_E,QUESTION_ID)
+        VALUES (#{id}, #{optionA,jdbcType=VARCHAR}, #{optionB,jdbcType=VARCHAR},
+         #{optionC,jdbcType=VARCHAR}, #{optionD,jdbcType=VARCHAR},
+         #{optionE,jdbcType=VARCHAR},#{questionId,jdbcType=INTEGER})
+    </insert>
+
+
+    <insert id="insertCheckBox" parameterType="SmdQuestions" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO SMD_QUESTIONS(ID,QUESTION,CORRECT,QUESTION_TYPE,TECH_CATE_ID,DESCRPT)
+        VALUES (#{id}, #{question,jdbcType=VARCHAR}, #{correct,jdbcType=VARCHAR}
+        , 2, #{techCateId,jdbcType=INTEGER}, #{descrpt,jdbcType=VARCHAR})
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT SMD_QUESTIONS_SEQ.nextval FROM dual
+        </selectKey>
+    </insert>
+
+
+    <insert id="insertCheckBoxOpt" parameterType="SmdOptions">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT SMD_OPTIONS_SEQ.nextval FROM dual
+        </selectKey>
+        INSERT INTO SMD_OPTIONS(ID,OPTION_A,OPTION_B,OPTION_C,OPTION_D,OPTION_E,QUESTION_ID)
+        VALUES (#{id}, #{optionA,jdbcType=VARCHAR}, #{optionB,jdbcType=VARCHAR},
+        #{optionC,jdbcType=VARCHAR}, #{optionD,jdbcType=VARCHAR},
+        #{optionE,jdbcType=VARCHAR},#{questionId,jdbcType=INTEGER})
+    </insert>
+
+
+    <insert id="insertJudge" parameterType="SmdQuestions" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO SMD_QUESTIONS(ID,QUESTION,CORRECT,QUESTION_TYPE,TECH_CATE_ID,DESCRPT)
+        VALUES (#{id}, #{question,jdbcType=VARCHAR}, #{correct,jdbcType=VARCHAR}
+        , 3, #{techCateId,jdbcType=INTEGER}, #{descrpt,jdbcType=VARCHAR})
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT SMD_QUESTIONS_SEQ.nextval FROM dual
+        </selectKey>
+    </insert>
+
+
+    <insert id="insertProgram" parameterType="FspQuestions">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT FSP_QUESTIONS_SEQ.nextval FROM dual
+        </selectKey>
+        INSERT INTO FSP_QUESTIONS(ID,QUESTION,STD_ANSWER,QUESTION_TYPE,TECH_CATE_ID,DESCRPT)
+        VALUES (#{id}, #{question,jdbcType=VARCHAR}, #{stdAnswer,jdbcType=VARCHAR}
+        , 6, #{techCateId,jdbcType=INTEGER}, #{descrpt,jdbcType=VARCHAR})
+    </insert>
+
+
+    <select id="selectTech" resultType="TechCategory" resultMap="baseResultMap">
+        SELECT * FROM TECH_CATEGORY WHERE COURSE_ID=#{id}
+    </select>
+</mapper>
