@@ -12,11 +12,9 @@ public interface ITechCategoryService {
 
     /**
      * @param techCategory 查询条件
-     * @param pageNum      页码
-     * @param pageSize     条数
      * @return
      */
-    List<TechCategory> selectTechCategorys(TechCategory techCategory, int pageNum, int pageSize);
+    List<TechCategory> selectTechCategorys(TechCategory techCategory);
 
     int insertTechCategory(TechCategory techCategory);
 

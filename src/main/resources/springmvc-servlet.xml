@@ -32,15 +32,15 @@
     <mvc:default-servlet-handler/>
 
     <!-- 配置拦截器 -->
-    <!--<mvc:interceptors>-->
-        <!--<bean class="com.pace2car.interceptor.GlobalInterceptor"/>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/**"/>-->
-            <!--&lt;!&ndash; 此路径的请求不拦截 &ndash;&gt;-->
-            <!--<mvc:exclude-mapping path="/user/**"/>-->
-            <!--<bean class="com.pace2car.interceptor.AuthenticationInterceptor" />-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <mvc:interceptors>
+        <bean class="com.pace2car.interceptor.GlobalInterceptor"/>
+        <mvc:interceptor>
+            <mvc:mapping path="/category/**"/>
+            <!-- 此路径的请求不拦截 -->
+            <mvc:exclude-mapping path="/user/**"/>
+            <bean class="com.pace2car.interceptor.AuthenticationInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
     <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀

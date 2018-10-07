@@ -20,10 +20,8 @@ public class TechCategoryServiceImpl implements ITechCategoryService {
     private TechCategoryMapper techCategoryMapper;
 
     @Override
-    public List<TechCategory> selectTechCategorys(TechCategory techCategory, int pageNum, int pageSize) {
-        // pagehelp插件会自动加上分页SQL的外面两层的嵌套
-        PageHelper.startPage(pageNum, pageSize);
-        return techCategoryMapper.selectTechCategorys(techCategory, pageNum, pageSize);
+    public List<TechCategory> selectTechCategorys(TechCategory techCategory) {
+        return techCategoryMapper.selectTechCategorys(techCategory);
     }
 
     @Override

@@ -25,7 +25,7 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <span class="m-r-sm text-muted welcome-message">欢迎您！ <strong>${admin.loginName}</strong> 使用在线考试后台管理系统</span>
+                <span class="m-r-sm text-muted welcome-message">欢迎您！ <strong>${sessionScope.logUser.userName}</strong> 使用在线考试后台管理系统</span>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -127,7 +127,7 @@
 
 
             <li>
-                <a href="admin/cheakOut.do">
+                <a href="user/logOut">
                     <i class="fa fa-sign-out"></i> Log out
                 </a>
             </li>

@@ -15,13 +15,9 @@ public interface TechCategoryMapper {
 
     /**
      * @param techCategory
-     * @param pageNum
-     * @param pageSize
      * @return
      */
-    List<TechCategory> selectTechCategorys(@Param("techCategory") TechCategory techCategory,
-                                           @Param("pageNum") int pageNum,
-                                           @Param("pageSize") int pageSize);
+    List<TechCategory> selectTechCategorys(TechCategory techCategory);
 
     int insertTechCategory(TechCategory techCategory);
 

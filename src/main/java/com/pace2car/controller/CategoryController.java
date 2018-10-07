@@ -35,13 +35,10 @@ public class CategoryController {
     private ITechCategoryService techCategoryService;
 
     @RequestMapping("/searchCourse")
-    public String searchCourse(Courses courses, Integer pageNum, ModelMap modelMap, HttpSession session) {
-        Page<Courses> page = null;
-        if (pageNum == null) {
-            pageNum = 1;
-        }
+    public String searchCourse(Courses courses, ModelMap modelMap, HttpSession session) {
+        List<Courses> page = null;
         if (courses != null && courses.getId() != null) {
-            page = (Page<Courses>) coursesService.selectCourses(courses, 0, 0);
+            page = coursesService.selectCourses(courses);
             Courses oldCourse = page.get(0);
             modelMap.addAttribute("oldCourse", oldCourse);
             return "updateCourse";
@@ -49,7 +46,7 @@ public class CategoryController {
         if (courses == null || courses.getCourseName() == null) {
             courses = (Courses) session.getAttribute("courses");
         }
-        page = (Page<Courses>) coursesService.selectCourses(courses, pageNum, 5);
+        page = coursesService.selectCourses(courses);
         modelMap.addAttribute("page", page);
         session.setAttribute("courses", courses);
 
@@ -97,12 +94,12 @@ public class CategoryController {
 
     @RequestMapping("/searchTechCategory")
     public String searchTechCategory(TechCategory techCategory, Integer pageNum, ModelMap modelMap, HttpSession session) {
-        Page<TechCategory> page = null;
+        List<TechCategory> page = null;
         if (pageNum == null) {
             pageNum = 1;
         }
         if (techCategory != null && techCategory.getId() != null) {
-            page = (Page<TechCategory>) techCategoryService.selectTechCategorys(techCategory, 0, 0);
+            page = techCategoryService.selectTechCategorys(techCategory);
             TechCategory oldTechCategory = page.get(0);
             modelMap.addAttribute("oldTechCategory", oldTechCategory);
             return "updateTechCategory";
@@ -110,7 +107,7 @@ public class CategoryController {
         if (techCategory == null || techCategory.getTechCtgr() == null) {
             techCategory = (TechCategory) session.getAttribute("techCategory");
         }
-        page = (Page<TechCategory>) techCategoryService.selectTechCategorys(techCategory, pageNum, 5);
+        page = techCategoryService.selectTechCategorys(techCategory);
         modelMap.addAttribute("page", page);
         session.setAttribute("techCategory", techCategory);
 
@@ -159,7 +156,7 @@ public class CategoryController {
     @RequestMapping(value = {"/load_courses"}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public List<Courses> loadCouses() {
-        return coursesService.selectCourses(null,1,50);
+        return coursesService.selectCourses(null);
     }
 
 }

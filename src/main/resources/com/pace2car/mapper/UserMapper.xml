@@ -15,6 +15,7 @@
         <result property="schAddr" column="SCH_ADDR"/>
         <result property="qq" column="QQ"/>
         <result property="email" column="EMAIL"/>
+        <result property="userType" column="USER_TYPE"/>
         <result property="gender" column="GENDER"/>
         <result property="birthday" column="BIRTHDAY"/>
         <result property="nationPlace" column="NATION_PLACE"/>

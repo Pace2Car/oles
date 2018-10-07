@@ -9,12 +9,21 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>课程列表-在线考试后台管理系统</title>
 
+    <link href="vendor/css/inspiniaen/datatables.min.css" rel="stylesheet">
+    <link href="vendor/css/inspiniaen/style.css" rel="stylesheet">
     <link href="js/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
     <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="vendor/css/animate.css" rel="stylesheet">
     <link href="vendor/css/plugins/dropzone/basic.css" rel="stylesheet">
     <link href="vendor/css/plugins/dropzone/dropzone.css" rel="stylesheet">
     <link href="vendor/css/style.css" rel="stylesheet">
+
+    <style>
+        div.dataTables_wrapper div.dataTables_filter input {
+            width: 300px;
+            margin-right: 100px;
+        }
+    </style>
 
 </head>
 
@@ -62,154 +71,60 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                     <i class="fa fa-wrench"></i>
                                 </a>
-                                <ul class="dropdown-menu dropdown-course">
-                                    <li><a href="#">Config option 1</a>
-                                    </li>
-                                    <li><a href="#">Config option 2</a>
-                                    </li>
-                                </ul>
                                 <a class="close-link">
                                     <i class="fa fa-times"></i>
                                 </a>
                             </div>
                         </div>
                         <div class="ibox-content">
-                            <div class="">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <a href="#" onclick="toInsert()"
+                                       class="btn btn-success btn-sm" data-toggle="modal"
+                                       data-target="#insertModal" data-backdrop="static">
+                                        <span class="fa fa-plus"></span> 新增课程</a>
+                                    <br/><br/>
+                                </div>
                             </div>
-                            <div id="editable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <a href="#" onclick="toInsert()"
-                                           class="btn btn-info btn-sm" data-toggle="modal"
-                                           data-target="#insertModal" data-backdrop="static">
-                                            <span class="fa fa-plus"></span> 新增课程</a>
-                                    </div>
-                                    <%--查询表单--%>
-                                    <div class="col-sm-10">
-                                        <form action="category/searchCourse" method="post" class="text-center">
-                                            <span class="dataTables_filter"><label class="text-right" style="width: 75px">课程名称:</label>
-                                                <input name="courseName" id="cname" value="${sessionScope.courses.courseName}" style="margin-bottom: 5px"
-                                                       type="text" class="form-control input-sm" placeholder="请输入课程名"
-                                                       aria-controls="editable">
-                                            </span>
-                                            <span>
-                                                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> 搜索</button>
-                                                <a class="btn btn-default" onclick="resetSelect()"><i class="fa fa-repeat"></i> 重置</a>
-                                            </span>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <table class="table table-striped table-bordered table-hover  dataTable"
-                                               id="editable" role="grid" aria-describedby="editable_info">
-                                            <%--顶部标签--%>
-                                            <thead>
-                                            <tr role="row">
-                                                <th class="sorting" tabindex="0" aria-controls="editable"
-                                                    rowspan="1" colspan="1" aria-sort="ascending"
-                                                    style="width: 172px;">课程ID
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"
-                                                    style="width: auto;">课程名称
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="CSS grade: activate to sort column ascending"
-                                                    style="width: 200px;">操作
-                                                </th>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="课程ID: activate to sort column descending" style="width: 238px;" aria-sort="ascending">课程ID</th>
+                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="课程名称: activate to sort column ascending" style="width: 417px;">课程名称</th>
+                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="操作: activate to sort column ascending" style="width: 377px;">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="course" items="${page}">
+                                            <tr id="tr_${course.id}" class="gradeA odd" role="row">
+                                                <td class="sorting_1">${course.id}</td>
+                                                <td>${course.courseName}</td>
+                                                <td class="center">
+                                                    <a href="#" courseId="${course.id}" onclick="toUpdate(this)"
+                                                       class="btn btn-info btn-sm" data-toggle="modal"
+                                                       data-target="#updateModal" data-backdrop="static">
+                                                        <span class="glyphicon glyphicon-refresh"></span> 更新</a>
+                                                    <a href="#" courseId="${course.id}" onclick="toDelete(this)"
+                                                       class="btn btn-danger btn-sm" data-toggle="modal"
+                                                       data-target="#deleteModal" data-backdrop="static">
+                                                        <span class="glyphicon glyphicon-trash"></span> 删除</a>
+                                                </td>
                                             </tr>
-                                            </thead>
-                                            <%--表单内容--%>
-                                            <tbody>
-                                            <c:forEach var="course" items="${page}">
-                                                <tr id="tr_${course.id}" class="gradeA odd" role="row">
-                                                    <td class="sorting_1">${course.id}</td>
-                                                    <td>${course.courseName}</td>
-                                                    <td class="center">
-                                                        <a href="#" courseId="${course.id}" onclick="toUpdate(this)"
-                                                           class="btn btn-info btn-sm" data-toggle="modal"
-                                                           data-target="#updateModal" data-backdrop="static">
-                                                            <span class="glyphicon glyphicon-refresh"></span> 更新</a>
-                                                        <a href="#" courseId="${course.id}" onclick="toDelete(this)"
-                                                           class="btn btn-danger btn-sm" data-toggle="modal"
-                                                           data-target="#deleteModal" data-backdrop="static">
-                                                            <span class="glyphicon glyphicon-trash"></span> 删除</a>
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>
-                                            </tbody>
-                                            <%--底部标签--%>
-                                            <tfoot>
-                                            <%--<tr role="row">--%>
-                                                <%--<th class="sorting" tabindex="0" aria-controls="editable"--%>
-                                                    <%--rowspan="1" colspan="1" aria-sort="ascending"--%>
-                                                    <%--style="width: 172px;">课程ID--%>
-                                                <%--</th>--%>
-                                                <%--<th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"--%>
-                                                    <%--style="width: auto;">课程名--%>
-                                                <%--</th>--%>
-                                                <%--<th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"--%>
-                                                    <%--colspan="1"--%>
-                                                    <%--aria-label="CSS grade: activate to sort column ascending"--%>
-                                                    <%--style="width: auto;">操作--%>
-                                                <%--</th>--%>
-                                            <%--</tr>--%>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                                <%--底部页号操作--%>
-                                <div class="row">
-                                    <div class="col-sm-5">
-                                        <div class="dataTables_info" id="editable_info" role="status" aria-live="polite">共${page.getTotal()}条记录</div>
-                                    </div>
-                                    <div class="col-sm-1">
-                                        <div class="footable-page-arrow">
-                                            &nbsp;&minus;${page.getPageNum()}/${page.getPages()}&minus;&nbsp;
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
-                                            <form action="category/searchCourse">
-                                                <ul class="pagination pull-right">
-                                                    <c:if test="${page.getPageNum() gt 1}">
-                                                        <li class="footable-page-arrow">
-                                                            <a href="category/searchCourse?pageNum=1">首页</a></li>
-                                                    </c:if>
-                                                    <c:if test="${page.getPageNum() gt 1}">
-                                                        <li class="footable-page-arrow">
-                                                            <a href="category/searchCourse?pageNum=${page.getPageNum()-1}">上一页</a>
-                                                        </li>
-                                                    </c:if>
-
-                                                    <c:if test="${page.getPageNum() lt page.getPages()}">
-                                                        <li class="footable-page-arrow">
-                                                            <a href="category/searchCourse?pageNum=${page.getPageNum()+1}">下一页</a>
-                                                        </li>
-                                                    </c:if>
-                                                    <c:if test="${page.getPageNum() lt page.getPages()}">
-                                                        <li class="footable-page-arrow">
-                                                            <a href="category/searchCourse?pageNum=${page.getPages()}">尾页</a>
-                                                        </li>
-                                                    </c:if>
-                                                    <c:if test="${page.getPages() > 1}">
-                                                        <li class="footable-page-arrow">
-                                                            &nbsp;&nbsp;<input type="text" name="pageNum" style="width: 80px;border-radius: 5px"
-                                                                               placeholder="请输入页号" title="请输入页号">
-                                                            <button type="submit">前往</button>
-                                                        </li>
-                                                    </c:if>
-                                                </ul>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                                        </c:forEach>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th rowspan="1" colspan="1">课程ID</th>
+                                            <th rowspan="1" colspan="1">课程名称</th>
+                                            <th rowspan="1" colspan="1">操作</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2"></div>
             </div>
         </div>
         <!-- footer 底部包装区域 -->
@@ -224,6 +139,7 @@
 <script src="js/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 <script src="vendor/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="vendor/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="vendor/js/datatables.min.js"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="vendor/js/inspinia.js"></script>
@@ -263,6 +179,18 @@
                 });
             }
         }
+
+    });
+    $(document).ready(function(){
+        $('.dataTables-example').DataTable({
+            pageLength: 10,
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [
+
+            ]
+
+        });
 
     });
 </script>
@@ -389,11 +317,6 @@
                 $('#insertModal').modal('hide');
             }, "json");
         });
-    }
-
-    function resetSelect() {
-        $("#cid").val("");
-        $("#cname").val("");
     }
 </script>
 

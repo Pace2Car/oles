@@ -20,7 +20,7 @@
                              </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong
-                                    class="font-bold">Pace2Car</strong>
+                                    class="font-bold">${sessionScope.logUser.userName}</strong>
                              </span> <span class="text-muted text-xs block">超级管理员<b
                                     class="caret"></b></span> </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -28,7 +28,7 @@
                         <li><a href="javascript:void(0)">Contacts</a></li>
                         <li><a href="javascript:void(0)">Mailbox</a></li>
                         <li class="divider"></li>
-                        <li><a href="admin/cheakOut.do">Logout</a></li>
+                        <li><a href="user/logOut">Logout</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
