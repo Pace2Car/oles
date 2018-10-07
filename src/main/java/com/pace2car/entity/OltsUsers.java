@@ -1,9 +1,11 @@
 package com.pace2car.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class OltsUsers implements Serializable {
+public class OltsUsers implements Serializable{
     private Integer id;
 
     private String stuNo;
@@ -30,6 +32,7 @@ public class OltsUsers implements Serializable {
 
     private String gender;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     private String nationPlace;
@@ -41,6 +44,14 @@ public class OltsUsers implements Serializable {
     private String graduateSchool;
 
     public OltsUsers() {
+    }
+
+    public OltsUsers(Integer id, String userName, String gender, String marjor, String graduateSchool) {
+        this.id = id;
+        this.userName = userName;
+        this.gender = gender;
+        this.marjor = marjor;
+        this.graduateSchool = graduateSchool;
     }
 
     public OltsUsers(Integer id, String stuNo, String idCardNo, String userName, String password, String mobile, String homeTel, String homeAddr, String schAddr, String qq, String email, Short userType, String gender, Date birthday, String nationPlace, String marjor, String eduBackground, String graduateSchool) {
@@ -62,6 +73,15 @@ public class OltsUsers implements Serializable {
         this.marjor = marjor;
         this.eduBackground = eduBackground;
         this.graduateSchool = graduateSchool;
+    }
+
+    public OltsUsers(Integer id, String idCardNo, String userName, String password, String mobile,Date birthday) {
+        this.id = id;
+        this.idCardNo = idCardNo;
+        this.userName = userName;
+        this.password = password;
+        this.mobile = mobile;
+        this.birthday = birthday;
     }
 
     public Integer getId() {

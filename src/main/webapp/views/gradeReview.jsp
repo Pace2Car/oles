@@ -55,13 +55,15 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="gradeA odd" role="row">
-                                            <td class="sorting_1">1</td>
-                                            <td>卢阳</td>
-                                            <td>59.0</td>
-                                            <td class="center">男</td>
-                                            <td class="center">四川工商学院计算机科学与技术</td>
-                                        </tr>
+                                        <c:forEach items="${grade}" var="g">
+                                            <tr class="gradeA odd" role="row">
+                                                <td class="sorting_1">${g.id}</td>
+                                                <td>${g.oltsUsers.userName}</td>
+                                                <td>${g.score}</td>
+                                                <td class="center">${g.oltsUsers.gender}</td>
+                                                <td class="center">${g.oltsUsers.graduateSchool}${g.oltsUsers.marjor}</td>
+                                            </tr>
+                                        </c:forEach>
                                         <tr class="gradeA odd" role="row">
                                             <td class="sorting_1">1</td>
                                             <td>卢阳</td>

@@ -30,6 +30,60 @@
 
     <select id="selectByPage" parameterType="OltsUsers" resultMap="baseResultMap">
         SELECT * FROM OLTS_USERS
-        ORDER BY ID DESC
+        ORDER BY ID
     </select>
+
+    <select id="selectById" parameterType="int" resultMap="baseResultMap">
+        SELECT * FROM OLTS_USERS WHERE ID=#{id}
+    </select>
+
+    <!--<select id="selectByPrimaryKey" resultMap="baseResultMap" parameterType="java.lang.Integer">-->
+        <!--SELECT *-->
+        <!--from OLTS_USERS where id = #{id,jdbcType=INTEGER}-->
+    <!--</select>-->
+
+    <update id="update" parameterType="OltsUsers">
+        UPDATE OLTS_USERS
+        <set>
+            <if test="idCardNo != null">ID_CARD_NO=#{idCardNo},</if>
+            <if test="userName != null">USER_NAME=#{userName},</if>
+            <if test="mobile != null">MOBILE=#{mobile},</if>
+            <if test="homeTel != null">HOME_TEL=#{homeTel},</if>
+            <if test="homeAddr != null">HOME_ADDR=#{homeAddr},</if>
+            <if test="schAddr != null">SCH_ADDR=#{schAddr},</if>
+            <if test="qq != null">QQ=#{qq},</if>
+            <if test="email != null">EMAIL=#{email},</if>
+            <if test="gender != null">GENDER=#{gender},</if>
+            <if test="birthday != null">BIRTHDAY=#{birthday,jdbcType=DATE},</if>
+            <if test="nationPlace != null">NATION_PLACE=#{nationPlace},</if>
+            <if test="marjor != null">MARJOR=#{marjor},</if>
+            <if test="eduBackground != null">EDU_BACKGROUND=#{eduBackground},</if>
+            <if test="graduateSchool != null">GRADUATE_SCHOOL=#{graduateSchool},</if>
+        </set>
+        WHERE ID=#{id}
+    </update>
+
+
+    <insert id="insertInfoBatch" parameterType="OltsUsers">
+    insert into OLTS_USERS (olts_users_seq.nextval, STU_NO,ID_CARD_NO, USER_NAME, PASS_WORD,MOBILE, HOME_TEL, HOME_ADDR,
+    SCH_ADDR, QQ, EMAIL,USER_TYPE,GENDER BIRTHDAY, NATION_PLACE, MARJOR, EDU_BACKGROUND, GRADUATE_SCHOOL)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+    (#{item.id}, #{item.stuNo}, #{item.idCardNo},#{item.userName}, #{item.password},
+    #{item.mobile}, #{item.homeTel},#{item.homeAddr}, #{item.schAddr}, #{item.qq}, #{item.email},
+    #{item.userType}, #{item.gender}, #{item.birthday}, #{item.nationPlace}, #{item.marjor}, #{item.eduBackground}, #{item.graduateSchool})
+    </foreach>
+    </insert>
+
+
+    <!--<insert id="insert" parameterType="OltsUsers">-->
+        <!--insert into OLTS_USERS (olts_users_seq.nextval, STU_NO,ID_CARD_NO, USER_NAME, PASS_WORD,MOBILE, HOME_TEL, HOME_ADDR,-->
+        <!--SCH_ADDR, QQ, EMAIL,USER_TYPE,GENDER, BIRTHDAY, NATION_PLACE, MARJOR, EDU_BACKGROUND, GRADUATE_SCHOOL)-->
+        <!--values (#{id,jdbcType=INTEGER},#{stuNo,jdbcType=VARCHAR},#{idCardNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},-->
+        <!--#{mobile,jdbcType=VARCHAR},#{homeTel,jdbcType=VARCHAR},#{homeAddr,jdbcType=VARCHAR},#{schAddr,jdbcType=VARCHAR},-->
+        <!--#{qq,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{userType,jdbcType=SMALLINT},#{gender,jdbcType=VARCHAR},#{birthday,jdbcType=DATE}-->
+        <!--,#{nationPlace,jdbcType=VARCHAR},#{marjor,jdbcType=VARCHAR},#{eduBackground,jdbcType=VARCHAR}-->
+        <!--#{graduateSchool,jdbcType=VARCHAR})-->
+    <!--</insert>-->
+
 </mapper>

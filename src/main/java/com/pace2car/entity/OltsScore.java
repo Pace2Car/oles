@@ -13,7 +13,16 @@ public class OltsScore implements Serializable {
   private String descrpt;
   private Integer userId;
   private String examNo;
+  OltsUsers oltsUsers;
 
+  public OltsScore(){};
+
+  public OltsScore(Integer id, Integer score, Integer userId, OltsUsers oltsUsers) {
+    this.id = id;
+    this.score = score;
+    this.userId = userId;
+    this.oltsUsers = oltsUsers;
+  }
 
   public Integer getId() {
     return id;
@@ -77,4 +86,25 @@ public class OltsScore implements Serializable {
     this.examNo = examNo;
   }
 
+  public OltsUsers getOltsUsers() {
+    return oltsUsers;
+  }
+
+  public void setOltsUsers(OltsUsers oltsUsers) {
+    this.oltsUsers = oltsUsers;
+  }
+
+  @Override
+  public String toString() {
+    return "OltsScore{" +
+            "id=" + id +
+            ", score=" + score +
+            ", fspScore=" + fspScore +
+            ", testDate=" + testDate +
+            ", descrpt='" + descrpt + '\'' +
+            ", userId=" + userId +
+            ", examNo='" + examNo + '\'' +
+            ", oltsUsers=" + oltsUsers +
+            '}';
+  }
 }

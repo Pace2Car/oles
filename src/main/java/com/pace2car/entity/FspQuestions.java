@@ -26,6 +26,14 @@ public class FspQuestions implements Serializable {
         this.pubdate = pubdate;
         this.descrpt = descrpt;
     }
+    public FspQuestions(Integer id, String question, String stdAnswer, Integer questionType, Integer techCateId , String descrpt) {
+        this.id = id;
+        this.question = question;
+        this.stdAnswer = stdAnswer;
+        this.questionType = questionType;
+        this.techCateId = techCateId;
+        this.descrpt = descrpt;
+    }
 
     public Integer getId() {
         return id;
