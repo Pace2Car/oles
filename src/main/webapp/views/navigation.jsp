@@ -100,7 +100,7 @@
                 <ul class="nav nav-second-level">
                     <li><a href="trade/showChart.do">生成试卷</a></li>
                     <li><a href="product/home.do">安排试卷</a></li>
-                    <li><a href="views/">主观题改卷</a></li>
+                    <li><a href="examManage/subjectiveList">主观题改卷</a></li>
                     <li><a href="gradeTable/list">成绩统计</a></li>
                 </ul>
             </li>
