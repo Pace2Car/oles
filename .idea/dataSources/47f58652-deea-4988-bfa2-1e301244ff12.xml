@@ -43,9 +43,9 @@
     </schema>
     <schema id="15" parent="1" name="OLTS">
       <ObjectId>96</ObjectId>
-      <IntrospectionTimestamp>2018-10-07.18:51:20</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2018-10-07.21:43:25</IntrospectionTimestamp>
       <CreatedTimestamp>2018-10-03.23:51:44</CreatedTimestamp>
-      <ModifiedTimestamp>2018-10-07.18:51:02</ModifiedTimestamp>
+      <ModifiedTimestamp>2018-10-07.21:43:23</ModifiedTimestamp>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -220,7 +220,7 @@
     <table id="58" parent="15" name="SMD_OPTIONS">
       <ObjectId>76587</ObjectId>
       <CreatedTimestamp>2018-10-03.23:55:02</CreatedTimestamp>
-      <ModifiedTimestamp>2018-10-03.23:55:02</ModifiedTimestamp>
+      <ModifiedTimestamp>2018-10-07.21:43:23</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="59" parent="15" name="SMD_QUESTIONS">
@@ -643,8 +643,9 @@
     </key>
     <column id="133" parent="58" name="ID">
       <Position>1</Position>
-      <DataType>VARCHAR2(32)|0</DataType>
+      <DataType>NUMBER(*)|0</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>NULL</DefaultExpression>
     </column>
     <column id="134" parent="58" name="OPTION_A">
       <Position>2</Position>
@@ -708,8 +709,7 @@
       <UnderlyingIndexName>SYS_C0012169</UnderlyingIndexName>
     </key>
     <foreign-key id="144" parent="58" name="SYS_C0012170">
-      <NameSurrogate>1</NameSurrogate>
-      <ModifiedTimestamp>2018-10-03.23:55:02</ModifiedTimestamp>
+      <ModifiedTimestamp>2018-10-07.21:43:23</ModifiedTimestamp>
       <ColNames>QUESTION_ID</ColNames>
       <RefSchemaName>OLTS</RefSchemaName>
       <RefTableName>SMD_QUESTIONS</RefTableName>
