@@ -32,41 +32,50 @@
                 <h2>主观题阅卷</h2>
                 <ol class="breadcrumb">
                     <li style="color:red">
-                        (编号:XXXXXXXXXXXXX)
+                        (编号:${examNo})
                     </li>
                 </ol>
             </div>
             <div class="col-lg-12">
+                <c:forEach items="${answer}" var="answer">
                 <div class="ibox float-e-margins border-bottom">
                     <div class="ibox-title">
                         <div class="ibox-tools" style="text-align: left">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong><i><span style="color:red">1、小明</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客观题得分:66.0</i></strong></span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong><i><span style="color:red">${answer.oltsUsers.id}、${answer.oltsUsers.userName}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客观题得分:66.0</i></strong></span>
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
                             </a>
-                            <span class="label label-primary" style="margin-top: 1.5px">已修改</span><span class="label label-warning" style="margin-top: 1.5px">未修改</span>
+                            <c:if test="${answer.status==0}"><span class="label label-warning" style="margin-top: 1.5px">未修改</span></c:if>
+                            <c:if test="${answer.status==1}"><span class="label label-primary" style="margin-top: 1.5px">已修改</span></c:if>
                         </div>
                     </div>
                     <div class="ibox-content" style="display: none">
                         <table class="table table-hover no-margins">
                             <thead>
                             <tr>
-                                <th style="font-size: 16px"><strong><i>(一) 简答题 每题5分</i></strong></th>
+                                <th style="font-size: 16px"><strong><i>
+                                    <c:if test="${answer.fspQuestions.questionType==5}">
+                                        (一) 简答题 每题5分
+                                    </c:if>
+                                    <c:if test="${answer.fspQuestions.questionType==6}">
+                                        (二) 编程题 每题10分
+                                    </c:if>
+                                </i></strong></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td>&nbsp;&nbsp;1.&nbsp;&nbsp;<span style="color: blue">请说明&与&&的区别？</span></td>
+                                <td>&nbsp;&nbsp;1.&nbsp;&nbsp;<span style="color: blue">${answer.fspQuestions.question}</span></td>
                             </tr>
                             <tr>
                                 <td>
                                     <div class="well" style="font-size: 15px">
-                                        &nbsp;&nbsp;学生作答的答案！
+                                        &nbsp;&nbsp;${answer.answer}
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考答案：单&与双&的区别：&&具有中断功能，而&没有</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考答案：${answer.fspQuestions.stdAnswer}</td>
                             </tr>
                             <tr>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;得分：<input type="text" style="width: 50px">&nbsp;&nbsp;分</td>
@@ -80,96 +89,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins border-bottom">
-                    <div class="ibox-title">
-                        <div class="ibox-tools" style="text-align: left">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong><i><span style="color:red">1、小明</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客观题得分:66.0</i></strong></span>
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <span class="label label-primary" style="margin-top: 1.5px">已修改</span><span class="label label-warning" style="margin-top: 1.5px">未修改</span>
-                        </div>
-                    </div>
-                    <div class="ibox-content" style="display: none">
-                        <table class="table table-hover no-margins">
-                            <thead>
-                            <tr>
-                                <th style="font-size: 16px"><strong><i>(一) 简答题 每题5分</i></strong></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>&nbsp;&nbsp;1.&nbsp;&nbsp;<span style="color: blue">请说明&与&&的区别？</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="well" style="font-size: 15px">
-                                        &nbsp;&nbsp;学生作答的答案！
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考答案：单&与双&的区别：&&具有中断功能，而&没有</td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;得分：<input type="text" style="width: 50px">&nbsp;&nbsp;分</td>
-                            </tr>
-                            </tbody>
-                            <tr>
-                                <td>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-w-m btn-info">提交</button>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins border-bottom">
-                    <div class="ibox-title">
-                        <div class="ibox-tools" style="text-align: left">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong><i><span style="color:red">1、小明</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客观题得分:66.0</i></strong></span>
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <span class="label label-primary" style="margin-top: 1.5px">已修改</span><span class="label label-warning" style="margin-top: 1.5px">未修改</span>
-                        </div>
-                    </div>
-                    <div class="ibox-content" style="display: none">
-                        <table class="table table-hover no-margins">
-                            <thead>
-                            <tr>
-                                <th style="font-size: 16px"><strong><i>(一) 简答题 每题5分</i></strong></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>&nbsp;&nbsp;1.&nbsp;&nbsp;<span style="color: blue">请说明&与&&的区别？</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="well" style="font-size: 15px">
-                                        &nbsp;&nbsp;学生作答的答案！
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考答案：单&与双&的区别：&&具有中断功能，而&没有</td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;得分：<input type="text" style="width: 50px">&nbsp;&nbsp;分</td>
-                            </tr>
-                            </tbody>
-                            <tr>
-                                <td>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-w-m btn-info">提交</button>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
         <!-- main 主体区域 -->

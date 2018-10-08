@@ -1,6 +1,8 @@
 package com.pace2car.entity;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,7 +13,10 @@ public class FspQuestions implements Serializable {
     private String stdAnswer;
     private Integer questionType;
     private Integer techCateId;
+
+    @DateTimeFormat()
     private Date pubdate;
+
     private String descrpt;
 
     public FspQuestions() {

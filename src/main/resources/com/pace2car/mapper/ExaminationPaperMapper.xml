@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pace2car.mapper.ExaminationPaperMapper">
+
+    <resultMap id="baseResultMap" type="Examination">
+        <id property="examNo" column="EXAM_NO"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="examDate" column="EXAM_DATE"/>
+        <result property="singleId" column="SINGLE_ID"/>
+        <result property="multipleId" column="MULTIPLE_ID"/>
+        <result property="trueFalseId" column="TRUE_FALSE_ID"/>
+        <result property="fillInGapsId" column="FILL_IN_GAPS_ID"/>
+        <result property="simpleAnwserId" column="SIMPLE_ANWSER_ID"/>
+        <result property="programId" column="PROGRAM_ID"/>
+        <result property="descrpt" column="DESCRPT"/>
+        <result property="validFlag" column="VALID_FLAG"/>
+        <association property="oltsUsers" javaType="OltsUsers" columnPrefix="o_">
+            <id property="id" column="ID"/>
+            <result property="userName" column="USER_NAME"/>
+        </association>
+    </resultMap>
+
+    <select id="selectPaper" parameterType="Examination" resultMap="baseResultMap">
+        SELECT
+            e.EXAM_NO,
+            e.USER_ID,
+            e.EXAM_DATE,
+            e.SINGLE_ID,
+            e.MULTIPLE_ID,
+            e.TRUE_FALSE_ID,
+            e.FILL_IN_GAPS_ID,
+            e.SIMPLE_ANWSER_ID,
+            e.PROGRAM_ID,
+            e.DESCRPT,
+            e.VALID_FLAG,
+            os.ID o_ID,
+            os.USER_NAME o_USER_NAME
+        FROM EXAMINATION e
+        INNER JOIN OLTS_USERS os ON e.USER_ID = os.ID
+    </select>
+</mapper>

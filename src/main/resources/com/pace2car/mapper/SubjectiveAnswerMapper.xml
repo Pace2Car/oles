@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pace2car.mapper.SubjectiveAnswerMapper">
+
+    <resultMap id="baseResultMap" type="FspAnswer">
+        <id property="id" column="ID"/>
+        <result property="answer" column="ANSWER"/>
+        <result property="fspId" column="FSP_ID"/>
+        <result property="examNo" column="EXAM_NO"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="status" column="STATUS"/>
+        <association property="fspQuestions" javaType="FspQuestions" columnPrefix="f_">
+            <id property="id" column="ID"/>
+            <result property="question" column="QUESTION"/>
+            <result property="stdAnswer" column="STD_ANSWER"/>
+            <result property="questionType" column="QUESTION_TYPE"/>
+            <result property="techCateId" column="TECH_CATE_ID"/>
+            <result property="pubdate" column="PUBDATE"/>
+            <result property="descrpt" column="DESCRPT"/>
+        </association>
+        <association property="oltsUsers" javaType="OltsUsers" columnPrefix="o_">
+            <id property="id" column="ID"/>
+            <result property="userName" column="USER_NAME"/>
+        </association>
+    </resultMap>
+
+    <select id="selectAnswer" parameterType="FspAnswer" resultMap="baseResultMap">
+        SELECT
+            fa.ID,
+            fa.ANSWER,
+            fa.FSP_ID,
+            fa.EXAM_NO,
+            fa.USER_ID,
+            fa.STATUS,
+            fq.ID     f_ID,
+            fq.QUESTION f_QUESTION,
+            fq.STD_ANSWER f_STD_ANSWER,
+            fq.QUESTION_TYPE f_QUESTION_TYPE,
+            fq.TECH_CATE_ID f_TECH_CATE_ID,
+            fq.PUBDATE f_PUBDATE,
+            fq.DESCRPT f_DESCRPT,
+            os.ID o_ID,
+            os.USER_NAME o_USER_NAME
+        FROM FSP_ANSWER fa
+        INNER JOIN FSP_QUESTIONS fq ON fa.FSP_ID = fq.ID
+        INNER JOIN OLTS_USERS os ON fa.USER_ID = os.ID
+        INNER JOIN EXAMINATION e ON fa.EXAM_NO = e.EXAM_NO
+    </select>
+</mapper>

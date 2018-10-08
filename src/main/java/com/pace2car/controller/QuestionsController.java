@@ -1,12 +1,14 @@
 package com.pace2car.controller;
 
 
+import com.github.pagehelper.Page;
 import com.pace2car.entity.*;
 import com.pace2car.service.ICoursesService;
 import com.pace2car.service.IQuestionsService;
 import com.pace2car.service.ITechCategoryService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,13 +17,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/ques")
 public class QuestionsController {
 
-    static Logger logger = Logger.getLogger(UserController.class);
+    static Logger logger = Logger.getLogger(QuestionsController.class);
 
     @Resource
     IQuestionsService questionsService;
@@ -115,5 +120,105 @@ public class QuestionsController {
             e.printStackTrace();
         }
     }
+
+    @RequestMapping("/searchRadio")
+    public String searchRadio(SmdQuestions questions,SmdOptions options,Integer pageNum, ModelMap modelMap){
+        Map<Integer, SmdOptions> optList = new HashMap<>();
+        Page<SmdQuestions> page = null;
+        //查询
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        questions.setQuestionType(1);
+        page = (Page<SmdQuestions>)questionsService.selectBySmdQues(questions, pageNum, 5);
+        modelMap.addAttribute("ques", page);
+        for (SmdQuestions h : page.getResult()) {
+            SmdOptions details = new SmdOptions();
+            options.setQuestionId(h.getId());
+            details = questionsService.selectBySmdOpt(options.getQuestionId());
+            optList.put(h.getId(),details);
+        }
+        modelMap.addAttribute("optList",optList);
+        return "searchRadio";
+    }
+
+    @RequestMapping("/searchCheckBox")
+    public String searchCheckBox(SmdQuestions questions,SmdOptions options,Integer pageNum, ModelMap modelMap){
+        Map<Integer, SmdOptions> optList = new HashMap<>();
+        Page<SmdQuestions> page = null;
+        //查询
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        questions.setQuestionType(2);
+        page = (Page<SmdQuestions>)questionsService.selectBySmdQues(questions, pageNum, 5);
+        modelMap.addAttribute("ques", page);
+        for (SmdQuestions h : page.getResult()) {
+            SmdOptions details = new SmdOptions();
+            options.setQuestionId(h.getId());
+            details = questionsService.selectBySmdOpt(options.getQuestionId());
+            optList.put(h.getId(),details);
+        }
+        modelMap.addAttribute("optList",optList);
+        return "searchJudge";
+    }
+
+
+    @RequestMapping("/searchJudge")
+    public String searchJudge(SmdQuestions questions,SmdOptions options,Integer pageNum, ModelMap modelMap){
+        Map<Integer, SmdOptions> optList = new HashMap<>();
+        Page<SmdQuestions> page = null;
+        //查询
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        questions.setQuestionType(3);
+        page = (Page<SmdQuestions>)questionsService.selectBySmdQues(questions, pageNum, 5);
+        modelMap.addAttribute("ques", page);
+        for (SmdQuestions h : page.getResult()) {
+            SmdOptions details = new SmdOptions();
+            options.setQuestionId(h.getId());
+            details = questionsService.selectBySmdOpt(options.getQuestionId());
+            optList.put(h.getId(),details);
+        }
+        modelMap.addAttribute("optList",optList);
+        return "searchJudge";
+    }
+
+    @RequestMapping("/searchShort")
+    public String searchShort(FspQuestions questions,FspAnswer answer,Integer pageNum, ModelMap modelMap){
+        Map<Integer, FspAnswer> optList = new HashMap<>();
+        Page<FspQuestions> page = null;
+        //查询
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        questions.setQuestionType(5);
+        page = (Page<FspQuestions>)questionsService.selectByFspQues(questions, pageNum, 5);
+        modelMap.addAttribute("ques", page);
+//        for (FspQuestions h : page.getResult()) {
+//            FspAnswer details = new FspAnswer();
+//            answer.setFspId(h.getId());
+//            details = questionsService.selectByFspOpt(answer.getFspId());
+//            optList.put(h.getId(),details);
+//        }
+//        modelMap.addAttribute("optList",optList);
+        return "searchShort";
+    }
+
+    @RequestMapping("/searchProgram")
+    public String searchProgram(FspQuestions questions,FspAnswer answer,Integer pageNum, ModelMap modelMap){
+        Map<Integer, FspAnswer> optList = new HashMap<>();
+        Page<FspQuestions> page = null;
+        //查询
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        questions.setQuestionType(6);
+        page = (Page<FspQuestions>)questionsService.selectByFspQues(questions, pageNum, 5);
+        modelMap.addAttribute("ques", page);
+        return "searchProgram";
+    }
+
 }
 

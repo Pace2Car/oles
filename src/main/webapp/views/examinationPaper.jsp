@@ -29,7 +29,7 @@
         <!-- 顶部导航 -->
         <div class="row wrapper border-bottom white-bg page-heading" style="text-align: center">
             <div class="col-lg-10">
-                <h2>试卷维护</h2>
+                <h2>试卷</h2>
                 <ol class="breadcrumb">
                     <li style="color:red">
                         (编号:XXXXXXXXXXXXX)
@@ -37,17 +37,8 @@
                 </ol>
             </div>
             <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-content" style="display: block">
-                        <div style="float: right">
-                            <button class="btn btn-primary active" type="button" id="addRadio">增加单选题</button>
-                            <button class="btn btn-primary active" type="button" id="addMulti-select">增加多选题</button>
-                            <button class="btn btn-primary active" type="button" id="addJudge">增加判断题</button>
-                            <button class="btn btn-primary active" type="button" id="addShortAnswer">增加简答题</button>
-                            <button class="btn btn-primary active" type="button" id="addProgramming">增加编程题</button>
-                            <button class="btn btn-primary active" type="button" id="refresh">刷新</button>
-                            <button class="btn btn-primary active" type="button" id="return">返回</button>
-                        </div>
+                <div class="ibox float-e-margins border-bottom">
+                    <div class="ibox-content">
                         <table class="table table-hover no-margins">
                             <thead>
                             <tr>
@@ -61,19 +52,11 @@
                             <tr>
                                 <td>
                                     <div class="well" style="font-size: 15px">
-                                        &nbsp;&nbsp;参考答案：单&与双&的区别：&&具有中断功能，而&没有
+                                        &nbsp;&nbsp;学生作答的答案！
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><a class="btn btn-danger btn-rounded btn-outline" href="#">移除本题</a></td>
-                            </tr>
                             </tbody>
-                            <tr>
-                                <td style="text-align: center">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-w-m btn-info">完成出卷</button>
-                                </td>
-                            </tr>
                         </table>
                     </div>
                 </div>
@@ -142,18 +125,6 @@
         }
 
     });
-
-    $(function () {
-        $("#refresh").click(function () {
-            window.location.reload();
-        })
-    })
-
-    $(function () {
-        $("#return").click(function () {
-            window.location.replace("views/SerialNumber.jsp");;
-        })
-    })
 </script>
 
 </body>

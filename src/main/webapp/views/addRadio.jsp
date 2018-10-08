@@ -16,6 +16,7 @@
     <link href="vendor/css/plugins/dropzone/dropzone.css" rel="stylesheet">
     <link href="vendor/css/style.css" rel="stylesheet">
 
+
 </head>
 
 <body>
@@ -63,7 +64,7 @@
                         <div class="col-sm-4 col-sm-offset-2">
                             <br>
                             <br>
-                            <button class="btn btn-primary" type="submit">保存更改</button>
+                            <button class="btn btn-primary" type="submit">新增试题</button>
 
                             <button class="btn btn-white" type="submit">取消</button>
                         </div>

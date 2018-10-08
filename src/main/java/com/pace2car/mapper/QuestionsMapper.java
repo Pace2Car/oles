@@ -29,5 +29,11 @@ public interface QuestionsMapper {
                                  @Param("pageNum") int pageNum,
                                  @Param("pageSize") int pageSize);
 
-    List<SmdOptions> selectBySmdOpt(SmdOptions options);
+    SmdOptions selectBySmdOpt(Integer questionId);
+
+    List<FspQuestions> selectByFspQues(@Param("questions") FspQuestions questions,
+                                       @Param("pageNum")int pageNum,
+                                       @Param("pageSize") int pageSize);
+
+    FspAnswer selectByFspOpt(Integer fspId);
 }
