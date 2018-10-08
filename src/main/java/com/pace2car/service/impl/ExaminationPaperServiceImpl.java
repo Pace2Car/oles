@@ -18,7 +18,7 @@ public class ExaminationPaperServiceImpl implements IExaminationPaperService {
 
 
     @Override
-    public List<Examination> selectPaper(Examination examination) {
-        return examinationPaperMapper.selectPaper(examination);
+    public Examination selectPaper() {
+        return examinationPaperMapper.selectPaper();
     }
 }

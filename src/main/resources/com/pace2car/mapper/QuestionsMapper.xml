@@ -142,6 +142,13 @@
         ORDER BY ID
     </select>
 
+    <select id="selectBySmdQuesId" parameterType="com.pace2car.entity.SmdQuestions" resultMap="smdQuesResultMap">
+        SELECT * FROM SMD_QUESTIONS
+        <where>
+            <if test="questions != null and questions.id != null">AND ID=#{questions.id}</if>
+        </where>
+    </select>
+
     <select id="selectBySmdOpt" parameterType="com.pace2car.entity.SmdOptions" resultMap="smdOptResultMap">
         SELECT * FROM SMD_OPTIONS WHERE QUESTION_ID=#{id}
     </select>

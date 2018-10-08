@@ -4,9 +4,9 @@
     <root id="1"/>
     <schema id="2" parent="1" name="OLTS">
       <ObjectId>63</ObjectId>
-      <IntrospectionTimestamp>2018-10-08.12:31:36</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2018-10-08.21:48:41</IntrospectionTimestamp>
       <CreatedTimestamp>2018-10-03.19:11:59</CreatedTimestamp>
-      <ModifiedTimestamp>2018-10-08.12:31:35</ModifiedTimestamp>
+      <ModifiedTimestamp>2018-10-08.21:48:41</ModifiedTimestamp>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -187,7 +187,7 @@
     <table id="47" parent="2" name="SMD_OPTIONS">
       <ObjectId>53969</ObjectId>
       <CreatedTimestamp>2018-10-03.19:13:24</CreatedTimestamp>
-      <ModifiedTimestamp>2018-10-03.19:13:24</ModifiedTimestamp>
+      <ModifiedTimestamp>2018-10-08.21:48:41</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="48" parent="2" name="SMD_QUESTIONS">
@@ -327,7 +327,7 @@
     <column id="73" parent="43" name="STATUS">
       <Position>6</Position>
       <DataType>NUMBER(*)|0</DataType>
-      <DefaultExpression>0 </DefaultExpression>
+      <DefaultExpression>0</DefaultExpression>
     </column>
     <index id="74" parent="43" name="SYS_C005888">
       <ObjectId>53983</ObjectId>
@@ -615,8 +615,9 @@
     </key>
     <column id="123" parent="47" name="ID">
       <Position>1</Position>
-      <DataType>VARCHAR2(32)|0</DataType>
+      <DataType>NUMBER(*)|0</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>NULL</DefaultExpression>
     </column>
     <column id="124" parent="47" name="OPTION_A">
       <Position>2</Position>

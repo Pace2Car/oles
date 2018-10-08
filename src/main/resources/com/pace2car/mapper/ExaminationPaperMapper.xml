@@ -23,7 +23,7 @@
         </association>
     </resultMap>
 
-    <select id="selectPaper" parameterType="Examination" resultMap="baseResultMap">
+    <select id="selectPaper" resultMap="baseResultMap">
         SELECT
             e.EXAM_NO,
             e.USER_ID,
@@ -40,5 +40,6 @@
             os.USER_NAME o_USER_NAME
         FROM EXAMINATION e
         INNER JOIN OLTS_USERS os ON e.USER_ID = os.ID
+        WHERE VALID_FLAG = 1
     </select>
 </mapper>

@@ -6,5 +6,5 @@ import com.pace2car.entity.Examination;
 import java.util.List;
 
 public interface ExaminationPaperMapper {
-    List<Examination> selectPaper(Examination Examination);
+    Examination selectPaper();
 }
