@@ -37,10 +37,16 @@
                 </ol>
             </div>
             <div class="col-lg-12">
+                <c:forEach items="${exam}" var="exam">
                 <div class="ibox float-e-margins border-bottom">
                     <div class="ibox-content">
                         <table class="table table-hover no-margins">
                             <thead>
+                            <tr>
+                                <td>
+                                    <strong><i>${exam.singleId}</i></strong>
+                                </td>
+                            </tr>
                             <tr>
                                 <th style="font-size: 16px"><strong><i>(一) 简答题 每题5分</i></strong></th>
                             </tr>
@@ -60,6 +66,7 @@
                         </table>
                     </div>
                 </div>
+                </c:forEach>
             </div>
         </div>
         <!-- main 主体区域 -->
