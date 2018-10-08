@@ -78,6 +78,7 @@
                                 </div>
                             </div>
                         </div>
+                            <input type="hidden" name="questionType" value="5">
                         <button class="btn btn-primary" type="submit">查询</button>
                         <button class="btn btn-white" type="reset">重置</button>
                     </form>

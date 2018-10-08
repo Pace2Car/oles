@@ -81,5 +81,10 @@ public class QuestionsServiceImpl implements IQuestionsService {
         return questionsMapper.selectByFspOpt(fspId);
     }
 
+    @Override
+    public SmdQuestions selectBySmdQuesId(Integer id) {
+        return questionsMapper.selectBySmdQuesId(id);
+    }
+
 
 }
