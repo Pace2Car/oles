@@ -17,7 +17,7 @@ public interface CoursesMapper {
      * @param courses
      * @return
      */
-    List<Courses> selectCourses(Courses courses);
+    List<Courses> selectCourses(@Param("courses") Courses courses);
 
     int insertCourse(Courses courses);
 
