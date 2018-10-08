@@ -1,5 +1,7 @@
 package com.pace2car.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -25,6 +27,8 @@ public class Examination implements Serializable {
     private String descrpt;
 
     private Integer validFlag;
+
+    OltsUsers oltsUsers;
 
     public Examination() {
     }
@@ -131,6 +135,14 @@ public class Examination implements Serializable {
         this.validFlag = validFlag;
     }
 
+    public OltsUsers getOltsUsers() {
+        return oltsUsers;
+    }
+
+    public void setOltsUsers(OltsUsers oltsUsers) {
+        this.oltsUsers = oltsUsers;
+    }
+
     @Override
     public String toString() {
         return "Examination{" +
@@ -145,6 +157,7 @@ public class Examination implements Serializable {
                 ", programId='" + programId + '\'' +
                 ", descrpt='" + descrpt + '\'' +
                 ", validFlag=" + validFlag +
+                ", oltsUsers=" + oltsUsers +
                 '}';
     }
 }

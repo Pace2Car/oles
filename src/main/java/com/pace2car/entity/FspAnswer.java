@@ -10,16 +10,22 @@ public class FspAnswer implements Serializable {
     private Integer fspId;
     private String examNo;
     private Integer userId;
+    private Integer status;
+    OltsUsers oltsUsers;
+    FspQuestions fspQuestions;
 
     public FspAnswer() {
     }
 
-    public FspAnswer(Integer id, String answer, Integer fspId, String examNo, Integer userId) {
+    public FspAnswer(Integer id, String answer, Integer fspId, String examNo, Integer userId, Integer status, OltsUsers oltsUsers, FspQuestions fspQuestions) {
         this.id = id;
         this.answer = answer;
         this.fspId = fspId;
         this.examNo = examNo;
         this.userId = userId;
+        this.status = status;
+        this.oltsUsers = oltsUsers;
+        this.fspQuestions = fspQuestions;
     }
 
     public Integer getId() {
@@ -66,6 +72,30 @@ public class FspAnswer implements Serializable {
         this.userId = userId;
     }
 
+    public OltsUsers getOltsUsers() {
+        return oltsUsers;
+    }
+
+    public void setOltsUsers(OltsUsers oltsUsers) {
+        this.oltsUsers = oltsUsers;
+    }
+
+    public FspQuestions getFspQuestions() {
+        return fspQuestions;
+    }
+
+    public void setFspQuestions(FspQuestions fspQuestions) {
+        this.fspQuestions = fspQuestions;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "FspAnswer{" +
@@ -74,6 +104,9 @@ public class FspAnswer implements Serializable {
                 ", fspId=" + fspId +
                 ", examNo='" + examNo + '\'' +
                 ", userId=" + userId +
+                ", status=" + status +
+                ", oltsUsers=" + oltsUsers +
+                ", fspQuestions=" + fspQuestions +
                 '}';
     }
 }
