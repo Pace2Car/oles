@@ -162,7 +162,7 @@
                     <div class="col-lg-12">
                         <ol class="breadcrumb">
                             <li style="margin-left: 37px">
-                                <input type="checkbox" name="id" value="" onclick="selectAll(this);">全选
+                                <input type="checkbox" name="singleId" value="${questions.id}" onclick="selectAll(this);">全选
                             </li>
                             <li style="">
                                 <span style="color: black">考卷编号：</span>

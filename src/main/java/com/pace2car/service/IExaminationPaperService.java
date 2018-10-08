@@ -6,5 +6,5 @@ import java.util.List;
 
 
 public interface IExaminationPaperService {
-    List<Examination> selectPaper(Examination examination);
+    Examination selectPaper();
 }
