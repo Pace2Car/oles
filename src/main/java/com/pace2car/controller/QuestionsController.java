@@ -31,7 +31,7 @@ public class QuestionsController {
     @RequestMapping(value = {"/load_courses"}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public List<Courses> loadCouses() {
-        return coursesService.selectCourses(null,1,50);
+        return coursesService.selectCourses(null);
     }
 
     @RequestMapping(value = {"/load_tech_by_id"},method = {RequestMethod.GET, RequestMethod.POST})

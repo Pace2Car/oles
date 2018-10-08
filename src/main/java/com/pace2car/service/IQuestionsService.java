@@ -1,10 +1,7 @@
 package com.pace2car.service;
 
 
-import com.pace2car.entity.FspQuestions;
-import com.pace2car.entity.SmdOptions;
-import com.pace2car.entity.SmdQuestions;
-import com.pace2car.entity.TechCategory;
+import com.pace2car.entity.*;
 
 import java.util.List;
 
@@ -25,4 +22,8 @@ public interface IQuestionsService {
     int insertJudge(SmdQuestions questions);
 
     int insertProgram(FspQuestions questions);
+
+    List<SmdQuestions> selectBySmdQues(SmdQuestions questions, int pageNum, int pageSize);
+
+    List<SmdOptions> selectBySmdOpt(SmdOptions options);
 }

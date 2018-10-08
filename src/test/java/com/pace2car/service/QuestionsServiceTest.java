@@ -2,6 +2,8 @@ package com.pace2car.service;
 
 
 import com.pace2car.entity.FspQuestions;
+import com.pace2car.entity.SmdOptions;
+import com.pace2car.entity.SmdQuestions;
 import com.pace2car.entity.TechCategory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,5 +29,35 @@ public class QuestionsServiceTest {
     public void select(){
         List<TechCategory> list = questionsService.selectTech(1);
         System.out.println(list);
+    }
+
+    @Test
+    public void selectByPage() throws Exception {
+        // 第1页，每页5条
+        // <a>First</a>
+        SmdQuestions smdQuestions = new SmdQuestions(null,null,null,null,null,null,null);
+        smdQuestions.setQuestion("1");
+        smdQuestions.setTechCateId(3);
+        com.github.pagehelper.Page<SmdQuestions> page = (com.github.pagehelper.Page<SmdQuestions>)questionsService.selectBySmdQues(smdQuestions, 1, 5);
+        System.out.println(">>>>" + page);
+        System.out.println("===========");
+
+        for (SmdQuestions h : page.getResult()) {
+            System.out.println(h.getQuestion());
+        }
+    }
+
+    @Test
+    public void selectBySmdOpt() throws Exception {
+        // 第1页，每页5条
+        // <a>First</a>
+        SmdOptions options = new SmdOptions(null,null,null,null,null,null,null);
+        options.setQuestionId(44);
+        List<SmdOptions> list= questionsService.selectBySmdOpt(options);
+        System.out.println("===========");
+
+        for (SmdOptions h : list) {
+            System.out.println(h.getOptionA());
+        }
     }
 }
