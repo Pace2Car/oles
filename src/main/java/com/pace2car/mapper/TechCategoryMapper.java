@@ -17,7 +17,7 @@ public interface TechCategoryMapper {
      * @param techCategory
      * @return
      */
-    List<TechCategory> selectTechCategorys(TechCategory techCategory);
+    List<TechCategory> selectTechCategorys(@Param("techCategory") TechCategory techCategory);
 
     int insertTechCategory(TechCategory techCategory);
 

@@ -32,7 +32,7 @@
                     </ul>
                 </div>
                 <div class="logo-element">
-                    GM+
+                    OLES
                 </div>
             </li>
             <li>
@@ -56,9 +56,30 @@
                     <span class="nav-label">试卷管理</span> <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="trade/tradeList.do">新增试卷</a></li>
-                    <li><a href="trade/showChart.do">试题查询</a></li>
-                    <li><a href="trade/showChart.do">生成试卷</a></li>
+                    <li class="nav-label">
+                        <a href="javascript:void(0)">
+                            <span class="nav-label">新增试题</span> <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-third-level collapse">
+                            <li><a href="views/addRadio.jsp">新增单选题</a></li>
+                            <li><a href="views/addCheckBox.jsp">新增多选题</a></li>
+                            <li><a href="views/addJudge.jsp">新增判断题</a></li>
+                            <li><a href="views/addShort.jsp">新增简答题</a></li>
+                            <li><a href="views/addProgram.jsp">新增编程题</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <span class="nav-label">新增试题</span> <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-third-level collapse">
+                            <li><a href="views/searchRadio.jsp">查询单选题</a></li>
+                            <li><a href="views/searchCheckBox.jsp">查询多选题</a></li>
+                            <li><a href="views/searchJudge.jsp">查询判断题</a></li>
+                            <li><a href="views/searchShort.jsp">查询简答题</a></li>
+                            <li><a href="views/searchProgram.jsp">查询编程题</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
             <li>
@@ -77,9 +98,10 @@
                     <i class="fa fa-th-large"></i>
                     <span class="nav-label">考试管理</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
+                    <li><a href="trade/showChart.do">生成试卷</a></li>
                     <li><a href="product/home.do">安排试卷</a></li>
-                    <li><a href="product/list.do">主观题改卷</a></li>
-                    <li><a href="product/sale.do">成绩统计</a></li>
+                    <li><a href="views/">主观题改卷</a></li>
+                    <li><a href="gradeTable/list">成绩统计</a></li>
                 </ul>
             </li>
         </ul>

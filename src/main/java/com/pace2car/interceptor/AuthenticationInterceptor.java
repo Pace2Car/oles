@@ -19,7 +19,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 获取用户的登录信息
         OltsUsers logUser = (OltsUsers) request.getSession().getAttribute("logUser");
-        logger.warn("登录的用户信息: " + logUser);
+        logger.debug("登录的用户信息: " + logUser);
         //未登录
         if (logUser == null) {
             logger.warn("未登录！请先登录！" );

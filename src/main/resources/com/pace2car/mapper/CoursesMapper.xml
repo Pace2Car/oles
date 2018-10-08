@@ -5,6 +5,11 @@
 
 <mapper namespace="com.pace2car.mapper.CoursesMapper">
 
+    <cache eviction="LRU"
+           flushInterval="60000"
+           size="1024"
+           readOnly="true"/>
+
     <resultMap id="baseResultMap" type="Courses">
         <id property="id" column="ID"/>
         <result property="courseName" column="COURSE_NAME"/>
