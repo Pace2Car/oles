@@ -43,7 +43,7 @@ public class QuestionsServiceTest {
         System.out.println("===========");
 
         for (SmdQuestions h : page.getResult()) {
-            System.out.println(h.getQuestion());
+            System.out.println(h.getId());
         }
     }
 
@@ -51,13 +51,8 @@ public class QuestionsServiceTest {
     public void selectBySmdOpt() throws Exception {
         // 第1页，每页5条
         // <a>First</a>
-        SmdOptions options = new SmdOptions(null,null,null,null,null,null,null);
-        options.setQuestionId(44);
-        List<SmdOptions> list= questionsService.selectBySmdOpt(options);
+        SmdOptions list= questionsService.selectBySmdOpt(44);
         System.out.println("===========");
-
-        for (SmdOptions h : list) {
-            System.out.println(h.getOptionA());
-        }
+        System.out.println(list.getOptionA());
     }
 }

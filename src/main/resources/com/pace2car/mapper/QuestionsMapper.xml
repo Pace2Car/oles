@@ -34,6 +34,23 @@
         <result property="questionId" column="QUESTION_ID"/>
     </resultMap>
 
+    <resultMap id="fspQuesResultMap" type="FspQuestions">
+        <id property="id" column="ID"/>
+        <result property="question" column="QUESTION"/>
+        <result property="stdAnswer" column="STD_ANSWER"/>
+        <result property="questionType" column="QUESTION_TYPE"/>
+        <result property="techCateId" column="TECH_CATE_ID"/>
+        <result property="pubdate" column="PUBDATE"/>
+        <result property="descrpt" column="DESCRPT"/>
+    </resultMap>
+
+    <resultMap id="fspOptResultMap" type="FspAnswer">
+        <id property="id" column="ID"/>
+        <result property="answer" column="ANSWER"/>
+        <result property="fspId" column="FSP_ID"/>
+        <result property="examNo" column="EXAM_NO"/>
+        <result property="userId" column="USER_ID"/>
+    </resultMap>
 
     <insert id="insertShort" parameterType="FspQuestions">
         <selectKey keyProperty="id" resultType="int" order="BEFORE">
@@ -112,7 +129,7 @@
     </select>
 
 
-    <select id="selectBySmdQues" parameterType="SmdQuestions" resultMap="smdQuesResultMap">
+    <select id="selectBySmdQues" parameterType="com.pace2car.entity.SmdQuestions" resultMap="smdQuesResultMap">
         SELECT * FROM SMD_QUESTIONS
         <where>
             <if test="questions != null and questions.question != null">
@@ -120,12 +137,32 @@
                 AND QUESTION LIKE #{likeQuestion}
             </if>
             <if test="questions != null and questions.techCateId != null">AND TECH_CATE_ID=#{questions.techCateId}</if>
+            AND QUESTION_TYPE=#{questions.questionType}
         </where>
         ORDER BY ID
     </select>
 
-    <select id="selectBySmdOpt" parameterType="SmdOptions" resultMap="smdOptResultMap">
-        SELECT * FROM SMD_OPTIONS WHERE QUESTION_ID=#{questionId}
+    <select id="selectBySmdOpt" parameterType="com.pace2car.entity.SmdOptions" resultMap="smdOptResultMap">
+        SELECT * FROM SMD_OPTIONS WHERE QUESTION_ID=#{id}
     </select>
+
+
+    <select id="selectByFspQues" parameterType="FspQuestions" resultMap="fspQuesResultMap">
+        SELECT * FROM FSP_QUESTIONS
+        <where>
+            <if test="questions != null and questions.question != null">
+                <bind name="likeQuestion" value="'%' + questions.question + '%'"/>
+                AND QUESTION LIKE #{likeQuestion}
+            </if>
+            <if test="questions != null and questions.techCateId != null">AND TECH_CATE_ID=#{questions.techCateId}</if>
+            AND QUESTION_TYPE=#{questions.questionType}
+        </where>
+        ORDER BY ID
+    </select>
+
+    <select id="selectByFspOpt" parameterType="FspAnswer" resultMap="fspOptResultMap">
+            SELECT * FROM FSP_ANSWER WHERE FSP_ID=#{id}
+        </select>
+
 
 </mapper>

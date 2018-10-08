@@ -64,9 +64,21 @@ public class QuestionsServiceImpl implements IQuestionsService {
     }
 
     @Override
-    public List<SmdOptions> selectBySmdOpt(SmdOptions options) {
+    public SmdOptions selectBySmdOpt(Integer questionId) {
 
-        return questionsMapper.selectBySmdOpt(options);
+        return questionsMapper.selectBySmdOpt(questionId);
+    }
+
+    @Override
+    public List<FspQuestions> selectByFspQues(FspQuestions questions, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+
+        return questionsMapper.selectByFspQues(questions, pageNum, pageSize);
+    }
+
+    @Override
+    public FspAnswer selectByFspOpt(Integer fspId) {
+        return questionsMapper.selectByFspOpt(fspId);
     }
 
 

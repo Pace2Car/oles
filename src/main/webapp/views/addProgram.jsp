@@ -63,7 +63,7 @@
                         <div class="col-sm-4 col-sm-offset-2">
                             <br>
                             <br>
-                            <button class="btn btn-primary" type="submit">保存更改</button>
+                            <button class="btn btn-primary" type="submit">新增试题</button>
 
                             <button class="btn btn-white" type="submit">取消</button>
                         </div>
@@ -72,6 +72,10 @@
                         <div class="form-group">
                             <label>编程题题干</label>
                             <textarea class="form-control" rows="14" name="question"></textarea>
+                        </div>
+                        <div>
+                            <label>标准答案</label>
+                            <textarea class="form-control" rows="14" name="stdAnswer">&lt;pre&gt;&emsp;&lt;/pre&gt;</textarea>
                         </div>
                     </div>
 
