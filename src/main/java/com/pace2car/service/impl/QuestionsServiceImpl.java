@@ -1,9 +1,7 @@
 package com.pace2car.service.impl;
 
-import com.pace2car.entity.FspQuestions;
-import com.pace2car.entity.SmdOptions;
-import com.pace2car.entity.SmdQuestions;
-import com.pace2car.entity.TechCategory;
+import com.github.pagehelper.PageHelper;
+import com.pace2car.entity.*;
 import com.pace2car.mapper.QuestionsMapper;
 import com.pace2car.service.IQuestionsService;
 import org.springframework.stereotype.Service;
@@ -56,6 +54,19 @@ public class QuestionsServiceImpl implements IQuestionsService {
     @Override
     public int insertProgram(FspQuestions questions) {
         return questionsMapper.insertProgram(questions);
+    }
+
+    @Override
+    public List<SmdQuestions> selectBySmdQues(SmdQuestions questions, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+
+        return questionsMapper.selectBySmdQues(questions, pageNum, pageSize);
+    }
+
+    @Override
+    public List<SmdOptions> selectBySmdOpt(SmdOptions options) {
+
+        return questionsMapper.selectBySmdOpt(options);
     }
 
 

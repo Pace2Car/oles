@@ -4,7 +4,7 @@
 
 <mapper namespace="com.pace2car.mapper.QuestionsMapper">
 
-    <resultMap id="baseResultMap" type="TechCategory">
+    <resultMap id="techResultMap" type="TechCategory">
         <id property="id" column="ID"/>
         <result property="techCtgr" column="TECH_CTGR"/>
         <result property="courseId" column="COURSE_ID"/>
@@ -13,8 +13,25 @@
             <result property="courseName" column="COURSE_NAME"/>
         </association>
     </resultMap>
-    <resultMap id="baseResultMap1" type="FspQuestions">
 
+    <resultMap id="smdQuesResultMap" type="SmdQuestions">
+        <id property="id" column="ID"/>
+        <result property="question" column="QUESTION"/>
+        <result property="correct" column="CORRECT"/>
+        <result property="questionType" column="QUESTION_TYPE"/>
+        <result property="techCateId" column="TECH_CATE_ID"/>
+        <result property="descrpt" column="DESCRPT"/>
+        <result property="pubdate" column="PUBDATE"/>
+    </resultMap>
+
+    <resultMap id="smdOptResultMap" type="SmdOptions">
+        <id property="id" column="ID"/>
+        <result property="optionA" column="OPTION_A"/>
+        <result property="optionB" column="OPTION_B"/>
+        <result property="optionC" column="OPTION_C"/>
+        <result property="optionD" column="OPTION_D"/>
+        <result property="optionE" column="OPTION_E"/>
+        <result property="questionId" column="QUESTION_ID"/>
     </resultMap>
 
 
@@ -90,7 +107,25 @@
     </insert>
 
 
-    <select id="selectTech" resultType="TechCategory" resultMap="baseResultMap">
+    <select id="selectTech" resultType="TechCategory" resultMap="techResultMap">
         SELECT * FROM TECH_CATEGORY WHERE COURSE_ID=#{id}
     </select>
+
+
+    <select id="selectBySmdQues" parameterType="SmdQuestions" resultMap="smdQuesResultMap">
+        SELECT * FROM SMD_QUESTIONS
+        <where>
+            <if test="questions != null and questions.question != null">
+                <bind name="likeQuestion" value="'%' + questions.question + '%'"/>
+                AND QUESTION LIKE #{likeQuestion}
+            </if>
+            <if test="questions != null and questions.techCateId != null">AND TECH_CATE_ID=#{questions.techCateId}</if>
+        </where>
+        ORDER BY ID
+    </select>
+
+    <select id="selectBySmdOpt" parameterType="SmdOptions" resultMap="smdOptResultMap">
+        SELECT * FROM SMD_OPTIONS WHERE QUESTION_ID=#{questionId}
+    </select>
+
 </mapper>
