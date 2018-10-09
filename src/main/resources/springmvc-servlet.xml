@@ -35,7 +35,7 @@
     <mvc:interceptors>
         <bean class="com.pace2car.interceptor.GlobalInterceptor"/>
         <mvc:interceptor>
-            <mvc:mapping path="/category/**"/>
+            <mvc:mapping path="/*/**"/>
             <!-- 此路径的请求不拦截 -->
             <mvc:exclude-mapping path="/user/**"/>
             <bean class="com.pace2car.interceptor.AuthenticationInterceptor" />
