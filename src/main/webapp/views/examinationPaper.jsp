@@ -39,53 +39,93 @@
 
             <div class="col-lg-12">
                 <form action="">
-                <c:forEach items="${sq}" var="sq">
+                <c:forEach items="${sq}" var="sq" varStatus="s">
                 <div class="ibox float-e-margins border-bottom">
                     <div class="ibox-content">
                         <table class="table table-hover no-margins">
                             <thead>
                             <tr>
+                                <c:if test="${sq.questionType==1}">
                                 <td>
-                                    <c:if test="${sq.questionType==1}"><strong><i>(一)单选题</i></strong></c:if>
+                                    <strong><i>(一)单选题 每题2分</i></strong>
                                 </td>
+                                </c:if>
+                                <c:if test="${sq.questionType==2}">
+                                <td>
+                                    <strong><i>(二)多选题 每题2分</i></strong>
+                                </td>
+                                </c:if>
+                                <c:if test="${sq.questionType==3}">
+                                    <td>
+                                        <strong><i>(三)判断题 每题2分</i></strong>
+                                    </td>
+                                </c:if>
                             </tr>
                             <tr>
-                                <th style="font-size: 16px"><strong><i>${sq.question}</i></strong></th>
+                                <th style="font-size: 16px"><strong><i>${s.count}.${sq.question}</i></strong></th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:choose>
-                                <c:when test="${sq.questionType==1}">
+                                <c:when test="${sq.questionType==1 || sq.questionType==0}">
                                     <tr>
                                         <td>
                                             <span class="input-group-addon" style="width: 38px;height: 34px">
                                             <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionA}</span>
                                             </span>
                                             </td>
+                                    </tr>
+                                    <tr>
                                         <td><span class="input-group-addon" style="width: 38px;height: 34px">
                                             <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;B.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionB}</span>
                                             </span></td>
+                                    </tr>
+                                    <tr>
                                         <td><span class="input-group-addon" style="width: 38px;height: 34px">
                                             <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;C.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionC}</span>
                                             </span></td>
+                                    </tr>
+                                    <tr>
                                         <td><span class="input-group-addon" style="width: 38px;height: 34px">
                                             <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;D.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionD}</span>
                                             </span></td>
                                     </tr>
                                 </c:when>
-                                <c:when test="${sq.questionType==2}">
-                                    <label class="col-sm-1 control-label">A</label>
-                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="A" >${op.get(sq.id).optionA}</span>
-                                        <input type="text" class="form-control" name="optionA"></div>
-                                    <label class="col-sm-1 control-label">B</label>
-                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="B">${op.get(sq.id).optionB}</span>
-                                        <input type="text" class="form-control" name="optionB"></div>
-                                    <label class="col-sm-1 control-label">C</label>
-                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="C">${op.get(sq.id).optionC}</span>
-                                        <input type="text" class="form-control" name="optionC"></div>
-                                    <label class="col-sm-1 control-label">D</label>
-                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="D">${op.get(sq.id).optionD}</span>
-                                        <input type="text" class="form-control" name="optionD"></div>
+                                <c:when test="${sq.questionType==2 || sq.questionType==-1}">
+                                    <tr>
+                                        <td>
+                                            <span class="input-group-addon" style="width: 38px;height: 34px">
+                                            <input type="checkbox" name="correct_${sq.id}" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionA}</span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="input-group-addon" style="width: 38px;height: 34px">
+                                            <input type="checkbox" name="correct_${sq.id}" value="A">&nbsp;&nbsp;B.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionB}</span>
+                                            </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="input-group-addon" style="width: 38px;height: 34px">
+                                            <input type="checkbox" name="correct_${sq.id}" value="A">&nbsp;&nbsp;C.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionC}</span>
+                                            </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="input-group-addon" style="width: 38px;height: 34px">
+                                            <input type="checkbox" name="correct_${sq.id}" value="A">&nbsp;&nbsp;D.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionD}</span>
+                                            </span></td>
+                                    </tr>
+                                </c:when>
+
+                                <c:when test="${sq.questionType==3 || sq.questionType==-2}">
+                                    <tr>
+                                        <td>
+                                            <div class="col-lg-8">
+                                                <label> <input type="radio" value="对" id="optionsRadios1" name="correct" > 对 </label>
+                                                <label> <input type="radio" value="错" id="optionsRadios2" name="correct" > 错 </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+
                                 </c:when>
                             </c:choose>
                             <%--<tr>--%>
@@ -99,6 +139,58 @@
                     </div>
                 </div>
                 </c:forEach>
+                <c:forEach items="${fq}" var="fq" varStatus="s">
+                    <div class="ibox float-e-margins border-bottom">
+                        <div class="ibox-content">
+                            <table class="table table-hover no-margins">
+                                <thead>
+                                <tr>
+                                    <c:if test="${fq.questionType==5}">
+                                        <td>
+                                            <strong><i>(四)简答题 每题5分</i></strong>
+                                        </td>
+                                    </c:if>
+                                    <c:if test="${fq.questionType==6}">
+                                        <td>
+                                            <strong><i>(五)编程题 每题10分</i></strong>
+                                        </td>
+                                    </c:if>
+                                </tr>
+                                <tr>
+                                    <th style="font-size: 16px"><strong><i>${s.count}.${fq.question}</i></strong></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:choose>
+                                    <c:when test="${fq.questionType==5||fq.questionType==-3}">
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <textarea class="form-control" rows="5" name="stdAnswer"></textarea>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:when>
+                                    <c:when test="${fq.questionType==6 || fq.questionType==-4}">
+                                        <tr>
+                                            <td>
+                                                <textarea class="form-control" rows="14" name="stdAnswer">&lt;pre&gt;&emsp;&lt;/pre&gt;</textarea>
+                                            </td>
+                                        </tr>
+                                    </c:when>
+                                </c:choose>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </c:forEach>
+                    <a href="#"  onclick="toCommint(this)"
+                        data-toggle="modal"
+                       data-target="#deleteModal" data-backdrop="static">
+                        <div style="text-align: center">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-w-m btn-info">提交试卷</button>
+                    </div></a>
+
                 </form>
             </div>
         </div>
@@ -117,8 +209,27 @@
     </div>
 
 </div>
-
-
+<!-- 删除模态框 -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel"> 提交确认 </h4>
+            </div>
+            <div class="modal-body">
+                <span class="fa fa-exclamation fa-2x" style="color:#f15b6c;"></span>
+                您确定要提交试卷吗？提交后不可修改
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button id="deleteConfirmBtn" type="button" class="btn btn-primary">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 <!-- Mainly scripts -->
 <script src="js/jquery-2.2.4.js"></script>
 <script src="js/bootstrap-3.3.7/js/bootstrap.min.js"></script>

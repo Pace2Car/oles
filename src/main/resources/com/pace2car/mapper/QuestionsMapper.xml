@@ -171,8 +171,12 @@
             SELECT * FROM FSP_ANSWER WHERE FSP_ID=#{id}
         </select>
 
-    <select id="selectBySmdQuesId" resultMap="smdQuesResultMap" parameterType="integer">
-        SELECT * FROM SMD_QUESTIONS WHERE ID=#{id}
+
+    <select id="selectByFspQuesId" parameterType="com.pace2car.entity.FspQuestions" resultMap="fspQuesResultMap">
+        SELECT * FROM FSP_QUESTIONS
+        <where>
+            <if test="fspQuestions != null and fspQuestions.id != null">AND ID=#{fspQuestions.id}</if>
+        </where>
     </select>
 
 

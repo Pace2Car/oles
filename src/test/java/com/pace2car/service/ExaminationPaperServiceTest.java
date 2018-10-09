@@ -1,6 +1,7 @@
 package com.pace2car.service;
 
 import com.pace2car.entity.Examination;
+import com.pace2car.entity.FspQuestions;
 import com.pace2car.entity.SmdOptions;
 import com.pace2car.entity.SmdQuestions;
 import org.junit.Test;
@@ -37,11 +38,22 @@ public class ExaminationPaperServiceTest {
         String multipleIds = examination.getMultipleId();
         String[] mtpsId = multipleIds.split(",");
 
+        String trueFalseId = examination.getTrueFalseId();
+        String[] tfId = trueFalseId.split(",");
+
+        String simpleAnwserId = examination.getSimpleAnwserId();
+        String[] saId = simpleAnwserId.split(",");
+
+        String programId = examination.getProgramId();
+        String[] pgId = programId.split(",");
+
         System.out.println(examNo);
         for (String s : sglsId) {
             System.out.println(s);
         }
         List<SmdQuestions> sq = new ArrayList<>();
+
+        List<FspQuestions> fq = new ArrayList<>();
 
         for (String s : sglsId) {
             Integer i = Integer.valueOf(s);
@@ -65,5 +77,24 @@ public class ExaminationPaperServiceTest {
             SmdOptions options1 = optList.get(question.getId());
             System.out.println(options1);
         }
+
+        for (String t : tfId) {
+            Integer i = Integer.valueOf(t);
+            sq.add(questionsService.selectBySmdQuesId(new SmdQuestions(i)));
+            System.out.println(sq);
+        }
+
+        for (String sa : saId) {
+            Integer i = Integer.valueOf(sa);
+            fq.add(questionsService.selectByFspQuesId(new FspQuestions(i)));
+            System.out.println(fq);
+        }
+
+        for (String p : pgId) {
+            Integer i = Integer.valueOf(p);
+            fq.add(questionsService.selectByFspQuesId(new FspQuestions(i)));
+            System.out.println(fq);
+        }
+
     }
 }

@@ -40,4 +40,6 @@ public interface QuestionsMapper {
     FspAnswer selectByFspOpt(Integer fspId);
 
     SmdQuestions selectBySmdQuesId(Integer id);
+
+    FspQuestions selectByFspQuesId(@Param("fspQuestions") FspQuestions fspQuestions);
 }
