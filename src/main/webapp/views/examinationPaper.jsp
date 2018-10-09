@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>模板-在线考试后台管理系统</title>
+    <title>考试-在线考试</title>
 
     <link href="js/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
     <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -31,176 +31,206 @@
 <body>
 
 <div id="wrapper">
-    <%@include file="navigation.jsp"%>
+    <%--<%@include file="navigation.jsp"%>--%>
 
     <div id="page-wrapper" class="gray-bg">
         <!-- header 顶部包装区域 -->
-        <%@include file="header.jsp"%>
+        <%@include file="header.jsp" %>
         <!-- 顶部导航 -->
         <div class="row wrapper border-bottom white-bg page-heading" style="text-align: center">
+            <div class="col-lg-1"></div>
             <div class="col-lg-10">
-                <h2>试卷</h2>
+                <h2>${examination.descrpt}</h2>
                 <ol class="breadcrumb">
                     <li style="color:red">
-                        (编号:${exam})
+                        (编号:${examination.examNo})
                     </li>
                 </ol>
             </div>
 
             <div class="col-lg-12">
                 <form action="">
-                <c:forEach items="${sq}" var="sq" varStatus="s">
-                <div class="ibox float-e-margins border-bottom">
-                    <div class="ibox-content">
-                        <table class="table table-hover no-margins">
-                            <thead>
-                            <tr>
-                                <c:if test="${sq.questionType==1}">
-                                <td>
-                                    <strong><i>(一)单选题 每题2分</i></strong>
-                                </td>
-                                </c:if>
-                                <c:if test="${sq.questionType==2}">
-                                <td>
-                                    <strong><i>(二)多选题 每题2分</i></strong>
-                                </td>
-                                </c:if>
-                                <c:if test="${sq.questionType==3}">
-                                    <td>
-                                        <strong><i>(三)判断题 每题2分</i></strong>
-                                    </td>
-                                </c:if>
-                            </tr>
-                            <tr>
-                                <th style="font-size: 16px"><strong><i>${s.count}.${sq.question}</i></strong></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:choose>
-                                <c:when test="${sq.questionType==1 || sq.questionType==0}">
+                    <c:forEach items="${sq}" var="sq" varStatus="s">
+                        <div class="ibox float-e-margins border-bottom">
+                            <div class="ibox-content">
+                                <table class="table table-hover no-margins">
+                                    <thead>
                                     <tr>
-                                        <td>
-                                            <span class="input-group-addon" style="width: 38px;height: 34px">
-                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionA}</span>
-                                            </span>
-                                            </td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="input-group-addon" style="width: 38px;height: 34px">
-                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;B.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionB}</span>
-                                            </span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="input-group-addon" style="width: 38px;height: 34px">
-                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;C.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionC}</span>
-                                            </span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="input-group-addon" style="width: 38px;height: 34px">
-                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;D.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionD}</span>
-                                            </span></td>
-                                    </tr>
-                                </c:when>
-                                <c:when test="${sq.questionType==2 || sq.questionType==-1}">
-                                    <tr>
-                                        <td>
-                                            <span class="input-group-addon" style="width: 38px;height: 34px">
-                                            <input type="checkbox" name="correct_${sq.id}" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionA}</span>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="input-group-addon" style="width: 38px;height: 34px">
-                                            <input type="checkbox" name="correct_${sq.id}" value="A">&nbsp;&nbsp;B.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionB}</span>
-                                            </span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="input-group-addon" style="width: 38px;height: 34px">
-                                            <input type="checkbox" name="correct_${sq.id}" value="A">&nbsp;&nbsp;C.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionC}</span>
-                                            </span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="input-group-addon" style="width: 38px;height: 34px">
-                                            <input type="checkbox" name="correct_${sq.id}" value="A">&nbsp;&nbsp;D.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionD}</span>
-                                            </span></td>
-                                    </tr>
-                                </c:when>
-
-                                <c:when test="${sq.questionType==3 || sq.questionType==-2}">
-                                    <tr>
-                                        <td>
-                                            <div class="col-lg-8">
-                                                <label> <input type="radio" value="对" id="optionsRadios1" name="correct" > 对 </label>
-                                                <label> <input type="radio" value="错" id="optionsRadios2" name="correct" > 错 </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                </c:when>
-                            </c:choose>
-                            <%--<tr>--%>
-                                <%--<td>--%>
-                                    <%--<div class="well" style="font-size: 15px">--%>
-                                    <%--</div>--%>
-                                <%--</td>--%>
-                            <%--</tr>--%>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                </c:forEach>
-                <c:forEach items="${fq}" var="fq" varStatus="s">
-                    <div class="ibox float-e-margins border-bottom">
-                        <div class="ibox-content">
-                            <table class="table table-hover no-margins">
-                                <thead>
-                                <tr>
-                                    <c:if test="${fq.questionType==5}">
-                                        <td>
-                                            <strong><i>(四)简答题 每题5分</i></strong>
-                                        </td>
-                                    </c:if>
-                                    <c:if test="${fq.questionType==6}">
-                                        <td>
-                                            <strong><i>(五)编程题 每题10分</i></strong>
-                                        </td>
-                                    </c:if>
-                                </tr>
-                                <tr>
-                                    <th style="font-size: 16px"><strong><i>${s.count}.${fq.question}</i></strong></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:choose>
-                                    <c:when test="${fq.questionType==5||fq.questionType==-3}">
-                                        <tr>
+                                        <c:if test="${sq.questionType==1}">
                                             <td>
-                                                <div>
-                                                    <textarea class="form-control" rows="5" name="stdAnswer"></textarea>
-                                                </div>
+                                                <strong><i>(一)单选题 每题2分</i></strong>
                                             </td>
-                                        </tr>
-                                    </c:when>
-                                    <c:when test="${fq.questionType==6 || fq.questionType==-4}">
-                                        <tr>
+                                        </c:if>
+                                        <c:if test="${sq.questionType==2}">
                                             <td>
-                                                <textarea class="form-control" rows="14" name="stdAnswer">&lt;pre&gt;&emsp;&lt;/pre&gt;</textarea>
+                                                <strong><i>(二)多选题 每题2分</i></strong>
                                             </td>
-                                        </tr>
-                                    </c:when>
-                                </c:choose>
-                                </tbody>
-                            </table>
+                                        </c:if>
+                                        <c:if test="${sq.questionType==3}">
+                                            <td>
+                                                <strong><i>(三)判断题 每题2分</i></strong>
+                                            </td>
+                                        </c:if>
+                                    </tr>
+                                    <tr>
+                                        <th style="font-size: 16px"><strong><i>${s.count}.${sq.question}</i></strong>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:choose>
+                                        <c:when test="${sq.questionType==1 || sq.questionType==0}">
+                                            <tr>
+                                                <td>
+                                            <span style="width: 38px;height: 34px">
+                                            <input type="radio" name="s_${sq.id}" id="s_${sq.id}"
+                                                   quesNo="s_${sq.id}" onchange="saveToLocal(this)" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span
+                                                    style="color: blue">${op.get(sq.id).optionA}</span>
+                                            </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="width: 38px;height: 34px">
+                                            <input type="radio" name="s_${sq.id}" id="s_${sq.id}"
+                                                   quesNo="s_${sq.id}" onchange="saveToLocal(this)" value="B">&nbsp;&nbsp;B.&nbsp;&nbsp;<span
+                                                        style="color: blue">${op.get(sq.id).optionB}</span>
+                                            </span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="width: 38px;height: 34px">
+                                            <input type="radio" name="s_${sq.id}" id="s_${sq.id}"
+                                                   quesNo="s_${sq.id}" onchange="saveToLocal(this)" value="C">&nbsp;&nbsp;C.&nbsp;&nbsp;<span
+                                                        style="color: blue">${op.get(sq.id).optionC}</span>
+                                            </span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="width: 38px;height: 34px">
+                                            <input type="radio" name="s_${sq.id}" id="s_${sq.id}"
+                                                   quesNo="s_${sq.id}" onchange="saveToLocal(this)" value="D">&nbsp;&nbsp;D.&nbsp;&nbsp;<span
+                                                        style="color: blue">${op.get(sq.id).optionD}</span>
+                                            </span></td>
+                                            </tr>
+                                        </c:when>
+                                        <c:when test="${sq.questionType==2 || sq.questionType==-1}">
+                                            <tr>
+                                                <td>
+                                            <span style="width: 38px;height: 34px">
+                                            <input type="checkbox" name="m_${sq.id}"
+                                                   quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span
+                                                    style="color: blue">${op.get(sq.id).optionA}</span>
+                                            </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="width: 38px;height: 34px">
+                                            <input type="checkbox" name="m_${sq.id}"
+                                                   quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="B">&nbsp;&nbsp;B.&nbsp;&nbsp;<span
+                                                        style="color: blue">${op.get(sq.id).optionB}</span>
+                                            </span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="width: 38px;height: 34px">
+                                            <input type="checkbox" name="m_${sq.id}"
+                                                   quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="C">&nbsp;&nbsp;C.&nbsp;&nbsp;<span
+                                                        style="color: blue">${op.get(sq.id).optionC}</span>
+                                            </span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="width: 38px;height: 34px">
+                                            <input type="checkbox" name="m_${sq.id}"
+                                                   quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="D">&nbsp;&nbsp;D.&nbsp;&nbsp;<span
+                                                        style="color: blue">${op.get(sq.id).optionD}</span>
+                                            </span></td>
+                                            </tr>
+                                            <c:if test="${op.get(sq.id).optionE != null}">
+                                            <tr>
+                                                <td>
+                                                    <span style="width: 38px;height: 34px">
+                                                    <input type="checkbox" name="m_${sq.id}"
+                                                           quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="E">&nbsp;&nbsp;E.&nbsp;&nbsp;
+                                                    <span style="color: blue">${op.get(sq.id).optionE}</span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            </c:if>
+                                        </c:when>
+
+                                        <c:when test="${sq.questionType==3 || sq.questionType==-2}">
+                                            <tr>
+                                                <td>
+                                                    <div class="col-lg-8">
+                                                        <label> <input type="radio" value="对"
+                                                                       quesNo="j_${sq.id}" onchange="saveToLocal(this)"
+                                                                       name="j_${sq.id}"> 对 </label>
+                                                        <label> <input type="radio" value="错"
+                                                                       quesNo="j_${sq.id}" onchange="saveToLocal(this)"
+                                                                       name="j_${sq.id}"> 错 </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </c:when>
+                                    </c:choose>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </c:forEach>
-                    <a href="#"  onclick="toCommint(this)"
-                        data-toggle="modal"
-                       data-target="#deleteModal" data-backdrop="static">
-                        <div style="text-align: center">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-w-m btn-info">提交试卷</button>
-                    </div></a>
-
+                    </c:forEach>
+                    <c:forEach items="${fq}" var="fq" varStatus="s">
+                        <div class="ibox float-e-margins border-bottom">
+                            <div class="ibox-content">
+                                <table class="table table-hover no-margins">
+                                    <thead>
+                                    <tr>
+                                        <c:if test="${fq.questionType==5}">
+                                            <td>
+                                                <strong><i>(四)简答题 每题5分</i></strong>
+                                            </td>
+                                        </c:if>
+                                        <c:if test="${fq.questionType==6}">
+                                            <td>
+                                                <strong><i>(五)编程题 每题10分</i></strong>
+                                            </td>
+                                        </c:if>
+                                    </tr>
+                                    <tr>
+                                        <th style="font-size: 16px">
+                                            <strong><i>${s.count}.${fq.question}</i></strong>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:choose>
+                                        <c:when test="${fq.questionType==5||fq.questionType==-3}">
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <textarea class="form-control" rows="5"
+                                                                  id="sa_${fq.id}" quesNo="sa_${fq.id}" onchange="saveToLocal(this)"
+                                                                  name="stdAnswer" ></textarea>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </c:when>
+                                        <c:when test="${fq.questionType==6 || fq.questionType==-4}">
+                                            <tr>
+                                                <td>
+                                                    <textarea class="form-control" rows="14"
+                                                              id="p_${fq.id}" quesNo="p_${fq.id}"
+                                                              name="stdAnswer" onchange="saveToLocal(this)"></textarea>
+                                                </td>
+                                            </tr>
+                                        </c:when>
+                                    </c:choose>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <a href="#" onclick="toCommint(this)"
+                       class="btn btn-w-m btn-info"
+                       data-toggle="modal"
+                       data-target="#deleteModal" data-backdrop="static">提交试卷</a>
                 </form>
             </div>
         </div>
@@ -215,7 +245,7 @@
             </div>
         </div>
         <!-- footer 底部包装区域 -->
-        <%@include file="footer.jsp"%>
+        <%@include file="footer.jsp" %>
     </div>
 
 </div>
@@ -235,13 +265,14 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button id="deleteConfirmBtn" type="button" class="btn btn-primary">提交</button>
+                <button id="commitConfirmBtn" type="button" class="btn btn-primary">提交</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
 <!-- Mainly scripts -->
 <script src="js/jquery-2.2.4.js"></script>
+<script src="js/store.js"></script>
 <script src="js/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 <script src="vendor/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="vendor/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -287,6 +318,58 @@
         }
 
     });
+</script>
+
+<script>
+    $(function () {
+
+        store.forEach(function (key, val) {
+            if ("sa" == key.substring(0,2) || "p" == key.substring(0,1)) {
+                $("#" + key).val(val);
+            } else if ("m" == key.substring(0,1)) {
+                var name = "input[name='"+ key + "']";
+                var all = $(name);
+                for (var i = 0; i < all.length; i++) {
+                    var checkVal = all.eq(i).val();
+
+                    var valArr = val.split(",");
+                    for (var v in valArr) {
+                        if (checkVal == valArr[v]) {
+                            all.get(i).checked = true;
+                        }
+                    }
+                }
+            } else if ("s" == key.substring(0,1) || "j" == key.substring(0,1)) {
+                var name = "input[name='"+ key + "']";
+                var allRadio = $(name);
+                for (var i = 0; i < allRadio.length; i++) {
+                    var radioVal = allRadio.eq(i).val();
+                    if (radioVal == val) {
+                        allRadio.get(i).checked = true;
+                    }
+                }
+            }
+        });
+    });
+
+    function saveToLocal(e) {
+        var key = $(e).attr("quesNo");
+        console.dirxml(store.get(key));
+        if ("m" == key.substring(0,1)) {
+            var name = "input[name='" + key + "']:checked";
+            var value = new Array();
+            $(name).each(function (i) {
+                value[i] = $(this).val();
+            });
+            value = value.join(",");
+            console.dirxml("m_value:" + value);
+        } else {
+            var value = $(e).val();
+        }
+        store.set(key, value);
+
+        console.dirxml(key + ":" + store.get(key));
+    }
 </script>
 
 </body>

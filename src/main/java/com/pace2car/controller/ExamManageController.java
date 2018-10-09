@@ -41,7 +41,6 @@ public class ExamManageController {
     public String selectPaper(ModelMap modelMap, SmdOptions options) {
         Map<Integer, SmdOptions> optList = new HashMap<>();
         Examination examination = examinationPaperService.selectPaper();
-        String examNo = examination.getExamNo();
 
         List<SmdQuestions> sq = new ArrayList<>();
 
@@ -121,7 +120,7 @@ public class ExamManageController {
         modelMap.addAttribute("op", optList);
         modelMap.addAttribute("sq", sq);
         modelMap.addAttribute("fq",fq);
-        modelMap.addAttribute("exam", examNo);
+        modelMap.addAttribute("examination", examination);
         return "examinationPaper";
     }
 
