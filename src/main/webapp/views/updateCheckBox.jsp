@@ -10,7 +10,7 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
     </button>
-    <h4 class="modal-title" id="myModalLabel">修改单选题信息</h4>
+    <h4 class="modal-title" id="myModalLabel">修改多选题信息</h4>
 </div>
 <div class="modal-body" id="update-modal-body">
     <!-- body -->
@@ -66,6 +66,13 @@
                                            value="${optId.optionD}"
                                            placeholder="请输入选项D">
                                 </div>
+                            </div><div class="form-group">
+                                <label for="optionD" class="col-sm-2 control-label">选项E</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="optionE" name="optionE"
+                                           value="${optId.optionE}"
+                                           placeholder="请输入选项E">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="correct" class="col-sm-2 control-label">正确答案</label>
@@ -73,6 +80,7 @@
                                     <input type="text" class="form-control" id="correct" name="correct"
                                            value="${quesId.correct}"
                                            placeholder="请输入正确答案">
+                                    <span class="help-block m-b-none">（以逗号分隔）</span>
                                 </div>
                             </div>
 
@@ -115,6 +123,7 @@
                 $('#trB_' + $('#id').val() + ' span').text($('#optionB').val());
                 $('#trC_' + $('#id').val() + ' span').text($('#optionC').val());
                 $('#trD_' + $('#id').val() + ' span').text($('#optionD').val());
+                $('#trE_' + $('#id').val() + ' span').text($('#optionE').val());
                 $('#trR_' + $('#id').val() + ' span').text($('#correct').val());
                 if (json.actionFlag) {
                     $('#myModal').modal('hide');

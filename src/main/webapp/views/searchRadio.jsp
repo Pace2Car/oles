@@ -78,7 +78,7 @@
                                 </div>
                             </div>
                         </div>
-                            <input type="hidden" name="questionType" value="1">
+                        <input type="hidden" name="questionType" value="1">
                         <button class="btn btn-primary" type="submit">查询</button>
                         <button class="btn btn-white" type="reset">重置</button>
                     </form>
@@ -91,7 +91,7 @@
                         </ol>
                     </div>
                     <c:forEach var="questions" items="${ques.getResult()}" varStatus="status">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12" id="div_${questions.id}">
                             <div class="ibox float-e-margins border-bottom">
                                 <div class="ibox-title">
                                     <div class="ibox-tools" style="text-align: left">
@@ -100,7 +100,7 @@
                                         <strong>
                                     <i>
                                         <span>${status.index+1}.</span>
-                                    <span style="color:blue">${questions.question}</span>
+                                    <span style="color:blue" id="ques_${questions.id}">${questions.question}</span>
                                     </i>
                                         </strong>
                                 </span>
@@ -109,46 +109,53 @@
                                         </a>
                                     </div>
                                 </div>
-
                                 <div class="ibox-content" style="display: none">
-                                    <table class="table table-hover no-margins">
+                                    <table class="table table-hover no-margins" >
                                             <%--<thead>--%>
                                             <%--<tr>--%>
                                             <%--<th style="font-size: 16px"><strong><i>(一) 简答题 每题5分</i></strong></th>--%>
                                             <%--</tr>--%>
                                             <%--</thead>--%>
                                         <tbody>
-                                        <tr>
+                                        <tr id="trA_${questions.id}">
                                             <td>&nbsp;&nbsp;A.&nbsp;&nbsp;
                                                 <span style="color: black">${optList.get(questions.id).optionA}</span>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr id="trB_${questions.id}">
                                             <td>&nbsp;&nbsp;B.&nbsp;&nbsp;
                                                 <span style="color: black">${optList.get(questions.id).optionB}</span>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr id="trC_${questions.id}">
                                             <td>&nbsp;&nbsp;C.&nbsp;&nbsp;
                                                 <span style="color: black">${optList.get(questions.id).optionC}</span>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr id="trD_${questions.id}">
                                             <td>&nbsp;&nbsp;D.&nbsp;&nbsp;
                                                 <span style="color: black">${optList.get(questions.id).optionD}</span>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr id="trR_${questions.id}">
                                             <td>答案是：&nbsp;&nbsp;&nbsp;
                                                 <span style="color: black">${questions.correct}</span>
                                                 &nbsp;&nbsp;&nbsp;
-                                                <button type="button" onclick="toUpdate(this)"
-                                                        class="btn btn-w-m btn-info"
+                                                <button type="button" class="btn btn-w-m btn-info"
+                                                        onclick="toUpdate(this)"
+                                                        data-toggle="modal"
+                                                        data-target="#myModal"
+                                                        data-backdrop="static"
                                                         no="${questions.id}">
                                                     更新
                                                 </button>
                                                 &nbsp;&nbsp;&nbsp;
-                                                <button type="button" class="btn btn-w-m btn-info">
+                                                <button type="button" class="btn btn-w-m btn-info"
+                                                onclick="toDelete(this)"
+                                                        id="deleteBtn"
+                                                        data-toggle="modal" data-target="#deleteModal"
+                                                        data-backdrop="static"
+                                                        no="${questions.id}">
                                                     删除
                                                 </button>
                                             </td>
@@ -162,7 +169,8 @@
                     <div class="col-lg-12">
                         <ol class="breadcrumb">
                             <li style="margin-left: 37px">
-                                <input type="checkbox" name="singleId" value="${questions.id}" onclick="selectAll(this);">全选
+                                <input type="checkbox" name="singleId" value="${questions.id}"
+                                       onclick="selectAll(this);">全选
                             </li>
                             <li style="">
                                 <span style="color: black">考卷编号：</span>
@@ -214,7 +222,42 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel"> 删除确认 </h4>
+            </div>
+            <div class="modal-body">
+                <span class="fa fa-exclamation fa-2x" style="color:#f15b6c;"></span>
+                您确定要删除编号为：<span id="quesMsg"></span> 的题目吗？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    关闭
+                </button>
+                <button id="deleteConfirmBtn" type="button" class="btn btn-primary">
+                    删除
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<div hidden id="successAlert" class="alert alert-success col-md-2"
+     style="margin-right: 5px;position: fixed; right: 5px; bottom: 5px; ">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong>成功！</strong>操作成功！
+</div>
+<div hidden id="failAlert" class="alert alert-warning col-md-2"
+     style="margin-right: 5px;position: fixed; right: 5px; bottom: 5px;">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong style="color: red">失败！</strong>操作失败！
+</div>
 <!-- Mainly scripts -->
 <script src="js/jquery-2.2.4.js"></script>
 <script src="js/bootstrap-3.3.7/js/bootstrap.min.js"></script>
@@ -300,11 +343,27 @@
         //console.log($(e).attr('empno'));
 
         var no = $(e).attr('no');
-        //加载更新员工的信息表单，并加入到模态框的content部分
         $.get('ques/toUpdateRadio/' + no, function (html) {
-            //console.dirxml(html)
+            console.dirxml(html)
             $('#myModal-content').append(html);
         }, 'html');
+    }
+    function toDelete(e) {
+        var id = $(e).attr('no');
+        $("#quesMsg").text(id);
+        $("#deleteConfirmBtn").click(function () {
+            $("#div_" + id).remove();
+            $.get("ques/deleteSmd?id=" + id, function (json) {
+                if (json.actionFlag) {
+                    $('#successAlert').show();
+                    setTimeout("$('#successAlert').hide()", 3000);
+                } else {
+                    $('#failAlert').show();
+                    setTimeout("$('#failAlert').hide()", 3000);
+                }
+                $('#deleteModal').modal('hide');
+            }, "json");
+        });
     }
 </script>
 

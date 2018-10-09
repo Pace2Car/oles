@@ -92,5 +92,40 @@ public class QuestionsServiceImpl implements IQuestionsService {
         return questionsMapper.selectBySmdQuesI(id);
     }
 
+    @Override
+    public int updateSmdQues(SmdQuestions questions) {
+        return questionsMapper.updateSmdQues(questions);
+    }
+
+    @Override
+    public int updateSmdOpt(SmdOptions options) {
+        return questionsMapper.updateSmdOpt(options);
+    }
+
+    @Override
+    public FspQuestions selectByFspQuesI(Integer id) {
+        return questionsMapper.selectByFspQuesI(id);
+    }
+
+    @Override
+    public int updateFspQues(FspQuestions questions) {
+        return questionsMapper.updateFspQues(questions);
+    }
+
+    @Override
+    public int deleteSmdQues(SmdQuestions questions) {
+        return questionsMapper.deleteSmdQues(questions);
+    }
+
+    @Override
+    public int deleteSmdOpt(Integer id) {
+        return questionsMapper.deleteSmdOpt(id);
+    }
+
+    @Override
+    public int deleteFspQues(FspQuestions questions) {
+        return questionsMapper.deleteFspQues(questions);
+    }
+
 
 }
