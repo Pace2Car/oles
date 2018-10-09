@@ -39,7 +39,7 @@ public class UserController {
             return "redirect:/views/index.jsp";
         } else if (usersInfo.getUserType() == null || usersInfo.getUserType() != 1) {
             session.setAttribute("logUser", usersInfo);
-            return "redirect:/views/examinationPaper.jsp";
+            return "redirect:/examManage/examinationPaper";
         }
         return "redirect:/login.jsp";
     }

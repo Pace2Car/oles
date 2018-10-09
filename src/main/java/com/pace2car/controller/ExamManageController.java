@@ -1,20 +1,15 @@
 package com.pace2car.controller;
 
 
-import com.pace2car.entity.Examination;
-import com.pace2car.entity.FspAnswer;
-import com.pace2car.entity.SmdOptions;
-import com.pace2car.entity.SmdQuestions;
+import com.pace2car.entity.*;
 import com.pace2car.service.IExaminationPaperService;
 import com.pace2car.service.IQuestionsService;
 import com.pace2car.service.ISubjectiveAnswerService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,9 +41,10 @@ public class ExamManageController {
     public String selectPaper(ModelMap modelMap, SmdOptions options) {
         Map<Integer, SmdOptions> optList = new HashMap<>();
         Examination examination = examinationPaperService.selectPaper();
-        String examNo = examination.getExamNo();
 
         List<SmdQuestions> sq = new ArrayList<>();
+
+        List<FspQuestions> fq = new ArrayList<>();
 
         String singleIds = examination.getSingleId();
         String[] sglsId = singleIds.split(",");
@@ -56,15 +52,63 @@ public class ExamManageController {
         String multipleIds = examination.getMultipleId();
         String[] mtpsId = multipleIds.split(",");
 
+        String trueFalseId = examination.getTrueFalseId();
+        String[] tfId = trueFalseId.split(",");
 
+        String simpleAnwserId = examination.getSimpleAnwserId();
+        String[] saId = simpleAnwserId.split(",");
+
+        String programId = examination.getProgramId();
+        String[] pgId = programId.split(",");
+
+        int x = 0 ;
         for (String s : sglsId) {
             Integer i = Integer.valueOf(s);
             sq.add(questionsService.selectBySmdQuesId(new SmdQuestions(i)));
+            if (x>0){
+                sq.get(x).setQuestionType(0);
+            }
+            x+=1;
         }
 
+        int y=0;
         for (String m : mtpsId) {
             Integer i = Integer.valueOf(m);
             sq.add(questionsService.selectBySmdQuesId(new SmdQuestions(i)));
+            if (y>0){
+                sq.get(y).setQuestionType(-1);
+            }
+            y+=1;
+        }
+
+        int m=0;
+        for (String t : tfId) {
+            Integer i = Integer.valueOf(t);
+            sq.add(questionsService.selectBySmdQuesId(new SmdQuestions(i)));
+            if (m>0){
+                sq.get(m).setQuestionType(-2);
+            }
+            m+=1;
+        }
+
+        int n=0;
+        for (String sa : saId) {
+            Integer i = Integer.valueOf(sa);
+            fq.add(questionsService.selectByFspQuesId(new FspQuestions(i)));
+            if (n>0){
+                fq.get(n).setQuestionType(-3);
+            }
+            n+=1;
+        }
+
+        int l=0;
+        for (String p : pgId) {
+            Integer i = Integer.valueOf(p);
+            fq.add(questionsService.selectByFspQuesId(new FspQuestions(i)));
+            if (l>0){
+                fq.get(l).setQuestionType(-4);
+            }
+            l+=1;
         }
 
         for (SmdQuestions question : sq) {
@@ -72,9 +116,11 @@ public class ExamManageController {
             SmdOptions details = questionsService.selectBySmdOpt(options.getQuestionId());
             optList.put(question.getId(), details);
         }
-        modelMap.addAttribute("sm", optList);
+
+        modelMap.addAttribute("op", optList);
         modelMap.addAttribute("sq", sq);
-        modelMap.addAttribute("exam", examNo);
+        modelMap.addAttribute("fq",fq);
+        modelMap.addAttribute("examination", examination);
         return "examinationPaper";
     }
 

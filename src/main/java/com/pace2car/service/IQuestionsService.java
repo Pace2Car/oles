@@ -31,6 +31,8 @@ public interface IQuestionsService {
 
     List<FspQuestions> selectByFspQues(FspQuestions questions, int pageNum, int pageSize);
 
+    FspQuestions selectByFspQuesId(FspQuestions fspQuestions);
+
     FspAnswer selectByFspOpt(Integer fspId);
 
     SmdQuestions selectBySmdQuesI(Integer id);

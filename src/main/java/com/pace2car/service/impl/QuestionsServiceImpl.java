@@ -7,7 +7,6 @@ import com.pace2car.service.IQuestionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service("questionsService")
@@ -80,6 +79,11 @@ public class QuestionsServiceImpl implements IQuestionsService {
         PageHelper.startPage(pageNum, pageSize);
 
         return questionsMapper.selectByFspQues(questions, pageNum, pageSize);
+    }
+
+    @Override
+    public FspQuestions selectByFspQuesId(FspQuestions fspQuestions) {
+        return questionsMapper.selectByFspQuesId(fspQuestions);
     }
 
     @Override

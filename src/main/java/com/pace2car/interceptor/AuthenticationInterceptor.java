@@ -23,7 +23,8 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
         //非管理员登录
         if (logUser != null && logUser.getUserType() == 0) {
             logger.warn("未授权访问！" );
-            response.sendRedirect(request.getContextPath() + "/views/examinationPaper.jsp");
+            logger.warn(request.getRequestURI());
+            response.sendRedirect(request.getContextPath() + "/examManage/examinationPaper");
             return false;
         }
         return super.preHandle(request, response, handler);

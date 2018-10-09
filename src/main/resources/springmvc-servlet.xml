@@ -38,6 +38,10 @@
             <mvc:mapping path="/*/**"/>
             <!-- 此路径的请求不拦截 -->
             <mvc:exclude-mapping path="/user/**"/>
+            <mvc:exclude-mapping path="/examManage/**"/>
+            <mvc:exclude-mapping path="/js/**"/>
+            <mvc:exclude-mapping path="/vendor/**"/>
+            <mvc:exclude-mapping path="/skin-config.html"/>
             <bean class="com.pace2car.interceptor.AuthenticationInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
