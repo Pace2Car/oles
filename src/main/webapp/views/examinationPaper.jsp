@@ -32,34 +32,74 @@
                 <h2>试卷</h2>
                 <ol class="breadcrumb">
                     <li style="color:red">
-                        (编号:XXXXXXXXXXXXX)
+                        (编号:${exam})
                     </li>
                 </ol>
             </div>
+
             <div class="col-lg-12">
+                <form action="">
+                <c:forEach items="${sq}" var="sq">
                 <div class="ibox float-e-margins border-bottom">
                     <div class="ibox-content">
                         <table class="table table-hover no-margins">
                             <thead>
                             <tr>
-                                <th style="font-size: 16px"><strong><i>(一) 简答题 每题5分</i></strong></th>
+                                <td>
+                                    <c:if test="${sq.questionType==1}"><strong><i>(一)单选题</i></strong></c:if>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="font-size: 16px"><strong><i>${sq.question}</i></strong></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>&nbsp;&nbsp;1.&nbsp;&nbsp;<span style="color: blue">请说明&与&&的区别？</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="well" style="font-size: 15px">
-                                        &nbsp;&nbsp;学生作答的答案！
-                                    </div>
-                                </td>
-                            </tr>
+                            <c:choose>
+                                <c:when test="${sq.questionType==1}">
+                                    <tr>
+                                        <td>
+                                            <span class="input-group-addon" style="width: 38px;height: 34px">
+                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span style="color: blue">${sm.get(sq.id).optionA}</span>
+                                            </span>
+                                            </td>
+                                        <td><span class="input-group-addon" style="width: 38px;height: 34px">
+                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;B.&nbsp;&nbsp;<span style="color: blue">${sm.get(sq.id).optionB}</span>
+                                            </span></td>
+                                        <td><span class="input-group-addon" style="width: 38px;height: 34px">
+                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;C.&nbsp;&nbsp;<span style="color: blue">${sm.get(sq.id).optionC}</span>
+                                            </span></td>
+                                        <td><span class="input-group-addon" style="width: 38px;height: 34px">
+                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;D.&nbsp;&nbsp;<span style="color: blue">${sm.get(sq.id).optionD}</span>
+                                            </span></td>
+                                    </tr>
+                                </c:when>
+                                <c:when test="${sq.questionType==2}">
+                                    <label class="col-sm-1 control-label">A</label>
+                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="A" >${sm.get(sq.id).optionA}</span>
+                                        <input type="text" class="form-control" name="optionA"></div>
+                                    <label class="col-sm-1 control-label">B</label>
+                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="B">${sm.get(sq.id).optionB}</span>
+                                        <input type="text" class="form-control" name="optionB"></div>
+                                    <label class="col-sm-1 control-label">C</label>
+                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="C">${sm.get(sq.id).optionC}</span>
+                                        <input type="text" class="form-control" name="optionC"></div>
+                                    <label class="col-sm-1 control-label">D</label>
+                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="D">${sm.get(sq.id).optionD}</span>
+                                        <input type="text" class="form-control" name="optionD"></div>
+                                </c:when>
+                            </c:choose>
+                            <%--<tr>--%>
+                                <%--<td>--%>
+                                    <%--<div class="well" style="font-size: 15px">--%>
+                                    <%--</div>--%>
+                                <%--</td>--%>
+                            <%--</tr>--%>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                </c:forEach>
+                </form>
             </div>
         </div>
         <!-- main 主体区域 -->

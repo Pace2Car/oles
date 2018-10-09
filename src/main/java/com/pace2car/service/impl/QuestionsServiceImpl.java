@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.pace2car.entity.*;
 import com.pace2car.mapper.QuestionsMapper;
 import com.pace2car.service.IQuestionsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,7 +14,7 @@ import java.util.List;
 public class QuestionsServiceImpl implements IQuestionsService {
 
 
-    @Resource
+    @Autowired(required = false)
     private QuestionsMapper questionsMapper;
 
     @Override
@@ -64,6 +65,11 @@ public class QuestionsServiceImpl implements IQuestionsService {
     }
 
     @Override
+    public SmdQuestions selectBySmdQuesId(SmdQuestions questions) {
+        return questionsMapper.selectBySmdQuesId(questions);
+    }
+
+    @Override
     public SmdOptions selectBySmdOpt(Integer questionId) {
 
         return questionsMapper.selectBySmdOpt(questionId);
@@ -79,6 +85,11 @@ public class QuestionsServiceImpl implements IQuestionsService {
     @Override
     public FspAnswer selectByFspOpt(Integer fspId) {
         return questionsMapper.selectByFspOpt(fspId);
+    }
+
+    @Override
+    public SmdQuestions selectBySmdQuesId(Integer id) {
+        return questionsMapper.selectBySmdQuesId(id);
     }
 
 

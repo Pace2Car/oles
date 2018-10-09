@@ -78,6 +78,7 @@
                                 </div>
                             </div>
                         </div>
+                            <input type="hidden" name="questionType" value="1">
                         <button class="btn btn-primary" type="submit">查询</button>
                         <button class="btn btn-white" type="reset">重置</button>
                     </form>
@@ -117,35 +118,41 @@
                                             <%--</tr>--%>
                                             <%--</thead>--%>
                                         <tbody>
-                                                <tr>
-                                                    <td>&nbsp;&nbsp;A.&nbsp;&nbsp;
-                                                        <span style="color: black">${optList.get(questions.id).optionA}</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&nbsp;&nbsp;B.&nbsp;&nbsp;
-                                                        <span style="color: black">${optList.get(questions.id).optionB}</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&nbsp;&nbsp;C.&nbsp;&nbsp;
-                                                        <span style="color: black">${optList.get(questions.id).optionC}</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&nbsp;&nbsp;D.&nbsp;&nbsp;
-                                                        <span style="color: black">${optList.get(questions.id).optionD}</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>答案是：&nbsp;&nbsp;&nbsp;
-                                                        <span style="color: black">${questions.correct}</span>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <button type="button" class="btn btn-w-m btn-info">
-                                                            更新
-                                                        </button>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <button type="button" class="btn btn-w-m btn-info">
-                                                            删除
-                                                        </button>
-                                                    </td>
-                                                </tr>
+                                        <tr>
+                                            <td>&nbsp;&nbsp;A.&nbsp;&nbsp;
+                                                <span style="color: black">${optList.get(questions.id).optionA}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;&nbsp;B.&nbsp;&nbsp;
+                                                <span style="color: black">${optList.get(questions.id).optionB}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;&nbsp;C.&nbsp;&nbsp;
+                                                <span style="color: black">${optList.get(questions.id).optionC}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;&nbsp;D.&nbsp;&nbsp;
+                                                <span style="color: black">${optList.get(questions.id).optionD}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>答案是：&nbsp;&nbsp;&nbsp;
+                                                <span style="color: black">${questions.correct}</span>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <button type="button" onclick="toUpdate(this)"
+                                                        class="btn btn-w-m btn-info"
+                                                        no="${questions.id}">
+                                                    更新
+                                                </button>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <button type="button" class="btn btn-w-m btn-info">
+                                                    删除
+                                                </button>
+                                            </td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -155,7 +162,7 @@
                     <div class="col-lg-12">
                         <ol class="breadcrumb">
                             <li style="margin-left: 37px">
-                                <input type="checkbox" name="id" value="" onclick="selectAll(this);">全选
+                                <input type="checkbox" name="singleId" value="${questions.id}" onclick="selectAll(this);">全选
                             </li>
                             <li style="">
                                 <span style="color: black">考卷编号：</span>
@@ -171,25 +178,25 @@
                         </ol>
                     </div>
                     <table class="table table-hover no-margins">
-                    <tr class="page-nav" style="text-align: center">
-                        <td colspan='5'>
-                            总记录：${ques.getTotal()} &nbsp;&nbsp;
-                            第${ques.getPageNum()}页/共${ques.getPages()}页
-                            &nbsp;&nbsp; &nbsp;&nbsp;
-                            <c:if test="${ques.getPageNum() gt 1}">
-                                <a href="ques/searchRadio?pageNum=1">第一页</a> &nbsp;
-                            </c:if>
-                            <c:if test="${ques.getPageNum() gt 1}">
-                                <a href="ques/searchRadio?pageNum=${ques.getPageNum()-1}">上一页</a>&nbsp;
-                            </c:if>
-                            <c:if test="${ques.getPageNum() lt ques.getPages()}">
-                                <a href="ques/searchRadio?pageNum=${ques.getPageNum()+1}">下一页</a>&nbsp;
-                            </c:if>
-                            <c:if test="${ques.getPageNum() lt ques.getPages()}">
-                                <a href="ques/searchRadio?pageNum=${ques.getPages()}">末页</a>&nbsp;
-                            </c:if>
-                        </td>
-                    </tr>
+                        <tr class="page-nav" style="text-align: center">
+                            <td colspan='5'>
+                                总记录：${ques.getTotal()} &nbsp;&nbsp;
+                                第${ques.getPageNum()}页/共${ques.getPages()}页
+                                &nbsp;&nbsp; &nbsp;&nbsp;
+                                <c:if test="${ques.getPageNum() gt 1}">
+                                    <a href="ques/searchRadio?pageNum=1">第一页</a> &nbsp;
+                                </c:if>
+                                <c:if test="${ques.getPageNum() gt 1}">
+                                    <a href="ques/searchRadio?pageNum=${ques.getPageNum()-1}">上一页</a>&nbsp;
+                                </c:if>
+                                <c:if test="${ques.getPageNum() lt ques.getPages()}">
+                                    <a href="ques/searchRadio?pageNum=${ques.getPageNum()+1}">下一页</a>&nbsp;
+                                </c:if>
+                                <c:if test="${ques.getPageNum() lt ques.getPages()}">
+                                    <a href="ques/searchRadio?pageNum=${ques.getPages()}">末页</a>&nbsp;
+                                </c:if>
+                            </td>
+                        </tr>
                     </table>
                 </div>
                 <div class="col-lg-2"></div>
@@ -201,7 +208,12 @@
     </div>
 
 </div>
-
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="myModal-content">
+        </div>
+    </div>
+</div>
 
 <!-- Mainly scripts -->
 <script src="js/jquery-2.2.4.js"></script>
@@ -278,8 +290,21 @@
             }, "json");
         });
     })
+
     function selectAll(checkbox) {
         $('input[type=checkbox]').prop('checked', $(checkbox).prop('checked'));
+    }
+
+    function toUpdate(e) {
+        $('#myModal-content').empty();
+        //console.log($(e).attr('empno'));
+
+        var no = $(e).attr('no');
+        //加载更新员工的信息表单，并加入到模态框的content部分
+        $.get('ques/toUpdateRadio/' + no, function (html) {
+            //console.dirxml(html)
+            $('#myModal-content').append(html);
+        }, 'html');
     }
 </script>
 

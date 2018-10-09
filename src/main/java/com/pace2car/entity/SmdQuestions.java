@@ -17,6 +17,10 @@ public class SmdQuestions implements Serializable {
     public SmdQuestions() {
     }
 
+    public SmdQuestions(Integer id) {
+        this.id = id;
+    }
+
     public SmdQuestions(Integer id, String question, String correct, Integer questionType, Integer techCateId, String descrpt, Date pubdate) {
         this.id = id;
         this.question = question;

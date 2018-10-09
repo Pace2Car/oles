@@ -9,10 +9,7 @@ import com.pace2car.service.ITechCategoryService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -129,7 +126,6 @@ public class QuestionsController {
         if (pageNum == null) {
             pageNum = 1;
         }
-        questions.setQuestionType(1);
         page = (Page<SmdQuestions>)questionsService.selectBySmdQues(questions, pageNum, 5);
         modelMap.addAttribute("ques", page);
         for (SmdQuestions h : page.getResult()) {
@@ -150,7 +146,6 @@ public class QuestionsController {
         if (pageNum == null) {
             pageNum = 1;
         }
-        questions.setQuestionType(2);
         page = (Page<SmdQuestions>)questionsService.selectBySmdQues(questions, pageNum, 5);
         modelMap.addAttribute("ques", page);
         for (SmdQuestions h : page.getResult()) {
@@ -172,7 +167,6 @@ public class QuestionsController {
         if (pageNum == null) {
             pageNum = 1;
         }
-        questions.setQuestionType(3);
         page = (Page<SmdQuestions>)questionsService.selectBySmdQues(questions, pageNum, 5);
         modelMap.addAttribute("ques", page);
         for (SmdQuestions h : page.getResult()) {
@@ -193,7 +187,6 @@ public class QuestionsController {
         if (pageNum == null) {
             pageNum = 1;
         }
-        questions.setQuestionType(5);
         page = (Page<FspQuestions>)questionsService.selectByFspQues(questions, pageNum, 5);
         modelMap.addAttribute("ques", page);
 //        for (FspQuestions h : page.getResult()) {
@@ -214,10 +207,16 @@ public class QuestionsController {
         if (pageNum == null) {
             pageNum = 1;
         }
-        questions.setQuestionType(6);
         page = (Page<FspQuestions>)questionsService.selectByFspQues(questions, pageNum, 5);
         modelMap.addAttribute("ques", page);
         return "searchProgram";
+    }
+
+    @RequestMapping("/toUpdateRadio/{id}")
+    public String toUpdate(@PathVariable Integer id, ModelMap modelMap,SmdQuestions questions) {
+        questionsService.selectBySmdQuesId(id);
+        modelMap.addAttribute("ques", questions);
+        return "updateRadio";
     }
 
 }

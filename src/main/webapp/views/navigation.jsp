@@ -70,7 +70,7 @@
                     </li>
                     <li>
                         <a href="javascript:void(0)">
-                            <span class="nav-label">新增试题</span> <span class="fa arrow"></span>
+                            <span class="nav-label">查询试题</span> <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-third-level collapse">
                             <li><a href="views/searchRadio.jsp">查询单选题</a></li>
