@@ -33,5 +33,5 @@ public interface IQuestionsService {
 
     FspAnswer selectByFspOpt(Integer fspId);
 
-    SmdQuestions selectBySmdQuesId(Integer id);
+    SmdQuestions selectBySmdQuesI(Integer id);
 }

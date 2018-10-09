@@ -171,8 +171,9 @@
             SELECT * FROM FSP_ANSWER WHERE FSP_ID=#{id}
         </select>
 
-    <select id="selectBySmdQuesId" resultMap="smdQuesResultMap" parameterType="integer">
-        SELECT * FROM SMD_QUESTIONS WHERE ID=#{id}
+    <select id="selectBySmdQuesI" parameterType="int" resultMap="smdQuesResultMap">
+        SELECT * FROM SMD_QUESTIONS
+        WHERE ID=#{id}
     </select>
 
 

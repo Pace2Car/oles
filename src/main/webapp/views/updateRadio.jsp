@@ -22,14 +22,14 @@
                     <div class="col-md-12 column text-center">
 
                         <form class="form-horizontal" role="form" id="updateForm" action="ques/updateRadio" method="post">
-                            <input type="hidden" id="id" name="id" value="${ques.id}">
+                            <input type="hidden" id="id" name="id" value="">
                             <div class="form-group">
                             </div>
                             <div class="form-group">
                                 <label for="userName" class="col-sm-2 control-label">题干</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="userName" name="userName"
-                                           value="${ques.question}"
+                                           value=""
                                            placeholder="请输入用户名">
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                 <label for="idCardNo" class="col-sm-2 control-label">身份证号码</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="idCardNo" name="idCardNo"
-                                           value="${user.idCardNo}"
+                                           value=""
                                            placeholder="请输入工作">
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                                 <label for="mobile" class="col-sm-2 control-label">手机</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="mobile" name="mobile"
-                                           value="${user.mobile}"
+                                           value=""
                                            placeholder="请输入经理">
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                                 <label for="homeTel" class="col-sm-2 control-label">家庭电话</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="homeTel" name="homeTel"
-                                           value="${user.homeTel}"
+                                           value=""
                                            placeholder="请输入奖金">
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                 <label for="homeAddr" class="col-sm-2 control-label">家庭地址</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="homeAddr" name="homeAddr"
-                                           value="${user.homeAddr}"
+                                           value=""
                                            placeholder="请输入工资">
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                             <div class="form-group">
                                 <label for="qq" class="col-sm-2 control-label">QQ</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="qq" name="qq" value="${user.qq}"
+                                    <input type="text" class="form-control" id="qq" name="qq" value=""
                                            placeholder="请输入奖金">
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                 <label for="email" class="col-sm-2 control-label">电子邮箱</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="email" name="email"
-                                           value="${user.email}"
+                                           value=""
                                            placeholder="请输入奖金">
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                 <label for="gender" class="col-sm-2 control-label">性别</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="gender" name="gender"
-                                           value="${user.gender}"
+                                           value=""
                                            placeholder="请输入奖金">
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                                 <label for="birthday" class="col-sm-2 control-label">出生日期</label>
                                 <div class="col-sm-5">
                                     <input type="date" class="form-control" id="birthday" name="birthday"
-                                           value="<fmt:formatDate value="${user.birthday}" pattern="yyyy-MM-dd"/>"
+                                           value="<fmt:formatDate value="" pattern="yyyy-MM-dd"/>"
                                     >
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                 <label for="nationPlace" class="col-sm-2 control-label">籍贯</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="nationPlace" name="nationPlace"
-                                           value="${user.nationPlace}"
+                                           value=""
                                            placeholder="请输入奖金">
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                                 <label for="marjor" class="col-sm-2 control-label">专业</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="marjor" name="marjor"
-                                           value="${user.marjor}"
+                                           value=""
                                            placeholder="请输入奖金">
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
                                 <label for="eduBackground" class="col-sm-2 control-label">最高学历</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="eduBackground" name="eduBackground"
-                                           value="${user.eduBackground}"
+                                           value=""
                                            placeholder="请输入奖金">
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                                 <label for="graduateSchool" class="col-sm-2 control-label">毕业院校</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="graduateSchool" name="graduateSchool"
-                                           value="${user.graduateSchool}"
+                                           value=""
                                            placeholder="请输入奖金">
                                 </div>
                             </div>

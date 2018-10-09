@@ -43,9 +43,9 @@
     </schema>
     <schema id="15" parent="1" name="OLTS">
       <ObjectId>64</ObjectId>
-      <IntrospectionTimestamp>2018-10-09.06:27:36</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2018-10-09.20:21:19</IntrospectionTimestamp>
       <CreatedTimestamp>2018-10-04.03:09:29</CreatedTimestamp>
-      <ModifiedTimestamp>2018-10-09.06:27:11</ModifiedTimestamp>
+      <ModifiedTimestamp>2018-10-09.20:21:17</ModifiedTimestamp>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -184,7 +184,7 @@
     <table id="47" parent="15" name="OLTS_USERS">
       <ObjectId>53768</ObjectId>
       <CreatedTimestamp>2018-10-04.03:09:33</CreatedTimestamp>
-      <ModifiedTimestamp>2018-10-04.03:09:33</ModifiedTimestamp>
+      <ModifiedTimestamp>2018-10-09.20:21:17</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="48" parent="15" name="SMD_OPTIONS">
@@ -330,7 +330,7 @@
     <column id="74" parent="44" name="STATUS">
       <Position>6</Position>
       <DataType>NUMBER(*)|0</DataType>
-      <DefaultExpression>0 </DefaultExpression>
+      <DefaultExpression>0</DefaultExpression>
     </column>
     <index id="75" parent="44" name="SYS_C005879">
       <ObjectId>53794</ObjectId>
@@ -558,6 +558,7 @@
     <column id="113" parent="47" name="USER_TYPE">
       <Position>12</Position>
       <DataType>NUMBER(2)|0</DataType>
+      <DefaultExpression>0</DefaultExpression>
     </column>
     <column id="114" parent="47" name="GENDER">
       <Position>13</Position>

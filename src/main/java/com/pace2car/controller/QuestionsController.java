@@ -213,9 +213,10 @@ public class QuestionsController {
     }
 
     @RequestMapping("/toUpdateRadio/{id}")
-    public String toUpdate(@PathVariable Integer id, ModelMap modelMap,SmdQuestions questions) {
-        questionsService.selectBySmdQuesId(id);
-        modelMap.addAttribute("ques", questions);
+    public String toUpdate(@PathVariable Integer id,ModelMap modelMap) {
+        SmdQuestions q = questionsService.selectBySmdQuesI(id);
+        System.out.println(q);
+        modelMap.addAttribute("quesId", q);
         return "updateRadio";
     }
 

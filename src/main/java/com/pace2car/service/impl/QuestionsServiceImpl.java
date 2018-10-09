@@ -88,8 +88,8 @@ public class QuestionsServiceImpl implements IQuestionsService {
     }
 
     @Override
-    public SmdQuestions selectBySmdQuesId(Integer id) {
-        return questionsMapper.selectBySmdQuesId(id);
+    public SmdQuestions selectBySmdQuesI(Integer id) {
+        return questionsMapper.selectBySmdQuesI(id);
     }
 
 
