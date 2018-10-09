@@ -72,7 +72,7 @@ public class ExamManageController {
             SmdOptions details = questionsService.selectBySmdOpt(options.getQuestionId());
             optList.put(question.getId(), details);
         }
-        modelMap.addAttribute("sm", optList);
+        modelMap.addAttribute("op", optList);
         modelMap.addAttribute("sq", sq);
         modelMap.addAttribute("exam", examNo);
         return "examinationPaper";

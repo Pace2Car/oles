@@ -59,32 +59,32 @@
                                     <tr>
                                         <td>
                                             <span class="input-group-addon" style="width: 38px;height: 34px">
-                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span style="color: blue">${sm.get(sq.id).optionA}</span>
+                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionA}</span>
                                             </span>
                                             </td>
                                         <td><span class="input-group-addon" style="width: 38px;height: 34px">
-                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;B.&nbsp;&nbsp;<span style="color: blue">${sm.get(sq.id).optionB}</span>
+                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;B.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionB}</span>
                                             </span></td>
                                         <td><span class="input-group-addon" style="width: 38px;height: 34px">
-                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;C.&nbsp;&nbsp;<span style="color: blue">${sm.get(sq.id).optionC}</span>
+                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;C.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionC}</span>
                                             </span></td>
                                         <td><span class="input-group-addon" style="width: 38px;height: 34px">
-                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;D.&nbsp;&nbsp;<span style="color: blue">${sm.get(sq.id).optionD}</span>
+                                            <input type="radio" name="correct_${sq.id}" value="A">&nbsp;&nbsp;D.&nbsp;&nbsp;<span style="color: blue">${op.get(sq.id).optionD}</span>
                                             </span></td>
                                     </tr>
                                 </c:when>
                                 <c:when test="${sq.questionType==2}">
                                     <label class="col-sm-1 control-label">A</label>
-                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="A" >${sm.get(sq.id).optionA}</span>
+                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="A" >${op.get(sq.id).optionA}</span>
                                         <input type="text" class="form-control" name="optionA"></div>
                                     <label class="col-sm-1 control-label">B</label>
-                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="B">${sm.get(sq.id).optionB}</span>
+                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="B">${op.get(sq.id).optionB}</span>
                                         <input type="text" class="form-control" name="optionB"></div>
                                     <label class="col-sm-1 control-label">C</label>
-                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="C">${sm.get(sq.id).optionC}</span>
+                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="C">${op.get(sq.id).optionC}</span>
                                         <input type="text" class="form-control" name="optionC"></div>
                                     <label class="col-sm-1 control-label">D</label>
-                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="D">${sm.get(sq.id).optionD}</span>
+                                    <div class="input-group m-b"><span class="input-group-addon"> <input type="checkbox" name="correct" value="D">${op.get(sq.id).optionD}</span>
                                         <input type="text" class="form-control" name="optionD"></div>
                                 </c:when>
                             </c:choose>
