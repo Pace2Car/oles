@@ -38,4 +38,6 @@ public interface QuestionsMapper {
                                        @Param("pageSize") int pageSize);
 
     FspAnswer selectByFspOpt(Integer fspId);
+
+    SmdQuestions selectBySmdQuesId(Integer id);
 }

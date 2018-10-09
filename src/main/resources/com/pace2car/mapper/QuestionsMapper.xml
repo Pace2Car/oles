@@ -137,7 +137,7 @@
                 AND QUESTION LIKE #{likeQuestion}
             </if>
             <if test="questions != null and questions.techCateId != null">AND TECH_CATE_ID=#{questions.techCateId}</if>
-            AND QUESTION_TYPE=#{questions.questionType}
+            <if test="questions != null and questions.questionType != null">AND QUESTION_TYPE=#{questions.questionType}</if>
         </where>
         ORDER BY ID
     </select>
@@ -170,6 +170,10 @@
     <select id="selectByFspOpt" parameterType="FspAnswer" resultMap="fspOptResultMap">
             SELECT * FROM FSP_ANSWER WHERE FSP_ID=#{id}
         </select>
+
+    <select id="selectBySmdQuesId" resultMap="smdQuesResultMap" parameterType="integer">
+        SELECT * FROM SMD_QUESTIONS WHERE ID=#{id}
+    </select>
 
 
 </mapper>
