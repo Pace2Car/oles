@@ -13,6 +13,17 @@
 
     <display-name>在线考试系统</display-name>
 
+    <!-- 配置登陆过滤器 -->
+    <filter>
+        <filter-name>login</filter-name>
+        <filter-class>com.pace2car.filter.LoginFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>login</filter-name>
+        <url-pattern>/views/*</url-pattern>
+    </filter-mapping>
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml</param-value>

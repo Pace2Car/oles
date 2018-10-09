@@ -34,11 +34,12 @@ public class UserController {
         OltsUsers usersInfo = userService.selectByLogin(user);
         logger.warn(usersInfo);
         logger.warn(usersInfo.getUserType());
-        if (usersInfo != null && usersInfo.getUserType() != null && usersInfo.getUserType() == 1) {
+        if (usersInfo.getUserType() != null && usersInfo.getUserType() == 1) {
             session.setAttribute("logUser", usersInfo);
             return "redirect:/views/index.jsp";
-        } else if (usersInfo != null && usersInfo.getUserType() == null || usersInfo.getUserType() != 1) {
-            return "redirect:/exam.jsp";
+        } else if (usersInfo.getUserType() == null || usersInfo.getUserType() != 1) {
+            session.setAttribute("logUser", usersInfo);
+            return "redirect:/views/examinationPaper.jsp";
         }
         return "redirect:/login.jsp";
     }

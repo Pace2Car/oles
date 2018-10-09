@@ -20,16 +20,10 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
         // 获取用户的登录信息
         OltsUsers logUser = (OltsUsers) request.getSession().getAttribute("logUser");
         logger.debug("登录的用户信息: " + logUser);
-        //未登录
-        if (logUser == null) {
-            logger.warn("未登录！请先登录！" );
-            response.sendRedirect(request.getContextPath() + "/login.jsp");
-            return false;
-        }
         //非管理员登录
-        if (logUser != null && logUser.getUserType() != 1) {
+        if (logUser != null && logUser.getUserType() == 0) {
             logger.warn("未授权访问！" );
-            response.sendRedirect(request.getContextPath() + "/exam.jsp");
+            response.sendRedirect(request.getContextPath() + "/views/examinationPaper.jsp");
             return false;
         }
         return super.preHandle(request, response, handler);
