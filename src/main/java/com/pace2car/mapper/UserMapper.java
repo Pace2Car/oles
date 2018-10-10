@@ -9,6 +9,20 @@ import java.util.List;
 @Repository
 public interface UserMapper {
 
+        int deleteByPrimaryKey(Integer id);
+
+        int insert(OltsUsers users);
+
+        int insertSelective(OltsUsers users);
+
+        OltsUsers selectByPrimaryKey(Integer id);
+
+        int updateByPrimaryKeySelective(OltsUsers users);
+
+        int updateByPrimaryKey(OltsUsers users);
+
+
+
     public OltsUsers selectByLogin(OltsUsers user);
 
     List<OltsUsers> selectByPage(@Param("users") OltsUsers users,

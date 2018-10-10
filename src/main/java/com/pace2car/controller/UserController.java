@@ -12,9 +12,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -30,7 +32,7 @@ public class UserController {
     IUserService userService;
 
     @RequestMapping("/login")
-    public String login(OltsUsers user, HttpSession session){
+    public String login(OltsUsers user, HttpSession session) {
         OltsUsers usersInfo = userService.selectByLogin(user);
         logger.warn(usersInfo);
         logger.warn(usersInfo.getUserType());
@@ -46,19 +48,19 @@ public class UserController {
 
 
     @RequestMapping("/list")
-    public String select(OltsUsers users, Integer pageNum, ModelMap modelMap){
+    public String select(OltsUsers users, Integer pageNum, ModelMap modelMap) {
         Page<OltsUsers> page = null;
         //查询
         if (pageNum == null) {
             pageNum = 1;
         }
-        page = (Page<OltsUsers>)userService.selectByPage(users, pageNum, 5);
+        page = (Page<OltsUsers>) userService.selectByPage(users, pageNum, 5);
         modelMap.addAttribute("page", page);
         return "userList";
     }
 
     @RequestMapping("/logOut")
-    public String logOut(HttpSession session){
+    public String logOut(HttpSession session) {
         session.removeAttribute("logUser");
         return "redirect:/login.jsp";
     }
@@ -71,8 +73,8 @@ public class UserController {
     }
 
 
-    @RequestMapping(value="/update", method = RequestMethod.POST)
-    public void update(OltsUsers users, RedirectAttributes redirectAttr, HttpSession session, HttpServletResponse response){
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public void update(OltsUsers users, RedirectAttributes redirectAttr, HttpSession session, HttpServletResponse response) {
         try {
             if (userService.update(users) > 0) {
                 response.getWriter().write("{\"actionFlag\": true}");
@@ -85,4 +87,13 @@ public class UserController {
         OltsUsers logUser = (OltsUsers) session.getAttribute("logUser");
         redirectAttr.addAttribute("userid", logUser.getId());
     }
+
+
+    @ResponseBody
+    @RequestMapping(value = "ajaxUpload.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public String ajaxUploadExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        return userService.ajaxUploadExcel(request, response);
+    }
 }
+
+
