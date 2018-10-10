@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +30,58 @@ public class ExamManageController {
 
     @Autowired(required = false)
     private IQuestionsService questionsService;
+
+    @RequestMapping("/searchExamination")
+    public String searchExamination(Examination examination, ModelMap modelMap, HttpSession session) {
+        List<Examination> examinations = examinationPaperService.selectAllExamination();
+        if (examination != null && examination.getExamNo() != null) {
+            Examination oldExamination = examinationPaperService.selectExaminationByExamNo(examination);
+            modelMap.addAttribute("oldExamination", oldExamination);
+            return "updateExamination";
+        }
+        modelMap.addAttribute("examinations", examinations);
+        session.setAttribute("examination", examination);
+        return "examinationList";
+    }
+
+    @RequestMapping("/updateExamination")
+    public void updateExamination(Examination examination, HttpServletResponse response) {
+        try {
+            if (examinationPaperService.updateExamination(examination) > 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/insertExamination")
+    public void insertExamination(Examination examination, HttpServletResponse response) {
+        try {
+            if (examinationPaperService.insertExamination(examination) > 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/deleteExamination")
+    public void deleteExamination(Examination examination, HttpServletResponse response) {
+        try {
+            if (examinationPaperService.deleteExamination(examination) > 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @RequestMapping("/subjectiveList")
     public String selectSubjective(ModelMap modelMap, FspAnswer fspAnswer) {

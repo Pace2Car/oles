@@ -357,6 +357,7 @@
                     setTimeout("$('#failAlert').hide()", 3000);
                 }
                 $('#insertModal').modal('hide');
+                location.reload();
             }, "json");
         });
     }

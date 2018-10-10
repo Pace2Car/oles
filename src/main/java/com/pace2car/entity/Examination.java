@@ -10,6 +10,7 @@ public class Examination implements Serializable {
 
     private Integer userId;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date examDate;
 
     private String singleId;

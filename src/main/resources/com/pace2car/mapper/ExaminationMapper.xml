@@ -19,6 +19,32 @@
         <result property="validFlag" column="VALID_FLAG"/>
     </resultMap>
 
+    <select id="selectAllExamination" resultMap="baseResultMap">
+        SELECT
+        e.EXAM_NO,
+        e.EXAM_DATE,
+        e.DESCRPT,
+        e.VALID_FLAG
+        FROM EXAMINATION e
+    </select>
+
+    <insert id="insertExamination" parameterType="Examination">
+        INSERT INTO EXAMINATION(EXAM_NO, EXAM_DATE, DESCRPT) VALUES (#{examNo}, #{examDate,jdbcType=TIMESTAMP}, #{descrpt,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="updateExamination" parameterType="Examination">
+        UPDATE EXAMINATION
+        <trim prefix="set" suffixOverrides=",">
+            <if test="examDate!=null">EXAM_DATE=#{examDate,jdbcType=TIMESTAMP},</if>
+            <if test="descrpt!=null">DESCRPT=#{descrpt,jdbcType=VARCHAR},</if>
+        </trim>
+        WHERE EXAM_NO=#{examNo,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteExamination" parameterType="Examination">
+        DELETE FROM EXAMINATION WHERE EXAM_NO=#{examNo,jdbcType=VARCHAR}
+    </delete>
+
     <select id="selectExaminationByExamNo" parameterType="Examination" resultMap="baseResultMap">
         SELECT
             e.EXAM_NO,
@@ -52,4 +78,5 @@
         FROM EXAMINATION e
         WHERE VALID_FLAG = 1
     </select>
+
 </mapper>
