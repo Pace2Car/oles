@@ -118,36 +118,39 @@ public class UserServiceImpl implements IUserService {
         for (int i = 0; i < listob.size(); i++) {
             List<Object> lo = listob.get(i);
             OltsUsers vo = new OltsUsers();
-            OltsUsers j = null;
-
-            try {
-                j = userMapper.selectByPrimaryKey(Integer.valueOf(String.valueOf(lo.get(0))));
-            } catch (NumberFormatException e) {
-                // TODO Auto-generated catch block
-                System.out.println("没有新增");
-            }
-            vo.setId(Integer.valueOf(String.valueOf(lo.get(0))));
-            vo.setStuNo(String.valueOf(lo.get(1)));
+//            OltsUsers j = null;
+//
+//            try {
+//                j = userMapper.selectByPrimaryKey(Integer.valueOf(String.valueOf(lo.get(0))));
+//            } catch (NumberFormatException e) {
+//                // TODO Auto-generated catch block
+//                System.out.println("没有新增");
+//            }
+//            vo.setId(Integer.valueOf(String.valueOf(lo.get(0))));
+//            vo.setStuNo(String.valueOf(lo.get(1)));
+            System.out.println(String.valueOf(lo.get(1)));
+            vo.setUserName(String.valueOf(lo.get(1)));
             vo.setIdCardNo(String.valueOf(lo.get(2)));
-            vo.setUserName(String.valueOf(lo.get(3)));
-            vo.setPassword(String.valueOf(lo.get(4)));
+            vo.setEduBackground(String.valueOf(lo.get(3)));
+            vo.setMarjor(String.valueOf(lo.get(4)));
+//            vo.setPassword(String.valueOf(lo.get(4)));
             vo.setMobile(String.valueOf(lo.get(5)));
-            vo.setHomeTel(String.valueOf(lo.get(6)));
-            vo.setHomeAddr(String.valueOf(lo.get(7)));
-            vo.setSchAddr(String.valueOf(lo.get(8)));
-            vo.setQq(String.valueOf(lo.get(9)));
-            vo.setEmail(String.valueOf(lo.get(10)));
-            vo.setUserType(Short.valueOf(String.valueOf(lo.get(11))));
-            vo.setGender(String.valueOf(lo.get(12)));
-            vo.setBirthday(Date.valueOf(String.valueOf(lo.get(13))));
-            vo.setNationPlace(String.valueOf(lo.get(14)));
-            vo.setMarjor(String.valueOf(lo.get(15)));
-            vo.setEduBackground(String.valueOf(lo.get(16)));
-            vo.setGraduateSchool(String.valueOf(lo.get(17)));
+//            vo.setHomeTel(String.valueOf(lo.get(6)));
+//            vo.setHomeAddr(String.valueOf(lo.get(7)));
+//            vo.setSchAddr(String.valueOf(lo.get(8)));
+            vo.setQq(String.valueOf(lo.get(6)));
+            vo.setPassword(String.valueOf(lo.get(7)));
+//            vo.setEmail(String.valueOf(lo.get(10)));
+//            vo.setUserType(Short.valueOf(String.valueOf(lo.get(11))));
+//            vo.setGender(String.valueOf(lo.get(12)));
+//            vo.setBirthday(Date.valueOf(String.valueOf(lo.get(13))));
+//            vo.setNationPlace(String.valueOf(lo.get(14)));
+//            vo.setGraduateSchool(String.valueOf(lo.get(17)));
 
-            if (j == null) {
+//            if (j == null) {
+                System.out.println(vo);
                 userMapper.insert(vo);
-            }
+//            }
 //            else {
 //                userMapper.updateByPrimaryKey(vo);
 //            }

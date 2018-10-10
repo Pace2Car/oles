@@ -32,7 +32,6 @@ public class OltsUsers implements Serializable{
 
     private String gender;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     private String nationPlace;
