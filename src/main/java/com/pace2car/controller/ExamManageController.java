@@ -71,21 +71,21 @@ public class ExamManageController {
             x+=1;
         }
 
-        int y=0;
+        int y=x;
         for (String m : mtpsId) {
             Integer i = Integer.valueOf(m);
             sq.add(questionsService.selectBySmdQuesId(new SmdQuestions(i)));
-            if (y>0){
+            if (y>x){
                 sq.get(y).setQuestionType(-1);
             }
             y+=1;
         }
 
-        int m=0;
+        int m=y;
         for (String t : tfId) {
             Integer i = Integer.valueOf(t);
             sq.add(questionsService.selectBySmdQuesId(new SmdQuestions(i)));
-            if (m>0){
+            if (m>y){
                 sq.get(m).setQuestionType(-2);
             }
             m+=1;
@@ -101,11 +101,11 @@ public class ExamManageController {
             n+=1;
         }
 
-        int l=0;
+        int l=n;
         for (String p : pgId) {
             Integer i = Integer.valueOf(p);
             fq.add(questionsService.selectByFspQuesId(new FspQuestions(i)));
-            if (l>0){
+            if (l>n){
                 fq.get(l).setQuestionType(-4);
             }
             l+=1;
