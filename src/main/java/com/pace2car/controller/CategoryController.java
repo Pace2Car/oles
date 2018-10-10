@@ -43,9 +43,6 @@ public class CategoryController {
             modelMap.addAttribute("oldCourse", oldCourse);
             return "updateCourse";
         }
-        if (courses == null || courses.getCourseName() == null) {
-            courses = (Courses) session.getAttribute("courses");
-        }
         page = coursesService.selectCourses(courses);
         modelMap.addAttribute("page", page);
         session.setAttribute("courses", courses);

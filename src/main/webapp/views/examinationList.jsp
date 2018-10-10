@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -7,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>课程列表-在线考试后台管理系统</title>
+    <title>试卷信息管理-在线考试后台管理系统</title>
 
     <link href="vendor/css/inspiniaen/datatables.min.css" rel="stylesheet">
     <link href="vendor/css/inspiniaen/style.css" rel="stylesheet">
@@ -38,16 +39,16 @@
         <!-- 顶部导航 -->
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>分类管理</h2>
+                <h2>试卷信息管理</h2>
                 <ol class="breadcrumb">
                     <li>
                         <a href="views/index.jsp">Home</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)">分类管理</a>
+                        <a href="javascript:void(0)">考试管理</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)">课程管理</a>
+                        <a href="javascript:void(0)">试卷信息管理</a>
                     </li>
                 </ol>
             </div>
@@ -63,7 +64,7 @@
                     <!-- main 在此显示内容 -->
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>课程信息表</h5>
+                            <h5>试卷信息表</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -82,7 +83,7 @@
                                     <a href="#" onclick="toInsert()"
                                        class="btn btn-success btn-sm" data-toggle="modal"
                                        data-target="#insertModal" data-backdrop="static">
-                                        <span class="fa fa-plus"></span> 新增课程</a>
+                                        <span class="fa fa-plus"></span> 新增试卷</a>
                                     <br/><br/>
                                 </div>
                             </div>
@@ -90,22 +91,35 @@
                                 <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="课程ID: activate to sort column descending" style="width: 238px;" aria-sort="ascending">课程ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="课程名称: activate to sort column ascending" style="width: 417px;">课程名称</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="试卷编号: activate to sort column descending" style="width: 238px;" aria-sort="ascending">试卷编号</th>
+                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="考试日期: activate to sort column ascending" style="width: 417px;">考试日期</th>
+                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="试卷描述: activate to sort column ascending" style="width: 377px;">试卷描述</th>
+                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="状态: activate to sort column ascending" style="width: 377px;">状态</th>
                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="操作: activate to sort column ascending" style="width: 377px;">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="course" items="${page}">
-                                            <tr id="tr_${course.id}" class="gradeA odd" role="row">
-                                                <td class="sorting_1">${course.id}</td>
-                                                <td>${course.courseName}</td>
+                                        <c:forEach var="examination" items="${examinations}">
+                                            <tr id="tr_${examination.examNo}" class="gradeA odd" role="row">
+                                                <td class="sorting_1">${examination.examNo}</td>
+                                                <td><fmt:formatDate value="${examination.examDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                                <td>${examination.descrpt}</td>
+                                                <td>
+                                                <c:choose>
+                                                    <c:when test="${examination.validFlag == 1}">
+                                                        可用
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        不可用
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                </td>
                                                 <td class="center">
-                                                    <a href="#" courseId="${course.id}" onclick="toUpdate(this)"
+                                                    <a href="#" examinationId="${examination.examNo}" onclick="toUpdate(this)"
                                                        class="btn btn-info btn-sm" data-toggle="modal"
                                                        data-target="#updateModal" data-backdrop="static">
                                                         <span class="glyphicon glyphicon-refresh"></span> 更新</a>
-                                                    <a href="#" courseId="${course.id}" onclick="toDelete(this)"
+                                                    <a href="#" examinationId="${examination.examNo}" onclick="toDelete(this)"
                                                        class="btn btn-danger btn-sm" data-toggle="modal"
                                                        data-target="#deleteModal" data-backdrop="static">
                                                         <span class="glyphicon glyphicon-trash"></span> 删除</a>
@@ -115,8 +129,10 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th rowspan="1" colspan="1">课程ID</th>
-                                            <th rowspan="1" colspan="1">课程名称</th>
+                                            <th rowspan="1" colspan="1">试卷编号</th>
+                                            <th rowspan="1" colspan="1">考试日期</th>
+                                            <th rowspan="1" colspan="1">试卷描述</th>
+                                            <th rowspan="1" colspan="1">状态</th>
                                             <th rowspan="1" colspan="1">操作</th>
                                         </tr>
                                     </tfoot>
@@ -203,16 +219,33 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
-                <h4 class="modal-title" > 添加课程 </h4>
+                <h4 class="modal-title" > 添加新的试卷 </h4>
             </div>
             <div class="modal-body text-center">
                 <form class="form-horizontal" role="form" id="insertForm">
                     <div class="form-inline">
+                        <input type="hidden" value="${logUser.id}" id="userId" name="userId">
                         <div class="form-group">
                             <div class="input-group input-group-md">
-                                <div class="input-group-addon" style="width: 96px;">课程名称：</div>
-                                <input style="width: 300px" type="text" class="form-control" id="courseName"
-                                       name="courseName" placeholder="请输入课程名">
+                                <div class="input-group-addon" style="width: 96px;">试卷编号：</div>
+                                <input style="width: 300px" type="text" class="form-control" id="examNo"
+                                       name="examNo" placeholder="试卷编号">
+                            </div>
+                        </div>
+                        <br/><br/>
+                        <div class="form-group">
+                            <div class="input-group input-group-md">
+                                <div class="input-group-addon" style="width: 96px;">考试日期：</div>
+                                <input style="width: 300px" type="date" class="form-control" id="examDate"
+                                       name="examDate" placeholder="考试日期">
+                            </div>
+                        </div>
+                        <br/><br/>
+                        <div class="form-group">
+                            <div class="input-group input-group-md">
+                                <div class="input-group-addon" style="width: 96px;">试卷描述：</div>
+                                <input style="width: 300px" type="text" class="form-control" id="descrpt"
+                                       name="descrpt" placeholder="试卷描述">
                             </div>
                         </div>
                     </div>
@@ -247,7 +280,7 @@
             </div>
             <div class="modal-body">
                 <span class="fa fa-exclamation fa-2x" style="color:#f15b6c;"></span>
-                您确定要删除编号为：<span id="courseMsg"></span> 的课程吗？
+                您确定要删除编号为：<span id="examinationMsg"></span> 的课程吗？
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -277,19 +310,18 @@
 
     function toUpdate(e) {
         $("#updateModal-content").empty();
-        var id = $(e).attr('courseId');
-        console.dirxml(id);
-        $.get("category/searchCourse?id=" + id, function (html) {
+        var id = $(e).attr('examinationId');
+        $.get("examManage/searchExamination?examNo=" + id, function (html) {
             $("#updateModal-content").append(html);
         }, "html");
     }
 
     function toDelete(e) {
-        var id = $(e).attr('courseId');
-        $("#courseMsg").text(id);
+        var id = $(e).attr('examinationId');
+        $("#examinationMsg").text(id);
         $("#deleteConfirmBtn").click(function () {
             $("#tr_" + id).remove();
-            $.get("category/deleteCourse?id=" + id, function (json) {
+            $.get("examManage/deleteExamination?examNo=" + id, function (json) {
                 if (json.actionFlag) {
                     $('#successAlert').show();
                     setTimeout("$('#successAlert').hide()", 3000);
@@ -304,9 +336,9 @@
 
     function toInsert() {
         $("#insertBtn").click(function () {
-            console.dirxml($("#courseName").val());
-            var course = $("#insertForm").serialize();
-            $.get("category/insertCourse", course, function (json) {
+            console.dirxml($("#userId").val());
+            var examination = $("#insertForm").serialize();
+            $.get("examManage/insertExamination", examination, function (json) {
                 if (json.actionFlag) {
                     $('#successAlert').show();
                     setTimeout("$('#successAlert').hide()", 3000);
