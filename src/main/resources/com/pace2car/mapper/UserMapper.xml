@@ -90,8 +90,8 @@
 
 
     <sql id="Base_Column_List">
-            id, stuNo, idCardNo, userName, password,mobile,homeTel,homeAddr,schAddr,qq,
-            email,userType,gender,birthday,nationPlace,marjor,eduBackground,graduateSchool
+            ID, STU_NO, ID_CARD_NO, USER_NAME, PASS_WORD,MOBILE,HOME_TEL,HOME_ADDR,SCH_ADDR,QQ,
+            EMAIL,USER_TYPE,GENDER,BIRTHDAY,NATION_PLACE,MARJOR,EDU_BACKGROUND,GRADUATE_SCHOOL
         </sql>
     <select id="selectByPrimaryKey" resultMap="baseResultMap" parameterType="java.lang.Integer">
         select
