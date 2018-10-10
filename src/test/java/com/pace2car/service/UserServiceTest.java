@@ -22,9 +22,5 @@ public class UserServiceTest {
     Date d = new Date();
 
 
-    @Test
-    public void selectById() throws Exception {
-        int i = this.userService.update(new OltsUsers(22,"123456789098765000","A1","B1","1",sdf.parse("2018-08-26")));
-        System.out.println(i);
-    }
+
 }

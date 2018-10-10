@@ -3,7 +3,7 @@ package com.pace2car.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class OltsUsers implements Serializable{
     private Integer id;
