@@ -21,7 +21,7 @@ import java.util.Map;
 public class ExaminationPaperServiceTest {
 
     @Autowired
-    private IExaminationPaperService examinationPaperService;
+    private IExaminationService examinationPaperService;
 
     @Autowired
     private IQuestionsService questionsService;
@@ -29,7 +29,7 @@ public class ExaminationPaperServiceTest {
     @Test
     public void testSelectCourses() {
         Map<Integer, SmdOptions> optList = new HashMap<>();
-        Examination examination = examinationPaperService.selectPaper();
+        Examination examination = examinationPaperService.selectCurrentExamination();
         String examNo = examination.getExamNo();
 
         String singleIds = examination.getSingleId();

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.pace2car.mapper.SubjectiveAnswerMapper">
+<mapper namespace="com.pace2car.mapper.FspAnswerMapper">
 
     <resultMap id="baseResultMap" type="FspAnswer">
         <id property="id" column="ID"/>

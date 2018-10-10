@@ -96,5 +96,8 @@ public class QuestionsServiceImpl implements IQuestionsService {
         return questionsMapper.selectBySmdQuesId(id);
     }
 
-
+    @Override
+    public int updateExam(Examination examination) {
+        return questionsMapper.updateExam(examination);
+    }
 }

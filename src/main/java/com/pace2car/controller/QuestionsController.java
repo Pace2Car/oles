@@ -4,17 +4,16 @@ package com.pace2car.controller;
 import com.github.pagehelper.Page;
 import com.pace2car.entity.*;
 import com.pace2car.service.ICoursesService;
+import com.pace2car.service.IExaminationService;
 import com.pace2car.service.IQuestionsService;
-import com.pace2car.service.ITechCategoryService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,10 +24,14 @@ public class QuestionsController {
 
     static Logger logger = Logger.getLogger(QuestionsController.class);
 
-    @Resource
+    @Autowired(required = false)
     IQuestionsService questionsService;
-    @Resource
+
+    @Autowired(required = false)
     ICoursesService coursesService;
+
+    @Autowired(required = false)
+    IExaminationService examinationService;
 
     @RequestMapping(value = {"/load_courses"}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
@@ -155,7 +158,7 @@ public class QuestionsController {
             optList.put(h.getId(),details);
         }
         modelMap.addAttribute("optList",optList);
-        return "searchJudge";
+        return "searchCheckBox";
     }
 
 
@@ -217,6 +220,62 @@ public class QuestionsController {
         questionsService.selectBySmdQuesId(id);
         modelMap.addAttribute("ques", questions);
         return "updateRadio";
+    }
+
+    @RequestMapping("/toAdd")
+    public void updateExam(Examination examination,HttpServletResponse response){
+        Examination exam = examinationService.selectExaminationByExamNo(examination);
+        if(examination.getSingleId() != null) {
+            String singleId = exam.getSingleId();
+            if (singleId == null) {
+                singleId = examination.getSingleId();
+            }else{
+                StringBuffer newSingleId = new StringBuffer(singleId);
+                newSingleId.append(","+examination.getSingleId());
+            }
+        }
+
+        if (examination.getMultipleId() != null) {
+            String multipleId = exam.getMultipleId();
+            if(multipleId != null) {
+                StringBuffer newMultipleId = new StringBuffer(multipleId);
+                newMultipleId.append(","+examination.getMultipleId());
+            }else {
+                multipleId=examination.getMultipleId();
+            }
+        }
+
+        if (examination.getTrueFalseId() != null) {
+            String trueFalseId = exam.getTrueFalseId();
+            if (trueFalseId == null) {
+                trueFalseId = examination.getTrueFalseId();
+            }else {
+                StringBuffer newTrueFalseId = new StringBuffer(trueFalseId);
+                newTrueFalseId.append(","+examination.getTrueFalseId());
+            }
+        }
+
+        if (examination.getSimpleAnwserId() != null) {
+            String simpleAnwserId = exam.getSimpleAnwserId();
+            if (simpleAnwserId == null) {
+                simpleAnwserId = examination.getSimpleAnwserId();
+            }else{
+                StringBuffer newSimpleAnwserId = new StringBuffer(simpleAnwserId);
+                newSimpleAnwserId.append(","+examination.getSimpleAnwserId());
+            }
+        }
+
+        try {
+            int i = questionsService.updateExam(examination);
+            if (
+                i > 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

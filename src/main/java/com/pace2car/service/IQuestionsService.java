@@ -36,4 +36,6 @@ public interface IQuestionsService {
     FspAnswer selectByFspOpt(Integer fspId);
 
     SmdQuestions selectBySmdQuesId(Integer id);
+
+    int updateExam(Examination examination);
 }

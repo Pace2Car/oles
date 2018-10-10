@@ -42,4 +42,6 @@ public interface QuestionsMapper {
     SmdQuestions selectBySmdQuesId(Integer id);
 
     FspQuestions selectByFspQuesId(@Param("fspQuestions") FspQuestions fspQuestions);
+
+    int updateExam(Examination examination);
 }
