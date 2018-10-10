@@ -30,44 +30,6 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="descrpt" class="col-sm-2 control-label">问题描述</label>
-                                <div class="col-sm-5">
-                                    <textarea class="form-control" rows="8" name="descrpt" id="descrpt">${quesId.descrpt}</textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="optionA" class="col-sm-2 control-label">选项A</label>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="optionA" name="optionA"
-                                           value="${optId.optionA}"
-                                           placeholder="请输入选项A">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="optionB" class="col-sm-2 control-label">选项B</label>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="optionB" name="optionB"
-                                           value="${optId.optionB}"
-                                           placeholder="请输入选项B">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="optionC" class="col-sm-2 control-label">选项C</label>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="optionC" name="optionC"
-                                           value="${optId.optionC}"
-                                           placeholder="请输入选项C">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="optionD" class="col-sm-2 control-label">选项D</label>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="optionD" name="optionD"
-                                           value="${optId.optionD}"
-                                           placeholder="请输入选项D">
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label for="correct" class="col-sm-2 control-label">正确答案</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="correct" name="correct"
@@ -109,12 +71,8 @@
 //             if (updateForm.checkValidity()) {
             var data = $('#updateForm').serialize();
 
-            $.post('ques/updateSmd', data, function (json) {
+            $.post('ques/updateJugde', data, function (json) {
                 $('#ques_' + $('#id').val()).text($('#question').val());
-                $('#trA_' + $('#id').val() + ' span').text($('#optionA').val());
-                $('#trB_' + $('#id').val() + ' span').text($('#optionB').val());
-                $('#trC_' + $('#id').val() + ' span').text($('#optionC').val());
-                $('#trD_' + $('#id').val() + ' span').text($('#optionD').val());
                 $('#trR_' + $('#id').val() + ' span').text($('#correct').val());
                 if (json.actionFlag) {
                     $('#myModal').modal('hide');

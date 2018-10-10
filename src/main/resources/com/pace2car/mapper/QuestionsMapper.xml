@@ -137,6 +137,17 @@
         WHERE EXAM_NO=#{examNo}
     </update>
 
+    <delete id="deleteSmdQues" parameterType="SmdQuestions">
+        DELETE FROM SMD_QUESTIONS WHERE ID=#{id,jdbcType=NUMERIC}
+    </delete>
+
+    <delete id="deleteSmdOpt" parameterType="SmdOptions">
+        DELETE FROM SMD_OPTIONS WHERE QUESTION_ID=#{id,jdbcType=NUMERIC}
+    </delete>
+
+    <delete id="deleteFspQues" parameterType="FspQuestions">
+        DELETE FROM FSP_QUESTIONS WHERE ID=#{id,jdbcType=NUMERIC}
+    </delete>
 
     <select id="selectTech" resultType="TechCategory" resultMap="techResultMap">
         SELECT * FROM TECH_CATEGORY WHERE COURSE_ID=#{id}
@@ -185,13 +196,46 @@
             SELECT * FROM FSP_ANSWER WHERE FSP_ID=#{id}
         </select>
 
+    <select id="selectBySmdQuesI" parameterType="int" resultMap="smdQuesResultMap">
+        SELECT * FROM SMD_QUESTIONS
+        WHERE ID=#{id}
+    </select>
 
-    <select id="selectByFspQuesId" parameterType="com.pace2car.entity.FspQuestions" resultMap="fspQuesResultMap">
+    <select id="selectByFspQuesI" parameterType="int" resultMap="fspQuesResultMap">
         SELECT * FROM FSP_QUESTIONS
-        <where>
-            <if test="fspQuestions != null and fspQuestions.id != null">AND ID=#{fspQuestions.id}</if>
-        </where>
+        WHERE ID=#{id}
     </select>
 
 
+    <update id="updateSmdQues" parameterType="SmdQuestions">
+        UPDATE SMD_QUESTIONS
+        <set>
+            <if test="question != null">QUESTION=#{question},</if>
+            <if test="correct != null">CORRECT=#{correct},</if>
+            <if test="descrpt != null">DESCRPT=#{descrpt},</if>
+        </set>
+        WHERE ID=#{id}
+    </update>
+
+    <update id="updateSmdOpt" parameterType="SmdOptions">
+        UPDATE SMD_OPTIONS
+        <set>
+            <if test="optionA != null">OPTION_A=#{optionA},</if>
+            <if test="optionB != null">OPTION_B=#{optionB},</if>
+            <if test="optionC != null">OPTION_C=#{optionC},</if>
+            <if test="optionD != null">OPTION_D=#{optionD},</if>
+            <if test="optionE != null">OPTION_E=#{optionE},</if>
+        </set>
+        WHERE QUESTION_ID=#{id}
+    </update>
+
+
+    <update id="updateFspQues" parameterType="FspQuestions">
+        UPDATE FSP_QUESTIONS
+        <set>
+            <if test="question != null">QUESTION=#{question},</if>
+            <if test="stdAnswer != null">STD_ANSWER=#{stdAnswer},</if>
+        </set>
+        WHERE ID=#{id}
+    </update>
 </mapper>

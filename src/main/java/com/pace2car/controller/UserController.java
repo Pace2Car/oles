@@ -84,6 +84,5 @@ public class UserController {
         }
         OltsUsers logUser = (OltsUsers) session.getAttribute("logUser");
         redirectAttr.addAttribute("userid", logUser.getId());
-
     }
 }

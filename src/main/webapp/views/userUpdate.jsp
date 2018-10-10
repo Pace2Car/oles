@@ -38,7 +38,7 @@
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="idCardNo" name="idCardNo"
                                            value="${user.idCardNo}"
-                                           placeholder="请输入工作">
+                                           placeholder="请输入身份证号码">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -46,7 +46,7 @@
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="mobile" name="mobile"
                                            value="${user.mobile}"
-                                           placeholder="请输入经理">
+                                           placeholder="请输入手机">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -54,7 +54,7 @@
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="homeTel" name="homeTel"
                                            value="${user.homeTel}"
-                                           placeholder="请输入奖金">
+                                           placeholder="请输入家庭电话">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -62,7 +62,7 @@
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="homeAddr" name="homeAddr"
                                            value="${user.homeAddr}"
-                                           placeholder="请输入工资">
+                                           placeholder="请输入家庭地址">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -70,7 +70,7 @@
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="schAddr" name="schAddr"
                                            value="${user.schAddr}"
-                                           placeholder="请输入奖金">
+                                           placeholder="请输入学校地址">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -85,7 +85,7 @@
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="email" name="email"
                                            value="${user.email}"
-                                           placeholder="请输入奖金">
+                                           placeholder="请输入电子邮箱">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -93,7 +93,7 @@
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="gender" name="gender"
                                            value="${user.gender}"
-                                           placeholder="请输入奖金">
+                                           placeholder="请输入性别">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -109,7 +109,7 @@
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="nationPlace" name="nationPlace"
                                            value="${user.nationPlace}"
-                                           placeholder="请输入奖金">
+                                           placeholder="请输入籍贯">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -117,7 +117,7 @@
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="marjor" name="marjor"
                                            value="${user.marjor}"
-                                           placeholder="请输入奖金">
+                                           placeholder="请输入专业">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -125,7 +125,7 @@
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="eduBackground" name="eduBackground"
                                            value="${user.eduBackground}"
-                                           placeholder="请输入奖金">
+                                           placeholder="请输入最高学历">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -133,7 +133,7 @@
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="graduateSchool" name="graduateSchool"
                                            value="${user.graduateSchool}"
-                                           placeholder="请输入奖金">
+                                           placeholder="请输入毕业院校">
                                 </div>
                             </div>
                             <%--<div class="form-group">--%>

@@ -39,9 +39,22 @@ public interface QuestionsMapper {
 
     FspAnswer selectByFspOpt(Integer fspId);
 
-    SmdQuestions selectBySmdQuesId(Integer id);
+    SmdQuestions selectBySmdQuesI(Integer id);
 
     FspQuestions selectByFspQuesId(@Param("fspQuestions") FspQuestions fspQuestions);
 
     int updateExam(Examination examination);
+    int updateSmdQues(SmdQuestions questions);
+
+    int updateSmdOpt(SmdOptions options);
+
+    FspQuestions selectByFspQuesI(Integer id);
+
+    int updateFspQues(FspQuestions questions);
+
+    int deleteSmdQues(SmdQuestions questions);
+
+    int deleteSmdOpt(Integer id);
+
+    int deleteFspQues(FspQuestions questions);
 }

@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -216,9 +218,11 @@ public class QuestionsController {
     }
 
     @RequestMapping("/toUpdateRadio/{id}")
-    public String toUpdate(@PathVariable Integer id, ModelMap modelMap,SmdQuestions questions) {
-        questionsService.selectBySmdQuesId(id);
-        modelMap.addAttribute("ques", questions);
+    public String toUpdateRadio(@PathVariable Integer id,ModelMap modelMap) {
+        SmdQuestions q = questionsService.selectBySmdQuesI(id);
+        SmdOptions o = questionsService.selectBySmdOpt(id);
+        modelMap.addAttribute("quesId", q);
+        modelMap.addAttribute("optId", o);
         return "updateRadio";
     }
 
@@ -278,5 +282,107 @@ public class QuestionsController {
         }
     }
 
+    @RequestMapping("/toUpdateCheckBox/{id}")
+    public String toUpdateCheckBox(@PathVariable Integer id,ModelMap modelMap) {
+        SmdQuestions q = questionsService.selectBySmdQuesI(id);
+        SmdOptions o = questionsService.selectBySmdOpt(id);
+        modelMap.addAttribute("quesId", q);
+        modelMap.addAttribute("optId", o);
+        return "updateCheckBox";
+    }
+
+    @RequestMapping("/toUpdateJudge/{id}")
+    public String toUpdateJudge(@PathVariable Integer id,ModelMap modelMap) {
+        SmdQuestions q = questionsService.selectBySmdQuesI(id);
+        modelMap.addAttribute("quesId", q);
+        return "updateJudge";
+    }
+
+    @RequestMapping("/toUpdateShort/{id}")
+    public String toUpdateShort(@PathVariable Integer id,ModelMap modelMap) {
+        FspQuestions q = questionsService.selectByFspQuesI(id);
+        modelMap.addAttribute("quesId", q);
+        return "updateShort";
+    }
+
+    @RequestMapping("/toUpdateProgram/{id}")
+    public String toUpdateProgram(@PathVariable Integer id,ModelMap modelMap) {
+        FspQuestions q = questionsService.selectByFspQuesI(id);
+        modelMap.addAttribute("quesId", q);
+        return "updateProgram";
+    }
+
+    @RequestMapping(value="/updateSmd", method = RequestMethod.POST)
+    public void updateSmd(SmdQuestions questions,SmdOptions options,HttpServletResponse response){
+        try {
+            int i = questionsService.updateSmdQues(questions);
+            options.setQuestionId(questions.getId());
+            i =i + questionsService.updateSmdOpt(options);
+            if (i >= 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value="/updateJugde", method = RequestMethod.POST)
+    public void updateJugde(SmdQuestions questions,HttpServletResponse response){
+        try {
+            int i = questionsService.updateSmdQues(questions);
+            if (i >= 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value="/updateFsp", method = RequestMethod.POST)
+    public void updateFsp(FspQuestions questions,HttpServletResponse response){
+        try {
+            int i = questionsService.updateFspQues(questions);
+            if (i > 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value="/deleteSmd", method = RequestMethod.GET)
+    public void deleteSmd(SmdQuestions questions, Integer id,HttpServletResponse response){
+        try {
+            int i = questionsService.deleteSmdOpt(id);
+            i += questionsService.deleteSmdQues(questions);
+            if (i > 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value="/deleteFsp", method = RequestMethod.GET)
+    public void deleteFsp(FspQuestions questions, HttpServletResponse response){
+        try {
+            int i = questionsService.deleteFspQues(questions);
+            if (i > 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
