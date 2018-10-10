@@ -1,6 +1,5 @@
 package com.pace2car.service;
 
-import com.pace2car.entity.Courses;
 import com.pace2car.entity.FspAnswer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +15,7 @@ import java.util.List;
 public class SubjectiveAnswerServiceTest {
 
     @Autowired
-    private ISubjectiveAnswerService subjectiveAnswerService;
+    private IFspAnswerService subjectiveAnswerService;
 
     @Test
     public void testSelectCourses() {

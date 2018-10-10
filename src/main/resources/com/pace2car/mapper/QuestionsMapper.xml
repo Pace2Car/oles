@@ -123,6 +123,20 @@
         , 6, #{techCateId,jdbcType=INTEGER}, #{descrpt,jdbcType=VARCHAR})
     </insert>
 
+    <update id="updateExam" parameterType="Examination">
+        UPDATE EXAMINATION
+        <trim prefix="set" suffixOverrides=",">
+            <if test="singleId!=null">SINGLE_ID=#{singleId},</if>
+            <if test="multipleId!=null">MULTIPLE_ID=#{multipleId},</if>
+            <if test="trueFalseId!=null">TRUE_FALSE_ID=#{trueFalseId},</if>
+            <if test="simpleAnwserId!=null">SIMPLE_ANWSER_ID=#{simpleAnwserId},</if>
+            <if test="programId!=null">PROGRAM_ID=#{programId},</if>
+            <if test="descrpt!=null">DESCRPT=#{descrpt},</if>
+            <if test="validFlag!=null">VALID_FLAG=#{validFlag},</if>
+        </trim>
+        WHERE EXAM_NO=#{examNo}
+    </update>
+
     <delete id="deleteSmdQues" parameterType="SmdQuestions">
         DELETE FROM SMD_QUESTIONS WHERE ID=#{id,jdbcType=NUMERIC}
     </delete>

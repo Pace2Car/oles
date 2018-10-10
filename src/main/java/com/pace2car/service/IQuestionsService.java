@@ -35,19 +35,8 @@ public interface IQuestionsService {
 
     FspAnswer selectByFspOpt(Integer fspId);
 
-    SmdQuestions selectBySmdQuesI(Integer id);
 
-    int updateSmdQues(SmdQuestions questions);
+    int updateExam(Examination examination);
 
-    int updateSmdOpt(SmdOptions options);
 
-    FspQuestions selectByFspQuesI(Integer id);
-
-    int updateFspQues(FspQuestions questions);
-
-    int deleteSmdQues(SmdQuestions questions);
-
-    int deleteSmdOpt(Integer id);
-
-    int deleteFspQues(FspQuestions questions);
 }

@@ -154,13 +154,13 @@
                     <div class="col-lg-12">
                         <ol class="breadcrumb">
                             <li style="margin-left: 37px">
-                                <input type="checkbox" name="id" value="" onclick="selectAll(this);">全选
+                                <input type="checkbox" name="" value="" onclick="selectAll(this);">全选
                             </li>
                             <li style="">
                                 <span style="color: black">考卷编号：</span>
-                                <input type="text" name="" id="">
+                                <input type="text" name="examNo" id="examNo">
                                 <input type="button" value="选择">
-                                <button class="btn btn-primary" type="submit">加入试卷</button>
+                                <button class="btn btn-primary" type="button" onclick="add()">加入试卷</button>
                             </li>
                         </ol>
                     </div>
@@ -197,6 +197,17 @@
         </div>
         <!-- footer 底部包装区域 -->
         <%@include file="footer.jsp" %>
+        <%--成功提示模态框--%>
+        <div id="successAlert" class="alert alert-success col-md-2"
+             style="margin-right: 5px;position: fixed; right: 5px; bottom: 5px;">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>成功！</strong>操作成功！
+        </div>
+        <div id="failAlert" class="alert alert-warning col-md-2"
+             style="margin-right: 5px;position: fixed; right: 5px; bottom: 5px;">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong style="color: red">失败！</strong>操作失败！
+        </div>
     </div>
 </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -290,6 +301,11 @@
 </script>
 <script>
     $(function () {
+        $('#successAlert').hide();
+        $('#failAlert').hide();
+    });
+
+    $(function () {
         // 加载课程名下拉列表
         $.get("ques/load_courses", function (resp) {
             // console.log(resp);
@@ -347,6 +363,28 @@
             }, "json");
         });
     }
+
+    function add(){
+        obj = document.getElementsByName("id");
+        check_val = [];
+        for(k in obj){
+            if(obj[k].checked)
+                check_val.push(obj[k].value);
+        }
+        value = check_val.join(",");
+        console.dirxml(check_val);
+        var examNo = $('#examNo').val();
+        console.dirxml(examNo);
+        $.post("ques/toAdd?examNo="+examNo+"&simpleAnwserId="+value,function (json) {
+            if (json.actionFlag) {
+                $('#successAlert').show();
+                setTimeout("$('#successAlert').hide()", 3000);
+            } else {
+                $('#failAlert').show();
+                setTimeout("$('#failAlert').hide()", 3000);
+            }
+        },"json")
+    };
 </script>
 
 </body>

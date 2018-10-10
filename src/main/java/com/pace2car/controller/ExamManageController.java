@@ -2,9 +2,9 @@ package com.pace2car.controller;
 
 
 import com.pace2car.entity.*;
-import com.pace2car.service.IExaminationPaperService;
+import com.pace2car.service.IExaminationService;
+import com.pace2car.service.IFspAnswerService;
 import com.pace2car.service.IQuestionsService;
-import com.pace2car.service.ISubjectiveAnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,10 +20,10 @@ import java.util.Map;
 public class ExamManageController {
 
     @Autowired(required = false)
-    private ISubjectiveAnswerService subjectiveAnswerService;
+    private IFspAnswerService subjectiveAnswerService;
 
     @Autowired(required = false)
-    private IExaminationPaperService examinationPaperService;
+    private IExaminationService examinationPaperService;
 
     @Autowired(required = false)
     private IQuestionsService questionsService;
@@ -40,7 +40,7 @@ public class ExamManageController {
     @RequestMapping("/examinationPaper")
     public String selectPaper(ModelMap modelMap, SmdOptions options) {
         Map<Integer, SmdOptions> optList = new HashMap<>();
-        Examination examination = examinationPaperService.selectPaper();
+        Examination examination = examinationPaperService.selectCurrentExamination();
 
         List<SmdQuestions> sq = new ArrayList<>();
 

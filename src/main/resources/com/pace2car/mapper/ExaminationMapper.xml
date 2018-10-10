@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.pace2car.mapper.ExaminationPaperMapper">
+<mapper namespace="com.pace2car.mapper.ExaminationMapper">
 
     <resultMap id="baseResultMap" type="Examination">
         <id property="examNo" column="EXAM_NO"/>
@@ -17,13 +17,9 @@
         <result property="programId" column="PROGRAM_ID"/>
         <result property="descrpt" column="DESCRPT"/>
         <result property="validFlag" column="VALID_FLAG"/>
-        <association property="oltsUsers" javaType="OltsUsers" columnPrefix="o_">
-            <id property="id" column="ID"/>
-            <result property="userName" column="USER_NAME"/>
-        </association>
     </resultMap>
 
-    <select id="selectPaper" resultMap="baseResultMap">
+    <select id="selectExaminationByExamNo" parameterType="Examination" resultMap="baseResultMap">
         SELECT
             e.EXAM_NO,
             e.USER_ID,
@@ -35,11 +31,25 @@
             e.SIMPLE_ANWSER_ID,
             e.PROGRAM_ID,
             e.DESCRPT,
-            e.VALID_FLAG,
-            os.ID o_ID,
-            os.USER_NAME o_USER_NAME
+            e.VALID_FLAG
         FROM EXAMINATION e
-        INNER JOIN OLTS_USERS os ON e.USER_ID = os.ID
+        WHERE e.EXAM_NO=#{examNo,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectCurrentExamination" resultMap="baseResultMap">
+        SELECT
+        e.EXAM_NO,
+        e.USER_ID,
+        e.EXAM_DATE,
+        e.SINGLE_ID,
+        e.MULTIPLE_ID,
+        e.TRUE_FALSE_ID,
+        e.FILL_IN_GAPS_ID,
+        e.SIMPLE_ANWSER_ID,
+        e.PROGRAM_ID,
+        e.DESCRPT,
+        e.VALID_FLAG
+        FROM EXAMINATION e
         WHERE VALID_FLAG = 1
     </select>
 </mapper>

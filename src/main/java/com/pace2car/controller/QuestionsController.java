@@ -4,19 +4,18 @@ package com.pace2car.controller;
 import com.github.pagehelper.Page;
 import com.pace2car.entity.*;
 import com.pace2car.service.ICoursesService;
+import com.pace2car.service.IExaminationService;
 import com.pace2car.service.IQuestionsService;
-import com.pace2car.service.ITechCategoryService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +26,14 @@ public class QuestionsController {
 
     static Logger logger = Logger.getLogger(QuestionsController.class);
 
-    @Resource
+    @Autowired(required = false)
     IQuestionsService questionsService;
-    @Resource
+
+    @Autowired(required = false)
     ICoursesService coursesService;
+
+    @Autowired(required = false)
+    IExaminationService examinationService;
 
     @RequestMapping(value = {"/load_courses"}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
@@ -214,109 +217,54 @@ public class QuestionsController {
         return "searchProgram";
     }
 
-    @RequestMapping("/toUpdateRadio/{id}")
-    public String toUpdateRadio(@PathVariable Integer id,ModelMap modelMap) {
-        SmdQuestions q = questionsService.selectBySmdQuesI(id);
-        SmdOptions o = questionsService.selectBySmdOpt(id);
-        modelMap.addAttribute("quesId", q);
-        modelMap.addAttribute("optId", o);
-        return "updateRadio";
-    }
 
-    @RequestMapping("/toUpdateCheckBox/{id}")
-    public String toUpdateCheckBox(@PathVariable Integer id,ModelMap modelMap) {
-        SmdQuestions q = questionsService.selectBySmdQuesI(id);
-        SmdOptions o = questionsService.selectBySmdOpt(id);
-        modelMap.addAttribute("quesId", q);
-        modelMap.addAttribute("optId", o);
-        return "updateCheckBox";
-    }
-
-    @RequestMapping("/toUpdateJudge/{id}")
-    public String toUpdateJudge(@PathVariable Integer id,ModelMap modelMap) {
-        SmdQuestions q = questionsService.selectBySmdQuesI(id);
-        modelMap.addAttribute("quesId", q);
-        return "updateJudge";
-    }
-
-    @RequestMapping("/toUpdateShort/{id}")
-    public String toUpdateShort(@PathVariable Integer id,ModelMap modelMap) {
-        FspQuestions q = questionsService.selectByFspQuesI(id);
-        modelMap.addAttribute("quesId", q);
-        return "updateShort";
-    }
-
-    @RequestMapping("/toUpdateProgram/{id}")
-    public String toUpdateProgram(@PathVariable Integer id,ModelMap modelMap) {
-        FspQuestions q = questionsService.selectByFspQuesI(id);
-        modelMap.addAttribute("quesId", q);
-        return "updateProgram";
-    }
-
-    @RequestMapping(value="/updateSmd", method = RequestMethod.POST)
-    public void updateSmd(SmdQuestions questions,SmdOptions options,HttpServletResponse response){
-        try {
-            int i = questionsService.updateSmdQues(questions);
-            options.setQuestionId(questions.getId());
-            i =i + questionsService.updateSmdOpt(options);
-            if (i >= 0) {
-                response.getWriter().write("{\"actionFlag\": true}");
-            } else {
-                response.getWriter().write("{\"actionFlag\": false}");
+    @RequestMapping("/toAdd")
+    public void updateExam(Examination examination,HttpServletResponse response){
+        Examination exam = examinationService.selectExaminationByExamNo(examination);
+        if(examination.getSingleId() != null) {
+            String singleId = exam.getSingleId();
+            if (singleId == null) {
+                singleId = examination.getSingleId();
+            }else{
+                StringBuffer newSingleId = new StringBuffer(singleId);
+                newSingleId.append(","+examination.getSingleId());
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-    }
 
-    @RequestMapping(value="/updateJugde", method = RequestMethod.POST)
-    public void updateJugde(SmdQuestions questions,HttpServletResponse response){
-        try {
-            int i = questionsService.updateSmdQues(questions);
-            if (i >= 0) {
-                response.getWriter().write("{\"actionFlag\": true}");
-            } else {
-                response.getWriter().write("{\"actionFlag\": false}");
+        if (examination.getMultipleId() != null) {
+            String multipleId = exam.getMultipleId();
+            if(multipleId != null) {
+                StringBuffer newMultipleId = new StringBuffer(multipleId);
+                newMultipleId.append(","+examination.getMultipleId());
+            }else {
+                multipleId=examination.getMultipleId();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-    }
 
-    @RequestMapping(value="/updateFsp", method = RequestMethod.POST)
-    public void updateFsp(FspQuestions questions,HttpServletResponse response){
-        try {
-            int i = questionsService.updateFspQues(questions);
-            if (i > 0) {
-                response.getWriter().write("{\"actionFlag\": true}");
-            } else {
-                response.getWriter().write("{\"actionFlag\": false}");
+        if (examination.getTrueFalseId() != null) {
+            String trueFalseId = exam.getTrueFalseId();
+            if (trueFalseId == null) {
+                trueFalseId = examination.getTrueFalseId();
+            }else {
+                StringBuffer newTrueFalseId = new StringBuffer(trueFalseId);
+                newTrueFalseId.append(","+examination.getTrueFalseId());
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-    }
 
-    @RequestMapping(value="/deleteSmd", method = RequestMethod.GET)
-    public void deleteSmd(SmdQuestions questions, Integer id,HttpServletResponse response){
-        try {
-            int i = questionsService.deleteSmdOpt(id);
-            i += questionsService.deleteSmdQues(questions);
-            if (i > 0) {
-                response.getWriter().write("{\"actionFlag\": true}");
-            } else {
-                response.getWriter().write("{\"actionFlag\": false}");
+        if (examination.getSimpleAnwserId() != null) {
+            String simpleAnwserId = exam.getSimpleAnwserId();
+            if (simpleAnwserId == null) {
+                simpleAnwserId = examination.getSimpleAnwserId();
+            }else{
+                StringBuffer newSimpleAnwserId = new StringBuffer(simpleAnwserId);
+                newSimpleAnwserId.append(","+examination.getSimpleAnwserId());
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-    }
 
-    @RequestMapping(value="/deleteFsp", method = RequestMethod.GET)
-    public void deleteFsp(FspQuestions questions, HttpServletResponse response){
         try {
-            int i = questionsService.deleteFspQues(questions);
-            if (i > 0) {
+            int i = questionsService.updateExam(examination);
+            if (
+                i > 0) {
                 response.getWriter().write("{\"actionFlag\": true}");
             } else {
                 response.getWriter().write("{\"actionFlag\": false}");

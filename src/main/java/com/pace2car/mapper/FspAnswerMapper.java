@@ -4,6 +4,6 @@ import com.pace2car.entity.FspAnswer;
 
 import java.util.List;
 
-public interface SubjectiveAnswerMapper {
+public interface FspAnswerMapper {
     List<FspAnswer> selectAnswer(FspAnswer fspAnswer);
 }
