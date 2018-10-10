@@ -73,7 +73,7 @@
                                         </c:if>
                                     </tr>
                                     <tr>
-                                        <th style="font-size: 16px"><strong><i>${s.count}.${sq.question}</i></strong>
+                                        <th style="font-size: 16px"><strong ><i>${s.count}.${sq.question}</i></strong>
                                         </th>
                                     </tr>
                                     </thead>
@@ -83,8 +83,10 @@
                                             <tr>
                                                 <td>
                                             <span style="width: 38px;height: 34px">
+
                                             <input type="radio" name="s_${sq.id}" id="s_${sq.id}"
-                                                   quesNo="s_${sq.id}" onchange="saveToLocal(this)" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span
+                                                   quesNo="s_${sq.id}" onchange="saveToLocal(this)"
+                                                   currentAns="${sq.correct}" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span
                                                     style="color: blue">${op.get(sq.id).optionA}</span>
                                             </span>
                                                 </td>
@@ -159,7 +161,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="col-lg-8">
-                                                        <label> <input type="radio" value="对"
+                                                        <label> <input type="radio" currentAns="${sq.id}${sq.correct}" value="对"
                                                                        quesNo="j_${sq.id}" onchange="saveToLocal(this)"
                                                                        name="j_${sq.id}"> 对 </label>
                                                         <label> <input type="radio" value="错"
@@ -227,10 +229,10 @@
                             </div>
                         </div>
                     </c:forEach>
-                    <a href="#" onclick="toCommint(this)"
+                    <a href="#" onclick="countScore()"
                        class="btn btn-w-m btn-info"
                        data-toggle="modal"
-                       data-target="#deleteModal" data-backdrop="static">提交试卷</a>
+                       data-target="" data-backdrop="static">提交试卷</a>
                 </form>
             </div>
         </div>
@@ -331,7 +333,6 @@
                 var all = $(name);
                 for (var i = 0; i < all.length; i++) {
                     var checkVal = all.eq(i).val();
-
                     var valArr = val.split(",");
                     for (var v in valArr) {
                         if (checkVal == valArr[v]) {
@@ -354,7 +355,7 @@
 
     function saveToLocal(e) {
         var key = $(e).attr("quesNo");
-        console.dirxml(store.get(key));
+        console.dirxml(store.get(key)[1]);
         if ("m" == key.substring(0,1)) {
             var name = "input[name='" + key + "']:checked";
             var value = new Array();
@@ -369,6 +370,36 @@
         store.set(key, value);
 
         console.dirxml(key + ":" + store.get(key));
+        var corr =  $(e).attr("quesCorr");
+
+    }
+
+    function countScore() {
+        var score = 0;
+        store.forEach(function (key, val) {
+            if ("m" == key.substring(0,1)) {
+                // var name = "input[name='"+ key + "']";
+                // var all = $(name);
+                // for (var i = 0; i < all.length; i++) {
+                //     var checkVal = all.eq(i).val();
+                //     var valArr = val.split(",");
+                //     for (var v in valArr) {
+                //         if (checkVal == valArr[v]) {
+                //         }
+                //     }
+                // }
+                // "s" == key.substring(0,1) ||
+            } else if ("j" == key.substring(0,1)) {
+                var name = "input[name='"+ key + "']:checked";
+                var myRadio = $(name).val();
+                console.dirxml($(name).attr("cuurentAns"));
+                var ca = $(name).attr("currentAns");
+                if (myRadio == ca) {
+                    score += 2;
+                    console.dirxml(score);
+                }
+            }
+        });
     }
 </script>
 

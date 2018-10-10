@@ -38,8 +38,8 @@
     </select>
 
     <!--<select id="selectByPrimaryKey" resultMap="baseResultMap" parameterType="java.lang.Integer">-->
-        <!--SELECT *-->
-        <!--from OLTS_USERS where id = #{id,jdbcType=INTEGER}-->
+    <!--SELECT *-->
+    <!--from OLTS_USERS where id = #{id,jdbcType=INTEGER}-->
     <!--</select>-->
 
     <update id="update" parameterType="OltsUsers">
@@ -65,25 +65,116 @@
 
 
     <insert id="insertInfoBatch" parameterType="OltsUsers">
-    insert into OLTS_USERS (olts_users_seq.nextval, STU_NO,ID_CARD_NO, USER_NAME, PASS_WORD,MOBILE, HOME_TEL, HOME_ADDR,
-    SCH_ADDR, QQ, EMAIL,USER_TYPE,GENDER BIRTHDAY, NATION_PLACE, MARJOR, EDU_BACKGROUND, GRADUATE_SCHOOL)
-    values
-    <foreach collection="list" item="item" index="index" separator=",">
-    (#{item.id}, #{item.stuNo}, #{item.idCardNo},#{item.userName}, #{item.password},
-    #{item.mobile}, #{item.homeTel},#{item.homeAddr}, #{item.schAddr}, #{item.qq}, #{item.email},
-    #{item.userType}, #{item.gender}, #{item.birthday}, #{item.nationPlace}, #{item.marjor}, #{item.eduBackground}, #{item.graduateSchool})
-    </foreach>
+        insert into OLTS_USERS (olts_users_seq.nextval, STU_NO,ID_CARD_NO, USER_NAME, PASS_WORD,MOBILE, HOME_TEL,
+        HOME_ADDR,
+        SCH_ADDR, QQ, EMAIL,USER_TYPE,GENDER BIRTHDAY, NATION_PLACE, MARJOR, EDU_BACKGROUND, GRADUATE_SCHOOL)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id}, #{item.stuNo}, #{item.idCardNo},#{item.userName}, #{item.password},
+            #{item.mobile}, #{item.homeTel},#{item.homeAddr}, #{item.schAddr}, #{item.qq}, #{item.email},
+            #{item.userType}, #{item.gender}, #{item.birthday}, #{item.nationPlace}, #{item.marjor},
+            #{item.eduBackground}, #{item.graduateSchool})
+        </foreach>
     </insert>
 
 
     <!--<insert id="insert" parameterType="OltsUsers">-->
-        <!--insert into OLTS_USERS (olts_users_seq.nextval, STU_NO,ID_CARD_NO, USER_NAME, PASS_WORD,MOBILE, HOME_TEL, HOME_ADDR,-->
-        <!--SCH_ADDR, QQ, EMAIL,USER_TYPE,GENDER, BIRTHDAY, NATION_PLACE, MARJOR, EDU_BACKGROUND, GRADUATE_SCHOOL)-->
-        <!--values (#{id,jdbcType=INTEGER},#{stuNo,jdbcType=VARCHAR},#{idCardNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},-->
-        <!--#{mobile,jdbcType=VARCHAR},#{homeTel,jdbcType=VARCHAR},#{homeAddr,jdbcType=VARCHAR},#{schAddr,jdbcType=VARCHAR},-->
-        <!--#{qq,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{userType,jdbcType=SMALLINT},#{gender,jdbcType=VARCHAR},#{birthday,jdbcType=DATE}-->
-        <!--,#{nationPlace,jdbcType=VARCHAR},#{marjor,jdbcType=VARCHAR},#{eduBackground,jdbcType=VARCHAR}-->
-        <!--#{graduateSchool,jdbcType=VARCHAR})-->
+    <!--insert into OLTS_USERS (olts_users_seq.nextval, STU_NO,ID_CARD_NO, USER_NAME, PASS_WORD,MOBILE, HOME_TEL, HOME_ADDR,-->
+    <!--SCH_ADDR, QQ, EMAIL,USER_TYPE,GENDER, BIRTHDAY, NATION_PLACE, MARJOR, EDU_BACKGROUND, GRADUATE_SCHOOL)-->
+    <!--values (#{id,jdbcType=INTEGER},#{stuNo,jdbcType=VARCHAR},#{idCardNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},-->
+    <!--#{mobile,jdbcType=VARCHAR},#{homeTel,jdbcType=VARCHAR},#{homeAddr,jdbcType=VARCHAR},#{schAddr,jdbcType=VARCHAR},-->
+    <!--#{qq,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{userType,jdbcType=SMALLINT},#{gender,jdbcType=VARCHAR},#{birthday,jdbcType=DATE}-->
+    <!--,#{nationPlace,jdbcType=VARCHAR},#{marjor,jdbcType=VARCHAR},#{eduBackground,jdbcType=VARCHAR}-->
+    <!--#{graduateSchool,jdbcType=VARCHAR})-->
     <!--</insert>-->
 
+
+    <sql id="Base_Column_List">
+            id, stuNo, idCardNo, userName, password,mobile,homeTel,homeAddr,schAddr,qq,
+            email,userType,gender,birthday,nationPlace,marjor,eduBackground,graduateSchool
+        </sql>
+    <select id="selectByPrimaryKey" resultMap="baseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from OLTS_USERS
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+            delete from OLTS_USERS
+            where id = #{id,jdbcType=INTEGER}
+        </delete>
+    <insert id="insert" parameterType="OltsUsers">
+            insert into OLTS_USERS (id, stuNo, idCardNo, userName, password,mobile,homeTel,homeAddr,schAddr,qq,
+            email,userType,gender,birthday,nationPlace,marjor,eduBackground,graduateSchool)
+            values (#{id,jdbcType=INTEGER},#{stuNo,jdbcType=VARCHAR},#{idCardNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    #{mobile,jdbcType=VARCHAR},#{homeTel,jdbcType=VARCHAR},#{homeAddr,jdbcType=VARCHAR},#{schAddr,jdbcType=VARCHAR},
+    #{qq,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{userType,jdbcType=SMALLINT},#{gender,jdbcType=VARCHAR},#{birthday,jdbcType=DATE}
+    ,#{nationPlace,jdbcType=VARCHAR},#{marjor,jdbcType=VARCHAR},#{eduBackground,jdbcType=VARCHAR}
+    #{graduateSchool,jdbcType=VARCHAR})
+        </insert>
+
+    <insert id="insertSelective" parameterType="OltsUsers">
+        insert into OLTS_USERS
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="date != null">
+                date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="date != null">
+                #{date,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="OltsUsers">
+        update OLTS_USERS
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="date != null">
+                date = #{date,jdbcType=DATE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="OltsUsers">
+            update OLTS_USERS
+            set user_name = #{userName,jdbcType=VARCHAR},
+            password = #{password,jdbcType=VARCHAR},
+            age = #{age,jdbcType=INTEGER},
+            date = #{date,jdbcType=DATE}
+            where id = #{id,jdbcType=INTEGER}
+        </update>
 </mapper>
+

@@ -18,5 +18,9 @@ public interface IUserService {
 
     int update(OltsUsers user);
 
-    void importExcelInfo(InputStream in, MultipartFile file, String birthday, int adminId) throws Exception;
+    String ajaxUploadExcel(HttpServletRequest request,HttpServletResponse response);
+
 }
+
+
+

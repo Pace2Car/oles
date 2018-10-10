@@ -57,4 +57,6 @@ public interface QuestionsMapper {
     int deleteSmdOpt(Integer id);
 
     int deleteFspQues(FspQuestions questions);
+
+    FspQuestions selectByFspQuesId(@Param("fspQuestions") FspQuestions fspQuestions);
 }
