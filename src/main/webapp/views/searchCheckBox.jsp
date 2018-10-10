@@ -385,7 +385,6 @@
             }, "json");
         });
     }
-    };
 
     function add(){
         console.dirxml(1);

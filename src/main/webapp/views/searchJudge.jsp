@@ -359,7 +359,6 @@
                 $('#deleteModal').modal('hide');
             }, "json");
         });
-    }
     };
     function add(){
         obj = document.getElementsByName("id");
