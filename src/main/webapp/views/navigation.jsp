@@ -75,11 +75,11 @@
                             <span class="nav-label">查询试题</span> <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-third-level collapse">
-                            <li><a href="views/searchRadio.jsp">查询单选题</a></li>
-                            <li><a href="views/searchCheckBox.jsp">查询多选题</a></li>
-                            <li><a href="views/searchJudge.jsp">查询判断题</a></li>
-                            <li><a href="views/searchShort.jsp">查询简答题</a></li>
-                            <li><a href="views/searchProgram.jsp">查询编程题</a></li>
+                            <li><a href="examManage/radio">查询单选题</a></li>
+                            <li><a href="examManage/checkBox">查询多选题</a></li>
+                            <li><a href="examManage/judge">查询判断题</a></li>
+                            <li><a href="examManage/shorts">查询简答题</a></li>
+                            <li><a href="examManage/program">查询编程题</a></li>
                         </ul>
                     </li>
                 </ul>

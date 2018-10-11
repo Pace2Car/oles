@@ -180,7 +180,7 @@
                             <li style="">
                                 <span style="color: black">考卷编号：</span>
                                 <input type="text" name="examNo" id="examNo">
-                                <input type="button" value="选择">
+                                <input type="button" data-toggle="modal" data-target="#myModal2" value="选择">
                                 <button class="btn btn-primary" type="button" onclick="add()">加入试卷</button>
                             </li>
                         </ol>
@@ -254,15 +254,22 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-<div hidden id="successAlert" class="alert alert-success col-md-2"
-     style="margin-right: 5px;position: fixed; right: 5px; bottom: 5px; ">
-    <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <strong>成功！</strong>操作成功！
-</div>
-<div hidden id="failAlert" class="alert alert-warning col-md-2"
-     style="margin-right: 5px;position: fixed; right: 5px; bottom: 5px;">
-    <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <strong style="color: red">失败！</strong>操作失败！
+
+<!-- 选择模态框 -->
+<div class="modal inmodal fade" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">请选择考卷编号</h4>
+            </div>
+            <c:forEach items="${list}" var="list">
+                <div class="modal-body">
+                    <a onclick="document.getElementById('examNo').value=this.innerHTML;" data-dismiss="modal">${list.examNo}</a>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
 </div>
 <!-- Mainly scripts -->
 <script src="js/jquery-2.2.4.js"></script>

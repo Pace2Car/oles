@@ -40,7 +40,6 @@
             </div>
 
             <div class="col-lg-12">
-                <form action="">
                     <div style="float: right">
                         <button class="btn btn-primary active" type="button" data-toggle="modal" data-target="#myModal1">增加单选题</button>
                         <button class="btn btn-primary active" type="button" data-toggle="modal" data-target="#myModal2">增加多选题</button>
@@ -73,7 +72,8 @@
                                         </c:if>
                                     </tr>
                                     <tr>
-                                        <th style="font-size: 16px"><strong ><i>${s.count}.${sq.question}</i></strong>
+                                        <th style="font-size: 16px" ><strong ><i>${s.count}.${sq.question}<input
+                                                type="hidden" value="${sq.id}"></i></strong>
                                         </th>
                                     </tr>
                                     </thead>
@@ -83,7 +83,6 @@
                                             <tr>
                                                 <td>
                                             <span style="width: 38px;height: 34px">
-
                                             <input type="radio" name="s_${sq.id}" id="s_${sq.id}"
                                                    quesNo="s_${sq.id}" onchange="saveToLocal(this)"
                                                    currentAns="${sq.correct}" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span
@@ -170,12 +169,14 @@
                                                     </div>
                                                 </td>
                                             </tr>
-
                                         </c:when>
                                     </c:choose>
                                     <tr>
                                         <td>
-                                            <button type="button" class="btn btn-outline btn-warning">移除本题</button>
+                                            <button type="button" onclick="toDelete(this)" smdId="${sq.id}" queType="${sq.questionType}"
+                                                    class="btn btn-outline btn-warning"
+                                                    data-toggle="modal"
+                                                    data-target="#deleteModal" data-backdrop="static">移除本题</button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -231,7 +232,10 @@
                                     </c:choose>
                                     <tr>
                                         <td>
-                                            <button type="button" class="btn btn-outline btn-warning">移除本题</button>
+                                            <button type="button" onclick="toDelete2(this)" fspId="${fq.id}" queType2="${fq.questionType}"
+                                                    class="btn btn-outline btn-warning"
+                                                    data-toggle="modal"
+                                                    data-target="#deleteModal" data-backdrop="static">移除本题</button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -239,11 +243,6 @@
                             </div>
                         </div>
                     </c:forEach>
-                    <a href="#" onclick="countScore()"
-                       class="btn btn-w-m btn-info"
-                       data-toggle="modal"
-                       data-target="" data-backdrop="static">提交试卷</a>
-                </form>
             </div>
         </div>
         <!-- main 主体区域 -->
@@ -357,6 +356,28 @@
 </div>
 
 
+<!-- 删除模态框 -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel"> 删除确认 </h4>
+            </div>
+            <div class="modal-body">
+                <span class="fa fa-exclamation fa-2x" style="color:#f15b6c;"></span>
+                您确定要删除编号为：<span id="smId"></span> 的试题吗？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button id="deleteConfirmBtn" type="button" class="btn btn-primary">删除</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 <!-- Mainly scripts -->
 <script src="js/jquery-2.2.4.js"></script>
 <script src="js/bootstrap-3.3.7/js/bootstrap.min.js"></script>
@@ -428,7 +449,8 @@
         $.post("ques/toAdd?examNo="+examNo+"&singleId="+s,function (json) {
             if (json.actionFlag) {
                 $('#successAlert').show();
-                setTimeout("$('#successAlert').hide()", 3000);
+                setTimeout("$('#successAlert').hide()", 1000);
+                window.location.reload();
             } else {
                 $('#failAlert').show();
                 setTimeout("$('#failAlert').hide()", 3000);
@@ -443,7 +465,8 @@
         $.post("ques/toAdd?examNo="+examNo+"&multipleId="+m,function (json) {
             if (json.actionFlag) {
                 $('#successAlert').show();
-                setTimeout("$('#successAlert').hide()", 3000);
+                setTimeout("$('#successAlert').hide()", 1000);
+                window.location.reload();
             } else {
                 $('#failAlert').show();
                 setTimeout("$('#failAlert').hide()", 3000);
@@ -458,7 +481,8 @@
         $.post("ques/toAdd?examNo="+examNo+"&trueFalseId="+t,function (json) {
             if (json.actionFlag) {
                 $('#successAlert').show();
-                setTimeout("$('#successAlert').hide()", 3000);
+                setTimeout("$('#successAlert').hide()", 1000);
+                window.location.reload();
             } else {
                 $('#failAlert').show();
                 setTimeout("$('#failAlert').hide()", 3000);
@@ -473,7 +497,8 @@
         $.post("ques/toAdd?examNo="+examNo+"&simpleAnwserId="+san,function (json) {
             if (json.actionFlag) {
                 $('#successAlert').show();
-                setTimeout("$('#successAlert').hide()", 3000);
+                setTimeout("$('#successAlert').hide()", 1000);
+                window.location.reload();
             } else {
                 $('#failAlert').show();
                 setTimeout("$('#failAlert').hide()", 3000);
@@ -488,12 +513,124 @@
         $.post("ques/toAdd?examNo="+examNo+"&programId="+p,function (json) {
             if (json.actionFlag) {
                 $('#successAlert').show();
-                setTimeout("$('#successAlert').hide()", 3000);
+                setTimeout("$('#successAlert').hide()", 1000);
+                window.location.reload();
             } else {
                 $('#failAlert').show();
                 setTimeout("$('#failAlert').hide()", 3000);
             }
         },"json")
+    }
+
+    function toDelete(e) {
+        var smdId = $(e).attr("smdId");
+        var queType = $(e).attr("queType");
+        console.dirxml(queType);
+        var examNo = $('#examNo').val();
+        $("#smId").text(smdId);
+        if (queType == 1  || queType==0) {
+            $("#deleteConfirmBtn").click(function () {
+                $.get("examManage/deleteExam?examNo=" + examNo+"&singleId="+smdId+"&questionType="+queType, function (json) {
+                    if (json.actionFlag) {
+                        $('#successAlert').show();
+                        setTimeout("$('#successAlert').hide()", 1000);
+                    } else {
+                        $('#failAlert').show();
+                        setTimeout("$('#failAlert').hide()", 3000);
+                    }
+                    $('#deleteModal').modal('hide');
+                    window.location.reload();
+                }, "json");
+            });
+        }
+
+        if (queType == 2  || queType== -1) {
+            $("#deleteConfirmBtn").click(function () {
+                $.get("examManage/deleteExam?examNo=" + examNo+"&multipleId="+smdId+"&questionType="+queType, function (json) {
+                    if (json.actionFlag) {
+                        $('#successAlert').show();
+                        setTimeout("$('#successAlert').hide()", 1000);
+                    } else {
+                        $('#failAlert').show();
+                        setTimeout("$('#failAlert').hide()", 3000);
+                    }
+                    $('#deleteModal').modal('hide');
+                    window.location.reload();
+                }, "json");
+            });
+        }
+
+        if (queType == 3  || queType== -2) {
+            $("#deleteConfirmBtn").click(function () {
+                $.get("examManage/deleteExam?examNo=" + examNo+"&trueFalseId="+smdId+"&questionType="+queType, function (json) {
+                    if (json.actionFlag) {
+                        $('#successAlert').show();
+                        setTimeout("$('#successAlert').hide()", 1000);
+                    } else {
+                        $('#failAlert').show();
+                        setTimeout("$('#failAlert').hide()", 3000);
+                    }
+                    $('#deleteModal').modal('hide');
+                    window.location.reload();
+                }, "json");
+            });
+        }
+    }
+
+    function toDelete2(e) {
+        var fspId = $(e).attr("fspId");
+        var queType2 = $(e).attr("queType2");
+        console.dirxml(queType2);
+        console.dirxml(fspId);
+        var examNo = $('#examNo').val();
+        $("#smId").text(fspId);
+        if (queType2 == 5  || queType2==-3) {
+            $("#deleteConfirmBtn").click(function () {
+                $.get("examManage/deleteExam?examNo=" + examNo+"&simpleAnwserId="+fspId+"&questionType="+queType2, function (json) {
+                    if (json.actionFlag) {
+                        $('#successAlert').show();
+                        setTimeout("$('#successAlert').hide()", 1000);
+                    } else {
+                        $('#failAlert').show();
+                        setTimeout("$('#failAlert').hide()", 3000);
+                    }
+                    $('#deleteModal').modal('hide');
+                    window.location.reload();
+                }, "json");
+            });
+        }
+
+        if (queType2 == 6  || queType2== -4) {
+            $("#deleteConfirmBtn").click(function () {
+                $.get("examManage/deleteExam?examNo=" + examNo+"&programId="+fspId+"&questionType="+queType2, function (json) {
+                    if (json.actionFlag) {
+                        $('#successAlert').show();
+                        setTimeout("$('#successAlert').hide()", 1000);
+                    } else {
+                        $('#failAlert').show();
+                        setTimeout("$('#failAlert').hide()", 3000);
+                    }
+                    $('#deleteModal').modal('hide');
+                    window.location.reload();
+                }, "json");
+            });
+        }
+
+        if (queType == 3  || queType== -2) {
+            $("#deleteConfirmBtn").click(function () {
+                $.get("examManage/deleteExam?examNo=" + examNo+"&trueFalseId="+smdId+"&questionType="+queType, function (json) {
+                    if (json.actionFlag) {
+                        $('#successAlert').show();
+                        setTimeout("$('#successAlert').hide()", 1000);
+                    } else {
+                        $('#failAlert').show();
+                        setTimeout("$('#failAlert').hide()", 3000);
+                    }
+                    $('#deleteModal').modal('hide');
+                    window.location.reload();
+                }, "json");
+            });
+        }
     }
 
 </script>
