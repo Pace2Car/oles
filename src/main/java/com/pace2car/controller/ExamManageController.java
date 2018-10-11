@@ -5,8 +5,7 @@ import com.pace2car.entity.*;
 import com.pace2car.service.IExaminationService;
 import com.pace2car.service.IFspAnswerService;
 import com.pace2car.service.IQuestionsService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,12 +19,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 import java.util.*;
 
 @Controller
 @RequestMapping("/examManage")
 public class ExamManageController {
+
+    private static Logger logger = Logger.getLogger(ExamManageController.class);
 
     @Autowired(required = false)
     private IFspAnswerService subjectiveAnswerService;
@@ -574,6 +574,7 @@ public class ExamManageController {
             }
         }
     }
+
     @RequestMapping("/insertAnswer")
     public String insertAnswer(FspAnswer answers,OltsScore score, HttpServletResponse response, HttpServletRequest request) {
         ModelMap modelMap = new ModelMap();
