@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -23,6 +24,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/examManage")
 public class ExamManageController {
+    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(ExamManageController.class);
 
     @Autowired(required = false)
     private IFspAnswerService subjectiveAnswerService;

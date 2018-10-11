@@ -74,15 +74,14 @@
                                     </div>
                                 </div>
                                 <div class="ibox-content">
-                                    <input type="text" class="form-control input-sm m-b-xs" id="filter"
-                                           placeholder="Search in table">
+                                    <input class="btn btn-danger" type="button" value="批量删除" onclick="todelete()">
 
                                     <table class="footable table table-stripped default footable-loaded"
-                                           data-page-size="8" data-filter="#filter">
+                                           data-page-size="8" data-filter="#filter" id="tableId">
                                         <thead>
                                         <tr>
                                             <th class="footable-visible footable-first-column footable-sortable">
-                                                <span><input type="checkbox" name="" id=""></span></th>
+                                                <input type="checkbox" name="case" id="selectall" onclick=cli("case")></th>
                                             <th class="footable-visible footable-first-column footable-sortable"><font
                                                     style="vertical-align: inherit;"><font
                                                     style="vertical-align: inherit;">序号</font></font><span
@@ -129,12 +128,19 @@
                                         </thead>
                                         <tbody>
                                         <c:forEach var="users" items="${page.getResult()}" varStatus="status">
-                                            <tr id="tr_${users.id}" class="gradeC footable-odd" style="display: table-row;">
-                                                <td class="footable-visible footable-first-column"><span
-                                                        class="footable-toggle"></span><font
-                                                        style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">${status.index+1}</font></font>
+                                            <tr id="tr_${users.id}" class="gradeC footable-odd"
+                                                style="display: table-row;">
+                                                <td class="footable-visible footable-first-column">
+                                                <input type="checkBox" id="case" name="case"/>
+                                                </span>
                                                 </td>
+                                                <td class="footable-visible footable-first-column">
+                                                    <input type="hidden">${users.id}
+                                                </td>
+                                                    <%--<span
+                                                            class="footable-toggle"></span><font
+                                                            style="vertical-align: inherit;"><font
+                                                            style="vertical-align: inherit;"></font></font>--%>
                                                 <td class="footable-visible"><font
                                                         style="vertical-align: inherit;"><font
                                                         style="vertical-align: inherit;">${users.userName}</font></font>
@@ -165,7 +171,9 @@
                                                 </td>
                                                 <td class="center footable-visible footable-last-column"><font
                                                         style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;"><a id="toUpdateBtn" onclick="toUpdate(this)" href="#" no="${users.id}"
+                                                        style="vertical-align: inherit;"><a id="toUpdateBtn"
+                                                                                            onclick="toUpdate(this)"
+                                                                                            href="#" no="${users.id}"
                                                                                             class="btn btn-info btn-sm"
                                                                                             data-toggle="modal"
                                                                                             data-target="#myModal"
@@ -215,16 +223,16 @@
                                                 第${page.getPageNum()}页/共${page.getPages()}页
                                                 &nbsp;&nbsp; &nbsp;&nbsp;
                                                 <c:if test="${page.getPageNum() gt 1}">
-                                                    <a href="user/list?pageNum=1">第一页</a> &nbsp;
+                                                    <a href="user/delete?pageNum=1">第一页</a> &nbsp;
                                                 </c:if>
                                                 <c:if test="${page.getPageNum() gt 1}">
-                                                    <a href="user/list?pageNum=${page.getPageNum()-1}">上一页</a>&nbsp;
+                                                    <a href="user/delete?pageNum=${page.getPageNum()-1}">上一页</a>&nbsp;
                                                 </c:if>
                                                 <c:if test="${page.getPageNum() lt page.getPages()}">
-                                                    <a href="user/list?pageNum=${page.getPageNum()+1}">下一页</a>&nbsp;
+                                                    <a href="user/delete?pageNum=${page.getPageNum()+1}">下一页</a>&nbsp;
                                                 </c:if>
                                                 <c:if test="${page.getPageNum() lt page.getPages()}">
-                                                    <a href="user/list?pageNum=${page.getPages()}">末页</a>&nbsp;
+                                                    <a href="user/delete?pageNum=${page.getPages()}">末页</a>&nbsp;
                                                 </c:if>
                                             </td>
                                         </tr>
@@ -308,8 +316,41 @@
             $('#myModal-content').append(html);
         }, 'html');
     }
+    function cli(Obj){
 
+        var collid = document.getElementById("selectall")
+        var coll = document.getElementsByName(Obj)
+        if (collid.checked){
+            for(var i = 0; i < coll.length; i++)
+                coll[i].checked = true;
+        }else{
+            for(var i = 0; i < coll.length; i++)
+                coll[i].checked = false;
+        }
+    }
+        function todelete() {
+            var msg = "确认删除选中试题";
+            if(confirm(msg)==true){
+                var chk_value = [];//定义一个数组
+                //利用将name等于ids的多选按钮得到
+                $("#tableId").find(":input[id='case']:checked").each(function(){
+                    //获取id值，因为id单元格在复选框单元格的下一个元素
+                    var val = $(this).parent().next().text();
+                    //将id值添加到数组
+                    chk_value.push(val);
+                });
+                if (chk_value.length == 0) {
+                    alert("你还没有选择任何内容！");
+                }
+                if (chk_value.length > 0) {
+                    //在浏览器控制台打印信息
+                    console.log(chk_value);
+                    location.href = "${pageContext.request.contextPath}/user/toDelete?chk_value=" + chk_value;
+                }
+            }
+        }
 </script>
+
 
 </body>
 

@@ -35,4 +35,5 @@ public interface UserMapper {
 
     void insertInfoBatch(List<OltsUsers> salaryList);
 
+    Integer deleteMany(int[] chk_value);
 }

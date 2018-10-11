@@ -176,16 +176,16 @@
                                 第${ques.getPageNum()}页/共${ques.getPages()}页
                                 &nbsp;&nbsp; &nbsp;&nbsp;
                                 <c:if test="${ques.getPageNum() gt 1}">
-                                    <a href="ques/searchRadio?pageNum=1">第一页</a> &nbsp;
+                                    <a href="ques/searchProgram?pageNum=1">第一页</a> &nbsp;
                                 </c:if>
                                 <c:if test="${ques.getPageNum() gt 1}">
-                                    <a href="ques/searchRadio?pageNum=${ques.getPageNum()-1}">上一页</a>&nbsp;
+                                    <a href="ques/searchProgram?pageNum=${ques.getPageNum()-1}">上一页</a>&nbsp;
                                 </c:if>
                                 <c:if test="${ques.getPageNum() lt ques.getPages()}">
-                                    <a href="ques/searchRadio?pageNum=${ques.getPageNum()+1}">下一页</a>&nbsp;
+                                    <a href="ques/searchProgram?pageNum=${ques.getPageNum()+1}">下一页</a>&nbsp;
                                 </c:if>
                                 <c:if test="${ques.getPageNum() lt ques.getPages()}">
-                                    <a href="ques/searchRadio?pageNum=${ques.getPages()}">末页</a>&nbsp;
+                                    <a href="ques/searchProgram?pageNum=${ques.getPages()}">末页</a>&nbsp;
                                 </c:if>
                             </td>
                         </tr>
@@ -198,16 +198,7 @@
         <!-- footer 底部包装区域 -->
         <%@include file="footer.jsp" %>
         <%--成功提示模态框--%>
-        <div id="successAlert" class="alert alert-success col-md-2"
-             style="margin-right: 5px;position: fixed; right: 5px; bottom: 5px;">
-            <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <strong>成功！</strong>操作成功！
-        </div>
-        <div id="failAlert" class="alert alert-warning col-md-2"
-             style="margin-right: 5px;position: fixed; right: 5px; bottom: 5px;">
-            <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <strong style="color: red">失败！</strong>操作失败！
-        </div>
+
     </div>
 
 </div>

@@ -160,6 +160,13 @@
                     var option = new Option(v.techCtgr, v.id);
                     $("#techCateId").append(option);
                 });
+                if (json.actionFlag) {
+                    $('#successAlert').show();
+                    setTimeout("$('#successAlert').hide()", 3000);
+                } else {
+                    $('#failAlert').show();
+                    setTimeout("$('#failAlert').hide()", 3000);
+                }
             },"json");
         });
     })

@@ -50,43 +50,6 @@ public class UserServiceImpl implements IUserService {
         return userMapper.update(user);
     }
 
-//    @Override
-//    public void importExcelInfo(InputStream in, MultipartFile file, String birthday, int adminId) throws Exception{
-//        List<List<Object>> listob = ExcelUtil.getBankListByExcel(in,file.getOriginalFilename());
-//        List<OltsUsers> salaryList = new ArrayList<OltsUsers>();
-//        //遍历listob数据，把数据放到List中
-//        for (int i = 0; i < listob.size(); i++) {
-//            List<Object> ob = listob.get(i);
-//            OltsUsers usersmanage = new OltsUsers();
-//            //设置编号
-////            usersmanage.setSerial(SerialUtil.salarySerial());
-//            //通过遍历实现把每一列封装成一个model中，再把所有的model用List集合装载
-//            usersmanage.setId(adminId);
-//            usersmanage.setStuNo(String.valueOf(ob.get(1)));
-//            usersmanage.setIdCardNo(String.valueOf(ob.get(2)));
-//            usersmanage.setUserName(String.valueOf(ob.get(3)));
-//            usersmanage.setPassword(String.valueOf(ob.get(4)));
-//            usersmanage.setMobile(String.valueOf(ob.get(5)));
-//            usersmanage.setHomeTel(String.valueOf(ob.get(6)));
-//            usersmanage.setHomeAddr(String.valueOf(ob.get(7)));
-//            usersmanage.setSchAddr(String.valueOf(ob.get(8)));
-//            usersmanage.setQq(String.valueOf(ob.get(9)));
-//            usersmanage.setEmail(String.valueOf(ob.get(10)));
-//            //object类型转Double类型
-//            usersmanage.setUserType(Short.parseShort(ob.get(11).toString()));
-//            usersmanage.setGender(String.valueOf(ob.get(12)));
-//            usersmanage.setBirthday(Date.valueOf(String.valueOf(ob.get(13))));
-////            usersmanage.setBirthday(birthday);
-//            usersmanage.setNationPlace(String.valueOf(ob.get(14)));
-//            usersmanage.setMarjor(String.valueOf(ob.get(15)));
-//            usersmanage.setEduBackground(String.valueOf(ob.get(16)));
-//            usersmanage.setGraduateSchool(String.valueOf(ob.get(17)));
-//            salaryList.add(usersmanage);
-//        }
-//        //批量插入
-//        userMapper.insertInfoBatch(salaryList);
-//    }
-
 
     public String ajaxUploadExcel(HttpServletRequest request, HttpServletResponse response) {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -118,44 +81,27 @@ public class UserServiceImpl implements IUserService {
         for (int i = 0; i < listob.size(); i++) {
             List<Object> lo = listob.get(i);
             OltsUsers vo = new OltsUsers();
-//            OltsUsers j = null;
-//
-//            try {
-//                j = userMapper.selectByPrimaryKey(Integer.valueOf(String.valueOf(lo.get(0))));
-//            } catch (NumberFormatException e) {
-//                // TODO Auto-generated catch block
-//                System.out.println("没有新增");
-//            }
-//            vo.setId(Integer.valueOf(String.valueOf(lo.get(0))));
-//            vo.setStuNo(String.valueOf(lo.get(1)));
             System.out.println(String.valueOf(lo.get(1)));
             vo.setUserName(String.valueOf(lo.get(1)));
             vo.setIdCardNo(String.valueOf(lo.get(2)));
             vo.setEduBackground(String.valueOf(lo.get(3)));
             vo.setMarjor(String.valueOf(lo.get(4)));
-//            vo.setPassword(String.valueOf(lo.get(4)));
+
             vo.setMobile(String.valueOf(lo.get(5)));
-//            vo.setHomeTel(String.valueOf(lo.get(6)));
-//            vo.setHomeAddr(String.valueOf(lo.get(7)));
-//            vo.setSchAddr(String.valueOf(lo.get(8)));
+
             vo.setQq(String.valueOf(lo.get(6)));
             vo.setPassword(String.valueOf(lo.get(7)));
-//            vo.setEmail(String.valueOf(lo.get(10)));
-//            vo.setUserType(Short.valueOf(String.valueOf(lo.get(11))));
-//            vo.setGender(String.valueOf(lo.get(12)));
-//            vo.setBirthday(Date.valueOf(String.valueOf(lo.get(13))));
-//            vo.setNationPlace(String.valueOf(lo.get(14)));
-//            vo.setGraduateSchool(String.valueOf(lo.get(17)));
+            System.out.println(vo);
+            userMapper.insert(vo);
 
-//            if (j == null) {
-                System.out.println(vo);
-                userMapper.insert(vo);
-//            }
-//            else {
-//                userMapper.updateByPrimaryKey(vo);
-//            }
         }
         return "文件导入成功！";
+    }
+
+    @Override
+    public Integer deleteMany(int[] chk_value) {
+            // TODO 自动生成的方法存根
+            return userMapper.deleteMany(chk_value);
     }
 }
 

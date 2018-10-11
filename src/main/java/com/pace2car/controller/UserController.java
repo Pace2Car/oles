@@ -59,6 +59,18 @@ public class UserController {
         return "userList";
     }
 
+    @RequestMapping("/delete")
+    public String selectAll(OltsUsers users, Integer pageNum, ModelMap modelMap) {
+        Page<OltsUsers> page = null;
+        //查询
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        page = (Page<OltsUsers>) userService.selectByPage(users, pageNum, 5);
+        modelMap.addAttribute("page", page);
+        return "userDeleteMany";
+    }
+
     @RequestMapping("/logOut")
     public String logOut(HttpSession session) {
         session.removeAttribute("logUser");
@@ -93,6 +105,18 @@ public class UserController {
     @RequestMapping(value = "import", method = {RequestMethod.GET, RequestMethod.POST})
     public String ajaxUploadExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
         return userService.ajaxUploadExcel(request, response);
+    }
+
+    @RequestMapping(value="/toDelete")
+    public String deleteMany(int[] chk_value) {
+        System.out.println(chk_value);
+        if (chk_value == null ) {
+            return "userDeleteMany";
+        }
+        //直接传数组
+        userService.deleteMany(chk_value);
+        //重定向
+        return "redirect:/user/delete";
     }
 }
 

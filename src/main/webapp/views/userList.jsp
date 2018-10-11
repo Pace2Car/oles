@@ -131,7 +131,7 @@
                                                 <td class="footable-visible footable-first-column"><span
                                                         class="footable-toggle"></span><font
                                                         style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">${status.index+1}</font></font>
+                                                        style="vertical-align: inherit;">${users.id}</font></font>
                                                 </td>
                                                 <td class="footable-visible"><font
                                                         style="vertical-align: inherit;"><font

@@ -64,7 +64,7 @@
                         <div class="col-sm-4 col-sm-offset-2">
                             <br>
                             <br>
-                            <button class="btn btn-primary" type="submit">新增试题</button>
+                            <button class="btn btn-primary" type="submit" onclick="ret()">新增试题</button>
 
                             <button class="btn btn-white" type="submit">取消</button>
                         </div>
@@ -157,6 +157,7 @@
 </script>
 <script>
     $(function () {
+
         // 加载课程名下拉列表
         $.get("ques/load_courses",function (resp) {
             // console.log(resp);
@@ -180,9 +181,25 @@
                     var option = new Option(v.techCtgr, v.id);
                     $("#techCateId").append(option);
                 });
+                if (json.actionFlag) {
+                    $('#successAlert').show();
+                    setTimeout("$('#successAlert').hide()", 3000);
+                } else {
+                    $('#failAlert').show();
+                    setTimeout("$('#failAlert').hide()", 3000);
+                }
             },"json");
         });
     })
+    function ret() {
+        if (json.actionFlag) {
+            $('#successAlert').show();
+            setTimeout("$('#successAlert').hide()", 3000);
+        } else {
+            $('#failAlert').show();
+            setTimeout("$('#failAlert').hide()", 3000);
+        }
+    }
 </script>
 </body>
 

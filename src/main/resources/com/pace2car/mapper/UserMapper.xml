@@ -103,6 +103,14 @@
             delete from OLTS_USERS
             where id = #{id,jdbcType=INTEGER}
         </delete>
+
+    <delete id="deleteMany" parameterType="int">
+        delete from OLTS_USERS where ID IN
+        <foreach item="qid" collection="array" open="(" separator="," close=")">
+            #{qid}
+        </foreach>
+    </delete>
+
     <insert id="insert" parameterType="OltsUsers">
         <selectKey keyProperty="id" resultType="int" order="BEFORE">
             select OLTS_USERS_SEQ.nextval from dual

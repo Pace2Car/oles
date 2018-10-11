@@ -20,6 +20,8 @@ public interface IUserService {
 
     String ajaxUploadExcel(HttpServletRequest request,HttpServletResponse response);
 
+    Integer deleteMany(int[] chk_value);
+
 }
 
 
