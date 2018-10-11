@@ -337,9 +337,11 @@ public class QuestionsController {
             String singleId = exam.getSingleId();
             if (singleId == null) {
                 singleId = examination.getSingleId();
+                exam.setSingleId(singleId);
             }else{
                 StringBuffer newSingleId = new StringBuffer(singleId);
                 newSingleId.append(","+examination.getSingleId());
+                exam.setSingleId(newSingleId.toString());
             }
         }
 
@@ -348,8 +350,10 @@ public class QuestionsController {
             if(multipleId != null) {
                 StringBuffer newMultipleId = new StringBuffer(multipleId);
                 newMultipleId.append(","+examination.getMultipleId());
+                exam.setMultipleId(newMultipleId.toString());
             }else {
                 multipleId=examination.getMultipleId();
+                exam.setMultipleId(multipleId);
             }
         }
 
@@ -357,9 +361,11 @@ public class QuestionsController {
             String trueFalseId = exam.getTrueFalseId();
             if (trueFalseId == null) {
                 trueFalseId = examination.getTrueFalseId();
+                exam.setTrueFalseId(trueFalseId);
             }else {
                 StringBuffer newTrueFalseId = new StringBuffer(trueFalseId);
                 newTrueFalseId.append(","+examination.getTrueFalseId());
+                exam.setTrueFalseId(newTrueFalseId.toString());
             }
         }
 
@@ -367,14 +373,28 @@ public class QuestionsController {
             String simpleAnwserId = exam.getSimpleAnwserId();
             if (simpleAnwserId == null) {
                 simpleAnwserId = examination.getSimpleAnwserId();
+                exam.setSimpleAnwserId(simpleAnwserId);
             }else{
                 StringBuffer newSimpleAnwserId = new StringBuffer(simpleAnwserId);
                 newSimpleAnwserId.append(","+examination.getSimpleAnwserId());
+                exam.setSimpleAnwserId(newSimpleAnwserId.toString());
+            }
+        }
+
+        if (examination.getProgramId() != null) {
+            String programId = exam.getProgramId();
+            if (programId == null) {
+                programId = examination.getSimpleAnwserId();
+                exam.setSimpleAnwserId(programId);
+            }else{
+                StringBuffer newProgramIdId = new StringBuffer(programId);
+                newProgramIdId.append(","+examination.getSimpleAnwserId());
+                exam.setSimpleAnwserId(newProgramIdId.toString());
             }
         }
 
         try {
-            int i = questionsService.updateExam(examination);
+            int i = questionsService.updateExam(exam);
             if (
                 i > 0) {
                 response.getWriter().write("{\"actionFlag\": true}");

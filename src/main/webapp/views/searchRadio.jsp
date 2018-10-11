@@ -258,16 +258,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-<div hidden id="successAlert" class="alert alert-success col-md-2"
-     style="margin-right: 5px;position: fixed; right: 5px; bottom: 5px; ">
-    <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <strong>成功！</strong>操作成功！
-</div>
-<div hidden id="failAlert" class="alert alert-warning col-md-2"
-     style="margin-right: 5px;position: fixed; right: 5px; bottom: 5px;">
-    <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <strong style="color: red">失败！</strong>操作失败！
-</div>
+
 <!-- Mainly scripts -->
 <script src="js/jquery-2.2.4.js"></script>
 <script src="js/bootstrap-3.3.7/js/bootstrap.min.js"></script>

@@ -19,6 +19,18 @@
         <result property="validFlag" column="VALID_FLAG"/>
     </resultMap>
 
+    <resultMap id="smdResultMap" type="SmdQuestions">
+        <id property="id" column="ID"/>
+        <result property="question" column="QUESTION"/>
+        <result property="questionType" column="QUESTION_TYPE"/>
+    </resultMap>
+
+    <resultMap id="fspResultMap" type="FspQuestions">
+        <id property="id" column="ID"/>
+        <result property="question" column="QUESTION"/>
+        <result property="questionType" column="QUESTION_TYPE"/>
+    </resultMap>
+
     <select id="selectAllExamination" resultMap="baseResultMap">
         SELECT
         e.EXAM_NO,
@@ -77,6 +89,33 @@
         e.VALID_FLAG
         FROM EXAMINATION e
         WHERE VALID_FLAG = 1
+    </select>
+    <select id="selectSmdIdByQuestionType" parameterType="int" resultMap="smdResultMap">
+        SELECT
+            s.ID
+        FROM SMD_QUESTIONS s
+        WHERE QUESTION_TYPE=#{questionType}
+    </select>
+
+    <select id="selectSmdQuestionById" parameterType="int" resultType="string">
+        SELECT
+            QUESTION
+        FROM SMD_QUESTIONS
+        WHERE ID=#{id,jdbcType=NUMERIC}
+    </select>
+
+    <select id="selectFspIdByQuestionType" parameterType="int" resultMap="fspResultMap">
+        SELECT
+            ID
+        FROM FSP_QUESTIONS
+        WHERE QUESTION_TYPE=#{questionType}
+    </select>
+
+    <select id="selectFspQuestionById" parameterType="int" resultType="string">
+        SELECT
+            QUESTION
+        FROM FSP_QUESTIONS
+        WHERE ID=#{id,jdbcType=NUMERIC}
     </select>
 
 </mapper>
