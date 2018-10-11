@@ -27,6 +27,17 @@
         </association>
     </resultMap>
 
+
+    <insert id="insertAnswer" parameterType="FspAnswer">
+        INSERT INTO FSP_ANSWER(ID,ANSWER,FSP_ID,EXAM_NO,USER_ID)
+        VALUES (#{id}, #{answer,jdbcType=VARCHAR}, #{fspId,jdbcType=INTEGER}
+        ,  #{examNo,jdbcType=INTEGER},#{userId,jdbcType=INTEGER} )
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT FSP_ANSWER_SEQ.nextval FROM dual
+        </selectKey>
+    </insert>
+
+
     <select id="selectAnswer" parameterType="FspAnswer" resultMap="baseResultMap">
         SELECT
             fa.ID,

@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
 import java.util.*;
 
 @Controller
@@ -531,4 +536,22 @@ public class ExamManageController {
             }
         }
     }
+    @RequestMapping("/insertAnswer")
+    public String insertAnswer(FspAnswer answers,OltsScore score, HttpServletResponse response, HttpServletRequest request) {
+        logger.warn(answers);
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("s",score);
+        try {
+            if (subjectiveAnswerService.insertAnswer(answers, request) > 0) {
+                response.getWriter().write("{\"actionFlag\": true}");
+            } else {
+                response.getWriter().write("{\"actionFlag\": false}");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/login.jsp";
+    }
+
 }
+

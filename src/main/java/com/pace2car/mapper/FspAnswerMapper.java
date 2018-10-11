@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface FspAnswerMapper {
     List<FspAnswer> selectAnswer(FspAnswer fspAnswer);
+
+    int insertAnswer(FspAnswer answer);
 }
