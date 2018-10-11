@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -354,6 +355,43 @@ public class ExamManageController {
         return "examinationMaintainMain";
     }
 
+    @RequestMapping("/radio")
+    public String radio(ModelMap modelMap) {
+        List<Examination> list = examinationPaperService.selectAllExamination();
+        modelMap.addAttribute("list", list);
+        return "searchRadio";
+    }
+
+    @RequestMapping("/checkBox")
+    public String checkBox(ModelMap modelMap) {
+        List<Examination> list = examinationPaperService.selectAllExamination();
+        modelMap.addAttribute("list", list);
+        return "searchCheckBox";
+    }
+
+    @RequestMapping("/judge")
+    public String judge(ModelMap modelMap) {
+        List<Examination> list = examinationPaperService.selectAllExamination();
+        modelMap.addAttribute("list", list);
+        return "searchJudge";
+    }
+
+    @RequestMapping("/shorts")
+    public String shorts(ModelMap modelMap) {
+        List<Examination> list = examinationPaperService.selectAllExamination();
+        modelMap.addAttribute("list", list);
+        return "searchShort";
+    }
+
+    @RequestMapping("/program")
+    public String program(ModelMap modelMap) {
+        List<Examination> list = examinationPaperService.selectAllExamination();
+        modelMap.addAttribute("list", list);
+        return "searchProgram";
+    }
+
+
+
     @RequestMapping("deleteExam")
     public void deleteExamById(ModelMap modelMap, SmdQuestions smdQuestions, Examination examination, FspQuestions fspQuestions,HttpServletResponse response) {
         if (smdQuestions.getQuestionType()==1 || smdQuestions.getQuestionType()==0){
@@ -502,7 +540,7 @@ public class ExamManageController {
 
         if (fspQuestions.getQuestionType()==6 || fspQuestions.getQuestionType()==-4){
             Examination examination1 = examinationPaperService.selectExaminationByExamNo(examination);
-            String id = examination.getSimpleAnwserId();
+            String id = examination.getProgramId();
 
             List<String> sId = new ArrayList();
             List<String> smdAll = new ArrayList();
@@ -538,7 +576,6 @@ public class ExamManageController {
     }
     @RequestMapping("/insertAnswer")
     public String insertAnswer(FspAnswer answers,OltsScore score, HttpServletResponse response, HttpServletRequest request) {
-        logger.warn(answers);
         ModelMap modelMap = new ModelMap();
         modelMap.addAttribute("s",score);
         try {

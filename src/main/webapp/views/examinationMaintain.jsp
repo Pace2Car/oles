@@ -40,7 +40,6 @@
             </div>
 
             <div class="col-lg-12">
-                <form action="">
                     <div style="float: right">
                         <button class="btn btn-primary active" type="button" data-toggle="modal" data-target="#myModal1">增加单选题</button>
                         <button class="btn btn-primary active" type="button" data-toggle="modal" data-target="#myModal2">增加多选题</button>
@@ -244,11 +243,6 @@
                             </div>
                         </div>
                     </c:forEach>
-                    <a href="#" onclick="countScore()"
-                       class="btn btn-w-m btn-info"
-                       data-toggle="modal"
-                       data-target="" data-backdrop="static">提交试卷</a>
-                </form>
             </div>
         </div>
         <!-- main 主体区域 -->

@@ -140,7 +140,7 @@ public class QuestionsController {
             optList.put(h.getId(),details);
         }
         modelMap.addAttribute("optList",optList);
-        return "searchRadio";
+        return "forward:/examManage/radio";
     }
 
     @RequestMapping("/searchCheckBox")
@@ -160,7 +160,7 @@ public class QuestionsController {
             optList.put(h.getId(),details);
         }
         modelMap.addAttribute("optList",optList);
-        return "searchCheckBox";
+        return "forward:/examManage/checkBox";
     }
 
 
@@ -181,7 +181,7 @@ public class QuestionsController {
             optList.put(h.getId(),details);
         }
         modelMap.addAttribute("optList",optList);
-        return "searchJudge";
+        return "forward:/examManage/judge";
     }
 
     @RequestMapping("/searchShort")
@@ -201,7 +201,7 @@ public class QuestionsController {
 //            optList.put(h.getId(),details);
 //        }
 //        modelMap.addAttribute("optList",optList);
-        return "searchShort";
+        return "forward:/examManage/shorts";
     }
 
     @RequestMapping("/searchProgram")
@@ -214,7 +214,7 @@ public class QuestionsController {
         }
         page = (Page<FspQuestions>)questionsService.selectByFspQues(questions, pageNum, 5);
         modelMap.addAttribute("ques", page);
-        return "searchProgram";
+        return "forward:/examManage/program";
     }
 
     @RequestMapping("/toUpdateRadio/{id}")
@@ -384,12 +384,12 @@ public class QuestionsController {
         if (examination.getProgramId() != null) {
             String programId = exam.getProgramId();
             if (programId == null) {
-                programId = examination.getSimpleAnwserId();
-                exam.setSimpleAnwserId(programId);
+                programId = examination.getProgramId();
+                exam.setProgramId(programId);
             }else{
                 StringBuffer newProgramIdId = new StringBuffer(programId);
-                newProgramIdId.append(","+examination.getSimpleAnwserId());
-                exam.setSimpleAnwserId(newProgramIdId.toString());
+                newProgramIdId.append(","+examination.getProgramId());
+                exam.setProgramId(newProgramIdId.toString());
             }
         }
 
