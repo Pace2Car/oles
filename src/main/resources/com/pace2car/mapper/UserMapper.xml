@@ -104,13 +104,14 @@
             where id = #{id,jdbcType=INTEGER}
         </delete>
     <insert id="insert" parameterType="OltsUsers">
-            insert into OLTS_USERS (id, stuNo, idCardNo, userName, password,mobile,homeTel,homeAddr,schAddr,qq,
-            email,userType,gender,birthday,nationPlace,marjor,eduBackground,graduateSchool)
-            values (#{id,jdbcType=INTEGER},#{stuNo,jdbcType=VARCHAR},#{idCardNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            select OLTS_USERS_SEQ.nextval from dual
+        </selectKey>
+            insert into OLTS_USERS
+            values (OLTS_USERS_SEQ.nextval,#{stuNo,jdbcType=VARCHAR},#{idCardNo,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},#{password},
     #{mobile,jdbcType=VARCHAR},#{homeTel,jdbcType=VARCHAR},#{homeAddr,jdbcType=VARCHAR},#{schAddr,jdbcType=VARCHAR},
     #{qq,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{userType,jdbcType=SMALLINT},#{gender,jdbcType=VARCHAR},#{birthday,jdbcType=DATE}
-    ,#{nationPlace,jdbcType=VARCHAR},#{marjor,jdbcType=VARCHAR},#{eduBackground,jdbcType=VARCHAR}
-    #{graduateSchool,jdbcType=VARCHAR})
+    ,#{nationPlace,jdbcType=VARCHAR},#{marjor,jdbcType=VARCHAR},#{eduBackground,jdbcType=VARCHAR},#{graduateSchool,jdbcType=VARCHAR})
         </insert>
 
     <insert id="insertSelective" parameterType="OltsUsers">

@@ -90,7 +90,7 @@ public class UserController {
 
 
     @ResponseBody
-    @RequestMapping(value = "ajaxUpload.do", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "import", method = {RequestMethod.GET, RequestMethod.POST})
     public String ajaxUploadExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
         return userService.ajaxUploadExcel(request, response);
     }

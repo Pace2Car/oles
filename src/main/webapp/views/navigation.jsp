@@ -48,6 +48,8 @@
                 </a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="user/list">用户信息</a></li>
+                    <li><a href="views/userImport.jsp">用户导入</a></li>
+                    <li><a href="user/list">用户操作</a></li>
                 </ul>
             </li>
             <li>
