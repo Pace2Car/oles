@@ -34,7 +34,6 @@
             <div class="row">
                 <div class="col-lg-1"></div>
                 <div class="col-lg-2">
-                    <form action="">
                     <div class="form-group">
                         <label>请输入考试编号：</label>
                         <br>
@@ -42,10 +41,9 @@
                         <br>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">选择
                         </button>
-                        <button type="submit" class="btn btn-outline btn-warning">维护</button>
+                        <button type="button" class="btn btn-outline btn-warning" onclick="maintain()">维护</button>
                         <button type="reset" class="btn btn-outline btn-default">重置</button>
                     </div>
-                    </form>
                 </div>
                 <div class="col-lg-2"></div>
             </div>
@@ -60,11 +58,11 @@
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                         <h4 class="modal-title">请选择考卷编号</h4>
                     </div>
+                    <c:forEach items="${list}" var="list">
                     <div class="modal-body">
-                        <a onclick="document.getElementById('examNo').value=this.innerHTML;" data-dismiss="modal">Text001</a><br>
-                        <a onclick="document.getElementById('examNo').value=this.innerHTML;" data-dismiss="modal">Text002</a><br>
-                        <a onclick="document.getElementById('examNo').value=this.innerHTML;" data-dismiss="modal">Text003</a><br>
+                        <a onclick="document.getElementById('examNo').value=this.innerHTML;" data-dismiss="modal">${list.examNo}</a>
                     </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>
@@ -133,6 +131,12 @@
     })
 
     $("#examNo").val($(".choose").html());
+
+    function maintain(){
+        var examNo = $('#examNo').val();
+        console.dirxml(examNo);
+        location.href="examManage/maintainExaminationPaper?examNo="+examNo;
+    };
 </script>
 
 </body>

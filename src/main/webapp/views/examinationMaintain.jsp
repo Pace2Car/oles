@@ -28,55 +28,222 @@
         <%@include file="header.jsp"%>
         <!-- 顶部导航 -->
         <div class="row wrapper border-bottom white-bg page-heading" style="text-align: center">
+            <div class="col-lg-1"></div>
             <div class="col-lg-10">
-                <h2>试卷维护</h2>
+                <h2>${examination.descrpt}</h2>
                 <ol class="breadcrumb">
                     <li style="color:red">
-                        (编号:XXXXXXXXXXXXX)
+                        <input type="hidden" id="examNo" name="examNo" value="${examination.examNo}">
+                        (编号:${examination.examNo})
                     </li>
                 </ol>
             </div>
+
             <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-content" style="display: block">
-                        <div style="float: right">
-                            <button class="btn btn-primary active" type="button" id="addRadio">增加单选题</button>
-                            <button class="btn btn-primary active" type="button" id="addMulti-select">增加多选题</button>
-                            <button class="btn btn-primary active" type="button" id="addJudge">增加判断题</button>
-                            <button class="btn btn-primary active" type="button" id="addShortAnswer">增加简答题</button>
-                            <button class="btn btn-primary active" type="button" id="addProgramming">增加编程题</button>
-                            <button class="btn btn-primary active" type="button" id="refresh">刷新</button>
-                            <button class="btn btn-primary active" type="button" id="return">返回</button>
-                        </div>
-                        <table class="table table-hover no-margins">
-                            <thead>
-                            <tr>
-                                <th style="font-size: 16px"><strong><i>(一) 简答题 每题5分</i></strong></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>&nbsp;&nbsp;1.&nbsp;&nbsp;<span style="color: blue">请说明&与&&的区别？</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="well" style="font-size: 15px">
-                                        &nbsp;&nbsp;参考答案：单&与双&的区别：&&具有中断功能，而&没有
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a class="btn btn-danger btn-rounded btn-outline" href="#">移除本题</a></td>
-                            </tr>
-                            </tbody>
-                            <tr>
-                                <td style="text-align: center">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-w-m btn-info">完成出卷</button>
-                                </td>
-                            </tr>
-                        </table>
+                <form action="">
+                    <div style="float: right">
+                        <button class="btn btn-primary active" type="button" data-toggle="modal" data-target="#myModal1">增加单选题</button>
+                        <button class="btn btn-primary active" type="button" data-toggle="modal" data-target="#myModal2">增加多选题</button>
+                        <button class="btn btn-primary active" type="button" data-toggle="modal" data-target="#myModal3">增加判断题</button>
+                        <button class="btn btn-primary active" type="button" data-toggle="modal" data-target="#myModal4">增加简答题</button>
+                        <button class="btn btn-primary active" type="button" data-toggle="modal" data-target="#myModal5">增加编程题</button>
+                        <button class="btn btn-primary active" type="button" id="refresh">刷新</button>
+                        <button class="btn btn-primary active" type="button" id="return">返回</button>
                     </div>
-                </div>
+                    <c:forEach items="${sq}" var="sq" varStatus="s">
+                        <div class="ibox float-e-margins border-bottom">
+                            <div class="ibox-content">
+                                <table class="table table-hover no-margins">
+                                    <thead>
+                                    <tr>
+                                        <c:if test="${sq.questionType==1}">
+                                            <td>
+                                                <strong><i>(一)单选题 每题2分</i></strong>
+                                            </td>
+                                        </c:if>
+                                        <c:if test="${sq.questionType==2}">
+                                            <td>
+                                                <strong><i>(二)多选题 每题2分</i></strong>
+                                            </td>
+                                        </c:if>
+                                        <c:if test="${sq.questionType==3}">
+                                            <td>
+                                                <strong><i>(三)判断题 每题2分</i></strong>
+                                            </td>
+                                        </c:if>
+                                    </tr>
+                                    <tr>
+                                        <th style="font-size: 16px"><strong ><i>${s.count}.${sq.question}</i></strong>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:choose>
+                                        <c:when test="${sq.questionType==1 || sq.questionType==0}">
+                                            <tr>
+                                                <td>
+                                            <span style="width: 38px;height: 34px">
+
+                                            <input type="radio" name="s_${sq.id}" id="s_${sq.id}"
+                                                   quesNo="s_${sq.id}" onchange="saveToLocal(this)"
+                                                   currentAns="${sq.correct}" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span
+                                                    style="color: blue">${op.get(sq.id).optionA}</span>
+                                            </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="width: 38px;height: 34px">
+                                            <input type="radio" name="s_${sq.id}" id="s_${sq.id}"
+                                                   quesNo="s_${sq.id}" onchange="saveToLocal(this)" value="B">&nbsp;&nbsp;B.&nbsp;&nbsp;<span
+                                                        style="color: blue">${op.get(sq.id).optionB}</span>
+                                            </span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="width: 38px;height: 34px">
+                                            <input type="radio" name="s_${sq.id}" id="s_${sq.id}"
+                                                   quesNo="s_${sq.id}" onchange="saveToLocal(this)" value="C">&nbsp;&nbsp;C.&nbsp;&nbsp;<span
+                                                        style="color: blue">${op.get(sq.id).optionC}</span>
+                                            </span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="width: 38px;height: 34px">
+                                            <input type="radio" name="s_${sq.id}" id="s_${sq.id}"
+                                                   quesNo="s_${sq.id}" onchange="saveToLocal(this)" value="D">&nbsp;&nbsp;D.&nbsp;&nbsp;<span
+                                                        style="color: blue">${op.get(sq.id).optionD}</span>
+                                            </span></td>
+                                            </tr>
+                                        </c:when>
+                                        <c:when test="${sq.questionType==2 || sq.questionType==-1}">
+                                            <tr>
+                                                <td>
+                                            <span style="width: 38px;height: 34px">
+                                            <input type="checkbox" name="m_${sq.id}"
+                                                   quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span
+                                                    style="color: blue">${op.get(sq.id).optionA}</span>
+                                            </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="width: 38px;height: 34px">
+                                            <input type="checkbox" name="m_${sq.id}"
+                                                   quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="B">&nbsp;&nbsp;B.&nbsp;&nbsp;<span
+                                                        style="color: blue">${op.get(sq.id).optionB}</span>
+                                            </span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="width: 38px;height: 34px">
+                                            <input type="checkbox" name="m_${sq.id}"
+                                                   quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="C">&nbsp;&nbsp;C.&nbsp;&nbsp;<span
+                                                        style="color: blue">${op.get(sq.id).optionC}</span>
+                                            </span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="width: 38px;height: 34px">
+                                            <input type="checkbox" name="m_${sq.id}"
+                                                   quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="D">&nbsp;&nbsp;D.&nbsp;&nbsp;<span
+                                                        style="color: blue">${op.get(sq.id).optionD}</span>
+                                            </span></td>
+                                            </tr>
+                                            <c:if test="${op.get(sq.id).optionE != null}">
+                                                <tr>
+                                                    <td>
+                                                    <span style="width: 38px;height: 34px">
+                                                    <input type="checkbox" name="m_${sq.id}"
+                                                           quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="E">&nbsp;&nbsp;E.&nbsp;&nbsp;
+                                                    <span style="color: blue">${op.get(sq.id).optionE}</span>
+                                                    </span>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
+                                        </c:when>
+
+                                        <c:when test="${sq.questionType==3 || sq.questionType==-2}">
+                                            <tr>
+                                                <td>
+                                                    <div class="col-lg-8">
+                                                        <label> <input type="radio" currentAns="${sq.id}${sq.correct}" value="对"
+                                                                       quesNo="j_${sq.id}" onchange="saveToLocal(this)"
+                                                                       name="j_${sq.id}"> 对 </label>
+                                                        <label> <input type="radio" value="错"
+                                                                       quesNo="j_${sq.id}" onchange="saveToLocal(this)"
+                                                                       name="j_${sq.id}"> 错 </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </c:when>
+                                    </c:choose>
+                                    <tr>
+                                        <td>
+                                            <button type="button" class="btn btn-outline btn-warning">移除本题</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <c:forEach items="${fq}" var="fq" varStatus="s">
+                        <div class="ibox float-e-margins border-bottom">
+                            <div class="ibox-content">
+                                <table class="table table-hover no-margins">
+                                    <thead>
+                                    <tr>
+                                        <c:if test="${fq.questionType==5}">
+                                            <td>
+                                                <strong><i>(四)简答题 每题5分</i></strong>
+                                            </td>
+                                        </c:if>
+                                        <c:if test="${fq.questionType==6}">
+                                            <td>
+                                                <strong><i>(五)编程题 每题10分</i></strong>
+                                            </td>
+                                        </c:if>
+                                    </tr>
+                                    <tr>
+                                        <th style="font-size: 16px">
+                                            <strong><i>${s.count}.${fq.question}</i></strong>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:choose>
+                                        <c:when test="${fq.questionType==5||fq.questionType==-3}">
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <textarea class="form-control" rows="5"
+                                                                  id="sa_${fq.id}" quesNo="sa_${fq.id}" onchange="saveToLocal(this)"
+                                                                  name="stdAnswer" ></textarea>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </c:when>
+                                        <c:when test="${fq.questionType==6 || fq.questionType==-4}">
+                                            <tr>
+                                                <td>
+                                                    <textarea class="form-control" rows="14"
+                                                              id="p_${fq.id}" quesNo="p_${fq.id}"
+                                                              name="stdAnswer" onchange="saveToLocal(this)"></textarea>
+                                                </td>
+                                            </tr>
+                                        </c:when>
+                                    </c:choose>
+                                    <tr>
+                                        <td>
+                                            <button type="button" class="btn btn-outline btn-warning">移除本题</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <a href="#" onclick="countScore()"
+                       class="btn btn-w-m btn-info"
+                       data-toggle="modal"
+                       data-target="" data-backdrop="static">提交试卷</a>
+                </form>
             </div>
         </div>
         <!-- main 主体区域 -->
@@ -92,7 +259,101 @@
         <!-- footer 底部包装区域 -->
         <%@include file="footer.jsp"%>
     </div>
+    <!-- 选择模态框 -->
+    <div class="modal inmodal fade" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h1 class="modal-title">请选择新增的单选试题编号</h1>
+                </div>
+                <c:forEach items="${s}" var="sId">
+                    <div class="modal-body" style="text-align: center">
+                        <a onclick="addSingle()" data-dismiss="modal" id="sId">${sId}</a>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </div>
 
+    <!-- 选择模态框 -->
+    <div class="modal inmodal fade" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h1 class="modal-title">请选择新增的多选试题编号</h1>
+                </div>
+                <c:forEach items="${m}" var="mId">
+                    <div class="modal-body" style="text-align: center">
+                        <a onclick="addMultiple()" data-dismiss="modal" id="mId">${mId}</a>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </div>
+
+    <!-- 选择模态框 -->
+    <div class="modal inmodal fade" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h1 class="modal-title">请选择新增的判断试题编号</h1>
+                </div>
+                <c:forEach items="${t}" var="tId">
+                    <div class="modal-body" style="text-align: center">
+                        <a onclick="addTrueFalse()" id="tId" data-dismiss="modal">${tId}</a>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </div>
+
+    <!-- 选择模态框 -->
+    <div class="modal inmodal fade" id="myModal4" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h1 class="modal-title">请选择新增的简答题编号</h1>
+                </div>
+                <c:forEach items="${san}" var="sAnswerId">
+                    <div class="modal-body" style="text-align: center">
+                        <a onclick="addSimpleAnswert()" id="sanId" data-dismiss="modal">${sAnswerId}</a>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </div>
+
+    <!-- 选择模态框 -->
+    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h1 class="modal-title">请选择新增的编程题编号</h1>
+                </div>
+                <c:forEach items="${p}" var="pId">
+                    <div class="modal-body" style="text-align: center">
+                        <a onclick="addProgram()" id="pId" data-dismiss="modal">${pId}</a>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </div>
+    <%--成功提示模态框--%>
+    <div id="successAlert" class="alert alert-success col-md-2"
+         style="margin-right: 5px;position: fixed; right: 5px; bottom: 5px;">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>成功！</strong>操作成功！
+    </div>
+    <div id="failAlert" class="alert alert-warning col-md-2"
+         style="margin-right: 5px;position: fixed; right: 5px; bottom: 5px;">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong style="color: red">失败！</strong>操作失败！
+    </div>
 </div>
 
 
@@ -111,6 +372,11 @@
 
 
 <script>
+    $(function () {
+        $('#successAlert').hide();
+        $('#failAlert').hide();
+    });
+
     $(document).ready(function () {
 
         Dropzone.options.myAwesomeDropzone = {
@@ -151,9 +417,85 @@
 
     $(function () {
         $("#return").click(function () {
-            window.location.replace("views/SerialNumber.jsp");;
+            window.location.replace("examManage/maintain");;
         })
     })
+
+    function addSingle(){
+        var examNo = $('#examNo').val();
+        var sId = $('#sId').html();
+        var s = sId.substring(0,sId.indexOf("、"));
+        $.post("ques/toAdd?examNo="+examNo+"&singleId="+s,function (json) {
+            if (json.actionFlag) {
+                $('#successAlert').show();
+                setTimeout("$('#successAlert').hide()", 3000);
+            } else {
+                $('#failAlert').show();
+                setTimeout("$('#failAlert').hide()", 3000);
+            }
+        },"json")
+    }
+
+    function addMultiple(){
+        var examNo = $('#examNo').val();
+        var mId = $('#mId').html();
+        var m = mId.substring(0,mId.indexOf("、"));
+        $.post("ques/toAdd?examNo="+examNo+"&multipleId="+m,function (json) {
+            if (json.actionFlag) {
+                $('#successAlert').show();
+                setTimeout("$('#successAlert').hide()", 3000);
+            } else {
+                $('#failAlert').show();
+                setTimeout("$('#failAlert').hide()", 3000);
+            }
+        },"json")
+    }
+
+    function addTrueFalse(){
+        var examNo = $('#examNo').val();
+        var tId = $('#tId').html();
+        var t = tId.substring(0,tId.indexOf("、"));
+        $.post("ques/toAdd?examNo="+examNo+"&trueFalseId="+t,function (json) {
+            if (json.actionFlag) {
+                $('#successAlert').show();
+                setTimeout("$('#successAlert').hide()", 3000);
+            } else {
+                $('#failAlert').show();
+                setTimeout("$('#failAlert').hide()", 3000);
+            }
+        },"json")
+    }
+
+    function addSimpleAnswert(){
+        var examNo = $('#examNo').val();
+        var sanId = $('#sanId').html();
+        var san = sanId.substring(0,sanId.indexOf("、"));
+        $.post("ques/toAdd?examNo="+examNo+"&simpleAnwserId="+san,function (json) {
+            if (json.actionFlag) {
+                $('#successAlert').show();
+                setTimeout("$('#successAlert').hide()", 3000);
+            } else {
+                $('#failAlert').show();
+                setTimeout("$('#failAlert').hide()", 3000);
+            }
+        },"json")
+    }
+
+    function addProgram(){
+        var examNo = $('#examNo').val();
+        var pId = $('#pId').html();
+        var p = pId.substring(0,pId.indexOf("、"));
+        $.post("ques/toAdd?examNo="+examNo+"&programId="+p,function (json) {
+            if (json.actionFlag) {
+                $('#successAlert').show();
+                setTimeout("$('#successAlert').hide()", 3000);
+            } else {
+                $('#failAlert').show();
+                setTimeout("$('#failAlert').hide()", 3000);
+            }
+        },"json")
+    }
+
 </script>
 
 </body>

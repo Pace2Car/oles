@@ -97,4 +97,25 @@ public class ExaminationPaperServiceTest {
         }
 
     }
+
+    @Test
+    public void selectSmdIdByQuestionType() {
+        List<SmdQuestions> smdQuestions = examinationPaperService.selectSmdIdByQuestionType(1);
+        for (SmdQuestions smdQuestion : smdQuestions) {
+            System.out.println(smdQuestion);
+        }
+    }
+
+    @Test
+    public void selectSmdQuestionById() {
+        System.out.println(examinationPaperService.selectSmdQuestionById(4));
+    }
+
+    @Test
+    public void selectFmdIdByQuestionType() {
+        List<FspQuestions> fspQuestions = examinationPaperService.selectFspIdByQuestionType(5);
+        for (FspQuestions fspQuestion : fspQuestions) {
+            System.out.println(fspQuestion);
+        }
+    }
 }

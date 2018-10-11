@@ -2,6 +2,8 @@ package com.pace2car.service.impl;
 
 
 import com.pace2car.entity.Examination;
+import com.pace2car.entity.FspQuestions;
+import com.pace2car.entity.SmdQuestions;
 import com.pace2car.mapper.ExaminationMapper;
 import com.pace2car.service.IExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +46,25 @@ public class ExaminationServiceImpl implements IExaminationService {
     @Override
     public Examination selectCurrentExamination() {
         return examinationMapper.selectCurrentExamination();
+    }
+
+    @Override
+    public List<SmdQuestions> selectSmdIdByQuestionType(Integer questionType) {
+        return examinationMapper.selectSmdIdByQuestionType(questionType);
+    }
+
+    @Override
+    public String selectSmdQuestionById(Integer id) {
+        return examinationMapper.selectSmdQuestionById(id);
+    }
+
+    @Override
+    public List<FspQuestions> selectFspIdByQuestionType(Integer questionType) {
+        return examinationMapper.selectFspIdByQuestionType(questionType);
+    }
+
+    @Override
+    public String selectFspQuestionById(Integer id) {
+        return examinationMapper.selectFspQuestionById(id);
     }
 }
