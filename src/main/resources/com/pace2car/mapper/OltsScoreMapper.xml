@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pace2car.mapper.OltsScoreMapper">
+
+    <resultMap id="baseResultMap" type="OltsScore">
+        <id property="id" column="ID"/>
+        <result property="score" column="SCORE"/>
+        <result property="fspScore" column="FSP_SCORE"/>
+        <result property="testDate" column="TEST_DATE"/>
+        <result property="descrpt" column="DESCRPT"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="examNo" column="EXAM_NO"/>
+    </resultMap>
+
+    <select id="selectAllScore" resultMap="baseResultMap">
+        SELECT ID,
+               SCORE,
+               FSP_SCORE,
+               TEST_DATE,
+               DESCRPT,
+               USER_ID,
+               EXAM_NO
+        FROM OLTS_SCORE
+        ORDER BY ID
+    </select>
+
+    <update id="updateScore" parameterType="OltsScore">
+        UPDATE OLTS_SCORE
+        <trim prefix="set" suffixOverrides=",">
+            <if test="fspScore!=null">FSP_SCORE=#{fspScore,jdbcType=NUMERIC},</if>
+        </trim>
+        WHERE EXAM_NO=#{examNo,jdbcType=VARCHAR}
+        AND USER_ID=#{userId,NUMERIC}
+    </update>
+
+</mapper>
