@@ -15,4 +15,6 @@ public interface OltsScoreMapper {
     List<OltsScore> selectAllScore();
 
     int updateScore(OltsScore oltsScore);
+
+    int insertScore(OltsScore oltsScore);
 }

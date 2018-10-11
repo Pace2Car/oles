@@ -41,158 +41,118 @@ public class QuestionsController {
         return coursesService.selectCourses(null);
     }
 
-    @RequestMapping(value = {"/load_tech_by_id"},method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = {"/load_tech_by_id"}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public List<TechCategory> loadTech(@RequestParam("courseId") Integer id){
+    public List<TechCategory> loadTech(@RequestParam("courseId") Integer id) {
         return questionsService.selectTech(id);
     }
 
     @RequestMapping("/addRadio")
-    public void insertRadio(SmdQuestions questions, SmdOptions options,HttpServletResponse response){
-        try {
-            questionsService.insertRadio(questions);
-            options.setQuestionId(questions.getId());
-            if (
-                questionsService.insertRadioOpt(options) > 0) {
-                response.getWriter().write("{\"actionFlag\": true}");
-            } else {
-                response.getWriter().write("{\"actionFlag\": false}");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String insertRadio(SmdQuestions questions, SmdOptions options, HttpServletResponse response) {
+
+        questionsService.insertRadio(questions);
+        options.setQuestionId(questions.getId());
+        questionsService.insertRadioOpt(options);
+        return "addRadio";
     }
 
     @RequestMapping("/addCheckBox")
-    public void insertCheckBox(SmdQuestions questions, SmdOptions options,HttpServletResponse response){
-        try {
-            questionsService.insertCheckBox(questions);
-            options.setQuestionId(questions.getId());
-            if (
-                    questionsService.insertCheckBoxOpt(options) > 0) {
-                response.getWriter().write("{\"actionFlag\": true}");
-            } else {
-                response.getWriter().write("{\"actionFlag\": false}");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String insertCheckBox(SmdQuestions questions, SmdOptions options, HttpServletResponse response) {
+        questionsService.insertCheckBox(questions);
+        options.setQuestionId(questions.getId());
+        questionsService.insertCheckBoxOpt(options);
+        return "addCheckBox";
     }
 
     @RequestMapping("/addJudge")
-    public void insertJudge(SmdQuestions questions,HttpServletResponse response){
-        try {
-            if (
-                    questionsService.insertJudge(questions) > 0) {
-                response.getWriter().write("{\"actionFlag\": true}");
-            } else {
-                response.getWriter().write("{\"actionFlag\": false}");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String insertJudge(SmdQuestions questions, HttpServletResponse response) {
+        questionsService.insertJudge(questions);
+        return "addJudge";
     }
-
 
 
     @RequestMapping("/addShort")
-    public void insertShort(FspQuestions questions, HttpServletResponse response){
-        try {
-
-            if (questionsService.insertShort(questions) > 0) {
-                response.getWriter().write("{\"actionFlag\": true}");
-            } else {
-                response.getWriter().write("{\"actionFlag\": false}");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String insertShort(FspQuestions questions, HttpServletResponse response) {
+        questionsService.insertShort(questions);
+        return "addShort";
     }
 
     @RequestMapping("/addProgram")
-    public void insertProgram(FspQuestions questions,HttpServletResponse response){
-        try {
-
-            if (questionsService.insertProgram(questions) > 0) {
-                response.getWriter().write("{\"actionFlag\": true}");
-            } else {
-                response.getWriter().write("{\"actionFlag\": false}");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String insertProgram(FspQuestions questions, HttpServletResponse response) {
+        questionsService.insertProgram(questions);
+        return "addProgram";
     }
 
     @RequestMapping("/searchRadio")
-    public String searchRadio(SmdQuestions questions,SmdOptions options,Integer pageNum, ModelMap modelMap){
+    public String searchRadio(SmdQuestions questions, SmdOptions options, Integer pageNum, ModelMap modelMap) {
         Map<Integer, SmdOptions> optList = new HashMap<>();
         Page<SmdQuestions> page = null;
         //查询
         if (pageNum == null) {
             pageNum = 1;
         }
-        page = (Page<SmdQuestions>)questionsService.selectBySmdQues(questions, pageNum, 5);
+        page = (Page<SmdQuestions>) questionsService.selectBySmdQues(questions, pageNum, 5);
         modelMap.addAttribute("ques", page);
         for (SmdQuestions h : page.getResult()) {
             SmdOptions details = new SmdOptions();
             options.setQuestionId(h.getId());
             details = questionsService.selectBySmdOpt(options.getQuestionId());
-            optList.put(h.getId(),details);
+            optList.put(h.getId(), details);
         }
-        modelMap.addAttribute("optList",optList);
+        modelMap.addAttribute("optList", optList);
         return "forward:/examManage/radio";
     }
 
     @RequestMapping("/searchCheckBox")
-    public String searchCheckBox(SmdQuestions questions,SmdOptions options,Integer pageNum, ModelMap modelMap){
+    public String searchCheckBox(SmdQuestions questions, SmdOptions options, Integer pageNum, ModelMap modelMap) {
         Map<Integer, SmdOptions> optList = new HashMap<>();
         Page<SmdQuestions> page = null;
         //查询
         if (pageNum == null) {
             pageNum = 1;
         }
-        page = (Page<SmdQuestions>)questionsService.selectBySmdQues(questions, pageNum, 5);
+        page = (Page<SmdQuestions>) questionsService.selectBySmdQues(questions, pageNum, 5);
         modelMap.addAttribute("ques", page);
         for (SmdQuestions h : page.getResult()) {
             SmdOptions details = new SmdOptions();
             options.setQuestionId(h.getId());
             details = questionsService.selectBySmdOpt(options.getQuestionId());
-            optList.put(h.getId(),details);
+            optList.put(h.getId(), details);
         }
-        modelMap.addAttribute("optList",optList);
+        modelMap.addAttribute("optList", optList);
         return "forward:/examManage/checkBox";
     }
 
 
     @RequestMapping("/searchJudge")
-    public String searchJudge(SmdQuestions questions,SmdOptions options,Integer pageNum, ModelMap modelMap){
+    public String searchJudge(SmdQuestions questions, SmdOptions options, Integer pageNum, ModelMap modelMap) {
         Map<Integer, SmdOptions> optList = new HashMap<>();
         Page<SmdQuestions> page = null;
         //查询
         if (pageNum == null) {
             pageNum = 1;
         }
-        page = (Page<SmdQuestions>)questionsService.selectBySmdQues(questions, pageNum, 5);
+        page = (Page<SmdQuestions>) questionsService.selectBySmdQues(questions, pageNum, 5);
         modelMap.addAttribute("ques", page);
         for (SmdQuestions h : page.getResult()) {
             SmdOptions details = new SmdOptions();
             options.setQuestionId(h.getId());
             details = questionsService.selectBySmdOpt(options.getQuestionId());
-            optList.put(h.getId(),details);
+            optList.put(h.getId(), details);
         }
-        modelMap.addAttribute("optList",optList);
+        modelMap.addAttribute("optList", optList);
         return "forward:/examManage/judge";
     }
 
     @RequestMapping("/searchShort")
-    public String searchShort(FspQuestions questions,FspAnswer answer,Integer pageNum, ModelMap modelMap){
+    public String searchShort(FspQuestions questions, FspAnswer answer, Integer pageNum, ModelMap modelMap) {
         Map<Integer, FspAnswer> optList = new HashMap<>();
         Page<FspQuestions> page = null;
         //查询
         if (pageNum == null) {
             pageNum = 1;
         }
-        page = (Page<FspQuestions>)questionsService.selectByFspQues(questions, pageNum, 5);
+        page = (Page<FspQuestions>) questionsService.selectByFspQues(questions, pageNum, 5);
         modelMap.addAttribute("ques", page);
 //        for (FspQuestions h : page.getResult()) {
 //            FspAnswer details = new FspAnswer();
@@ -205,20 +165,20 @@ public class QuestionsController {
     }
 
     @RequestMapping("/searchProgram")
-    public String searchProgram(FspQuestions questions,FspAnswer answer,Integer pageNum, ModelMap modelMap){
+    public String searchProgram(FspQuestions questions, FspAnswer answer, Integer pageNum, ModelMap modelMap) {
         Map<Integer, FspAnswer> optList = new HashMap<>();
         Page<FspQuestions> page = null;
         //查询
         if (pageNum == null) {
             pageNum = 1;
         }
-        page = (Page<FspQuestions>)questionsService.selectByFspQues(questions, pageNum, 5);
+        page = (Page<FspQuestions>) questionsService.selectByFspQues(questions, pageNum, 5);
         modelMap.addAttribute("ques", page);
         return "forward:/examManage/program";
     }
 
     @RequestMapping("/toUpdateRadio/{id}")
-    public String toUpdateRadio(@PathVariable Integer id,ModelMap modelMap) {
+    public String toUpdateRadio(@PathVariable Integer id, ModelMap modelMap) {
         SmdQuestions q = questionsService.selectBySmdQuesI(id);
         SmdOptions o = questionsService.selectBySmdOpt(id);
         modelMap.addAttribute("quesId", q);
@@ -227,7 +187,7 @@ public class QuestionsController {
     }
 
     @RequestMapping("/toUpdateCheckBox/{id}")
-    public String toUpdateCheckBox(@PathVariable Integer id,ModelMap modelMap) {
+    public String toUpdateCheckBox(@PathVariable Integer id, ModelMap modelMap) {
         SmdQuestions q = questionsService.selectBySmdQuesI(id);
         SmdOptions o = questionsService.selectBySmdOpt(id);
         modelMap.addAttribute("quesId", q);
@@ -236,32 +196,32 @@ public class QuestionsController {
     }
 
     @RequestMapping("/toUpdateJudge/{id}")
-    public String toUpdateJudge(@PathVariable Integer id,ModelMap modelMap) {
+    public String toUpdateJudge(@PathVariable Integer id, ModelMap modelMap) {
         SmdQuestions q = questionsService.selectBySmdQuesI(id);
         modelMap.addAttribute("quesId", q);
         return "updateJudge";
     }
 
     @RequestMapping("/toUpdateShort/{id}")
-    public String toUpdateShort(@PathVariable Integer id,ModelMap modelMap) {
+    public String toUpdateShort(@PathVariable Integer id, ModelMap modelMap) {
         FspQuestions q = questionsService.selectByFspQuesI(id);
         modelMap.addAttribute("quesId", q);
         return "updateShort";
     }
 
     @RequestMapping("/toUpdateProgram/{id}")
-    public String toUpdateProgram(@PathVariable Integer id,ModelMap modelMap) {
+    public String toUpdateProgram(@PathVariable Integer id, ModelMap modelMap) {
         FspQuestions q = questionsService.selectByFspQuesI(id);
         modelMap.addAttribute("quesId", q);
         return "updateProgram";
     }
 
-    @RequestMapping(value="/updateSmd", method = RequestMethod.POST)
-    public void updateSmd(SmdQuestions questions,SmdOptions options,HttpServletResponse response){
+    @RequestMapping(value = "/updateSmd", method = RequestMethod.POST)
+    public void updateSmd(SmdQuestions questions, SmdOptions options, HttpServletResponse response) {
         try {
             int i = questionsService.updateSmdQues(questions);
             options.setQuestionId(questions.getId());
-            i =i + questionsService.updateSmdOpt(options);
+            i = i + questionsService.updateSmdOpt(options);
             if (i >= 0) {
                 response.getWriter().write("{\"actionFlag\": true}");
             } else {
@@ -272,8 +232,8 @@ public class QuestionsController {
         }
     }
 
-    @RequestMapping(value="/updateJugde", method = RequestMethod.POST)
-    public void updateJugde(SmdQuestions questions,HttpServletResponse response){
+    @RequestMapping(value = "/updateJugde", method = RequestMethod.POST)
+    public void updateJugde(SmdQuestions questions, HttpServletResponse response) {
         try {
             int i = questionsService.updateSmdQues(questions);
             if (i >= 0) {
@@ -286,8 +246,8 @@ public class QuestionsController {
         }
     }
 
-    @RequestMapping(value="/updateFsp", method = RequestMethod.POST)
-    public void updateFsp(FspQuestions questions,HttpServletResponse response){
+    @RequestMapping(value = "/updateFsp", method = RequestMethod.POST)
+    public void updateFsp(FspQuestions questions, HttpServletResponse response) {
         try {
             int i = questionsService.updateFspQues(questions);
             if (i > 0) {
@@ -300,8 +260,8 @@ public class QuestionsController {
         }
     }
 
-    @RequestMapping(value="/deleteSmd", method = RequestMethod.GET)
-    public void deleteSmd(SmdQuestions questions, Integer id,HttpServletResponse response){
+    @RequestMapping(value = "/deleteSmd", method = RequestMethod.GET)
+    public void deleteSmd(SmdQuestions questions, Integer id, HttpServletResponse response) {
         try {
             int i = questionsService.deleteSmdOpt(id);
             i += questionsService.deleteSmdQues(questions);
@@ -315,8 +275,8 @@ public class QuestionsController {
         }
     }
 
-    @RequestMapping(value="/deleteFsp", method = RequestMethod.GET)
-    public void deleteFsp(FspQuestions questions, HttpServletResponse response){
+    @RequestMapping(value = "/deleteFsp", method = RequestMethod.GET)
+    public void deleteFsp(FspQuestions questions, HttpServletResponse response) {
         try {
             int i = questionsService.deleteFspQues(questions);
             if (i > 0) {
@@ -331,28 +291,28 @@ public class QuestionsController {
 
 
     @RequestMapping("/toAdd")
-    public void updateExam(Examination examination,HttpServletResponse response){
+    public void updateExam(Examination examination, HttpServletResponse response) {
         Examination exam = examinationService.selectExaminationByExamNo(examination);
-        if(examination.getSingleId() != null) {
+        if (examination.getSingleId() != null) {
             String singleId = exam.getSingleId();
             if (singleId == null) {
                 singleId = examination.getSingleId();
                 exam.setSingleId(singleId);
-            }else{
+            } else {
                 StringBuffer newSingleId = new StringBuffer(singleId);
-                newSingleId.append(","+examination.getSingleId());
+                newSingleId.append("," + examination.getSingleId());
                 exam.setSingleId(newSingleId.toString());
             }
         }
 
         if (examination.getMultipleId() != null) {
             String multipleId = exam.getMultipleId();
-            if(multipleId != null) {
+            if (multipleId != null) {
                 StringBuffer newMultipleId = new StringBuffer(multipleId);
-                newMultipleId.append(","+examination.getMultipleId());
+                newMultipleId.append("," + examination.getMultipleId());
                 exam.setMultipleId(newMultipleId.toString());
-            }else {
-                multipleId=examination.getMultipleId();
+            } else {
+                multipleId = examination.getMultipleId();
                 exam.setMultipleId(multipleId);
             }
         }
@@ -362,9 +322,9 @@ public class QuestionsController {
             if (trueFalseId == null) {
                 trueFalseId = examination.getTrueFalseId();
                 exam.setTrueFalseId(trueFalseId);
-            }else {
+            } else {
                 StringBuffer newTrueFalseId = new StringBuffer(trueFalseId);
-                newTrueFalseId.append(","+examination.getTrueFalseId());
+                newTrueFalseId.append("," + examination.getTrueFalseId());
                 exam.setTrueFalseId(newTrueFalseId.toString());
             }
         }
@@ -374,9 +334,9 @@ public class QuestionsController {
             if (simpleAnwserId == null) {
                 simpleAnwserId = examination.getSimpleAnwserId();
                 exam.setSimpleAnwserId(simpleAnwserId);
-            }else{
+            } else {
                 StringBuffer newSimpleAnwserId = new StringBuffer(simpleAnwserId);
-                newSimpleAnwserId.append(","+examination.getSimpleAnwserId());
+                newSimpleAnwserId.append("," + examination.getSimpleAnwserId());
                 exam.setSimpleAnwserId(newSimpleAnwserId.toString());
             }
         }
@@ -386,9 +346,9 @@ public class QuestionsController {
             if (programId == null) {
                 programId = examination.getProgramId();
                 exam.setProgramId(programId);
-            }else{
+            } else {
                 StringBuffer newProgramIdId = new StringBuffer(programId);
-                newProgramIdId.append(","+examination.getProgramId());
+                newProgramIdId.append("," + examination.getProgramId());
                 exam.setProgramId(newProgramIdId.toString());
             }
         }
@@ -396,7 +356,7 @@ public class QuestionsController {
         try {
             int i = questionsService.updateExam(exam);
             if (
-                i > 0) {
+                    i > 0) {
                 response.getWriter().write("{\"actionFlag\": true}");
             } else {
                 response.getWriter().write("{\"actionFlag\": false}");

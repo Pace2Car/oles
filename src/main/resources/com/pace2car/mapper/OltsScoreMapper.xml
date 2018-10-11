@@ -15,6 +15,16 @@
         <result property="examNo" column="EXAM_NO"/>
     </resultMap>
 
+    <insert id="insertScore" parameterType="OltsScore">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT OLTS_SCORE_SEQ.nextval FROM dual
+        </selectKey>
+        INSERT INTO OLTS_SCORE(ID,SCORE,FSP_SCORE,TEST_DATE,DESCRPT,USER_ID,EXAM_NO)
+        VALUES (#{id}, #{score,jdbcType=INTEGER}, #{fspScore,jdbcType=INTEGER},
+        #{testDate,jdbcType=DATE}, #{descrpt,jdbcType=VARCHAR},
+        #{userId,jdbcType=INTEGER},#{examNo,jdbcType=VARCHAR})
+    </insert>
+
     <select id="selectAllScore" resultMap="baseResultMap">
         SELECT ID,
                SCORE,

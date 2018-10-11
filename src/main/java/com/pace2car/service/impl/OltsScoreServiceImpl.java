@@ -27,4 +27,9 @@ public class OltsScoreServiceImpl implements IOltsScoreService {
     public int updateScore(OltsScore oltsScore) {
         return oltsScoreMapper.updateScore(oltsScore);
     }
+
+    @Override
+    public int insertScore(OltsScore oltsScore) {
+        return oltsScoreMapper.insertScore(oltsScore);
+    }
 }

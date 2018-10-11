@@ -191,15 +191,7 @@
             },"json");
         });
     })
-    function ret() {
-        if (json.actionFlag) {
-            $('#successAlert').show();
-            setTimeout("$('#successAlert').hide()", 3000);
-        } else {
-            $('#failAlert').show();
-            setTimeout("$('#failAlert').hide()", 3000);
-        }
-    }
+
 </script>
 </body>
 

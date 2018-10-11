@@ -13,4 +13,6 @@ public interface IOltsScoreService {
     List<OltsScore> selectAllScore();
 
     int updateScore(OltsScore oltsScore);
+
+    int insertScore(OltsScore oltsScore);
 }

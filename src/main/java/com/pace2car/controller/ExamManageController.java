@@ -4,6 +4,7 @@ package com.pace2car.controller;
 import com.pace2car.entity.*;
 import com.pace2car.service.IExaminationService;
 import com.pace2car.service.IFspAnswerService;
+import com.pace2car.service.IOltsScoreService;
 import com.pace2car.service.IQuestionsService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ import java.util.*;
 @Controller
 @RequestMapping("/examManage")
 public class ExamManageController {
-    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(ExamManageController.class);
 
     private static Logger logger = Logger.getLogger(ExamManageController.class);
 
@@ -39,6 +39,9 @@ public class ExamManageController {
 
     @Autowired(required = false)
     private IExaminationService examinationService;
+
+    @Autowired(required = false)
+    private IOltsScoreService scoreService;
 
     @RequestMapping("/searchExamination")
     public String searchExamination(Examination examination, ModelMap modelMap, HttpSession session) {
@@ -578,8 +581,8 @@ public class ExamManageController {
 
     @RequestMapping("/insertAnswer")
     public String insertAnswer(FspAnswer answers,OltsScore score, HttpServletResponse response, HttpServletRequest request) {
-        ModelMap modelMap = new ModelMap();
-        modelMap.addAttribute("s",score);
+
+        scoreService.insertScore(score);
         try {
             if (subjectiveAnswerService.insertAnswer(answers, request) > 0) {
                 response.getWriter().write("{\"actionFlag\": true}");
@@ -589,7 +592,7 @@ public class ExamManageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "redirect:/login.jsp";
+        return "redirect:/user/logOut";
     }
 
 }
