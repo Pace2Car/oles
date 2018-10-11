@@ -15,17 +15,17 @@
     <link href="vendor/css/plugins/dropzone/basic.css" rel="stylesheet">
     <link href="vendor/css/plugins/dropzone/dropzone.css" rel="stylesheet">
     <link href="vendor/css/style.css" rel="stylesheet">
-    <SCRIPT LANGUAGE="JavaScript">
-        var i=0;
-        function auto_submit (){
-            i++;
-            var choose = confirm("你试图离开当前窗口,警告第"+i+"次，三次后系统将自动提交试卷!("+i+"/3)");
-            if(i==3 && choose){
-                window.location.href="http://www.mps.gov.cn/";
-            }
-        }
-            window.onblur=auto_submit;
-    </SCRIPT>
+    <%--<SCRIPT LANGUAGE="JavaScript">--%>
+    <%--var i=0;--%>
+    <%--function auto_submit (){--%>
+    <%--i++;--%>
+    <%--var choose = confirm("你试图离开当前窗口,警告第"+i+"次，三次后系统将自动提交试卷!("+i+"/3)");--%>
+    <%--if(i==3 && choose){--%>
+    <%--window.location.href="http://www.mps.gov.cn/";--%>
+    <%--}--%>
+    <%--}--%>
+    <%--window.onblur=auto_submit;--%>
+    <%--</SCRIPT>--%>
 </head>
 
 <body>
@@ -49,7 +49,10 @@
             </div>
 
             <div class="col-lg-12">
-                <form action="">
+                <form action="" id="submitForm">
+                    <input type="hidden" name="examNo" value="${examination.examNo}">
+                    <input type="hidden" name="userId" value="${logUser.id}">
+                    <input type="hidden" id="score" name="score" >
                     <c:forEach items="${sq}" var="sq" varStatus="s">
                         <div class="ibox float-e-margins border-bottom">
                             <div class="ibox-content">
@@ -73,7 +76,7 @@
                                         </c:if>
                                     </tr>
                                     <tr>
-                                        <th style="font-size: 16px"><strong ><i>${s.count}.${sq.question}</i></strong>
+                                        <th style="font-size: 16px"><strong><i>${s.count}.${sq.question}</i></strong>
                                         </th>
                                     </tr>
                                     </thead>
@@ -94,6 +97,7 @@
                                             <tr>
                                                 <td><span style="width: 38px;height: 34px">
                                             <input type="radio" name="s_${sq.id}" id="s_${sq.id}"
+                                                   currentAns="${sq.correct}"
                                                    quesNo="s_${sq.id}" onchange="saveToLocal(this)" value="B">&nbsp;&nbsp;B.&nbsp;&nbsp;<span
                                                         style="color: blue">${op.get(sq.id).optionB}</span>
                                             </span></td>
@@ -101,6 +105,7 @@
                                             <tr>
                                                 <td><span style="width: 38px;height: 34px">
                                             <input type="radio" name="s_${sq.id}" id="s_${sq.id}"
+                                                   currentAns="${sq.correct}"
                                                    quesNo="s_${sq.id}" onchange="saveToLocal(this)" value="C">&nbsp;&nbsp;C.&nbsp;&nbsp;<span
                                                         style="color: blue">${op.get(sq.id).optionC}</span>
                                             </span></td>
@@ -108,6 +113,7 @@
                                             <tr>
                                                 <td><span style="width: 38px;height: 34px">
                                             <input type="radio" name="s_${sq.id}" id="s_${sq.id}"
+                                                   currentAns="${sq.correct}"
                                                    quesNo="s_${sq.id}" onchange="saveToLocal(this)" value="D">&nbsp;&nbsp;D.&nbsp;&nbsp;<span
                                                         style="color: blue">${op.get(sq.id).optionD}</span>
                                             </span></td>
@@ -117,7 +123,7 @@
                                             <tr>
                                                 <td>
                                             <span style="width: 38px;height: 34px">
-                                            <input type="checkbox" name="m_${sq.id}"
+                                            <input type="checkbox" name="m_${sq.id}" currentAns="${sq.correct}"
                                                    quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="A">&nbsp;&nbsp;A.&nbsp;&nbsp;<span
                                                     style="color: blue">${op.get(sq.id).optionA}</span>
                                             </span>
@@ -125,35 +131,35 @@
                                             </tr>
                                             <tr>
                                                 <td><span style="width: 38px;height: 34px">
-                                            <input type="checkbox" name="m_${sq.id}"
+                                            <input type="checkbox" name="m_${sq.id}" currentAns="${sq.correct}"
                                                    quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="B">&nbsp;&nbsp;B.&nbsp;&nbsp;<span
                                                         style="color: blue">${op.get(sq.id).optionB}</span>
                                             </span></td>
                                             </tr>
                                             <tr>
                                                 <td><span style="width: 38px;height: 34px">
-                                            <input type="checkbox" name="m_${sq.id}"
+                                            <input type="checkbox" name="m_${sq.id}" currentAns="${sq.correct}"
                                                    quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="C">&nbsp;&nbsp;C.&nbsp;&nbsp;<span
                                                         style="color: blue">${op.get(sq.id).optionC}</span>
                                             </span></td>
                                             </tr>
                                             <tr>
                                                 <td><span style="width: 38px;height: 34px">
-                                            <input type="checkbox" name="m_${sq.id}"
+                                            <input type="checkbox" name="m_${sq.id}" currentAns="${sq.correct}"
                                                    quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="D">&nbsp;&nbsp;D.&nbsp;&nbsp;<span
                                                         style="color: blue">${op.get(sq.id).optionD}</span>
                                             </span></td>
                                             </tr>
                                             <c:if test="${op.get(sq.id).optionE != null}">
-                                            <tr>
-                                                <td>
+                                                <tr>
+                                                    <td>
                                                     <span style="width: 38px;height: 34px">
                                                     <input type="checkbox" name="m_${sq.id}"
                                                            quesNo="m_${sq.id}" onchange="saveToLocal(this)" value="E">&nbsp;&nbsp;E.&nbsp;&nbsp;
                                                     <span style="color: blue">${op.get(sq.id).optionE}</span>
                                                     </span>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
                                             </c:if>
                                         </c:when>
 
@@ -161,10 +167,10 @@
                                             <tr>
                                                 <td>
                                                     <div class="col-lg-8">
-                                                        <label> <input type="radio" currentAns="${sq.id}${sq.correct}" value="对"
+                                                        <label> <input type="radio" currentAns="${sq.correct}" value="对"
                                                                        quesNo="j_${sq.id}" onchange="saveToLocal(this)"
                                                                        name="j_${sq.id}"> 对 </label>
-                                                        <label> <input type="radio" value="错"
+                                                        <label> <input type="radio" value="错" currentAns="${sq.correct}"
                                                                        quesNo="j_${sq.id}" onchange="saveToLocal(this)"
                                                                        name="j_${sq.id}"> 错 </label>
                                                     </div>
@@ -208,8 +214,10 @@
                                                 <td>
                                                     <div>
                                                         <textarea class="form-control" rows="5"
-                                                                  id="sa_${fq.id}" quesNo="sa_${fq.id}" onchange="saveToLocal(this)"
-                                                                  name="stdAnswer" ></textarea>
+                                                                  id="sa_${fq.id}" quesNo="sa_${fq.id}"
+                                                                  onchange="saveToLocal(this)"
+                                                                  name="sa${fq.id}_answer"></textarea>
+                                                        <input type="hidden" name="sa_${fq.id}" value="sa_${fq.id}">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -219,7 +227,8 @@
                                                 <td>
                                                     <textarea class="form-control" rows="14"
                                                               id="p_${fq.id}" quesNo="p_${fq.id}"
-                                                              name="stdAnswer" onchange="saveToLocal(this)"></textarea>
+                                                              name="p${fq.id}_answer" onchange="saveToLocal(this)"></textarea>
+                                                    <input type="hidden" name="p_${fq.id}" value="p_${fq.id}">
                                                 </td>
                                             </tr>
                                         </c:when>
@@ -228,11 +237,13 @@
                                 </table>
                             </div>
                         </div>
+
                     </c:forEach>
                     <a href="#" onclick="countScore()"
                        class="btn btn-w-m btn-info"
                        data-toggle="modal"
                        data-target="" data-backdrop="static">提交试卷</a>
+
                 </form>
             </div>
         </div>
@@ -326,10 +337,10 @@
     $(function () {
 
         store.forEach(function (key, val) {
-            if ("sa" == key.substring(0,2) || "p" == key.substring(0,1)) {
+            if ("sa" == key.substring(0, 2) || "p" == key.substring(0, 1)) {
                 $("#" + key).val(val);
-            } else if ("m" == key.substring(0,1)) {
-                var name = "input[name='"+ key + "']";
+            } else if ("m" == key.substring(0, 1)) {
+                var name = "input[name='" + key + "']";
                 var all = $(name);
                 for (var i = 0; i < all.length; i++) {
                     var checkVal = all.eq(i).val();
@@ -340,8 +351,8 @@
                         }
                     }
                 }
-            } else if ("s" == key.substring(0,1) || "j" == key.substring(0,1)) {
-                var name = "input[name='"+ key + "']";
+            } else if ("s" == key.substring(0, 1) || "j" == key.substring(0, 1)) {
+                var name = "input[name='" + key + "']";
                 var allRadio = $(name);
                 for (var i = 0; i < allRadio.length; i++) {
                     var radioVal = allRadio.eq(i).val();
@@ -355,8 +366,8 @@
 
     function saveToLocal(e) {
         var key = $(e).attr("quesNo");
-        console.dirxml(store.get(key)[1]);
-        if ("m" == key.substring(0,1)) {
+        console.dirxml(store.get(key));
+        if ("m" == key.substring(0, 1)) {
             var name = "input[name='" + key + "']:checked";
             var value = new Array();
             $(name).each(function (i) {
@@ -370,36 +381,50 @@
         store.set(key, value);
 
         console.dirxml(key + ":" + store.get(key));
-        var corr =  $(e).attr("quesCorr");
 
     }
 
     function countScore() {
         var score = 0;
+        var count = new Array();
+        count[0] = 1;
         store.forEach(function (key, val) {
-            if ("m" == key.substring(0,1)) {
-                // var name = "input[name='"+ key + "']";
-                // var all = $(name);
-                // for (var i = 0; i < all.length; i++) {
-                //     var checkVal = all.eq(i).val();
-                //     var valArr = val.split(",");
-                //     for (var v in valArr) {
-                //         if (checkVal == valArr[v]) {
-                //         }
-                //     }
-                // }
-                // "s" == key.substring(0,1) ||
-            } else if ("j" == key.substring(0,1)) {
-                var name = "input[name='"+ key + "']:checked";
+            if ("m" == key.substring(0, 1)) {
+                var name = "input[name='" + key + "']:checked";
+                var all = $(name);
+                var ca = $(name).attr("currentAns");
+                // console.dirxml(ca);
+                var array = new Array();
+                for (var i = 0; i < all.length; i++) {
+                    array[i] = all.eq(i).val();
+                    var checkVal = all.eq(i).val();
+                    var valArr = val.split(",");
+                }
+                console.dirxml(array.toString());
+                if (ca.length < array.length) {
+                    score += 0;
+                } else if (ca == array.toString()) {
+                    score += 4;
+                }
+            }
+
+            else if ("s_" == key.substring(0, 2) || "j" == key.substring(0, 1)) {
+                var name = "input[name='" + key + "']:checked";
                 var myRadio = $(name).val();
-                console.dirxml($(name).attr("cuurentAns"));
                 var ca = $(name).attr("currentAns");
                 if (myRadio == ca) {
                     score += 2;
-                    console.dirxml(score);
                 }
             }
         });
+        $("#score").val(score);
+        var updateForm = document.getElementById('submitForm');
+        var data = $('#submitForm').serialize();
+        $.post('examManage/insertAnswer', data, function (json) {
+            if (json.actionFlag) {
+                store.clean();
+            }
+        }, 'json');
     }
 </script>
 
