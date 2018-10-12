@@ -43,6 +43,16 @@
                            name="descrpt" placeholder="请输入试卷描述">
                 </div>
             </div>
+            <br/><br/>
+            <div class="form-group">
+                <div class="input-group input-group-md">
+                    <span  style="width: 110px;margin-right: 30px">状态：</span>
+                    <input type="radio" value="1"
+                           name="validFlag" <c:if test="${oldExamination.validFlag == 1}">checked</c:if>> 可用
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"
+                           name="validFlag" <c:if test="${oldExamination.validFlag != 1}">checked</c:if>> 不可用
+                </div>
+            </div>
         </div>
     </form>
 </div>
@@ -71,6 +81,7 @@
                     setTimeout("$('#failAlert').hide()", 3000);
                 }
                 $('#updateModal').modal("hide");
+                location.reload();
             },"json");
 
         });

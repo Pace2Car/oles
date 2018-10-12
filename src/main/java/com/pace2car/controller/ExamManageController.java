@@ -32,9 +32,6 @@ public class ExamManageController {
     private IFspAnswerService subjectiveAnswerService;
 
     @Autowired(required = false)
-    private IExaminationService examinationPaperService;
-
-    @Autowired(required = false)
     private IQuestionsService questionsService;
 
     @Autowired(required = false)
@@ -45,9 +42,9 @@ public class ExamManageController {
 
     @RequestMapping("/searchExamination")
     public String searchExamination(Examination examination, ModelMap modelMap, HttpSession session) {
-        List<Examination> examinations = examinationPaperService.selectAllExamination();
+        List<Examination> examinations = examinationService.selectAllExamination();
         if (examination != null && examination.getExamNo() != null) {
-            Examination oldExamination = examinationPaperService.selectExaminationByExamNo(examination);
+            Examination oldExamination = examinationService.selectExaminationByExamNo(examination);
             modelMap.addAttribute("oldExamination", oldExamination);
             return "updateExamination";
         }
@@ -59,7 +56,12 @@ public class ExamManageController {
     @RequestMapping("/updateExamination")
     public void updateExamination(Examination examination, HttpServletResponse response) {
         try {
-            if (examinationPaperService.updateExamination(examination) > 0) {
+            if (examination.getValidFlag() == 1) {
+                examinationService.clearAllFlag();
+                if (examinationService.setNowExam(examination) > 0) {
+                    response.getWriter().write("{\"actionFlag\": true}");
+                }
+            } else if (examinationService.updateExamination(examination) > 0) {
                 response.getWriter().write("{\"actionFlag\": true}");
             } else {
                 response.getWriter().write("{\"actionFlag\": false}");
@@ -72,7 +74,7 @@ public class ExamManageController {
     @RequestMapping("/insertExamination")
     public void insertExamination(Examination examination, HttpServletResponse response) {
         try {
-            if (examinationPaperService.insertExamination(examination) > 0) {
+            if (examinationService.insertExamination(examination) > 0) {
                 response.getWriter().write("{\"actionFlag\": true}");
             } else {
                 response.getWriter().write("{\"actionFlag\": false}");
@@ -85,7 +87,7 @@ public class ExamManageController {
     @RequestMapping("/deleteExamination")
     public void deleteExamination(Examination examination, HttpServletResponse response) {
         try {
-            if (examinationPaperService.deleteExamination(examination) > 0) {
+            if (examinationService.deleteExamination(examination) > 0) {
                 response.getWriter().write("{\"actionFlag\": true}");
             } else {
                 response.getWriter().write("{\"actionFlag\": false}");
@@ -115,7 +117,7 @@ public class ExamManageController {
     @RequestMapping("/examinationPaper")
     public String selectPaper(ModelMap modelMap, SmdOptions options) {
         Map<Integer, SmdOptions> optList = new HashMap<>();
-        Examination examination = examinationPaperService.selectCurrentExamination();
+        Examination examination = examinationService.selectCurrentExamination();
 
         List<SmdQuestions> sq = new ArrayList<>();
 
@@ -202,7 +204,7 @@ public class ExamManageController {
     @RequestMapping("/maintainExaminationPaper")
     public String maintainExaminationPaper(ModelMap modelMap, SmdOptions options, Examination examination, HttpServletResponse response) throws IOException {
         Map<Integer, SmdOptions> optList = new HashMap<>();
-        Examination e = examinationPaperService.selectExaminationByExamNo(examination);
+        Examination e = examinationService.selectExaminationByExamNo(examination);
 
         List<SmdQuestions> sq = new ArrayList<>();
 
@@ -279,7 +281,7 @@ public class ExamManageController {
             optList.put(question.getId(), details);
         }
         List sId = new ArrayList();
-        List<SmdQuestions> sIds = examinationPaperService.selectSmdIdByQuestionType(1);
+        List<SmdQuestions> sIds = examinationService.selectSmdIdByQuestionType(1);
         List<String> smdAll = new ArrayList();
         String chosenSingleId = e.getSingleId();
         List<String> result = Arrays.asList(chosenSingleId.split(","));
@@ -288,12 +290,12 @@ public class ExamManageController {
         }
         for (String sa : smdAll) {
             if (!result.contains(sa)) {
-                sId.add(sa + "、" + examinationPaperService.selectSmdQuestionById(Integer.valueOf(sa)));
+                sId.add(sa + "、" + examinationService.selectSmdQuestionById(Integer.valueOf(sa)));
             }
         }
 
         List mId = new ArrayList();
-        List<SmdQuestions> mIds = examinationPaperService.selectSmdIdByQuestionType(2);
+        List<SmdQuestions> mIds = examinationService.selectSmdIdByQuestionType(2);
         List<String> smdAll2 = new ArrayList();
         String chosenMId = e.getMultipleId();
         List<String> result2 = Arrays.asList(chosenMId.split(","));
@@ -302,11 +304,11 @@ public class ExamManageController {
         }
         for (String sa : smdAll2) {
             if (!result2.contains(sa)) {
-                mId.add(sa + "、" + examinationPaperService.selectSmdQuestionById(Integer.valueOf(sa)));
+                mId.add(sa + "、" + examinationService.selectSmdQuestionById(Integer.valueOf(sa)));
             }
         }
         List tId = new ArrayList();
-        List<SmdQuestions> tIds = examinationPaperService.selectSmdIdByQuestionType(3);
+        List<SmdQuestions> tIds = examinationService.selectSmdIdByQuestionType(3);
         List<String> smdAll3 = new ArrayList();
         String chosenTId = e.getTrueFalseId();
         List<String> result3 = Arrays.asList(chosenTId.split(","));
@@ -315,12 +317,12 @@ public class ExamManageController {
         }
         for (String sa : smdAll3) {
             if (!result3.contains(sa)) {
-                tId.add(sa + "、" + examinationPaperService.selectSmdQuestionById(Integer.valueOf(sa)));
+                tId.add(sa + "、" + examinationService.selectSmdQuestionById(Integer.valueOf(sa)));
             }
         }
 
         List sAnswerId = new ArrayList();
-        List<FspQuestions> saIds = examinationPaperService.selectFspIdByQuestionType(5);
+        List<FspQuestions> saIds = examinationService.selectFspIdByQuestionType(5);
         List<String> smdAll4 = new ArrayList();
         String chosenSaId = e.getSimpleAnwserId();
         List<String> result4 = Arrays.asList(chosenSaId.split(","));
@@ -329,12 +331,12 @@ public class ExamManageController {
         }
         for (String sa : smdAll4) {
             if (!result4.contains(sa)) {
-                sAnswerId.add(sa + "、" + examinationPaperService.selectFspQuestionById(Integer.valueOf(sa)));
+                sAnswerId.add(sa + "、" + examinationService.selectFspQuestionById(Integer.valueOf(sa)));
             }
         }
 
         List pId = new ArrayList();
-        List<FspQuestions> pIds = examinationPaperService.selectFspIdByQuestionType(6);
+        List<FspQuestions> pIds = examinationService.selectFspIdByQuestionType(6);
         List<String> smdAll5 = new ArrayList();
         String chosenpId = e.getProgramId();
         List<String> result5 = Arrays.asList(chosenpId.split(","));
@@ -343,7 +345,7 @@ public class ExamManageController {
         }
         for (String sa : smdAll5) {
             if (!result5.contains(sa)) {
-                pId.add(sa + "、" + examinationPaperService.selectFspQuestionById(Integer.valueOf(sa)));
+                pId.add(sa + "、" + examinationService.selectFspQuestionById(Integer.valueOf(sa)));
             }
         }
 
@@ -362,56 +364,56 @@ public class ExamManageController {
 
     @RequestMapping("/maintain")
     public String maintainExam(ModelMap modelMap) {
-        List<Examination> list = examinationPaperService.selectAllExamination();
+        List<Examination> list = examinationService.selectAllExamination();
         modelMap.addAttribute("list", list);
         return "examinationMaintainMain";
     }
 
     @RequestMapping("/gradeMain")
     public String gradeMain(ModelMap modelMap) {
-        List<Examination> list = examinationPaperService.selectAllExamination();
+        List<Examination> list = examinationService.selectAllExamination();
         modelMap.addAttribute("list", list);
         return "gradeTableMain";
     }
 
     @RequestMapping("/subMain")
     public String subMain(ModelMap modelMap) {
-        List<Examination> list = examinationPaperService.selectAllExamination();
+        List<Examination> list = examinationService.selectAllExamination();
         modelMap.addAttribute("list", list);
         return "subjectiveMain";
     }
 
     @RequestMapping("/radio")
     public String radio(ModelMap modelMap) {
-        List<Examination> list = examinationPaperService.selectAllExamination();
+        List<Examination> list = examinationService.selectAllExamination();
         modelMap.addAttribute("list", list);
         return "searchRadio";
     }
 
     @RequestMapping("/checkBox")
     public String checkBox(ModelMap modelMap) {
-        List<Examination> list = examinationPaperService.selectAllExamination();
+        List<Examination> list = examinationService.selectAllExamination();
         modelMap.addAttribute("list", list);
         return "searchCheckBox";
     }
 
     @RequestMapping("/judge")
     public String judge(ModelMap modelMap) {
-        List<Examination> list = examinationPaperService.selectAllExamination();
+        List<Examination> list = examinationService.selectAllExamination();
         modelMap.addAttribute("list", list);
         return "searchJudge";
     }
 
     @RequestMapping("/shorts")
     public String shorts(ModelMap modelMap) {
-        List<Examination> list = examinationPaperService.selectAllExamination();
+        List<Examination> list = examinationService.selectAllExamination();
         modelMap.addAttribute("list", list);
         return "searchShort";
     }
 
     @RequestMapping("/program")
     public String program(ModelMap modelMap) {
-        List<Examination> list = examinationPaperService.selectAllExamination();
+        List<Examination> list = examinationService.selectAllExamination();
         modelMap.addAttribute("list", list);
         return "searchProgram";
     }
@@ -421,7 +423,7 @@ public class ExamManageController {
     @RequestMapping("deleteExam")
     public void deleteExamById(ModelMap modelMap, SmdQuestions smdQuestions, Examination examination, FspQuestions fspQuestions,HttpServletResponse response) {
         if (smdQuestions.getQuestionType()==1 || smdQuestions.getQuestionType()==0){
-            Examination examination1 = examinationPaperService.selectExaminationByExamNo(examination);
+            Examination examination1 = examinationService.selectExaminationByExamNo(examination);
             String id = examination.getSingleId();
 
             List<String> sId = new ArrayList();
@@ -457,7 +459,7 @@ public class ExamManageController {
         }
 
         if (smdQuestions.getQuestionType()==2 || smdQuestions.getQuestionType()==-1){
-            Examination examination1 = examinationPaperService.selectExaminationByExamNo(examination);
+            Examination examination1 = examinationService.selectExaminationByExamNo(examination);
             String id = examination.getMultipleId();
 
             List<String> sId = new ArrayList();
@@ -493,7 +495,7 @@ public class ExamManageController {
         }
 
         if (smdQuestions.getQuestionType()==3 || smdQuestions.getQuestionType()==-2){
-            Examination examination1 = examinationPaperService.selectExaminationByExamNo(examination);
+            Examination examination1 = examinationService.selectExaminationByExamNo(examination);
             String id = examination.getTrueFalseId();
 
             List<String> sId = new ArrayList();
@@ -529,7 +531,7 @@ public class ExamManageController {
         }
 
         if (fspQuestions.getQuestionType()==5 || fspQuestions.getQuestionType()==-3){
-            Examination examination1 = examinationPaperService.selectExaminationByExamNo(examination);
+            Examination examination1 = examinationService.selectExaminationByExamNo(examination);
             String id = examination.getSimpleAnwserId();
 
             List<String> sId = new ArrayList();
@@ -565,7 +567,7 @@ public class ExamManageController {
         }
 
         if (fspQuestions.getQuestionType()==6 || fspQuestions.getQuestionType()==-4){
-            Examination examination1 = examinationPaperService.selectExaminationByExamNo(examination);
+            Examination examination1 = examinationService.selectExaminationByExamNo(examination);
             String id = examination.getProgramId();
 
             List<String> sId = new ArrayList();
