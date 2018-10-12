@@ -425,7 +425,6 @@ public class ExamManageController {
         if (smdQuestions.getQuestionType()==1 || smdQuestions.getQuestionType()==0){
             Examination examination1 = examinationService.selectExaminationByExamNo(examination);
             String id = examination.getSingleId();
-
             List<String> sId = new ArrayList();
             List<String> smdAll = new ArrayList();
             String[] split = examination1.getSingleId().split(",");
