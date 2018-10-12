@@ -33,7 +33,16 @@
                 <h2>主页</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="index.jsp">Home</a>
+                        <a href="views/index.jsp">Home</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">试题管理</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">新增试题</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">新增单选题</a>
                     </li>
                 </ol>
             </div>

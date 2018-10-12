@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>模板-在线考试后台管理系统</title>
+    <title>查询多选题-在线考试后台管理系统</title>
 
     <link href="js/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
     <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -35,7 +35,16 @@
                 <h2>主页</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="index.jsp">Home</a>
+                        <a href="views/index.jsp">Home</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">试题管理</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">查询试题</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">查询多选题</a>
                     </li>
                 </ol>
             </div>
