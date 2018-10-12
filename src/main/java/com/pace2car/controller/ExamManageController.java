@@ -96,11 +96,19 @@ public class ExamManageController {
     }
 
     @RequestMapping("/subjectiveList")
-    public String selectSubjective(ModelMap modelMap, FspAnswer fspAnswer) {
-        List<FspAnswer> answer = subjectiveAnswerService.findSubAnswer(fspAnswer);
-        String examNo = answer.get(0).getExamNo();
-        modelMap.addAttribute("examNo", examNo);
-        modelMap.addAttribute("answer", answer);
+    public String selectSubjective(ModelMap modelMap, FspAnswer fspAnswer,Examination examination) {
+//        List<FspAnswer> answer = subjectiveAnswerService.findSubAnswer(fspAnswer);
+        Map<Integer,List<FspAnswer>> ansMap = new HashMap<>();
+//        List<FspAnswer> fsp = new ArrayList<>();
+        List<FspAnswer> userList = subjectiveAnswerService.selectUserInExam(examination);
+        for (FspAnswer user : userList) {
+            List<FspAnswer> answers = subjectiveAnswerService.selectAnswerByUser(user);
+            ansMap.put(user.getUserId(), answers);
+        }
+
+        modelMap.addAttribute("userList", userList);
+        modelMap.addAttribute("examNo", examination.getExamNo());
+        modelMap.addAttribute("ansMap", ansMap);
         return "subjectiveRead";
     }
 
@@ -357,6 +365,20 @@ public class ExamManageController {
         List<Examination> list = examinationPaperService.selectAllExamination();
         modelMap.addAttribute("list", list);
         return "examinationMaintainMain";
+    }
+
+    @RequestMapping("/gradeMain")
+    public String gradeMain(ModelMap modelMap) {
+        List<Examination> list = examinationPaperService.selectAllExamination();
+        modelMap.addAttribute("list", list);
+        return "gradeTableMain";
+    }
+
+    @RequestMapping("/subMain")
+    public String subMain(ModelMap modelMap) {
+        List<Examination> list = examinationPaperService.selectAllExamination();
+        modelMap.addAttribute("list", list);
+        return "subjectiveMain";
     }
 
     @RequestMapping("/radio")

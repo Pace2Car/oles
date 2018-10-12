@@ -3,6 +3,7 @@ package com.pace2car.service.impl;
 import com.pace2car.entity.OltsScore;
 import com.pace2car.mapper.OltsScoreMapper;
 import com.pace2car.service.IOltsScoreService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +16,7 @@ import java.util.List;
 @Service("oltsScoreService")
 public class OltsScoreServiceImpl implements IOltsScoreService {
 
-    @Resource
+    @Autowired(required = false)
     private OltsScoreMapper oltsScoreMapper;
 
     @Override

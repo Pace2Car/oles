@@ -12,6 +12,9 @@
         <result property="examNo" column="EXAM_NO"/>
         <result property="userId" column="USER_ID"/>
         <result property="status" column="STATUS"/>
+    </resultMap>
+
+    <resultMap id="anserResultMap" type="FspAnswer" extends="baseResultMap">
         <association property="fspQuestions" javaType="FspQuestions" columnPrefix="f_">
             <id property="id" column="ID"/>
             <result property="question" column="QUESTION"/>
@@ -25,20 +28,33 @@
             <id property="id" column="ID"/>
             <result property="userName" column="USER_NAME"/>
         </association>
+        <association property="oltsScore" javaType="OltsScore" columnPrefix="os_">
+            <id property="id" column="ID"/>
+            <result property="score" column="SCORE"/>
+            <result property="userId" column="USER_ID"/>
+            <result property="examNo" column="EXAM_NO"/>
+        </association>
     </resultMap>
 
 
     <insert id="insertAnswer" parameterType="FspAnswer">
         INSERT INTO FSP_ANSWER(ID,ANSWER,FSP_ID,EXAM_NO,USER_ID)
         VALUES (#{id}, #{answer,jdbcType=VARCHAR}, #{fspId,jdbcType=INTEGER}
-        ,  #{examNo,jdbcType=INTEGER},#{userId,jdbcType=INTEGER} )
+        ,  #{examNo,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER} )
         <selectKey keyProperty="id" resultType="int" order="BEFORE">
             SELECT FSP_ANSWER_SEQ.nextval FROM dual
         </selectKey>
     </insert>
 
+    <select id="selectUserInExam" parameterType="Examination" resultMap="baseResultMap">
+        SELECT DISTINCT USER_ID,
+               EXAM_NO
+            FROM FSP_ANSWER
+        WHERE EXAM_NO=#{examNo,jdbcType=VARCHAR}
+    </select>
 
-    <select id="selectAnswer" parameterType="FspAnswer" resultMap="baseResultMap">
+
+    <select id="selectAnswerByUser" parameterType="FspAnswer" resultMap="anserResultMap">
         SELECT
             fa.ID,
             fa.ANSWER,
@@ -53,11 +69,37 @@
             fq.TECH_CATE_ID f_TECH_CATE_ID,
             fq.PUBDATE f_PUBDATE,
             fq.DESCRPT f_DESCRPT,
-            os.ID o_ID,
-            os.USER_NAME o_USER_NAME
+            ou.ID o_ID,
+            ou.USER_NAME o_USER_NAME,
+            os.SCORE os_SCORE
         FROM FSP_ANSWER fa
         INNER JOIN FSP_QUESTIONS fq ON fa.FSP_ID = fq.ID
-        INNER JOIN OLTS_USERS os ON fa.USER_ID = os.ID
+        INNER JOIN OLTS_USERS ou ON fa.USER_ID = ou.ID
         INNER JOIN EXAMINATION e ON fa.EXAM_NO = e.EXAM_NO
+        INNER JOIN OLTS_SCORE os ON e.EXAM_NO = os.EXAM_NO AND e.USER_ID=os.USER_ID
+        <where>
+            <if test="fspAnswer!=null and fspAnswer.userId!=null">
+                AND fa.USER_ID=#{fspAnswer.userId,jdbcType=NUMERIC}
+            </if>
+            <if test="fspAnswer!=null and fspAnswer.examNo!=null">
+                AND fa.EXAM_NO=#{fspAnswer.examNo,jdbcType=NUMERIC}
+            </if>
+        </where>
+        ORDER BY fq.QUESTION_TYPE
     </select>
+
+    <update id="updateStatus" parameterType="OltsScore">
+        UPDATE FSP_ANSWER
+        <set>
+            STATUS=1
+        </set>
+        <where>
+            <if test="oltsScore!=null and oltsScore.userId!=null">
+                AND USER_ID=#{oltsScore.userId,jdbcType=NUMERIC}
+            </if>
+            <if test="oltsScore!=null and oltsScore.examNo!=null">
+                AND EXAM_NO=#{oltsScore.examNo,jdbcType=NUMERIC}
+            </if>
+        </where>
+    </update>
 </mapper>

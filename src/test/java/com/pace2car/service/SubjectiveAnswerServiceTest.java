@@ -1,5 +1,6 @@
 package com.pace2car.service;
 
+import com.pace2car.entity.Examination;
 import com.pace2car.entity.FspAnswer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,9 +20,23 @@ public class SubjectiveAnswerServiceTest {
 
     @Test
     public void testSelectCourses() {
-        List<FspAnswer> answer = subjectiveAnswerService.findSubAnswer(null);
+        List<FspAnswer> answer = subjectiveAnswerService.selectAnswerByUser(null);
         for (FspAnswer fspAnswer : answer) {
             System.out.println(fspAnswer);
+        }
+    }
+
+    @Test
+    public void testSelectUserInExam() throws Exception {
+        Examination e = new Examination();
+        e.setExamNo("Test20181008X");
+        List<FspAnswer> userList = subjectiveAnswerService.selectUserInExam(e);
+        for (FspAnswer user : userList) {
+            System.out.println(user.getUserId());
+            List<FspAnswer> fspAnswers = subjectiveAnswerService.selectAnswerByUser(user);
+            for (FspAnswer answer : fspAnswers) {
+                System.out.println(answer);
+            }
         }
     }
 }

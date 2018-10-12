@@ -2,7 +2,9 @@ package com.pace2car.service.impl;
 
 
 import com.pace2car.controller.ExamManageController;
+import com.pace2car.entity.Examination;
 import com.pace2car.entity.FspAnswer;
+import com.pace2car.entity.OltsScore;
 import com.pace2car.mapper.FspAnswerMapper;
 import com.pace2car.service.IFspAnswerService;
 import org.apache.commons.lang3.StringUtils;
@@ -22,8 +24,8 @@ public class FspAnswerServiceImpl implements IFspAnswerService {
 
 
     @Override
-    public List<FspAnswer> findSubAnswer(FspAnswer fspAnswer) {
-        return fspAnswerMapper.selectAnswer(fspAnswer);
+    public List<FspAnswer> selectAnswerByUser(FspAnswer fspAnswer) {
+        return fspAnswerMapper.selectAnswerByUser(fspAnswer);
     }
 
     @Override
@@ -95,6 +97,16 @@ public class FspAnswerServiceImpl implements IFspAnswerService {
             }
         }
         return 1;
+    }
+
+    @Override
+    public List<FspAnswer> selectUserInExam(Examination examination) {
+        return fspAnswerMapper.selectUserInExam(examination);
+    }
+
+    @Override
+    public void updateStatus(OltsScore oltsScore) {
+        fspAnswerMapper.updateStatus(oltsScore);
     }
 }
 

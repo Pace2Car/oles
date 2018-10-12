@@ -37,20 +37,21 @@
                 </ol>
             </div>
             <div class="col-lg-12">
-                <c:forEach items="${answer}" var="answer">
                 <div class="ibox float-e-margins border-bottom">
+                    <c:forEach items="${userList}" var="user">
                     <div class="ibox-title">
                         <div class="ibox-tools" style="text-align: left">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong><i><span style="color:red">${answer.oltsUsers.id}、${answer.oltsUsers.userName}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客观题得分:66.0</i></strong></span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong><i><span style="color:red">${ansMap.get(user.userId).get(0).oltsUsers.userName}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客观题得分:${ansMap.get(user.userId).get(0).oltsScore.score}.0</i></strong></span>
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
                             </a>
-                            <c:if test="${answer.status==0}"><span class="label label-warning" style="margin-top: 1.5px">未修改</span></c:if>
-                            <c:if test="${answer.status==1}"><span class="label label-primary" style="margin-top: 1.5px">已修改</span></c:if>
+                            <c:if test="${ansMap.get(user.userId).get(0).status==0}"><span class="label label-warning" style="margin-top: 1.5px">未修改</span></c:if>
+                            <c:if test="${ansMap.get(user.userId).get(0).status==1}"><span class="label label-primary" style="margin-top: 1.5px">已修改</span></c:if>
                         </div>
                     </div>
-                    <div class="ibox-content" style="display: none">
+                    <div class="ibox-content" style="display: block">
                         <table class="table table-hover no-margins">
+                            <c:forEach items="${ansMap.get(user.userId)}" var="answer">
                             <thead>
                             <tr>
                                 <th style="font-size: 16px"><strong><i>
@@ -78,18 +79,24 @@
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考答案：${answer.fspQuestions.stdAnswer}</td>
                             </tr>
                             <tr>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;得分：<input type="text" style="width: 50px">&nbsp;&nbsp;分</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;得分：
+                                    <input name="sc_${answer.userId}_${answer.examNo}" type="number" style="width: 80px" id="fspScore" required>&nbsp;&nbsp;分
+                                </td>
                             </tr>
                             </tbody>
+                            </c:forEach>
+                            <input type="hidden" value="${examNo}" id="examNo_sc_${user.userId}_${examNo}">
+                            <input type="hidden" value="${user.userId}" id="userId_sc_${user.userId}_${examNo}">
                             <tr>
                                 <td>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-w-m btn-info">提交</button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button type="button" scoreId="sc_${user.userId}_${examNo}"  class="btn btn-w-m btn-info" onclick="submit(this)">提交</button>
                                 </td>
                             </tr>
                         </table>
                     </div>
+                    </c:forEach>
                 </div>
-                </c:forEach>
             </div>
         </div>
         <!-- main 主体区域 -->
@@ -156,7 +163,26 @@
 
     });
 </script>
-
+<script>
+    function submit(e) {
+        var scoreId = $(e).attr("scoreId");
+        var examNo = $("#examNo_"+scoreId).val();
+        var userId = $("#userId_"+scoreId).val();
+        console.dirxml(scoreId);
+        var name = "input[name='" + $(e).attr("scoreId") + "']";
+        console.dirxml(name);
+        var fspScore = 0;
+        $(name).each(function (i) {
+            fspScore+=parseInt($(this).val());
+        });
+        console.dirxml("socre:" + fspScore);
+        $.post('gradeTable/updateFspScore?fspScore='+fspScore+"&examNo="+examNo+"&userId="+userId, function (json) {
+            if (json.actionFlag) {
+                location.reload();
+            }
+        }, 'json');
+    }
+</script>
 </body>
 
 </html>
