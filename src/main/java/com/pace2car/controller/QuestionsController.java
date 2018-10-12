@@ -35,6 +35,9 @@ public class QuestionsController {
     @Autowired(required = false)
     IExaminationService examinationService;
 
+    @Autowired(required = false)
+    private IExaminationService examinationPaperService;
+
     @RequestMapping(value = {"/load_courses"}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public List<Courses> loadCouses() {

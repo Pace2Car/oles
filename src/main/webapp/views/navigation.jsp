@@ -75,7 +75,7 @@
                             <span class="nav-label">查询试题</span> <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-third-level collapse">
-                            <li><a href="examManage/radio">查询单选题</a></li>
+                            <li><a href="examManage/checkBox">查询单选题</a></li>
                             <li><a href="examManage/checkBox">查询多选题</a></li>
                             <li><a href="examManage/judge">查询判断题</a></li>
                             <li><a href="examManage/shorts">查询简答题</a></li>

@@ -18,6 +18,8 @@
     <link href="vendor/css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="vendor/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
     <link href="vendor/css/plugins/footable/footable.core.css" rel="stylesheet">
+    <link href="highLight/src/shCore.css" rel="stylesheet">
+    <link href="highLight/styles/shThemeDefault.css" rel="stylesheet">
 
 </head>
 
@@ -100,7 +102,7 @@
                                         <strong>
                                     <i>
                                         <span>${status.index+1}.</span>
-                                    <span style="color:blue" id="ques_${questions.id}">${questions.question}</span>
+                                    <span style="color:blue" id="ques_${questions.id}">${questions.question}${questions.descrpt}</span>
                                     </i>
                                         </strong>
                                 </span>
@@ -283,6 +285,8 @@
 <!-- Custom and plugin javascript -->
 <script src="vendor/js/inspinia.js"></script>
 <script src="vendor/js/plugins/pace/pace.min.js"></script>
+<script src="highLight/src/shCore.js"></script>
+<script src="highLight/scripts/shBrushJava.js"></script>
 
 <!-- DROPZONE -->
 <script src="vendor/js/plugins/dropzone/dropzone.js"></script>
