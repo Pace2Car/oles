@@ -29,11 +29,11 @@ public class SubjectiveAnswerServiceTest {
     @Test
     public void testSelectUserInExam() throws Exception {
         Examination e = new Examination();
-        e.setExamNo("Test20181008X");
+        e.setExamNo("Test18101202");
         List<FspAnswer> userList = subjectiveAnswerService.selectUserInExam(e);
         for (FspAnswer user : userList) {
-            System.out.println(user.getUserId());
-            List<FspAnswer> fspAnswers = subjectiveAnswerService.selectAnswerByUser(user);
+            System.out.println(user+"----------------------------------");
+            List<FspAnswer> fspAnswers = subjectiveAnswerService.selectAnswerByUser(null);
             for (FspAnswer answer : fspAnswers) {
                 System.out.println(answer);
             }

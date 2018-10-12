@@ -85,7 +85,7 @@
                 AND fa.EXAM_NO=#{fspAnswer.examNo,jdbcType=NUMERIC}
             </if>
         </where>
-        ORDER BY fq.QUESTION_TYPE
+--         ORDER BY fq.QUESTION_TYPE
     </select>
 
     <update id="updateStatus" parameterType="OltsScore">

@@ -500,7 +500,7 @@ public class ExamManageController {
 
             List<String> sId = new ArrayList();
             List<String> smdAll = new ArrayList();
-            String[] split = examination1.getMultipleId().split(",");
+            String[] split = examination1.getTrueFalseId().split(",");
             for (String s : split) {
                 smdAll.add(s);
             }
