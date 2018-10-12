@@ -615,22 +615,6 @@
                 }, "json");
             });
         }
-
-        if (queType == 3  || queType== -2) {
-            $("#deleteConfirmBtn").click(function () {
-                $.get("examManage/deleteExam?examNo=" + examNo+"&trueFalseId="+smdId+"&questionType="+queType, function (json) {
-                    if (json.actionFlag) {
-                        $('#successAlert').show();
-                        setTimeout("$('#successAlert').hide()", 1000);
-                    } else {
-                        $('#failAlert').show();
-                        setTimeout("$('#failAlert').hide()", 3000);
-                    }
-                    $('#deleteModal').modal('hide');
-                    window.location.reload();
-                }, "json");
-            });
-        }
     }
 
 </script>

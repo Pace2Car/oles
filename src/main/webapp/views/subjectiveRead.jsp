@@ -41,7 +41,10 @@
                     <c:forEach items="${userList}" var="user">
                     <div class="ibox-title">
                         <div class="ibox-tools" style="text-align: left">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><strong><i><span style="color:red">${ansMap.get(user.userId).get(0).oltsUsers.userName}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客观题得分:${ansMap.get(user.userId).get(0).oltsScore.score}.0</i></strong></span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>
+                            <strong><i><span style="color:red">${ansMap.get(user.userId).get(0).oltsUsers.userName}</span>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客观题得分:${ansMap.get(user.userId).get(0).oltsScore.score}.0
+                            </i></strong></span>
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
                             </a>
