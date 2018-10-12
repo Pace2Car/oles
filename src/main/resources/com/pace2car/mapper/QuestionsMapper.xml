@@ -63,12 +63,12 @@
 
 
     <insert id="insertRadio" parameterType="SmdQuestions" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        INSERT INTO SMD_QUESTIONS(ID,QUESTION,CORRECT,QUESTION_TYPE,TECH_CATE_ID,DESCRPT)
-        VALUES (#{id}, #{question,jdbcType=VARCHAR}, #{correct,jdbcType=VARCHAR}
-        , 1, #{techCateId,jdbcType=INTEGER}, #{descrpt,jdbcType=VARCHAR})
         <selectKey keyProperty="id" resultType="int" order="BEFORE">
             SELECT SMD_QUESTIONS_SEQ.nextval FROM dual
         </selectKey>
+        INSERT INTO SMD_QUESTIONS(ID,QUESTION,CORRECT,QUESTION_TYPE,TECH_CATE_ID,DESCRPT)
+        VALUES (#{id}, #{question,jdbcType=VARCHAR}, #{correct,jdbcType=VARCHAR}
+        , 1, #{techCateId,jdbcType=INTEGER}, #{descrpt,jdbcType=VARCHAR})
     </insert>
 
 

@@ -76,7 +76,7 @@
                         </div>
                         <div>
                             <textarea class="form-control" rows="5"
-                                      placeholder="此处为格式代码"name="descrpt" >&lt;pre&gt;&emsp;&lt;/pre&gt;</textarea>
+                                      placeholder="此处为格式代码"name="descrpt" >&lt;pre&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/pre&gt;</textarea>
                         </div>
                         <label class="control-label">选项</label>
                         <br>
