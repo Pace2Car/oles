@@ -17,17 +17,17 @@
     <link href="vendor/css/plugins/dropzone/basic.css" rel="stylesheet">
     <link href="vendor/css/plugins/dropzone/dropzone.css" rel="stylesheet">
     <link href="vendor/css/style.css" rel="stylesheet">
-    <%--<SCRIPT LANGUAGE="JavaScript">--%>
-    <%--var i=0;--%>
-    <%--function auto_submit (){--%>
-    <%--i++;--%>
-    <%--var choose = confirm("你试图离开当前窗口,警告第"+i+"次，三次后系统将自动提交试卷!("+i+"/3)");--%>
-    <%--if(i==3 && choose){--%>
-    <%--window.location.href="http://www.mps.gov.cn/";--%>
-    <%--}--%>
-    <%--}--%>
-    <%--window.onblur=auto_submit;--%>
-    <%--</SCRIPT>--%>
+    <script>
+        var i=0;
+        function auto_submit (){
+        i++;
+        var choose = confirm("你试图离开当前窗口,警告第"+i+"次，三次后系统将自动提交试卷!("+i+"/3)");
+        if(i==3 && choose){
+        window.location.href="http://www.mps.gov.cn/";
+        }
+        }
+        window.onblur=auto_submit;
+    </script>
 </head>
 
 <body>
