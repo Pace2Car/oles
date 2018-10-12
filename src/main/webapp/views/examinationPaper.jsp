@@ -239,10 +239,10 @@
                         </div>
 
                     </c:forEach>
-                    <a href="#" onclick="countScore()"
+                    <a href="#"
                        class="btn btn-w-m btn-info"
                        data-toggle="modal"
-                       data-target="" data-backdrop="static">提交试卷</a>
+                       data-target="#deleteModal" data-backdrop="static">提交试卷</a>
 
                 </form>
             </div>
@@ -278,7 +278,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button id="commitConfirmBtn" type="button" class="btn btn-primary">提交</button>
+                <button id="commitConfirmBtn" type="button" class="btn btn-primary" onclick="countScore()">提交</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -335,7 +335,6 @@
 
 <script>
     $(function () {
-
         store.forEach(function (key, val) {
             if ("sa" == key.substring(0, 2) || "p" == key.substring(0, 1)) {
                 $("#" + key).val(val);
@@ -417,12 +416,14 @@
                 }
             }
         });
+
         $("#score").val(score);
         var updateForm = document.getElementById('submitForm');
         var data = $('#submitForm').serialize();
         $.post('examManage/insertAnswer', data, function (json) {
+            store.clear();
             if (json.actionFlag) {
-                store.clean();
+                location.href = "user/logOut";
             }
         }, 'json');
     }

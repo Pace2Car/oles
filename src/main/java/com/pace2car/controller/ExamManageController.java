@@ -602,8 +602,7 @@ public class ExamManageController {
     }
 
     @RequestMapping("/insertAnswer")
-    public String insertAnswer(FspAnswer answers,OltsScore score, HttpServletResponse response, HttpServletRequest request) {
-
+    public void insertAnswer(FspAnswer answers,OltsScore score, HttpServletResponse response, HttpServletRequest request) {
         scoreService.insertScore(score);
         try {
             if (subjectiveAnswerService.insertAnswer(answers, request) > 0) {
@@ -614,7 +613,6 @@ public class ExamManageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "redirect:/user/logOut";
     }
 
 }
