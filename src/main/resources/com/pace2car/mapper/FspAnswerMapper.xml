@@ -76,7 +76,7 @@
         INNER JOIN FSP_QUESTIONS fq ON fa.FSP_ID = fq.ID
         INNER JOIN OLTS_USERS ou ON fa.USER_ID = ou.ID
         INNER JOIN EXAMINATION e ON fa.EXAM_NO = e.EXAM_NO
-        INNER JOIN OLTS_SCORE os ON e.EXAM_NO = os.EXAM_NO AND e.USER_ID=os.USER_ID
+        INNER JOIN OLTS_SCORE os ON fa.EXAM_NO = os.EXAM_NO AND fa.USER_ID=os.USER_ID
         <where>
             <if test="fspAnswer!=null and fspAnswer.userId!=null">
                 AND fa.USER_ID=#{fspAnswer.userId,jdbcType=NUMERIC}
@@ -85,7 +85,7 @@
                 AND fa.EXAM_NO=#{fspAnswer.examNo,jdbcType=NUMERIC}
             </if>
         </where>
---         ORDER BY fq.QUESTION_TYPE
+        ORDER BY fq.QUESTION_TYPE
     </select>
 
     <update id="updateStatus" parameterType="OltsScore">

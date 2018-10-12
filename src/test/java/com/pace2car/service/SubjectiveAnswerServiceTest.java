@@ -32,8 +32,9 @@ public class SubjectiveAnswerServiceTest {
         e.setExamNo("Test18101202");
         List<FspAnswer> userList = subjectiveAnswerService.selectUserInExam(e);
         for (FspAnswer user : userList) {
-            System.out.println(user+"----------------------------------");
-            List<FspAnswer> fspAnswers = subjectiveAnswerService.selectAnswerByUser(null);
+            System.out.println(user);
+            System.out.println("----------------------------------");
+            List<FspAnswer> fspAnswers = subjectiveAnswerService.selectAnswerByUser(user);
             for (FspAnswer answer : fspAnswers) {
                 System.out.println(answer);
             }
