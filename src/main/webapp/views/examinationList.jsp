@@ -280,7 +280,7 @@
             </div>
             <div class="modal-body">
                 <span class="fa fa-exclamation fa-2x" style="color:#f15b6c;"></span>
-                您确定要删除编号为：<span id="examinationMsg"></span> 的课程吗？
+                您确定要删除编号为：<span id="examinationMsg"></span> 的试卷吗？
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

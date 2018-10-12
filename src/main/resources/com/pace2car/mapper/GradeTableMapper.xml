@@ -8,7 +8,9 @@
     <resultMap id="baseResultMap" type="OltsScore">
         <id property="id" column="ID"/>
         <result property="score" column="SCORE"/>
+        <result property="fspScore" column="FSP_SCORE"/>
         <result property="userId" column="USER_ID"/>
+        <result property="examNo" column="EXAM_NO"/>
         <association property="oltsUsers" javaType="OltsUsers" columnPrefix="o_">
             <id property="id" column="ID"/>
             <result property="userName" column="USER_NAME"/>
@@ -22,6 +24,8 @@
         SELECT os.ID,
         os.SCORE,
         os.USER_ID,
+        os.EXAM_NO,
+        os.FSP_SCORE,
         ou.ID          o_ID,
         ou.USER_NAME o_USER_NAME,
         ou.GENDER    o_GENDER,
@@ -29,5 +33,10 @@
         ou.MARJOR    o_MARJOR
         FROM OLTS_SCORE os
         INNER JOIN OLTS_USERS ou ON os.USER_ID = ou.ID
+        <where>
+            <if test="oltsScore!=null and oltsScore.examNo!=null">
+                AND EXAM_NO=#{oltsScore.examNo,jdbcType=VARCHAR}
+            </if>
+        </where>
     </select>
 </mapper>

@@ -33,7 +33,7 @@
                 <h2>考试成绩</h2>
                 <ol class="breadcrumb">
                     <li style="color:red">
-                        (编号:XXXXXXXXXXXXX)
+                        (编号:${grade.get(0).examNo})
                     </li>
                 </ol>
             </div>
@@ -59,81 +59,11 @@
                                             <tr class="gradeA odd" role="row">
                                                 <td class="sorting_1">${g.id}</td>
                                                 <td>${g.oltsUsers.userName}</td>
-                                                <td>${g.score}</td>
+                                                <td>${g.score+g.fspScore}</td>
                                                 <td class="center">${g.oltsUsers.gender}</td>
                                                 <td class="center">${g.oltsUsers.graduateSchool}${g.oltsUsers.marjor}</td>
                                             </tr>
                                         </c:forEach>
-                                        <tr class="gradeA odd" role="row">
-                                            <td class="sorting_1">1</td>
-                                            <td>卢阳</td>
-                                            <td>59.0</td>
-                                            <td class="center">男</td>
-                                            <td class="center">四川工商学院计算机科学与技术</td>
-                                        </tr>
-                                        <tr class="gradeA odd" role="row">
-                                            <td class="sorting_1">1</td>
-                                            <td>卢阳</td>
-                                            <td>59.0</td>
-                                            <td class="center">男</td>
-                                            <td class="center">四川工商学院计算机科学与技术</td>
-                                        </tr>
-                                        <tr class="gradeA odd" role="row">
-                                            <td class="sorting_1">1</td>
-                                            <td>卢阳</td>
-                                            <td>59.0</td>
-                                            <td class="center">男</td>
-                                            <td class="center">四川工商学院计算机科学与技术</td>
-                                        </tr>
-                                        <tr class="gradeA odd" role="row">
-                                            <td class="sorting_1">1</td>
-                                            <td>卢阳</td>
-                                            <td>59.0</td>
-                                            <td class="center">男</td>
-                                            <td class="center">四川工商学院计算机科学与技术</td>
-                                        </tr>
-                                        <tr class="gradeA odd" role="row">
-                                            <td class="sorting_1">1</td>
-                                            <td>卢阳</td>
-                                            <td>59.0</td>
-                                            <td class="center">男</td>
-                                            <td class="center">四川工商学院计算机科学与技术</td>
-                                        </tr>
-                                        <tr class="gradeA odd" role="row">
-                                            <td class="sorting_1">1</td>
-                                            <td>卢阳</td>
-                                            <td>59.0</td>
-                                            <td class="center">男</td>
-                                            <td class="center">四川工商学院计算机科学与技术</td>
-                                        </tr>
-                                        <tr class="gradeA odd" role="row">
-                                            <td class="sorting_1">1</td>
-                                            <td>卢阳</td>
-                                            <td>59.0</td>
-                                            <td class="center">男</td>
-                                            <td class="center">四川工商学院计算机科学与技术</td>
-                                        </tr>
-                                        <tr class="gradeA odd" role="row">
-                                            <td class="sorting_1">1</td>
-                                            <td>卢阳</td>
-                                            <td>59.0</td>
-                                            <td class="center">男</td>
-                                            <td class="center">四川工商学院计算机科学与技术</td>
-                                        </tr>
-                                        <tr class="gradeA odd" role="row">
-                                            <td class="sorting_1">1</td>
-                                            <td>卢阳</td>
-                                            <td>59.0</td>
-                                            <td class="center">男</td>
-                                            <td class="center">四川工商学院计算机科学与技术</td>
-                                        </tr>
-                                        <tr class="gradeA odd" role="row">
-                                            <td class="sorting_1">1</td>
-                                            <td>卢阳</td>
-                                            <td>59.0</td>
-                                            <td class="center">男</td>
-                                            <td class="center">四川工商学院计算机科学与技术</td>
-                                        </tr>
                                         </tbody>
                                         <tfoot>
                                         <tr><th rowspan="1" colspan="1">序号</th>

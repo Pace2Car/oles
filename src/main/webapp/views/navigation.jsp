@@ -102,8 +102,8 @@
                 <ul class="nav nav-second-level">
                     <li><a href="examManage/searchExamination">试卷信息管理</a></li>
                     <li><a href="examManage/maintain">试卷维护</a></li>
-                    <li><a href="examManage/subjectiveList">主观题改卷</a></li>
-                    <li><a href="gradeTable/list">成绩统计</a></li>
+                    <li><a href="examManage/subMain">主观题改卷</a></li>
+                    <li><a href="examManage/gradeMain">成绩统计</a></li>
                 </ul>
             </li>
         </ul>

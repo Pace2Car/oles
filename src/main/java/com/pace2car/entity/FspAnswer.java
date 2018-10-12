@@ -13,6 +13,7 @@ public class FspAnswer implements Serializable {
     private Integer status;
     OltsUsers oltsUsers;
     FspQuestions fspQuestions;
+    OltsScore oltsScore;
 
     public FspAnswer() {
     }
@@ -96,6 +97,14 @@ public class FspAnswer implements Serializable {
         this.status = status;
     }
 
+    public OltsScore getOltsScore() {
+        return oltsScore;
+    }
+
+    public void setOltsScore(OltsScore oltsScore) {
+        this.oltsScore = oltsScore;
+    }
+
     @Override
     public String toString() {
         return "FspAnswer{" +
@@ -107,6 +116,7 @@ public class FspAnswer implements Serializable {
                 ", status=" + status +
                 ", oltsUsers=" + oltsUsers +
                 ", fspQuestions=" + fspQuestions +
+                ", oltsScore=" + oltsScore +
                 '}';
     }
 }

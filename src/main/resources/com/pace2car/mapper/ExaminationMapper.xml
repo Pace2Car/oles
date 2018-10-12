@@ -41,7 +41,7 @@
     </select>
 
     <insert id="insertExamination" parameterType="Examination">
-        INSERT INTO EXAMINATION(EXAM_NO, EXAM_DATE, DESCRPT) VALUES (#{examNo}, #{examDate,jdbcType=TIMESTAMP}, #{descrpt,jdbcType=VARCHAR})
+        INSERT INTO EXAMINATION(EXAM_NO, USER_ID, EXAM_DATE, DESCRPT) VALUES (#{examNo}, #{userId,jdbcType=NUMERIC}, #{examDate,jdbcType=TIMESTAMP}, #{descrpt,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateExamination" parameterType="Examination">
@@ -52,6 +52,18 @@
         </trim>
         WHERE EXAM_NO=#{examNo,jdbcType=VARCHAR}
     </update>
+
+    <update id="clearAllFlag">
+        UPDATE EXAMINATION
+        SET VALID_FLAG=0
+    </update>
+
+    <update id="setNowExam" parameterType="Examination">
+        UPDATE EXAMINATION
+        SET VALID_FLAG=1
+        WHERE EXAM_NO=#{examNo,jdbcType=VARCHAR}
+    </update>
+
 
     <delete id="deleteExamination" parameterType="Examination">
         DELETE FROM EXAMINATION WHERE EXAM_NO=#{examNo,jdbcType=VARCHAR}

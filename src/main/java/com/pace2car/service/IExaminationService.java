@@ -17,6 +17,10 @@ public interface IExaminationService {
 
     int deleteExamination(Examination examination);
 
+    int clearAllFlag();
+
+    int setNowExam(Examination examination);
+
     Examination selectExaminationByExamNo(Examination examination);
 
     Examination selectCurrentExamination();

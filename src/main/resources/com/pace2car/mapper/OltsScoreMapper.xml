@@ -40,10 +40,12 @@
     <update id="updateScore" parameterType="OltsScore">
         UPDATE OLTS_SCORE
         <trim prefix="set" suffixOverrides=",">
-            <if test="fspScore!=null">FSP_SCORE=#{fspScore,jdbcType=NUMERIC},</if>
+            <if test="oltsScore != null and oltsScore.fspScore!=null">
+                FSP_SCORE=#{oltsScore.fspScore,jdbcType=NUMERIC},
+            </if>
         </trim>
-        WHERE EXAM_NO=#{examNo,jdbcType=VARCHAR}
-        AND USER_ID=#{userId,NUMERIC}
+        WHERE EXAM_NO=#{oltsScore.examNo,jdbcType=VARCHAR}
+        AND USER_ID=#{oltsScore.userId,jdbcType=NUMERIC}
     </update>
 
 </mapper>

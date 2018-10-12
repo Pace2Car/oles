@@ -1,6 +1,7 @@
 package com.pace2car.mapper;
 
 import com.pace2car.entity.OltsScore;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface OltsScoreMapper {
 
     List<OltsScore> selectAllScore();
 
-    int updateScore(OltsScore oltsScore);
+    int updateScore(@Param("oltsScore") OltsScore oltsScore);
 
     int insertScore(OltsScore oltsScore);
 }

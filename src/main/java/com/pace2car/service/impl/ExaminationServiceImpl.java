@@ -39,6 +39,16 @@ public class ExaminationServiceImpl implements IExaminationService {
     }
 
     @Override
+    public int clearAllFlag() {
+        return examinationMapper.clearAllFlag();
+    }
+
+    @Override
+    public int setNowExam(Examination examination) {
+        return examinationMapper.setNowExam(examination);
+    }
+
+    @Override
     public Examination selectExaminationByExamNo(Examination examination) {
         return examinationMapper.selectExaminationByExamNo(examination);
     }
