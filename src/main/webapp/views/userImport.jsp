@@ -144,7 +144,7 @@
                                 <td><input id="upfile" type="file" name="upfile"></td>
                             </tr>
                             <tr>
-                                <td><input type="button" value="导入" id="btn" name="btn" class="btn btn-info btn-sm"></td>
+                                <td><input type="submit" value="导入" id="btn" name="btn" class="btn btn-info btn-sm"></td>
                             </tr>
                         </table>
                     </form>
